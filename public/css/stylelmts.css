@@ -1,0 +1,243 @@
+body{
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Roboto', sans-serif;
+    font-family: 'Open Sans', sans-serif;
+}
+
+select option{
+    font-size: medium;
+}
+.btn .btn-light{
+    background-color: red;
+}
+.background-blue{
+  /* background-color:#1b2e4f; */
+  /* height:100vh; */
+}
+.lmts-primary{
+    background-color: #1B2E4F;
+    color:white;
+}
+.tituloTabela{
+    background-color:#1b2e4f;
+    color:white;
+    padding: 20px;
+    text-align: center;
+    margin-bottom: -10px;
+
+}
+.card-cadastro{
+    margin:50px 0 50px 0;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 5px;
+
+}
+.card-cadastro-servidor{
+    margin:30px 0 50px 0;
+    padding: 5px;
+
+}
+.btn .lmts-primary:hover{
+    background-color: darkblue;
+
+}
+.btn-cadastro-primary{
+    width:100%;
+}
+.info{
+    width: 100%;
+    
+    /* height: 100vh; */
+}
+.info-texto{
+    width: 100%;
+    /* height: 718px; */
+    /* background-color: #1B2E4F; */
+    
+    float: left;
+}
+.info-login{
+    width: 25%;
+    height: 718px;
+    background-color: white;
+    float: right;
+}
+.info-texto .texto{
+    padding: 50px;
+    /* color: white; */
+    color: #1b2e4f;
+}
+
+.texto p{
+    padding-left: 20px;
+    padding-left: 20px;
+    font-size: 20px;
+}
+.texto ul{
+    padding-left: 20px;
+    font-size: 16px;
+    font-size: 20px;
+}
+
+
+
+.text-center{
+    margin-top: 40px;
+    padding-top: 50px;
+
+}
+
+.botoes{
+    width: 300px;
+    margin: 0 auto;
+    height: 40px;
+
+}
+
+.info-login .btn{
+    float: right;
+
+}
+.formulario-centro{
+    text-align: right;
+}
+
+
+/*Tela Cadastro*/
+.background{
+    width: 100%;
+    height: 730px;
+    background-color: #1B2E4F;
+}
+.centro{
+    width: 25%;
+
+    margin: 0 auto;
+    height: 730px;
+    background-color: white;
+
+}
+.centro h2{
+
+    padding-top: 40px;
+}
+
+/*Home Servidor*/
+
+.tela-servidor{
+    width: 100%;
+    height: 730px;
+
+}
+
+
+.conteudo-central{
+    width: 100%;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+
+
+}
+
+.cartao{
+    margin: 30px;
+    width: 200px;
+    height: 250px;
+    float: left;
+    border-radius: 20px;
+    box-shadow: 0 0 4px rgba(0,0,0,0.5);
+}
+
+.cartao h2{
+    color: #1B2E4F;
+}
+
+.cartao:hover{
+    box-shadow: 0 0 10px rgba(0,0,0,0.5); /*Valor1 = Posição y | Valor2 = Posição x | Valor3 = blur | Valor4 = CorP*/
+}
+
+.centro-cartao{
+    padding-top: 50px;
+    
+    height: 50vh;
+    /* background-color: #ddd; */
+}
+
+/*Tabelas*/
+
+.tabela-centro{
+    width: 80%;
+
+
+}
+
+.nome-documento{
+
+    height: 50px;
+    margin-bottom: 0;
+    border: 0px;
+
+    text-align: center;
+}
+
+/* FOOTER */
+.footer{
+    /* background-color:#454545; */
+    background-color:#1b2e4f;
+    /* height: 90vh; */
+    padding:100px;
+    color: white;
+    border-top:1px solid white;
+  }
+  .footer .social{
+    width: 30px;
+    margin: 10px;
+    transition: 0.5s;
+  }
+  .footer .social:hover{
+    width: 35px;
+    transition: 0.5s;
+  }
+  .footer .sobre a{
+    margin-bottom: 10px;
+    color: white;
+  }
+  .footer a{
+    color:white;
+  }
+  
+  .footer .coluna h3{
+    margin-bottom:20px;
+  }
+  .footer .social-network{
+    margin-top:20px;
+  }
+  @media screen and (max-width: 576px) {
+    .footer .coluna{
+      margin-bottom:30px;
+    }
+    .footer .social{
+      width:20px;
+    }
+  
+    .curved p{
+        font-size: 1rem;
+        /* margin-bottom: 5%; */
+    }
+    .info-modulo-body{
+        height: 260px;
+        overflow-y: auto;
+  
+    }
+}
+@media screen and (max-width: 359px) {
+
+  .cartao{
+    background-color: blue;
+
+  }
+
+
+}
