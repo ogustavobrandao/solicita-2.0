@@ -20,10 +20,12 @@ class CreateTccsTable extends Migration
             $table->string('titulacao_orientador');
             $table->string('coorientador');
             $table->string('titulacao_coorientador');
+            $table->string('campus');
+            $table->string('curso');
             $table->string('referencia');
 
             $table->unsignedBigInteger('documento_id');
-            $table->foreign('documento_id')->references('id')->on('requisicao_documentos');
+            $table->foreign('documento_id')->references('id')->on('ficha_catalograficas');
         });
     }
 

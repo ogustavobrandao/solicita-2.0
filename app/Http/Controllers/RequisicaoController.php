@@ -2,6 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\FichaCatalografica;
+use App\Models\Monografia;
+use App\Models\ProgramaEducacional;
+use App\Models\Tcc;
+use App\Models\Tese;
+use App\Models\TipoDocumento;
+use Database\Seeders\TipoDocumentoSeeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -146,13 +153,76 @@ class RequisicaoController extends Controller
         $usuarios = User::All();
         $alunos = Aluno::All();
         $perfis = Perfil::where('aluno_id', Auth::user()->aluno->id)->get();
-        return view('autenticacao.formulario-requisicao-bibli', compact('usuarios', 'unidades', 'perfis', 'alunos'));
+        $tipos_documentos = TipoDocumento::all();
+        return view('autenticacao.formulario-requisicao-bibli', compact('usuarios', 'unidades', 'perfis', 'alunos', 'tipos_documentos'));
     }
 
     public function cadastrarDocumento(Request $request)
     {
         $tipo_documento = $request->documento;
         return view('telas_aluno.cadastrar_documento', ['tipo_documento' => $tipo_documento]);
+    }
+
+    public function criarDocumento(Request $request)
+    {
+        //'cutter', 'classificacao'
+
+        $ficha = new FichaCatalografica();
+
+        $ficha->autor = $request->autor;
+        $ficha->titulo = $request->titulo;
+        $ficha->subtitulo = $request->subtitulo;
+        $ficha->local = $request->local;
+        $ficha->ano = $request->ano;
+        $ficha->folhas = $request->folhas;
+        $ficha->ilustracao = $request->ilustracao;
+        $ficha->tipo_documento_id = $request->tipo_documento;
+        $ficha->save();
+
+        if($request->tipo_documento == 1){
+            $monografia = new Monografia();
+            $monografia->orientador = $request->orientador;
+            $monografia->coorientador = $request->coorientador;
+            $monografia->titulacao_orientador = $request->titulacao_orientador;
+            $monografia->titulacao_coorientador = $request->titulacao_coorientador;
+            $monografia->curso = $request->curso;
+            $monografia->campus = $request->campus;
+            $monografia->documento_id = $ficha->id;
+            $monografia->save();
+            return redirect(Route('home-aluno'))->with('sucess', 'Monografia Cadastrada Com Sucesso!');
+        } elseif ($request->tipo_documento == 2){
+            $tese = new Tese();
+            $tese->orientador = $request->orientador;
+            $tese->coorientador = $request->coorientador;
+            $tese->titulacao_orientador = $request->titulacao_orientador;
+            $tese->titulacao_coorientador = $request->titulacao_coorientador;
+            $tese->programa = $request->programa;
+            $tese->documento_id = $ficha->id;
+            $tese->save();
+            return redirect(Route('home-aluno'))->with('sucess', 'Tese Cadastrada Com Sucesso!');
+        } elseif ($request->tipo_documento == 3){
+            $tcc = new Tcc();
+            $tcc->orientador = $request->orientador;
+            $tcc->coorientador = $request->coorientador;
+            $tcc->titulacao_orientador = $request->titulacao_orientador;
+            $tcc->titulacao_coorientador = $request->titulacao_coorientador;
+            $tcc->campus = $request->campus;
+            $tcc->curso = $request->curso;
+            $tcc->referencia = $request->referencia;
+            $tcc->documento_id = $ficha->id;
+            $tcc->save();
+            return redirect(Route('home-aluno'))->with('sucess', 'Trabalho de Conclusão de Curso Cadastrado Com Sucesso!');
+        } elseif ($request->tipo_documento == 4){
+            $programaEduc = new ProgramaEducacional();
+            $programaEduc->programa = $request->programa;
+            $programaEduc->campus = $request->campus;
+            $programaEduc->documento_id = $ficha->id;
+            $programaEduc->save();
+            return redirect(Route('home-aluno'))->with('sucess', 'Produto Educacional Cadastrado Com Sucesso!');
+        }
+        else {
+            dd($request);
+        }
     }
 
     public function novaRequisicao(Request $request)

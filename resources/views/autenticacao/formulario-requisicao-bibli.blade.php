@@ -12,7 +12,7 @@
                 <div class="card-body">
 
                     <div class="row justify-content-center">
-                        <h2>Solicitar Documentos Biblioteca</h2>
+                        <h2>Solicitar Ficha Catalográfica</h2>
                     </div>
                     <form method="POST" enctype="multipart/form-data" id="formRequisicao"
                           action="{{ route('cadastrarDocumento') }}">
@@ -41,28 +41,20 @@
 
                         <div class="form-group row justify-content-center">
                             <div class="col-sm-12">
-                                <label>Documentos</label>
-                                {{-- Declaração de vínculo --}}
-                                <div>
-                                    <input type="radio" name="documento" value="Monografia"
-                                           id="monografia" checked> Monografia</input>
-                                </div>
-                                {{-- comprovante de matrícula --}}
-                                <div>
-                                    <input type="radio" name="documento" value="Tese"
-                                           id="tese"> Tese</input></br>
-                                </div>
-                                {{-- Histórico escolar --}}
-                                <div>
-                                    <input type="radio" name="documento" value="TCC" id="tcc"> Trabalho de Conclusão de
-                                    Curso</input></br>
-                                </div>
+                                <label>Tipo de Ficha</label>
 
-                                {{-- Ficha Catalográfica --}}
-                                <div>
-                                    <input type="radio" name="documento" value="ProdutoEduc" id="produtoEduc">
-                                    Produto Educacional</input></br>
-                                </div>
+                                @foreach($tipos_documentos as $tipo)
+                                    <div>
+                                        <input type="radio" name="documento" value="{{$tipo->id}}"
+                                               id="{{$tipo->tipo}}" @if($tipo->tipo == 'Monografia') checked @endif>
+                                        @if($tipo->tipo == 'Monografia')Monografia
+                                        @elseif($tipo->tipo == 'Tese')Tese
+                                        @elseif($tipo->tipo == 'TCC')Trabalho de Conclusão de Curso
+                                        @elseif($tipo->tipo == 'ProgramaEduc')Produto Educacional
+                                        @else {{$tipo->tipo}}
+                                        @endif</input>
+                                    </div>
+                                @endforeach
                                 <div class="form-group row mb-0" style="margin-top:10px">
                                     <div class="col-md-8 offset-md-4">
 

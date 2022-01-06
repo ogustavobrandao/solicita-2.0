@@ -23,7 +23,7 @@ class CreateTesesTable extends Migration
             $table->string('programa');
 
             $table->unsignedBigInteger('documento_id');
-            $table->foreign('documento_id')->references('id')->on('requisicao_documentos');
+            $table->foreign('documento_id')->references('id')->on('ficha_catalograficas');
         });
     }
 

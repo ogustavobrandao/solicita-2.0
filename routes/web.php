@@ -71,6 +71,7 @@ Route::group(['middleware'=> 'CheckAluno'], function(){
     Route::post('/excluir-requisicao/{id}',[\App\Http\Controllers\RequisicaoController::class, 'excluirRequisicao'])->name('excluir-requisicao');
 
     Route::post('/cadastrar-documento-bibli', [\App\Http\Controllers\RequisicaoController::class, 'cadastrarDocumento'])->name('cadastrarDocumento');
+    Route::post('/criar-doc-bibli', [\App\Http\Controllers\RequisicaoController::class, 'criarDocumento'])->name('criarDocumentoBibli');
 
     Route::get('/confirmacao-requisicao',function(){
         return view('autenticacao.confirmacao-requisicao');
