@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Biblioteca;
 use App\Models\Bibliotecario;
+use App\Models\FichaCatalografica;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -22,10 +23,15 @@ class BibliotecarioController extends Controller
     return view('autenticacao.login');
   }
 
+    public function listarSolicitacoes(){
+        $fichas = FichaCatalografica::all();
+        return view('telas_bibliotecario.listar_documentos_solicitados', compact('fichas'));
+    }
+
   public function createBibliotecario()
   {
       $bibliotecas = Biblioteca::All();
-    return view('autenticacao.cadastro-bibliotecario',compact('bibliotecas'));
+      return view('autenticacao.cadastro-bibliotecario',compact('bibliotecas'));
   }
 
   public function perfil()

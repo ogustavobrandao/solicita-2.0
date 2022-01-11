@@ -100,6 +100,7 @@ Route::group(['middleware'=> 'CheckBibliotecario'], function(){
     Route::post('/atualizar-bibliotecario',[\App\Http\Controllers\BibliotecarioController::class, 'atualizarBibliotecario'])->name('atualizar-bibliotecario')->middleware('CheckBibliotecario');
     Route::get('/editar-senha-bibliotecario',[\App\Http\Controllers\BibliotecarioController::class, 'editarSenha'])->name('editar-senha-bibliotecario')->middleware('CheckBibliotecario');
     Route::post('/atualizar-senha-bibliotecario',[\App\Http\Controllers\BibliotecarioController::class, 'atualizarSenha'])->name('atualizar-senha-bibliotecario')->middleware('CheckBibliotecario');
+    Route::get('/listar-fichas',[\App\Http\Controllers\BibliotecarioController::class, 'listarSolicitacoes'])->name('listar-fichas');
 });
 
 //----------------------------------------------BIBLIOTECA---------------------------------------------------

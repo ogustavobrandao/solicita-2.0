@@ -14,8 +14,11 @@
     <link href="{{ asset('css/field-animation.css') }}" rel="stylesheet">
     <link href="{{ asset('css/styles/style.css') }}" rel="stylesheet">
 
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <style type="text/css">
-        
+
 
         .td-align {
            text-align: center;     /* alinhamento horizontal */
@@ -317,7 +320,7 @@
               <div class="col-sm-12 styleRodape_Texto_Conteudo_MapaDoSite"><a href="http://lmts.uag.ufrpe.br/br/content/solicita" style="color:white">O Solicita</a></div>
 							<div class="col-sm-12 styleRodape_Texto_Conteudo_MapaDoSite"><a href="http://lmts.uag.ufrpe.br/br/content/equipe" style="color:white">Equipe</a></div>
 							<div class="col-sm-12 styleRodape_Texto_Conteudo_MapaDoSite"><a href="http://lmts.uag.ufrpe.br/br/noticias" style="color:white">Notícia</a></div>
-							<div class="col-sm-12 styleRodape_Texto_Conteudo_MapaDoSite"><a href="http://lmts.uag.ufrpe.br/br/content/projetos" style="color:white">Projetos</a></div> 
+							<div class="col-sm-12 styleRodape_Texto_Conteudo_MapaDoSite"><a href="http://lmts.uag.ufrpe.br/br/content/projetos" style="color:white">Projetos</a></div>
 						</div>
 					</div>
 				</div>
@@ -337,7 +340,7 @@
 								</div>
 								<div class="col-sm-12 styleRodape_container">
 									<div href="" class="row">
-										
+
 										<div class="col">
 											<img src="{{asset('icones/facebook_logo.svg')}}" alt="Logo" width="20px;" />
 											<a href="" class="styleRodape_Texto_Contato" style="color: white;">@lmtsufape</a>
@@ -363,7 +366,7 @@
 						</div>
 					</div>
         </div>
-        
+
 				<div class="col-sm-2 ">
 					<div class="row">
 						<div class="styleRodape_linha_left">
@@ -373,7 +376,7 @@
 									<div class="col-sm-12" style="padding-bottom: 1rem; padding-left: 10px;">
 										<a href="http://www.ufrpe.br/"><img src="{{asset('icones/logo-ufrpe-branca.png')}}" alt="Logo" height="115px;" /></a>
 									</div>
-									
+
 								</div>
 							</div>
 						</div>
