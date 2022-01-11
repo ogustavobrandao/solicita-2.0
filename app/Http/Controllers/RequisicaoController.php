@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\FichaCatalografica;
 use App\Models\Monografia;
+use App\Models\PalavraChave;
 use App\Models\ProgramaEducacional;
 use App\Models\Tcc;
 use App\Models\Tese;
@@ -179,7 +180,7 @@ class RequisicaoController extends Controller
         $ficha->tipo_documento_id = $request->tipo_documento;
         $ficha->save();
 
-        if($request->tipo_documento == 1){
+        if ($request->tipo_documento == 1) {
             $monografia = new Monografia();
             $monografia->orientador = $request->orientador;
             $monografia->coorientador = $request->coorientador;
@@ -189,8 +190,7 @@ class RequisicaoController extends Controller
             $monografia->campus = $request->campus;
             $monografia->documento_id = $ficha->id;
             $monografia->save();
-            return redirect(Route('home-aluno'))->with('sucess', 'Monografia Cadastrada Com Sucesso!');
-        } elseif ($request->tipo_documento == 2){
+        } elseif ($request->tipo_documento == 2) {
             $tese = new Tese();
             $tese->orientador = $request->orientador;
             $tese->coorientador = $request->coorientador;
@@ -199,8 +199,7 @@ class RequisicaoController extends Controller
             $tese->programa = $request->programa;
             $tese->documento_id = $ficha->id;
             $tese->save();
-            return redirect(Route('home-aluno'))->with('sucess', 'Tese Cadastrada Com Sucesso!');
-        } elseif ($request->tipo_documento == 3){
+        } elseif ($request->tipo_documento == 3) {
             $tcc = new Tcc();
             $tcc->orientador = $request->orientador;
             $tcc->coorientador = $request->coorientador;
@@ -211,18 +210,45 @@ class RequisicaoController extends Controller
             $tcc->referencia = $request->referencia;
             $tcc->documento_id = $ficha->id;
             $tcc->save();
-            return redirect(Route('home-aluno'))->with('sucess', 'Trabalho de Conclusão de Curso Cadastrado Com Sucesso!');
-        } elseif ($request->tipo_documento == 4){
+        } elseif ($request->tipo_documento == 4) {
             $programaEduc = new ProgramaEducacional();
             $programaEduc->programa = $request->programa;
             $programaEduc->campus = $request->campus;
             $programaEduc->documento_id = $ficha->id;
             $programaEduc->save();
-            return redirect(Route('home-aluno'))->with('sucess', 'Produto Educacional Cadastrado Com Sucesso!');
-        }
-        else {
+        } else {
             dd($request);
         }
+
+        $palavra = new PalavraChave();
+        $palavra->palavra = $request->primeira_chave;
+        $palavra->documento_id = $ficha->id;
+        $palavra->save();
+
+        $palavra = new PalavraChave();
+        $palavra->palavra = $request->segunda_chave;
+        $palavra->documento_id = $ficha->id;
+        $palavra->save();
+
+        $palavra = new PalavraChave();
+        $palavra->palavra = $request->terceira_chave;
+        $palavra->documento_id = $ficha->id;
+        $palavra->save();
+
+        if ($request->quarta_chave != null) {
+            $palavra = new PalavraChave();
+            $palavra->palavra = $request->quarta_chave;
+            $palavra->documento_id = $ficha->id;
+            $palavra->save();
+        }
+        if ($request->quinta_chave != null) {
+            $palavra = new PalavraChave();
+            $palavra->palavra = $request->quinta_chave;
+            $palavra->documento_id = $ficha->id;
+            $palavra->save();
+        }
+
+        return redirect(Route('home-aluno'))->with('sucess', 'Ficha Catalografica Cadastrada Com Sucesso!');
     }
 
     public function novaRequisicao(Request $request)

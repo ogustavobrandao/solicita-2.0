@@ -17,4 +17,20 @@ class FichaCatalografica extends Model
     public function tipo_documento(){
         return $this->hasOne('App\Models\TipoDocumento');
     }
+
+    public function tcc(){
+        return $this->hasOne('App\Models\Tcc');
+    }
+
+    public function tese(){
+        return $this->hasOne('App\Models\Tese');
+    }
+
+    public function palavra_chave(){
+        return $this->hasMany('App\Models\PalavraChave');
+    }
+
+    public function monografia(){
+        return $this->hasOne('App\Models\Monografia');
+    }
 }
