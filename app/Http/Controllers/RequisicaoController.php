@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Dissertacao;
 use App\Models\FichaCatalografica;
 use App\Models\Monografia;
 use App\Models\PalavraChave;

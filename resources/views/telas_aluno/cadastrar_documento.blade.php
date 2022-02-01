@@ -38,7 +38,12 @@
                 <div class="card-body">
 
                     <div class="row justify-content-center">
-                        <h2>Ficha Catalográfica - {{$tipo_documento}}</h2>
+                        <h2>Ficha Catalográfica - @if($tipo_documento == 1)Monografia
+                            @elseif($tipo_documento == 2)Tese
+                            @elseif($tipo_documento == 3)Trabalho de Conclusão de Curso
+                            @elseif($tipo_documento == 4)Produto Educacional
+                            @elseif($tipo_documento == 5)Dissertação
+                            @endif</h2>
                     </div>
                     <form method="POST" enctype="multipart/form-data" id="formRequisicao"
                           action="{{ route('criarDocumentoBibli') }}">
@@ -301,10 +306,65 @@
                                 </div>
                             </div>
                             <hr>
+                        @elseif($tipo_documento == 5)
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h3>Dissertação</h3>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12" style="margin-left: 15px;">
+                                    <div class="form-group">
+                                        <label for="orientador">Orientador: <span style="color: red">*</span></label>
+                                        <input type="text" class="form-control" id="orientador" name="orientador"
+                                               placeholder="Digite o Orientador" value="" required>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="subtitulo">Titulação do Orientador: <span style="color: red">*</span></label>
+                                        <select class="form-control" id="titulacao_orientador" name="titulacao_orientador">
+                                            <option value="graduado">Graduado</option>
+                                            <option value="especialista">Especialista</option>
+                                            <option value="mestre">Mestre</option>
+                                            <option value="doutor">Doutor</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="orientador">Coorientador: </label>
+                                        <input type="text" class="form-control" id="coorientador"
+                                               placeholder="Digite o Nome do Coorientador" value="" name="coorientador">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="subtitulo">Titulação do Coorientador:</label>
+                                        <select class="form-control" id="titulacao_coorientador" name="titulacao_coorientador">
+                                            <option>Sem Coorientador</option>
+                                            <option value="graduado">Graduado</option>
+                                            <option value="especialista">Especialista</option>
+                                            <option value="mestre">Mestre</option>
+                                            <option value="doutor">Doutor</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="programa">Programa: <span style="color: red">*</span></label>
+                                        <input type="text" class="form-control" id="programa" name="programa"
+                                               placeholder="Digite o Nome do Programa" value="">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="campus">Campus: <span style="color: red">*</span></label>
+                                        <input type="text" class="form-control" id="campus" name="campus"
+                                               placeholder="Digite o Nome do Campus" value="" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
                         @endif
                         <div class="row">
                             <div class="col-md-12">
-                                <h3>Palavras Chave</h3>
+                                <h3>Palavras-chave</h3>
                             </div>
                         </div>
                         <div class="row">
@@ -312,31 +372,31 @@
                                 <div class="form-group">
                                     <label for="primeira">Primeira Palavra:<span style="color: red">*</span></label>
                                     <input type="text" class="form-control" id="primeira" name="primeira_chave"
-                                           placeholder="Primeira Palavra Chave" value="">
+                                           placeholder="1. Palavras-chave" value="">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="segunda">Segunda Palavra:<span style="color: red">*</span></label>
                                     <input type="text" class="form-control" id="segunda" name="segunda_chave"
-                                           placeholder="Segunda Palavra Chave" value="">
+                                           placeholder="2. Palavras-chave" value="">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="terceira">Terceira Palavra:<span style="color: red">*</span></label>
                                     <input type="text" class="form-control" id="terceira" name="terceira_chave"
-                                           placeholder="Terceira Palavra Chave" value="">
+                                           placeholder="3. Palavras-chave" value="">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="quarta">Quarta Palavra:</label>
                                     <input type="text" class="form-control" id="quarta" name="quarta_chave"
-                                           placeholder="Quarta Palavra Chave" value="">
+                                           placeholder="4. Palavras-chave" value="">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="quinta">Quinta Palavra:</label>
                                     <input type="text" class="form-control" id="quinta" name="quinta_chave"
-                                           placeholder="Quinta Palavra Chave" value="">
+                                           placeholder="5. Palavras-chave" value="">
                                 </div>
                             </div>
                             <div class="col text-center" style="padding-top: 0px">

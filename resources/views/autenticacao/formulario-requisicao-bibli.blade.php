@@ -51,6 +51,7 @@
                                         @elseif($tipo->tipo == 'Tese')Tese
                                         @elseif($tipo->tipo == 'TCC')Trabalho de Conclusão de Curso
                                         @elseif($tipo->tipo == 'ProgramaEduc')Produto Educacional
+                                        @elseif($tipo->tipo == 'Dissertacao')Dissertação
                                         @else {{$tipo->tipo}}
                                         @endif</input>
                                     </div>

@@ -46,7 +46,12 @@
                                 {{$ficha->autor}}
                             </td>
                             <td>
-                                {{\App\Models\TipoDocumento::find($ficha->tipo_documento_id)->tipo}}
+                                @if ($ficha->tipo_documento_id == 1)Monografia
+                                @elseif ($ficha->tipo_documento_id == 2)Tese
+                                @elseif ($ficha->tipo_documento_id == 3)TCC
+                                @elseif ($ficha->tipo_documento_id == 4)Produto Educacional
+                                @elseif ($ficha->tipo_documento_id == 5)Dissertação
+                                @endif
                             </td>
                             <td>
                                 {{$ficha->created_at}}
@@ -55,7 +60,7 @@
                                 Em Andamento
                             </td>
                             <td>
-                                <a href="#"><i class="fa fa-file-text fa-sm" aria-hidden="true" size="10px"></i> Abrir</a>
+                                <a href="{{ route('editar-fichas') }}"><i class="fa fa-file-text fa-sm" aria-hidden="true" size="10px"></i> Abrir</a>
                             </td>
                         </tr>
                     @endforeach

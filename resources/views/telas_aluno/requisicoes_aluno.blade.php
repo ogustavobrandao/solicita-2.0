@@ -94,7 +94,12 @@
 
                                                 @if($ficha->id == $rd->ficha_catalografica_id)
                                                     <li>
-                                                        Ficha Catalográfica - {{\App\Models\TipoDocumento::find($ficha->tipo_documento_id)->tipo}}
+                                                        Ficha Catalográfica - @if ($ficha->tipo_documento_id == 1)Monografia
+                                                        @elseif ($ficha->tipo_documento_id == 2)Tese
+                                                        @elseif ($ficha->tipo_documento_id == 3)TCC
+                                                        @elseif ($ficha->tipo_documento_id == 4)Produto Educacional
+                                                        @elseif ($ficha->tipo_documento_id == 5)Dissertação
+                                                        @endif
                                                     </li>
                                                 @endif
                                             @endforeach
