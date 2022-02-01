@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTccsTable extends Migration
+class CreateDissertacaosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,15 @@ class CreateTccsTable extends Migration
      */
     public function up()
     {
-        Schema::create('tccs', function (Blueprint $table) {
+        Schema::create('dissertacaos', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->string('orientador');
             $table->string('titulacao_orientador');
             $table->string('coorientador')->nullable();
             $table->string('titulacao_coorientador')->nullable();
+            $table->string('programa');
             $table->string('campus');
-            $table->string('curso');
-            $table->string('referencia');
 
             $table->unsignedBigInteger('documento_id');
             $table->foreign('documento_id')->references('id')->on('ficha_catalograficas');
@@ -36,6 +35,6 @@ class CreateTccsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tccs');
+        Schema::dropIfExists('dissertacaos');
     }
 }

@@ -18,8 +18,8 @@ class CreateTesesTable extends Migration
             $table->timestamps();
             $table->string('orientador');
             $table->string('titulacao_orientador');
-            $table->string('coorientador');
-            $table->string('titulacao_coorientador');
+            $table->string('coorientador')->nullable();
+            $table->string('titulacao_coorientador')->nullable();
             $table->string('programa');
 
             $table->unsignedBigInteger('documento_id');

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Biblioteca;
 use App\Models\Bibliotecario;
 use App\Models\FichaCatalografica;
+use App\Models\Requisicao_documento;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -24,8 +25,21 @@ class BibliotecarioController extends Controller
   }
 
     public function listarSolicitacoes(){
-        $fichas = FichaCatalografica::all();
-        return view('telas_bibliotecario.listar_documentos_solicitados', compact('fichas'));
+        $requisicaos = Requisicao_documento::all();
+        $idUser = Auth::user()->id;
+        $bibliotecario = Bibliotecario::where('user_id',$idUser)->first();
+        $unidadeBibliotecario = $bibliotecario->biblioteca->unidade_id;
+        $fichas = [];
+        $requisicoesFichas = [];
+        foreach ($requisicaos as $ficha) {
+            $perfil = $ficha->aluno->perfil->first();
+            if ($ficha->ficha_catalografica_id != null && $unidadeBibliotecario == $perfil->unidade_id){
+                $requisicoesFichas[] =$ficha;
+                $fichas[] = FichaCatalografica::find($ficha->ficha_catalografica_id);
+
+            }
+        }
+        return view('telas_bibliotecario.listar_documentos_solicitados', compact('requisicoesFichas','fichas'));
     }
 
   public function createBibliotecario()
@@ -40,7 +54,6 @@ class BibliotecarioController extends Controller
       $user = User::find($idUser); //Usuário Autenticado
     $bibliotecario = Bibliotecario::where('user_id',$idUser)->first(); //Bibliotecario autenticado
       $biblioteca = Biblioteca::where('id',$bibliotecario->biblioteca_id)->first();
-
     return view('telas_bibliotecario.perfil_bibliotecario', ['user'=>$user,
     'bibliotecario'=>$bibliotecario,'biblioteca'=>$biblioteca]);
 

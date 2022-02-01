@@ -60,6 +60,7 @@
                                 </div>
                             </div>
                         </div>
+                        <input type="hidden" name="id_perfil" value="{{ $id_perfil }}">
                         <hr>
                         <! –– Dados do Trabalho ––>
                         <div class="row">

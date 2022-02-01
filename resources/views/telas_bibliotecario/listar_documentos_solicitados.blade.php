@@ -46,7 +46,7 @@
                                 {{$ficha->autor}}
                             </td>
                             <td>
-                                {{\App\Models\TipoDocumento::find($ficha->tipo_documento_id)->first()->tipo}}
+                                {{\App\Models\TipoDocumento::find($ficha->tipo_documento_id)->tipo}}
                             </td>
                             <td>
                                 {{$ficha->created_at}}

@@ -20,7 +20,7 @@ class CreateFichaCatalograficasTable extends Migration
             $table->string('classificacao')->nullable();
             $table->string('autor');
             $table->string('titulo');
-            $table->string('subtitulo');
+            $table->string('subtitulo')->nullable();
             $table->string('local');
             $table->string('ano');
             $table->integer('folhas');

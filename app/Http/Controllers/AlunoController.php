@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\FichaCatalografica;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
@@ -39,8 +40,9 @@ class AlunoController extends Controller
     $requisicoes_documentos = Requisicao_documento::where('aluno_id',$aluno->id)->get();
     $aluno= Aluno::where('user_id',$idUser)->first();
     $documentos = Documento::all();
+    $fichas = FichaCatalografica::all();
     $perfis = Perfil::where('aluno_id',$aluno->id)->get();
-    return view('telas_aluno.requisicoes_aluno',compact('requisicoes','requisicoes_documentos','aluno','documentos','perfis'));
+    return view('telas_aluno.requisicoes_aluno',compact('requisicoes','requisicoes_documentos','aluno','documentos','perfis','fichas'));
   }
   public function homeAluno(){
     return view('autenticacao.home-aluno');

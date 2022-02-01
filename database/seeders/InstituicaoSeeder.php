@@ -19,5 +19,9 @@ class InstituicaoSeeder extends Seeder
           'nome'=>'Universidade Federal do Agreste de Pernambuco',
           'administrador_id'=>$administrador_id[0],
         ]);
+        DB::table('instituicaos')->insert([
+            'nome'=>'Universidade de Pernambuco',
+            'administrador_id'=>$administrador_id[0],
+        ]);
     }
 }
