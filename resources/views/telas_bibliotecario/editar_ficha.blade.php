@@ -427,20 +427,21 @@
                                     <input type="text" class="form-control" id="terceira" name="terceira_chave"
                                            placeholder="3. Palavras-chave" value="{{$palavrasChave[2]->palavra}}">
                                 </div>
-                                @if(sizeof($palavrasChave) == 4 )
+                                @if(sizeof($palavrasChave) >= 4 )
                                     <input type="hidden" name="palavra_chave4_id" value="{{$palavrasChave[3]->id}}">
                                     <div class="form-group">
                                         <label for="quarta">Quarta Palavra:</label>
                                         <input type="text" class="form-control" id="quarta" name="quarta_chave"
                                                placeholder="4. Palavras-chave" value="{{$palavrasChave[3]->palavra}} ">
                                     </div>
-                                @elseif(sizeof($palavrasChave) == 5)
-                                    <input type="hidden" name="palavra_chave5_id" value="{{$palavrasChave[4]->id}}">
-                                    <div class="form-group">
-                                        <label for="quinta">Quinta Palavra:</label>
-                                        <input type="text" class="form-control" id="quinta" name="quinta_chave"
-                                               placeholder="5. Palavras-chave" value="{{$palavrasChave[4]->palavra}} ">
-                                    </div>
+                                    @if(sizeof($palavrasChave) == 5)
+                                        <input type="hidden" name="palavra_chave5_id" value="{{$palavrasChave[4]->id}}">
+                                        <div class="form-group">
+                                            <label for="quinta">Quinta Palavra:</label>
+                                            <input type="text" class="form-control" id="quinta" name="quinta_chave"
+                                                   placeholder="5. Palavras-chave" value="{{$palavrasChave[4]->palavra}} ">
+                                        </div>
+                                    @endif
                                 @endif
                             </div>
                             <div class="col text-center" style="padding-top: 0px">
