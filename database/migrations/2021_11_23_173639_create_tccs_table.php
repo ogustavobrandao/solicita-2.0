@@ -18,14 +18,14 @@ class CreateTccsTable extends Migration
             $table->timestamps();
             $table->string('orientador');
             $table->string('titulacao_orientador');
-            $table->string('coorientador');
-            $table->string('titulacao_coorientador');
+            $table->string('coorientador')->nullable();
+            $table->string('titulacao_coorientador')->nullable();
             $table->string('campus');
             $table->string('curso');
             $table->string('referencia');
 
-            $table->unsignedBigInteger('documento_id');
-            $table->foreign('documento_id')->references('id')->on('ficha_catalograficas');
+            $table->unsignedBigInteger('ficha_catalografica_id');
+            $table->foreign('ficha_catalografica_id')->references('id')->on('ficha_catalograficas');
         });
     }
 

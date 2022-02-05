@@ -14,7 +14,9 @@ class Bibliotecario extends Model
         return $this->belongsTo('App\Models\User','user_id');
     }
 
-
+    public function biblioteca(){
+        return $this->belongsTo('App\Models\Biblioteca');
+    }
 
     public function requisicao_documento(){
         return $this->hasMany('App\Models\Requisicao_documento');

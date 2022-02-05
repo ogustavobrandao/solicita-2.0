@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Biblioteca;
+use App\Models\Unidade;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,7 +19,8 @@ class BibliotecaController extends Controller
 
   public function createBiblioteca()
   {
-    return view('telas_biblioteca.cadastro-biblioteca');
+      $unidades = Unidade::all();
+    return view('telas_biblioteca.cadastro-biblioteca', compact('unidades'));
   }
 
 
@@ -28,6 +30,7 @@ class BibliotecaController extends Controller
     ]);
     $biblioteca = new Biblioteca();
     $biblioteca->nome = $request->nome;
+    $biblioteca->unidade_id = $request->unidade;
     $biblioteca->save();
     return redirect()->route('home')->with('success', 'Biblioteca cadastrada com sucesso!');
   }

@@ -16,10 +16,12 @@ class BibliotecaSeeder extends Seeder
     {
         DB::table('bibliotecas')->insert([
             'nome'=> 'Biblioteca UPE',
+            'unidade_id' => 1,
         ]);
 
         DB::table('bibliotecas')->insert([
             'nome'=> 'Biblioteca UFAPE',
+            'unidade_id' => 1,
         ]);
     }
 }

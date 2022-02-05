@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Instituicao;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 class UnidadeSeeder extends Seeder
@@ -13,10 +14,14 @@ class UnidadeSeeder extends Seeder
      */
     public function run()
     {
-      $instituicao_id = DB::table('instituicaos')->where('nome','Universidade Federal do Agreste de Pernambuco')->pluck('id');
+      $instituicoes = Instituicao::All();
         DB::table('unidades')->insert([
           'nome'=> 'UFAPE - SEDE (Unidade Acadêmica de Garanhuns)',
-          'instituicao_id'=> $instituicao_id[0],
+          'instituicao_id'=> $instituicoes[0]->id,
+        ]);
+        DB::table('unidades')->insert([
+            'nome'=> 'UPE - Campus Garanhuns',
+            'instituicao_id'=> $instituicoes[1]->id,
         ]);
     }
 }

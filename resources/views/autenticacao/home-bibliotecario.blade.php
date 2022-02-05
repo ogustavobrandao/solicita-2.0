@@ -11,7 +11,7 @@
 
    <div class="row justify-content-center d-flex align-items-center">
       <div class="col-sm-4 d-flex justify-content-center">
-         <a href="#" style="text-decoration:none; color: inherit;">
+         <a href="{{ route('listar-fichas') }}" style="text-decoration:none; color: inherit;">
             <div class="card cartao text-center " style="border-radius: 30px">
              <div class="card-body d-flex justify-content-center">
                   <h2 style="padding-top:15px">Listar Documentos Solicitados</h2>

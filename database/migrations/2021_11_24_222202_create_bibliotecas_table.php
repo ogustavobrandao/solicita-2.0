@@ -17,6 +17,9 @@ class CreateBibliotecasTable extends Migration
             $table->id();
             $table->string('nome')->unique();
             $table->timestamps();
+
+            $table->unsignedBigInteger('unidade_id');
+            $table->foreign('unidade_id')->references('id')->on('unidades');
         });
     }
 

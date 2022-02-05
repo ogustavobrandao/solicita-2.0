@@ -13,11 +13,6 @@ class FichaCatalografica extends Model
 
     protected $fillable = ['cutter', 'classificacao', 'autor', 'titulo', 'subtitulo', 'local', 'ano', 'folhas', 'ilustracao'];
 
-
-    public function tipo_documento(){
-        return $this->hasOne('App\Models\TipoDocumento');
-    }
-
     public function tcc(){
         return $this->hasOne('App\Models\Tcc');
     }
