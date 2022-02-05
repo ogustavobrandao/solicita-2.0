@@ -445,14 +445,16 @@
                                 @endif
                             </div>
                             <div class="col text-center" style="padding-top: 0px">
-                                <a type="button" class="btn btn-secondary" style="margin-right: 10px" href="{{ route('prepara-requisicao-bibli') }}">Voltar</a>
-                                <button type="submit" class="btn btn-primary-lmts" style="margin-left: 10px" href="#">Salvar</button>
+                                <a type="button" class="btn btn-secondary" style="margin-right: 30px" href="{{ route('listar-fichas') }}">Voltar</a>
+                                @if($requisicao->status == 'Em andamento')
+                                    <a type="button" class="btn btn-danger" href="{{ route('rejeitar-ficha',$requisicao->id) }}">Rejeitar solicitação</a>
+                                @endif
+                                <button type="submit" class="btn btn-primary-lmts" style="margin-left: 30px" href="#">Gerar ficha</button>
                             </div>
                             <input type="hidden" name="ficha_catalografica_id" value="{{$fichaCatalografica->id}}">
                             <input type="hidden" name="palavra_chave1_id" value="{{$palavrasChave[0]->id}}">
                             <input type="hidden" name="palavra_chave2_id" value="{{$palavrasChave[1]->id}}">
                             <input type="hidden" name="palavra_chave3_id" value="{{$palavrasChave[2]->id}}">
-
 
                         </div>
                     </form>
@@ -462,4 +464,7 @@
     </div>
 </div>
 
+@php
+
+@endphp
 @endsection

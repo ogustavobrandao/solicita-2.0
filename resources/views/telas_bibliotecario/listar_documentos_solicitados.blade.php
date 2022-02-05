@@ -33,6 +33,7 @@
                             style="cursor:pointer">Data da Requisição</th>
                         <th scope="col" align="center">Status</th>
                         <th scope="col" align="center">Ação</th>
+                        <th scope="col" align="center">Data de análise</th>
 
                     </tr>
                     </thead>
@@ -59,10 +60,29 @@
                                         {{$ficha->created_at}}
                                     </td>
                                     <td>
-                                        {{$requisicao->status}}
+                                        @if($requisicao->status == 'Concluido')<p style="color: #1d643b; "><strong>Concluido</strong></p>
+                                        @elseif($requisicao->status == 'Em andamento')<p style="color: #857b26"><strong>Em andamento</strong></p>
+                                        @elseif($requisicao->status == 'Rejeitado')<p style="color: #4c110f"><strong>Rejeitado</strong></p>
+                                        @endif
                                     </td>
                                     <td>
                                         <a href="{{ route('editar-ficha', $requisicao->id) }}"><i class="fa fa-file-text fa-sm" aria-hidden="true" size="10px"></i> Abrir</a>
+                                        @if($requisicao->status == 'Rejeitado')
+                                            <div class="btn-group-vertical">
+                                                <a class="btn btn-light dropdown-toggle" data-toggle="dropdown" href="#">
+                                                    <span class="fa fa-info-circle" title="Toggle dropdown menu"></span>
+                                                </a>
+                                                <ul class="dropdown-menu">
+                                                    <p style="margin-left: 3px">{{$requisicao->anotacoes}}</p>
+                                                </ul>
+                                            </div>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if($requisicao->status != 'Em andamento')
+                                            {{$requisicao->updated_at}}
+                                        @endif
+
                                     </td>
                                 </tr>
                             @endif

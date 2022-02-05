@@ -71,7 +71,7 @@ class BibliotecarioController extends Controller
             $documento = ProgramaEducacional::where('ficha_catalografica_id', $fichaCatalografica->id)->first();
         else
             $documento = Dissertacao::where('ficha_catalografica_id', $fichaCatalografica->id)->first();
-        return view('telas_bibliotecario.editar_ficha', compact('documento', 'aluno', 'palavrasChave', 'fichaCatalografica', 'tipo_documento'));
+        return view('telas_bibliotecario.editar_ficha', compact('documento', 'aluno', 'palavrasChave', 'fichaCatalografica', 'tipo_documento','requisicao'));
     }
 
     public function atualizarFicha(Request $request)
@@ -158,16 +158,39 @@ class BibliotecarioController extends Controller
             $palavra->update();
         }
 
-
+        date_default_timezone_set('America/Sao_Paulo');
         $date = date('d/m/Y');
 
 
         $documentosRequisitados = Requisicao_documento::where('ficha_catalografica_id', $request->ficha_catalografica_id)->first();
-        $documentosRequisitados->status_data = $date;
+        $documentosRequisitados->updated_at = $date;
         $documentosRequisitados->status = 'Concluido';
         $documentosRequisitados->update();
 
-        return redirect(Route('home-bibliotecario'))->with('sucess', 'Ficha Catalografica Atualizada Com Sucesso!');
+        return redirect(Route('listar-fichas'));
+    }
+
+    public function rejeitarFicha($requisicaoId) {
+
+        $requisicao = Requisicao_documento::find($requisicaoId);
+        $ficha = FichaCatalografica::find($requisicaoId)->first();
+        $aluno = Aluno::find($requisicao->aluno_id);
+        $usuario = User::find($aluno->user_id);
+
+        return view('telas_bibliotecario.rejeitar_ficha', compact('ficha','usuario','requisicao'));
+    }
+
+    public function atualizarRejeicao($requisicaoId, Request $request){
+
+        $requisicao = Requisicao_documento::find($requisicaoId);
+        $requisicao->anotacoes = $request->mensagem;
+        $requisicao->status = 'Rejeitado';
+        date_default_timezone_set('America/Sao_Paulo');
+        $date = date('d/m/Y');
+        $hour = hour('H:i');
+        $requisicao->updated_at = $date + $hour;
+        $requisicao->update();
+        return redirect(Route('listar-fichas'));
     }
 
     public function createBibliotecario()
