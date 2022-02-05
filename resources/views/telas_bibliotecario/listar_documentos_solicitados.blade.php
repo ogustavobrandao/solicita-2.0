@@ -13,6 +13,14 @@
           </div>
         </div>
        --}}
+        <div class="row justify-content-sm-center " style="">
+            <select class="form-select" aria-label="" style="">
+                <option selected>Open this select menu</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+            </select>
+        </div>
         <div class="row justify-content-sm-center">
             <div class="col-sm-10">
                 <h2 class="tituloTabela">{{Auth::user()->name}} - Lista de Requisições de Fichas Catalográficas</h2>
@@ -67,13 +75,19 @@
                                     </td>
                                     <td>
                                         <a href="{{ route('editar-ficha', $requisicao->id) }}"><i class="fa fa-file-text fa-sm" aria-hidden="true" size="10px"></i> Abrir</a>
-                                        @if($requisicao->status == 'Rejeitado')
+                                        @if($requisicao->status != 'Em andamento')
                                             <div class="btn-group-vertical">
                                                 <a class="btn btn-light dropdown-toggle" data-toggle="dropdown" href="#">
-                                                    <span class="fa fa-info-circle" title="Toggle dropdown menu"></span>
+                                                    <span class="fa fa-info-circle" title="Exibir explicação da rejeição"></span>
                                                 </a>
                                                 <ul class="dropdown-menu">
-                                                    <p style="margin-left: 3px">{{$requisicao->anotacoes}}</p>
+                                                    @if($requisicao->status == 'Concluido')
+
+                                                        <p style="margin-left: 3px">Requisição analisada e aprovada por: <Strong>{{\App\Models\User::where('id',\App\Models\Bibliotecario::where('id',$requisicao->bibliotecario_id)->first()->user_id)->first()->name}}</Strong></p>
+                                                    @elseif($requisicao->status == 'Rejeitado' && $requisicao->bibliotecario_id != null)
+                                                        <p style="margin: 1rem">Requisição analisada e rejeitada por: <Strong>{{\App\Models\User::where('id',\App\Models\Bibliotecario::where('id',$requisicao->bibliotecario_id)->first()->user_id)->first()->name}}</Strong> <br></p>
+                                                        <p style="margin-left: 1rem">Motivo: <strong style="color: #4c110f">{{ $requisicao->anotacoes }}</strong></p>
+                                                    @endif
                                                 </ul>
                                             </div>
                                         @endif
@@ -82,7 +96,6 @@
                                         @if($requisicao->status != 'Em andamento')
                                             {{$requisicao->updated_at}}
                                         @endif
-
                                     </td>
                                 </tr>
                             @endif
