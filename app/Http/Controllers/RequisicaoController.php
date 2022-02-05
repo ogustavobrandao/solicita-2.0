@@ -192,7 +192,7 @@ class RequisicaoController extends Controller
             $monografia->titulacao_coorientador = $request->titulacao_coorientador;
             $monografia->curso = $request->curso;
             $monografia->campus = $request->campus;
-            $monografia->documento_id = $ficha->id;
+            $monografia->ficha_catalografica_id = $ficha->id;
             $monografia->save();
         } elseif ($request->tipo_documento == 2) {
             $tese = new Tese();
@@ -201,7 +201,7 @@ class RequisicaoController extends Controller
             $tese->titulacao_orientador = $request->titulacao_orientador;
             $tese->titulacao_coorientador = $request->titulacao_coorientador;
             $tese->programa = $request->programa;
-            $tese->documento_id = $ficha->id;
+            $tese->ficha_catalografica_id = $ficha->id;
             $tese->save();
         } elseif ($request->tipo_documento == 3) {
             $tcc = new Tcc();
@@ -212,13 +212,13 @@ class RequisicaoController extends Controller
             $tcc->campus = $request->campus;
             $tcc->curso = $request->curso;
             $tcc->referencia = $request->referencia;
-            $tcc->documento_id = $ficha->id;
+            $tcc->ficha_catalografica_id = $ficha->id;
             $tcc->save();
         } elseif ($request->tipo_documento == 4) {
             $programaEduc = new ProgramaEducacional();
             $programaEduc->programa = $request->programa;
             $programaEduc->campus = $request->campus;
-            $programaEduc->documento_id = $ficha->id;
+            $programaEduc->ficha_catalografica_id = $ficha->id;
             $programaEduc->save();
         } elseif ($request->tipo_documento == 5) {
             $dissertacao = new Dissertacao();
@@ -228,7 +228,7 @@ class RequisicaoController extends Controller
             $dissertacao->titulacao_coorientador = $request->titulacao_coorientador;
             $dissertacao->campus = $request->campus;
             $dissertacao->programa = $request->programa;
-            $dissertacao->documento_id = $ficha->id;
+            $dissertacao->ficha_catalografica_id = $ficha->id;
             $dissertacao->save();
         }else {
             dd($request);
@@ -236,37 +236,49 @@ class RequisicaoController extends Controller
 
         $palavra = new PalavraChave();
         $palavra->palavra = $request->primeira_chave;
-        $palavra->documento_id = $ficha->id;
+        $palavra->ficha_catalografica_id = $ficha->id;
         $palavra->save();
 
         $palavra = new PalavraChave();
         $palavra->palavra = $request->segunda_chave;
-        $palavra->documento_id = $ficha->id;
+        $palavra->ficha_catalografica_id = $ficha->id;
         $palavra->save();
 
         $palavra = new PalavraChave();
         $palavra->palavra = $request->terceira_chave;
-        $palavra->documento_id = $ficha->id;
+        $palavra->ficha_catalografica_id = $ficha->id;
         $palavra->save();
 
         if ($request->quarta_chave != null) {
             $palavra = new PalavraChave();
             $palavra->palavra = $request->quarta_chave;
-            $palavra->documento_id = $ficha->id;
+            $palavra->ficha_catalografica_id = $ficha->id;
             $palavra->save();
         }
         if ($request->quinta_chave != null) {
             $palavra = new PalavraChave();
             $palavra->palavra = $request->quinta_chave;
-            $palavra->documento_id = $ficha->id;
+            $palavra->ficha_catalografica_id = $ficha->id;
             $palavra->save();
         }
 
-
+        $requisicao = new Requisicao();
+        $idUser = Auth::user()->id;
+        $aluno = Aluno::where('user_id', $idUser)->first(); //Aluno autenticado
+        $perfil = Perfil::where('id', $request->id_perfil)->first();
+        date_default_timezone_set('America/Sao_Paulo');
         $date = date('d/m/Y');
+        $hour = date('H:i');
+        $requisicao->data_pedido = $date;
+        $requisicao->hora_pedido = $hour;
+        $requisicao->perfil_id = $perfil->id;
+        $requisicao->aluno_id = $aluno->id; //necessária adequação com o código de autenticação do usuário do perfil aluno
+        $requisicao->save();
 
         $documentosRequisitados = new Requisicao_documento();
         $documentosRequisitados->status_data = $date;
+        $documentosRequisitados->requisicao_id = $requisicao->id;
+        $documentosRequisitados->aluno_id = $perfil->aluno_id;
         $documentosRequisitados->status = 'Em andamento';
         $documentosRequisitados->ficha_catalografica_id = $ficha->id;
         $documentosRequisitados->save();

@@ -52,16 +52,56 @@
                         <! –– Dados Pessoais ––>
                         <div class="row">
                             <div class="col-md-12">
-                                <h3>Dados Pessoais</h3>
+                                <h3>Dados Pessoais do Solicitante</h3>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12" style="margin-left: 15px;">
                                 <div class="form-group">
-                                    <label for="exampleFormControlInput1">Nome<span style="color: red">*</span>:</label>
+                                    <label for="exampleFormControlInput1">Nome:<span style="color: red">*</span>:</label>
                                     <input type="text" class="form-control" id="nome" name="nome"
-                                           placeholder="Nome" value="{{\Illuminate\Support\Facades\Auth::user()->name}}"
+                                           placeholder="Nome" value="{{\App\Models\User::where('id', $aluno->user_id)->first()->name}}"
                                            disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleFormControlInput1">CPF:<span style="color: red">*</span>:</label>
+                                    <input type="text" class="form-control" id="cpf" name="cpf"
+                                           placeholder="Nome" value="{{$aluno->cpf}}"
+                                           disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleFormControlInput1">Email:<span style="color: red">*</span>:</label>
+                                    <input type="text" class="form-control" id="email" name="email"
+                                           placeholder="Nome" value="{{\App\Models\User::where('id', $aluno->user_id)->first()->email}}"
+                                           disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleFormControlInput1">Curso:<span style="color: red">*</span>:</label>
+                                    <input type="text" class="form-control" id="email" name="email"
+                                           placeholder="Nome" value="{{\App\Models\Perfil::where('aluno_id', $aluno->id)->first()->default}}"
+                                           disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <! -- Dados para o bibliotecario -- !>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h3>Dados para o Bibliotecario</h3>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12" style="margin-left: 15px;">
+                                <div class="form-group">
+                                    <label for="cutter">Cutter: <span style="color: red">*</span></label>
+                                    <input type="text" class="form-control" id="cutter" name="cutter"
+                                           placeholder="Digite o código de Cutter" value="" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="classificacao">Classificação: <span style="color: red">*</span></label>
+                                    <input type="text" class="form-control" id="classificacao" name="classificacao"
+                                           placeholder="Digite a classificação" value="" required>
                                 </div>
                             </div>
                         </div>
@@ -411,6 +451,7 @@
                             <input type="hidden" name="palavra_chave1_id" value="{{$palavrasChave[0]->id}}">
                             <input type="hidden" name="palavra_chave2_id" value="{{$palavrasChave[1]->id}}">
                             <input type="hidden" name="palavra_chave3_id" value="{{$palavrasChave[2]->id}}">
+
 
                         </div>
                     </form>

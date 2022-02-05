@@ -18,8 +18,8 @@ class CreatePalavraChavesTable extends Migration
             $table->timestamps();
             $table->string('palavra');
 
-            $table->unsignedBigInteger('documento_id');
-            $table->foreign('documento_id')->references('id')->on('ficha_catalograficas');
+            $table->unsignedBigInteger('ficha_catalografica_id');
+            $table->foreign('ficha_catalografica_id')->references('id')->on('ficha_catalograficas');
         });
     }
 

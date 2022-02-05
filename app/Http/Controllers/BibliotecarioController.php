@@ -57,31 +57,30 @@ class BibliotecarioController extends Controller
     {
         $requisicao = Requisicao_documento::where('id', $requisicaoId)->first();
         $aluno = Aluno::where('id', $requisicao->aluno_id)->first();
-        $palavrasChave = PalavraChave::where('documento_id', $requisicao->ficha_catalografica_id)->Get();
+        $palavrasChave = PalavraChave::where('ficha_catalografica_id', $requisicao->ficha_catalografica_id)->Get();
         $fichaCatalografica = FichaCatalografica::where('id', $requisicao->ficha_catalografica_id)->first();
         $tipo_documento = $fichaCatalografica->tipo_documento_id;
         $documentoEspecificoNome = TipoDocumento::where('id', $tipo_documento)->first()->tipo;
         if($documentoEspecificoNome == 'Monografia')
-            $documento = Monografia::where('documento_id', $fichaCatalografica->id)->first();
+            $documento = Monografia::where('ficha_catalografica_id', $fichaCatalografica->id)->first();
         elseif ($documentoEspecificoNome == 'Tese')
-            $documento = Tese::where('documento_id', $fichaCatalografica->id)->first();
+            $documento = Tese::where('ficha_catalografica_id', $fichaCatalografica->id)->first();
         elseif ($documentoEspecificoNome == 'TCC')
-            $documento = Tcc::where('documento_id', $fichaCatalografica->id)->first();
+            $documento = Tcc::where('ficha_catalografica_id', $fichaCatalografica->id)->first();
         elseif ($documentoEspecificoNome == 'ProgramaEduc')
-            $documento = ProgramaEducacional::where('documento_id', $fichaCatalografica->id)->first();
+            $documento = ProgramaEducacional::where('ficha_catalografica_id', $fichaCatalografica->id)->first();
         else
-            $documento = Dissertacao::where('documento_id', $fichaCatalografica->id)->first();
+            $documento = Dissertacao::where('ficha_catalografica_id', $fichaCatalografica->id)->first();
         return view('telas_bibliotecario.editar_ficha', compact('documento', 'aluno', 'palavrasChave', 'fichaCatalografica', 'tipo_documento'));
     }
 
     public function atualizarFicha(Request $request)
     {
-        //'cutter', 'classificacao'
 
         $ficha = FichaCatalografica::find($request->ficha_catalografica_id);
-
-
         $ficha->autor = $request->autor;
+        $ficha->cutter = $request->cutter;
+        $ficha->classificacao = $request->classificacao;
         $ficha->titulo = $request->titulo;
         $ficha->subtitulo = $request->subtitulo;
         $ficha->local = $request->local;
@@ -92,7 +91,7 @@ class BibliotecarioController extends Controller
 
 
         if ($request->tipo_documento == 1) {
-            $monografia = Monografia::where('documento_id', $request->ficha_catalografica_id)->first();
+            $monografia = Monografia::where('ficha_catalografica_id', $request->ficha_catalografica_id)->first();
             $monografia->orientador = $request->orientador;
             $monografia->coorientador = $request->coorientador;
             $monografia->titulacao_orientador = $request->titulacao_orientador;
@@ -101,7 +100,7 @@ class BibliotecarioController extends Controller
             $monografia->campus = $request->campus;
             $monografia->update();
         } elseif ($request->tipo_documento == 2) {
-            $tese = Tese::where('documento_id', $request->ficha_catalografica_id)->first();
+            $tese = Tese::where('ficha_catalografica_id', $request->ficha_catalografica_id)->first();
             $tese->orientador = $request->orientador;
             $tese->coorientador = $request->coorientador;
             $tese->titulacao_orientador = $request->titulacao_orientador;
@@ -109,7 +108,7 @@ class BibliotecarioController extends Controller
             $tese->programa = $request->programa;
             $tese->update();
         } elseif ($request->tipo_documento == 3) {
-            $tcc = Tcc::where('documento_id', $request->ficha_catalografica_id)->first();
+            $tcc = Tcc::where('ficha_catalografica_id', $request->ficha_catalografica_id)->first();
             $tcc->orientador = $request->orientador;
             $tcc->coorientador = $request->coorientador;
             $tcc->titulacao_orientador = $request->titulacao_orientador;
@@ -119,12 +118,12 @@ class BibliotecarioController extends Controller
             $tcc->referencia = $request->referencia;
             $tcc->update();
         } elseif ($request->tipo_documento == 4) {
-            $programaEduc = ProgramaEducacional::where('documento_id', $request->ficha_catalografica_id)->first();
+            $programaEduc = ProgramaEducacional::where('ficha_catalografica_id', $request->ficha_catalografica_id)->first();
             $programaEduc->programa = $request->programa;
             $programaEduc->campus = $request->campus;
             $programaEduc->update();
         } elseif ($request->tipo_documento == 5) {
-            $dissertacao = Dissertacao::where('documento_id', $request->ficha_catalografica_id)->first();
+            $dissertacao = Dissertacao::where('ficha_catalografica_id', $request->ficha_catalografica_id)->first();
             $dissertacao->orientador = $request->orientador;
             $dissertacao->coorientador = $request->coorientador;
             $dissertacao->titulacao_orientador = $request->titulacao_orientador;

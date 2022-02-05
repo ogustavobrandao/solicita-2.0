@@ -22,8 +22,8 @@ class CreateTesesTable extends Migration
             $table->string('titulacao_coorientador')->nullable();
             $table->string('programa');
 
-            $table->unsignedBigInteger('documento_id');
-            $table->foreign('documento_id')->references('id')->on('ficha_catalograficas');
+            $table->unsignedBigInteger('ficha_catalografica_id');
+            $table->foreign('ficha_catalografica_id')->references('id')->on('ficha_catalograficas');
         });
     }
 
