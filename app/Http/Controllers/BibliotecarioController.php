@@ -2,10 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Aluno;
 use App\Models\Biblioteca;
 use App\Models\Bibliotecario;
+use App\Models\Dissertacao;
 use App\Models\FichaCatalografica;
+use App\Models\Monografia;
+use App\Models\PalavraChave;
+use App\Models\Perfil;
+use App\Models\ProgramaEducacional;
+use App\Models\Requisicao;
 use App\Models\Requisicao_documento;
+use App\Models\Tcc;
+use App\Models\Tese;
+use App\Models\TipoDocumento;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -32,21 +42,133 @@ class BibliotecarioController extends Controller
         $unidadeBibliotecario = $bibliotecario->biblioteca->unidade_id;
         $fichas = [];
         $requisicoesFichas = [];
-        foreach ($requisicaos as $ficha) {
-            $perfil = $ficha->aluno->perfil->first();
-            if ($ficha->ficha_catalografica_id != null && $unidadeBibliotecario == $perfil->unidade_id) {
-                $requisicoesFichas[] = $ficha;
-                $fichas[] = FichaCatalografica::find($ficha->ficha_catalografica_id);
-
+        foreach ($requisicaos as $requisicao) {
+            $perfil = $requisicao->aluno->perfil->first();
+            if ($requisicao->ficha_catalografica_id != null && $unidadeBibliotecario == $perfil->unidade_id) {
+                $requisicoesFichas[] = $requisicao;
+                $fichas[] = FichaCatalografica::find($requisicao->ficha_catalografica_id);
             }
         }
+
         return view('telas_bibliotecario.listar_documentos_solicitados', compact('requisicoesFichas', 'fichas'));
     }
 
-    public function editarFichas(Request $request)
+    public function editarFicha($requisicaoId)
     {
-        dd($request);
-        return view('telas_bibliotecario.editar_fichas');
+        $requisicao = Requisicao_documento::where('id', $requisicaoId)->first();
+        $aluno = Aluno::where('id', $requisicao->aluno_id)->first();
+        $palavrasChave = PalavraChave::where('documento_id', $requisicao->ficha_catalografica_id)->Get();
+        $fichaCatalografica = FichaCatalografica::where('id', $requisicao->ficha_catalografica_id)->first();
+        $tipo_documento = $fichaCatalografica->tipo_documento_id;
+        $documentoEspecificoNome = TipoDocumento::where('id', $tipo_documento)->first()->tipo;
+        if($documentoEspecificoNome == 'Monografia')
+            $documento = Monografia::where('documento_id', $fichaCatalografica->id)->first();
+        elseif ($documentoEspecificoNome == 'Tese')
+            $documento = Tese::where('documento_id', $fichaCatalografica->id)->first();
+        elseif ($documentoEspecificoNome == 'TCC')
+            $documento = Tcc::where('documento_id', $fichaCatalografica->id)->first();
+        elseif ($documentoEspecificoNome == 'ProgramaEduc')
+            $documento = ProgramaEducacional::where('documento_id', $fichaCatalografica->id)->first();
+        else
+            $documento = Dissertacao::where('documento_id', $fichaCatalografica->id)->first();
+        return view('telas_bibliotecario.editar_ficha', compact('documento', 'aluno', 'palavrasChave', 'fichaCatalografica', 'tipo_documento'));
+    }
+
+    public function atualizarFicha(Request $request)
+    {
+        //'cutter', 'classificacao'
+
+        $ficha = FichaCatalografica::find($request->ficha_catalografica_id);
+
+
+        $ficha->autor = $request->autor;
+        $ficha->titulo = $request->titulo;
+        $ficha->subtitulo = $request->subtitulo;
+        $ficha->local = $request->local;
+        $ficha->ano = $request->ano;
+        $ficha->folhas = $request->folhas;
+        $ficha->ilustracao = $request->ilustracao;
+        $ficha->update();
+
+
+        if ($request->tipo_documento == 1) {
+            $monografia = Monografia::where('documento_id', $request->ficha_catalografica_id)->first();
+            $monografia->orientador = $request->orientador;
+            $monografia->coorientador = $request->coorientador;
+            $monografia->titulacao_orientador = $request->titulacao_orientador;
+            $monografia->titulacao_coorientador = $request->titulacao_coorientador;
+            $monografia->curso = $request->curso;
+            $monografia->campus = $request->campus;
+            $monografia->update();
+        } elseif ($request->tipo_documento == 2) {
+            $tese = Tese::where('documento_id', $request->ficha_catalografica_id)->first();
+            $tese->orientador = $request->orientador;
+            $tese->coorientador = $request->coorientador;
+            $tese->titulacao_orientador = $request->titulacao_orientador;
+            $tese->titulacao_coorientador = $request->titulacao_coorientador;
+            $tese->programa = $request->programa;
+            $tese->update();
+        } elseif ($request->tipo_documento == 3) {
+            $tcc = Tcc::where('documento_id', $request->ficha_catalografica_id)->first();
+            $tcc->orientador = $request->orientador;
+            $tcc->coorientador = $request->coorientador;
+            $tcc->titulacao_orientador = $request->titulacao_orientador;
+            $tcc->titulacao_coorientador = $request->titulacao_coorientador;
+            $tcc->campus = $request->campus;
+            $tcc->curso = $request->curso;
+            $tcc->referencia = $request->referencia;
+            $tcc->update();
+        } elseif ($request->tipo_documento == 4) {
+            $programaEduc = ProgramaEducacional::where('documento_id', $request->ficha_catalografica_id)->first();
+            $programaEduc->programa = $request->programa;
+            $programaEduc->campus = $request->campus;
+            $programaEduc->update();
+        } elseif ($request->tipo_documento == 5) {
+            $dissertacao = Dissertacao::where('documento_id', $request->ficha_catalografica_id)->first();
+            $dissertacao->orientador = $request->orientador;
+            $dissertacao->coorientador = $request->coorientador;
+            $dissertacao->titulacao_orientador = $request->titulacao_orientador;
+            $dissertacao->titulacao_coorientador = $request->titulacao_coorientador;
+            $dissertacao->campus = $request->campus;
+            $dissertacao->programa = $request->programa;
+            $dissertacao->update();
+        }else {
+            dd($request);
+        }
+
+        $palavra = PalavraChave::where('id',$request->palavra_chave1_id)->first();
+        $palavra->palavra = $request->primeira_chave;
+        $palavra->update();
+
+        $palavra = PalavraChave::where('id',$request->palavra_chave2_id)->first();
+        $palavra->palavra = $request->segunda_chave;
+        $palavra->update();
+
+        $palavra = PalavraChave::where('id',$request->palavra_chave3_id)->first();
+        $palavra->palavra = $request->terceira_chave;
+        $palavra->update();
+
+        if ($request->quarta_chave != null) {
+            $palavra = PalavraChave::where('id',$request->palavra_chave4_id)->first();
+            $palavra->palavra = $request->quarta_chave;
+            $palavra->update();
+        }
+        if ($request->quinta_chave != null) {
+            $palavra = PalavraChave::where('id',$request->palavra_chave5_id)->first();
+            $palavra->palavra = $request->quinta_chave;
+            $palavra->update();
+        }
+
+
+        $date = date('d/m/Y');
+
+
+        $documentosRequisitados = Requisicao_documento::where('ficha_catalografica_id', $request->ficha_catalografica_id)->first();
+        $documentosRequisitados->status_data = $date;
+        $documentosRequisitados->status = 'Concluido';
+        $documentosRequisitados->update();
+
+        return redirect(Route('home-bibliotecario'))->with('sucess', 'Ficha Catalografica Atualizada Com Sucesso!');
     }
 
     public function createBibliotecario()

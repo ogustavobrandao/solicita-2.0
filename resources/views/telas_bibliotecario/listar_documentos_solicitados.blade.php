@@ -15,7 +15,7 @@
        --}}
         <div class="row justify-content-sm-center">
             <div class="col-sm-10">
-                <h2 class="tituloTabela">{{Auth::user()->name}} - Lista de Fichas Catalograficas</h2>
+                <h2 class="tituloTabela">{{Auth::user()->name}} - Lista de Requisições de Fichas Catalográficas</h2>
             </div>
         </div>
         <div class="row justify-content-center">
@@ -37,32 +37,36 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($fichas as $ficha)
-                        <tr style="background-color: #f9f9f9">
-                            <td scope="row">
-                                {{$ficha->id}}
-                            </td>
-                            <td>
-                                {{$ficha->autor}}
-                            </td>
-                            <td>
-                                @if ($ficha->tipo_documento_id == 1)Monografia
-                                @elseif ($ficha->tipo_documento_id == 2)Tese
-                                @elseif ($ficha->tipo_documento_id == 3)TCC
-                                @elseif ($ficha->tipo_documento_id == 4)Produto Educacional
-                                @elseif ($ficha->tipo_documento_id == 5)Dissertação
-                                @endif
-                            </td>
-                            <td>
-                                {{$ficha->created_at}}
-                            </td>
-                            <td>
-                                Em Andamento
-                            </td>
-                            <td>
-                                <a href="{{ route('editar-fichas') }}"><i class="fa fa-file-text fa-sm" aria-hidden="true" size="10px"></i> Abrir</a>
-                            </td>
-                        </tr>
+                    @foreach($requisicoesFichas as $requisicao)
+                        @foreach($fichas as $ficha)
+                            @if($ficha->id == $requisicao->ficha_catalografica_id)
+                                <tr style="background-color: #f9f9f9">
+                                    <td scope="row">
+                                        {{$requisicao->id}}
+                                    </td>
+                                    <td>
+                                        {{$ficha->autor}}
+                                    </td>
+                                    <td>
+                                        @if ($ficha->tipo_documento_id == 1)Monografia
+                                        @elseif ($ficha->tipo_documento_id == 2)Tese
+                                        @elseif ($ficha->tipo_documento_id == 3)TCC
+                                        @elseif ($ficha->tipo_documento_id == 4)Produto Educacional
+                                        @elseif ($ficha->tipo_documento_id == 5)Dissertação
+                                        @endif
+                                    </td>
+                                    <td>
+                                        {{$ficha->created_at}}
+                                    </td>
+                                    <td>
+                                        {{$requisicao->status}}
+                                    </td>
+                                    <td>
+                                        <a href="{{ route('editar-ficha', $requisicao->id) }}"><i class="fa fa-file-text fa-sm" aria-hidden="true" size="10px"></i> Abrir</a>
+                                    </td>
+                                </tr>
+                            @endif
+                        @endforeach
                     @endforeach
                     </tbody>
                 </table>
