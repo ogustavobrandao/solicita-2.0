@@ -95,13 +95,13 @@
                                 <div class="form-group">
                                     <label for="cutter">Cutter: <span style="color: red">*</span></label>
                                     <input type="text" class="form-control" id="cutter" name="cutter"
-                                           placeholder="Digite o código de Cutter" @if($fichaCatalografica->cutter != null) value="{{$fichaCatalografica->cutter}} " disabled @endif  required>
-
+                                           placeholder="Digite o código de Cutter" value="" required>
                                 </div>
+
                                 <div class="form-group">
                                     <label for="classificacao">Classificação: <span style="color: red">*</span></label>
                                     <input type="text" class="form-control" id="classificacao" name="classificacao"
-                                           placeholder="Digite a classificação" @if($fichaCatalografica->classificacao != null) value="{{$fichaCatalografica->classificacao}}" disabled @endif required>
+                                           placeholder="Digite a classificação" value="" required>
                                 </div>
                             </div>
                         </div>

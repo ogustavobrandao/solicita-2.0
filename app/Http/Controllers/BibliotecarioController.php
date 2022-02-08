@@ -159,7 +159,7 @@ class BibliotecarioController extends Controller
         }
 
         date_default_timezone_set('America/Sao_Paulo');
-        $date = date('d/m/Y, H:i:s');
+        $date = date('d/m/Y');
 
 
         $userId = Auth::user()->id;
@@ -178,12 +178,11 @@ class BibliotecarioController extends Controller
     public function rejeitarFicha($requisicaoId) {
 
         $requisicao = Requisicao_documento::find($requisicaoId);
-        $ficha = FichaCatalografica::find($requisicao->ficha_catalografica_id);
+        $ficha = FichaCatalografica::find($requisicaoId)->first();
         $aluno = Aluno::find($requisicao->aluno_id);
         $usuario = User::find($aluno->user_id);
-        $tipo_documento =  TipoDocumento::find($ficha->tipo_documento_id)->tipo;
 
-        return view('telas_bibliotecario.rejeitar_ficha', compact('ficha','usuario','requisicao','tipo_documento'));
+        return view('telas_bibliotecario.rejeitar_ficha', compact('ficha','usuario','requisicao'));
     }
 
     public function atualizarRejeicao($requisicaoId, Request $request){
@@ -193,10 +192,10 @@ class BibliotecarioController extends Controller
         $requisicao->anotacoes = $request->mensagem;
         $requisicao->status = 'Rejeitado';
         date_default_timezone_set('America/Sao_Paulo');
-        $date = date('d/m/Y, H:i:s');
+        $date = date('d/m/Y');
         $requisicao->updated_at = $date;
         $idUser = Auth::user()->id;
-        $bibliotecario = Bibliotecario::where('user_id',$idUser)->first();
+        $bibliotecario = Bibliotecario::find($idUser);
         $requisicao->bibliotecario_id = $bibliotecario->id;
         $requisicao->update();
         return redirect(Route('listar-fichas'));
