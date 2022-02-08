@@ -178,7 +178,7 @@ class BibliotecarioController extends Controller
     public function rejeitarFicha($requisicaoId) {
 
         $requisicao = Requisicao_documento::find($requisicaoId);
-        $ficha = FichaCatalografica::find($requisicaoId)->first();
+        $ficha = FichaCatalografica::find($requisicaoId);
         $aluno = Aluno::find($requisicao->aluno_id);
         $usuario = User::find($aluno->user_id);
 
