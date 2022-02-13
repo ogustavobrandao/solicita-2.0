@@ -20,6 +20,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class BibliotecarioController extends Controller
 {
@@ -295,6 +296,12 @@ class BibliotecarioController extends Controller
         return redirect()->route('perfil-bibliotecario')
             ->with('success', 'Senha alterada com sucesso!');
 
+    }
+
+    public function gerarPdf()
+    {
+        $pdf = PDF::loadView('telas_bibliotecario/ficha_calatografica');
+        return $pdf->setPaper('a4')->stream('ficha_catalografica');
     }
 
 }
