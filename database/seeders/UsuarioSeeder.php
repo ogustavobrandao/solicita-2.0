@@ -27,11 +27,11 @@ class UsuarioSeeder extends Seeder
 
         DB::table('users')->insert([
 
-            'name' => 'aluno',
-            'email' => 'aluno@gmail',
-            'password' => Hash::make('123456'),
-            'tipo' => 'aluno',
-            'email_verified_at' => '2020-01-01'
+          'name'=>'aluno',
+          'email'=>'aluno@gmail',
+          'password'=>Hash::make('123456'),
+          'tipo'=>'aluno',
+            'email_verified_at'=>'2020-01-01'
         ]);
 
         DB::table('users')->insert([

@@ -13,6 +13,14 @@
           </div>
         </div>
        --}}
+        <div class="row justify-content-sm-center " style="">
+            <select class="form-select" aria-label="" style="">
+                <option selected>Open this select menu</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+            </select>
+        </div>
         <div class="row justify-content-sm-center">
             <div class="col-sm-10">
                 <h2 class="tituloTabela">{{Auth::user()->name}} - Lista de Requisições de Fichas Catalográficas</h2>

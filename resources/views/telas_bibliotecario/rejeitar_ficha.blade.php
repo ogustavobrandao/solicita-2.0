@@ -39,7 +39,6 @@
                     <div class="row justify-content-center">
                         <h2>Rejeitar documento</h2>
                     </div>
-
                     <form method="POST" enctype="multipart/form-data" id="formRequisicao"
                           action="{{ route('atualizar-rejeicao',$requisicao->id) }}">
                         @csrf
@@ -74,10 +73,7 @@
                                 <div class="form-group">
                                     <label for="exampleFormControlInput1">Tipo do documento:</label>
                                     <input type="text" class="form-control" id="titulo" name="titulo"
-                                           placeholder="Mensagem explicativa" @if($tipo_documento == 'ProgramaEduc' ) value="Programa Educacional"
-                                           @elseif($tipo_documento == 'Dissertacao') value="Dissertação"
-                                           @else Value="{{$tipo_documento}}"
-                                           @endif disabled>
+                                           placeholder="Mensagem explicativa" value="{{\App\Models\TipoDocumento::find($ficha->tipo_documento_id)->first()->tipo}}" disabled>
                                 </div>
                             </div>
                         </div>
