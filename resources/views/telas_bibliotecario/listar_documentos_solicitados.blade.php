@@ -65,7 +65,7 @@
                                         @endif
                                     </td>
                                     <td>
-                                        {{$ficha->created_at}}
+                                        {{ date('d/m/Y H:i:s', strtotime($ficha->created_at)) }}
                                     </td>
                                     <td>
                                         @if($requisicao->status == 'Concluido')<p style="color: #1d643b; "><strong>Concluido</strong></p>
@@ -94,7 +94,7 @@
                                     </td>
                                     <td>
                                         @if($requisicao->status != 'Em andamento')
-                                            {{$requisicao->updated_at}}
+                                            {{ date('m/d/Y H:i:s', strtotime($requisicao->updated_at)) }}
                                         @endif
                                     </td>
                                 </tr>

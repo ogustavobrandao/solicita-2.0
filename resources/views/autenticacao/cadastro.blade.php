@@ -79,7 +79,7 @@
                               <div class="col-sm-4">
                                 <label for="unidade">Instituição / Unidade Acadêmica</label>
                                 <select name="unidade" id="unidade"class="browser-default custom-select">
-                                <option value="" disable selected hidden>-- Selecionar Unidade --</option>
+                                <option value="" disable hidden>-- Selecionar Unidade --</option>
                                 @foreach($unidades as $unidade)
                                 <option value="{{$unidade->id}}">{{$unidade->nome}}</option>
                                 @endforeach
@@ -100,7 +100,7 @@
 
                                     <option value="" disable selected hidden>-- Selecionar Curso --</option>
                                     @foreach($cursos as $curso)
-                                    <option value="{{$curso->id}}">{{$curso->nome}}</option>
+                                        <option value="{{$curso->id}}">{{$curso->nome}}</option>
                                     @endforeach
 
                                     @error('cursos')
@@ -195,12 +195,12 @@
 
   });
 
-  function validateEmail(email) 
+  function validateEmail(email)
   {
       var re = /\S+@\S+\.\S+/;
       return re.test(email);
   }
-    
+
 
   function validate() {
     var $result = $("#result");
@@ -216,14 +216,14 @@
       $result.css("color", "red");
       return false;
     }
-    
+
   }
 
   $("#validate").on("click", validate);
 
 
 
-  
+
 
 </script>
 @endsection

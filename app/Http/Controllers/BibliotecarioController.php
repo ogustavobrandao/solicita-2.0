@@ -61,6 +61,7 @@ class BibliotecarioController extends Controller
         $fichaCatalografica = FichaCatalografica::where('id', $requisicao->ficha_catalografica_id)->first();
         $tipo_documento = $fichaCatalografica->tipo_documento_id;
         $documentoEspecificoNome = TipoDocumento::where('id', $tipo_documento)->first()->tipo;
+        $bibliotecario = Bibliotecario::find($requisicao->bibliotecario_id);
         if($documentoEspecificoNome == 'Monografia')
             $documento = Monografia::where('ficha_catalografica_id', $fichaCatalografica->id)->first();
         elseif ($documentoEspecificoNome == 'Tese')
@@ -71,7 +72,7 @@ class BibliotecarioController extends Controller
             $documento = ProgramaEducacional::where('ficha_catalografica_id', $fichaCatalografica->id)->first();
         else
             $documento = Dissertacao::where('ficha_catalografica_id', $fichaCatalografica->id)->first();
-        return view('telas_bibliotecario.editar_ficha', compact('documento', 'aluno', 'palavrasChave', 'fichaCatalografica', 'tipo_documento','requisicao'));
+        return view('telas_bibliotecario.editar_ficha', compact('documento', 'aluno', 'palavrasChave', 'fichaCatalografica', 'tipo_documento','requisicao', 'bibliotecario'));
     }
 
     public function atualizarFicha(Request $request)
@@ -192,7 +193,7 @@ class BibliotecarioController extends Controller
         $requisicao->anotacoes = $request->mensagem;
         $requisicao->status = 'Rejeitado';
         date_default_timezone_set('America/Sao_Paulo');
-        $date = date('d/m/Y');
+        $date = date('d/m/Y H:i:s');
         $requisicao->updated_at = $date;
         $idUser = Auth::user()->id;
         $bibliotecario = Bibliotecario::find($idUser);
