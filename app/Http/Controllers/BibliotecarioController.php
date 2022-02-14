@@ -21,7 +21,6 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Barryvdh\DomPDF\Facade as PDF;
 
 class BibliotecarioController extends Controller
 {
@@ -217,8 +216,10 @@ class BibliotecarioController extends Controller
         else
             $documento = Dissertacao::where('ficha_catalografica_id', $ficha->id)->first();
 
+        
+            //return view('telas_bibliotecario.gerar_ficha',compact('ficha','palavras', 'tipo_documento','documento'));
         $pdf = Pdf::loadView('telas_bibliotecario.gerar_ficha',compact('ficha','palavras', 'tipo_documento','documento'));
-        return $pdf->download($ficha->titulo . "_" . $ficha->autor . strtotime('now'));
+        return $pdf->download($ficha->titulo . "_" . $ficha->autor . strtotime('now').".pdf");
     }
 
     public function createBibliotecario()
@@ -316,11 +317,6 @@ class BibliotecarioController extends Controller
 
     }
 
-    public function gerarPdf()
-    {
-        $pdf = PDF::loadView('telas_bibliotecario/ficha_calatografica');
-        return $pdf->setPaper('a4')->stream('ficha_catalografica');
-    }
 
 }
 
