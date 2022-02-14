@@ -26,8 +26,8 @@ class DatabaseSeeder extends Seeder
         $this->call(BibliotecarioSeeder::class);
         $this->call(TipoDocumentoSeeder::class);
         // $this->call(ServidorSeeder::class);
-        // $this->call(AlunoSeeder::class);
-        // $this->call(PerfilSeeder::class);
+        $this->call(AlunoSeeder::class);
+        $this->call(PerfilSeeder::class);
         // $this->call(RequisicaoSeeder::class);
         // $this->call(Requisicao_documentoSeeder::class);
     }
