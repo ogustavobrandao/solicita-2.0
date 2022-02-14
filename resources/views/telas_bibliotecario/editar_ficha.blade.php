@@ -40,7 +40,7 @@
                     @if($requisicao->status == "Rejeitado")
                         <div class="alert alert-warning " role="alert">
                             <div class="d-flex justify-content-center">
-                                <h3>Este documento já foi analisado e rejeitado por: <strong>{{ \App\Models\User::find($bibliotecario->user_id)->name }} em: {{ $requisicao->updated_at }}</strong></h3>
+                                <h3>Este documento já foi analisado e rejeitado por: <strong>{{ \App\Models\User::find($bibliotecario->user_id)->name }} em: {{ date('d/m/Y H:i:s', strtotime($requisicao->updated_at)) }}</strong></h3>
                             </div>
                             <div class="d-flex justify-content-center">
                                 <p>Motivo: <strong> {{ $requisicao->anotacoes }} </strong></p>
@@ -49,7 +49,7 @@
                     @elseif($requisicao->status == "Concluido")
                         <div class="alert alert-warning " role="alert">
                             <div class="d-flex justify-content-center">
-                                <h3>Este documento já foi analisado e gerado por: <strong>{{ \App\Models\User::find($bibliotecario->user_id)->name }}</strong>, em: <strong>{{ date('m/d/Y H:i:s', strtotime($requisicao->updated_at)) }}</strong>.</h3>
+                                <h3>Este documento já foi analisado e gerado por: <strong>{{ \App\Models\User::find($bibliotecario->user_id)->name }}</strong>, em: <strong>{{ date('d/m/Y H:i:s', strtotime($requisicao->updated_at)) }}</strong>.</h3>
                             </div>
                         </div>
                     @endif

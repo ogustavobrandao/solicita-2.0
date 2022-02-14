@@ -86,7 +86,7 @@
                                     </td>
                                     <td>
                                         @if($requisicao->status != 'Em andamento')
-                                            {{ date('m/d/Y H:i:s', strtotime($requisicao->updated_at)) }}
+                                            {{ date('d/m/Y H:i:s', strtotime($requisicao->updated_at)) }}
                                         @endif
                                     </td>
                                 </tr>
