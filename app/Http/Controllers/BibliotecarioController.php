@@ -17,6 +17,7 @@ use App\Models\Tcc;
 use App\Models\Tese;
 use App\Models\TipoDocumento;
 use App\Models\User;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -81,8 +82,10 @@ class BibliotecarioController extends Controller
 
         $ficha = FichaCatalografica::find($request->ficha_catalografica_id);
         $ficha->autor = $request->autor;
-        $ficha->cutter = $request->cutter;
-        $ficha->classificacao = $request->classificacao;
+        if($ficha-> cutter == null)
+            $ficha->cutter = $request->cutter;
+        if($ficha->classificacao == null)
+            $ficha->classificacao = $request->classificacao;
         $ficha->titulo = $request->titulo;
         $ficha->subtitulo = $request->subtitulo;
         $ficha->local = $request->local;
@@ -160,17 +163,13 @@ class BibliotecarioController extends Controller
             $palavra->update();
         }
 
-        date_default_timezone_set('America/Sao_Paulo');
-        $date = date('d/m/Y');
-
-
         $userId = Auth::user()->id;
         $bibliotecario = Bibliotecario::where('user_id',$userId)->first();
 
 
         $documentosRequisitados = Requisicao_documento::where('ficha_catalografica_id', $request->ficha_catalografica_id)->first();
-        $documentosRequisitados->updated_at = $date;
         $documentosRequisitados->status = 'Concluido';
+        $documentosRequisitados->updated_at = time();
         $documentosRequisitados->bibliotecario_id = $bibliotecario->id;
         $documentosRequisitados->update();
 
@@ -193,14 +192,33 @@ class BibliotecarioController extends Controller
         $requisicao = Requisicao_documento::find($requisicaoId);
         $requisicao->anotacoes = $request->mensagem;
         $requisicao->status = 'Rejeitado';
-        date_default_timezone_set('America/Sao_Paulo');
-        $date = date('d/m/Y H:i:s');
-        $requisicao->updated_at = $date;
+        $requisicao->updated_at = time();
         $idUser = Auth::user()->id;
         $bibliotecario = Bibliotecario::find($idUser);
         $requisicao->bibliotecario_id = $bibliotecario->id;
         $requisicao->update();
         return redirect(Route('listar-fichas'));
+    }
+
+    public function gerarFicha($requisicaoId) {
+        $requisicao = Requisicao_documento::find($requisicaoId);
+        $ficha = FichaCatalografica::find($requisicao->ficha_catalografica_id);
+        $palavras = PalavraChave::Where('ficha_catalografica_id', $ficha->id)->get();
+        $tipo_documento= TipoDocumento::find($ficha->tipo_documento_id)->tipo;
+
+        if($tipo_documento == 'Monografia')
+            $documento = Monografia::where('ficha_catalografica_id', $ficha->id)->first();
+        elseif ($tipo_documento == 'Tese')
+            $documento = Tese::where('ficha_catalografica_id', $ficha->id)->first();
+        elseif ($tipo_documento == 'TCC')
+            $documento = Tcc::where('ficha_catalografica_id', $ficha->id)->first();
+        elseif ($tipo_documento == 'ProgramaEduc')
+            $documento = ProgramaEducacional::where('ficha_catalografica_id', $ficha->id)->first();
+        else
+            $documento = Dissertacao::where('ficha_catalografica_id', $ficha->id)->first();
+
+        $pdf = Pdf::loadView('telas_bibliotecario.gerar_ficha',compact('ficha','palavras', 'tipo_documento','documento'));
+        return $pdf->download($ficha->titulo . "_" . $ficha->autor . strtotime('now'));
     }
 
     public function createBibliotecario()

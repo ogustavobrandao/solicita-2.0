@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('conteudo')
+
     <div>@include('componentes.mensagens')</div>
     <div class="container-fluid" style="min-height:100vh">
 
@@ -155,6 +156,24 @@
                                                         @component('componentes.popup', ["titulo"=>"Seu pedido foi Indeferido pelo(s) seguinte(s) motivo:" ,"conteudo" => $rd->anotacoes, "id"=>$rd->id ])
                                                         @endcomponent
                                                     </a>
+                                                </li>
+                                            @endif
+                                            {{-- Status ficha Concluida --}}
+                                            @if($rd->status == "Concluido")
+                                                <li style="color:darkgreen">
+                                                    {{ $rd->status }}
+                                                </li>
+                                            @endif
+                                            @if($rd->status == "Rejeitado")
+                                                <li style="color: darkred">
+                                                {{ $rd->status }}
+                                                <a data-toggle="tooltip" data-placement="left"
+                                                   title="Seu pedido foi rejeitado pelo(s) seguinte(s) motivo: {{$rd->anotacoes}}">
+                                                        <span onclick="exibirAnotacoes({{$rd->id}})"
+                                                              class="glyphicon glyphicon-eye-open"
+                                                              aria-hidden="true"></span>
+                                                @component('componentes.popup', ["titulo"=>"Seu pedido foi rejeitado pelo(s) seguinte(s) motivo:" ,"conteudo" => $rd->anotacoes, "id"=>$rd->id ])
+                                                @endcomponent
                                                 </li>
                                             @endif
                                         @endif
