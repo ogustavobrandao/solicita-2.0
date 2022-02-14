@@ -78,10 +78,6 @@
                         </span>
                       @enderror
                     </div>
-                    {{-- Ficha Catalográfica --}}
-                    <div>
-                        <input type="checkbox" name="" value="" id=""> Ficha Catalográfica </input></br>
-                    </div>
                     {{-- outros  --}}
                     <div>
                       <input type="checkbox" name="outros"               value="Outros"                     id="outros"

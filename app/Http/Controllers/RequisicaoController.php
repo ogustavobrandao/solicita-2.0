@@ -266,17 +266,16 @@ class RequisicaoController extends Controller
         $idUser = Auth::user()->id;
         $aluno = Aluno::where('user_id', $idUser)->first(); //Aluno autenticado
         $perfil = Perfil::where('id', $request->id_perfil)->first();
-        date_default_timezone_set('America/Sao_Paulo');
         $date = date('d/m/Y');
         $hour = date('H:i');
-        $requisicao->data_pedido = $date;
-        $requisicao->hora_pedido = $hour;
+        $requisicao->data_pedido = date('Y-m-d');
+        $requisicao->hora_pedido = date('H:i');
         $requisicao->perfil_id = $perfil->id;
         $requisicao->aluno_id = $aluno->id; //necessária adequação com o código de autenticação do usuário do perfil aluno
         $requisicao->save();
 
         $documentosRequisitados = new Requisicao_documento();
-        $documentosRequisitados->status_data = $date;
+        $documentosRequisitados->status_data = date('Y-m-d');
         $documentosRequisitados->requisicao_id = $requisicao->id;
         $documentosRequisitados->aluno_id = $perfil->aluno_id;
         $documentosRequisitados->status = 'Em andamento';
@@ -321,8 +320,7 @@ class RequisicaoController extends Controller
         $aluno = Aluno::where('user_id', $idUser)->first(); //Aluno autenticado
         $perfil = Perfil::where('id', $request->default)->first();
         $arrayDocumentos = [];//Array Temporário
-        date_default_timezone_set('America/Sao_Paulo');
-        $date = date('d/m/Y');
+        $date = date('Y/m/d', time());
         $hour = date('H:i');
         $requisicao->data_pedido = $date;
         $requisicao->hora_pedido = $hour;
@@ -350,7 +348,7 @@ class RequisicaoController extends Controller
             array_push($arrayDocumentos, RequisicaoController::requisitados($requisicao, 5, $perfil, $texto));
         }
         //#Documentos
-        $ano = date('Y');
+        $ano = date('Y', time());
         $size = count($arrayDocumentos);
         $requisicao->requisicao_documento()->saveMany($arrayDocumentos);
         $id = [];
@@ -366,10 +364,10 @@ class RequisicaoController extends Controller
     public function requisitados(Requisicao $requisicao, $id, Perfil $perfil, $texto)
     {
         date_default_timezone_set('America/Sao_Paulo');
-        $date = date('d/m/Y');
+        //$date = date('d/m/Y', time());
         $hour = date('H:i');
         $documentosRequisitados = new Requisicao_documento();
-        $documentosRequisitados->status_data = $date;
+        $documentosRequisitados->status_data = now();
         $documentosRequisitados->requisicao_id = $requisicao->id;
         $documentosRequisitados->aluno_id = $perfil->aluno_id;
         $documentosRequisitados->status = 'Em andamento';
