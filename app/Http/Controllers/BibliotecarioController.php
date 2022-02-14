@@ -21,6 +21,7 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class BibliotecarioController extends Controller
 {
@@ -162,7 +163,6 @@ class BibliotecarioController extends Controller
             $palavra->update();
         }
 
-
         $userId = Auth::user()->id;
         $bibliotecario = Bibliotecario::where('user_id',$userId)->first();
 
@@ -179,12 +179,11 @@ class BibliotecarioController extends Controller
     public function rejeitarFicha($requisicaoId) {
 
         $requisicao = Requisicao_documento::find($requisicaoId);
-        $ficha = FichaCatalografica::find($requisicao->ficha_catalografica_id);
+        $ficha = FichaCatalografica::find($requisicaoId);
         $aluno = Aluno::find($requisicao->aluno_id);
         $usuario = User::find($aluno->user_id);
-        $tipo_documento =  TipoDocumento::find($ficha->tipo_documento_id)->tipo;
 
-        return view('telas_bibliotecario.rejeitar_ficha', compact('ficha','usuario','requisicao','tipo_documento'));
+        return view('telas_bibliotecario.rejeitar_ficha', compact('ficha','usuario','requisicao'));
     }
 
     public function atualizarRejeicao($requisicaoId, Request $request){
@@ -195,7 +194,7 @@ class BibliotecarioController extends Controller
         $requisicao->status = 'Rejeitado';
         $requisicao->updated_at = time();
         $idUser = Auth::user()->id;
-        $bibliotecario = Bibliotecario::where('user_id',$idUser)->first();
+        $bibliotecario = Bibliotecario::find($idUser);
         $requisicao->bibliotecario_id = $bibliotecario->id;
         $requisicao->update();
         return redirect(Route('listar-fichas'));
@@ -315,6 +314,12 @@ class BibliotecarioController extends Controller
         return redirect()->route('perfil-bibliotecario')
             ->with('success', 'Senha alterada com sucesso!');
 
+    }
+
+    public function gerarPdf()
+    {
+        $pdf = PDF::loadView('telas_bibliotecario/ficha_calatografica');
+        return $pdf->setPaper('a4')->stream('ficha_catalografica');
     }
 
 }

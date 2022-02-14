@@ -107,7 +107,6 @@ Route::group(['middleware'=> 'CheckBibliotecario'], function(){
     Route::post('/editar-ficha/{ficha_id}/rejeitar-ficha',[\App\Http\Controllers\BibliotecarioController::class, 'atualizarRejeicao'])->name('atualizar-rejeicao')->middleware('CheckBibliotecario');
     Route::get('/editar-ficha/{ficha_id}/gerar-ficha',[\App\Http\Controllers\BibliotecarioController::class, 'gerarFicha'])->name('gerar-ficha')->middleware('CheckBibliotecario');
 
-
 });
 
 // ---------------------------------------REQUISICAO------------------------------------------------------------------
