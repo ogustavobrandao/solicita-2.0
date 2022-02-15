@@ -94,6 +94,7 @@ class BibliotecarioController extends Controller
         $ficha->update();
 
 
+
         if ($request->tipo_documento == 1) {
             $monografia = Monografia::where('ficha_catalografica_id', $request->ficha_catalografica_id)->first();
             $monografia->orientador = $request->orientador;
@@ -172,7 +173,9 @@ class BibliotecarioController extends Controller
         $documentosRequisitados->bibliotecario_id = $bibliotecario->id;
         $documentosRequisitados->update();
 
-        return redirect(Route('listar-fichas'));
+        $requisicaoId = $documentosRequisitados->id;
+
+        return redirect(Route('gerar-ficha',$requisicaoId));
     }
 
     public function rejeitarFicha($requisicaoId) {
@@ -216,7 +219,7 @@ class BibliotecarioController extends Controller
         else
             $documento = Dissertacao::where('ficha_catalografica_id', $ficha->id)->first();
 
-        
+
             //return view('telas_bibliotecario.gerar_ficha',compact('ficha','palavras', 'tipo_documento','documento'));
         $pdf = Pdf::loadView('telas_bibliotecario.gerar_ficha',compact('ficha','palavras', 'tipo_documento','documento'));
         return $pdf->download($ficha->titulo . "_" . $ficha->autor . strtotime('now').".pdf");
