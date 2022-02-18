@@ -134,9 +134,14 @@
                         <div class="row">
                             <div class="col-md-12" style="margin-left: 15px;">
                                 <div class="form-group">
-                                    <label for="autor">Autor: <span style="color: red">*</span></label>
-                                    <input type="text" class="form-control" id="autor" name="autor"
-                                           placeholder="Digite o nome do Autor" value="{{$fichaCatalografica->autor}}" required>
+                                    <label for="autor_nome">Nome do Autor: <span style="color: red">*</span></label>
+                                    <input type="text" class="form-control" id="autor_nome" name="autor_nome"
+                                           placeholder="Digite o nome do Autor" value="{{$fichaCatalografica->autor_nome}}" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="autor_sobrenome">Sobrenome do Autor: <span style="color: red">*</span></label>
+                                    <input type="text" class="form-control" id="autor_sobrenome" name="autor_sobrenome"
+                                           placeholder="Digite o sobrenome do Autor" value="{{$fichaCatalografica->autor_sobrenome}}" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="titulo">Titulo: <span style="color: red">*</span></label>

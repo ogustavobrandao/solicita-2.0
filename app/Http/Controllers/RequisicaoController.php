@@ -174,7 +174,8 @@ class RequisicaoController extends Controller
 
         $ficha = new FichaCatalografica();
 
-        $ficha->autor = $request->autor;
+        $ficha->autor_nome = $request->autor_nome;
+        $ficha->autor_sobrenome = $request->autor_sobrenome;
         $ficha->titulo = $request->titulo;
         $ficha->subtitulo = $request->subtitulo;
         $ficha->local = $request->local;

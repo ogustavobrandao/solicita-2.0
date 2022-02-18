@@ -80,7 +80,8 @@ class BibliotecarioController extends Controller
     {
 
         $ficha = FichaCatalografica::find($request->ficha_catalografica_id);
-        $ficha->autor = $request->autor;
+        $ficha->autor_nome = $request->autor_sobrenome;
+        $ficha->autor_sobrenome = $request->autor_sobrenome;
         if($ficha-> cutter == null)
             $ficha->cutter = $request->cutter;
         if($ficha->classificacao == null)
@@ -173,9 +174,7 @@ class BibliotecarioController extends Controller
         $documentosRequisitados->bibliotecario_id = $bibliotecario->id;
         $documentosRequisitados->update();
 
-        $requisicaoId = $documentosRequisitados->id;
-
-        return redirect(Route('gerar-ficha',$requisicaoId));
+        return redirect(Route('gerar-ficha',$documentosRequisitados->id));
     }
 
     public function rejeitarFicha($requisicaoId) {
@@ -196,8 +195,9 @@ class BibliotecarioController extends Controller
         $requisicao->status = 'Rejeitado';
         $requisicao->updated_at = time();
         $idUser = Auth::user()->id;
-        $bibliotecario = Bibliotecario::find($idUser);
+        $bibliotecario = Bibliotecario::where('user_id',$idUser)->first();
         $requisicao->bibliotecario_id = $bibliotecario->id;
+
         $requisicao->update();
         return redirect(Route('listar-fichas'));
     }
