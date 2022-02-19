@@ -16,6 +16,7 @@ use App\Models\Requisicao_documento;
 use App\Models\Tcc;
 use App\Models\Tese;
 use App\Models\TipoDocumento;
+use App\Models\Unidade;
 use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
@@ -207,6 +208,10 @@ class BibliotecarioController extends Controller
         $ficha = FichaCatalografica::find($requisicao->ficha_catalografica_id);
         $palavras = PalavraChave::Where('ficha_catalografica_id', $ficha->id)->get();
         $tipo_documento= TipoDocumento::find($ficha->tipo_documento_id)->tipo;
+        $bibliotecario = Bibliotecario::find($requisicao->bibliotecario_id);
+        $userBibliotecario = User::find($bibliotecario->user_id);
+        $biblioteca = Biblioteca::find($bibliotecario->biblioteca_id);
+        $unidade = Unidade::find($biblioteca->unidade_id);
 
         if($tipo_documento == 'Monografia')
             $documento = Monografia::where('ficha_catalografica_id', $ficha->id)->first();
@@ -219,9 +224,7 @@ class BibliotecarioController extends Controller
         else
             $documento = Dissertacao::where('ficha_catalografica_id', $ficha->id)->first();
 
-
-            //return view('telas_bibliotecario.gerar_ficha',compact('ficha','palavras', 'tipo_documento','documento'));
-        $pdf = Pdf::loadView('telas_bibliotecario.gerar_ficha',compact('ficha','palavras', 'tipo_documento','documento'));
+        $pdf = Pdf::loadView('telas_bibliotecario.gerar_ficha',compact('ficha','palavras', 'tipo_documento','documento', 'bibliotecario', 'unidade', 'userBibliotecario'));
         return $pdf->download($ficha->titulo . "_" . $ficha->autor . strtotime('now').".pdf");
     }
 
