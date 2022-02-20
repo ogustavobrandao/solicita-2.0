@@ -62,8 +62,8 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleFormControlInput1">Autor do documento:</label>
-                                    <input type="text" class="form-control" id="autor" name="autor"
-                                           placeholder="" value="{{$ficha->autor}}" disabled>
+                                    <input type="text" class="form-control" id="autor_nome" name="autor_nome"
+                                           placeholder="" value="{{$ficha->autor_nome}}" disabled>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleFormControlInput1">Titulo do documento:</label>

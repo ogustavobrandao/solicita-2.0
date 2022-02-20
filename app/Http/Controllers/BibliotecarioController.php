@@ -16,11 +16,13 @@ use App\Models\Requisicao_documento;
 use App\Models\Tcc;
 use App\Models\Tese;
 use App\Models\TipoDocumento;
+use App\Models\Unidade;
 use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class BibliotecarioController extends Controller
 {
@@ -80,7 +82,8 @@ class BibliotecarioController extends Controller
     {
 
         $ficha = FichaCatalografica::find($request->ficha_catalografica_id);
-        $ficha->autor = $request->autor;
+        $ficha->autor_nome = $request->autor_sobrenome;
+        $ficha->autor_sobrenome = $request->autor_sobrenome;
         if($ficha-> cutter == null)
             $ficha->cutter = $request->cutter;
         if($ficha->classificacao == null)
@@ -92,6 +95,7 @@ class BibliotecarioController extends Controller
         $ficha->folhas = $request->folhas;
         $ficha->ilustracao = $request->ilustracao;
         $ficha->update();
+
 
 
         if ($request->tipo_documento == 1) {
@@ -172,13 +176,12 @@ class BibliotecarioController extends Controller
         $documentosRequisitados->bibliotecario_id = $bibliotecario->id;
         $documentosRequisitados->update();
 
-        return redirect(Route('listar-fichas'));
+        return redirect(Route('gerar-ficha',$documentosRequisitados->id));
     }
 
     public function rejeitarFicha($requisicaoId) {
-
         $requisicao = Requisicao_documento::find($requisicaoId);
-        $ficha = FichaCatalografica::find($requisicaoId);
+        $ficha = FichaCatalografica::find($requisicao->ficha_catalografica_id);
         $aluno = Aluno::find($requisicao->aluno_id);
         $usuario = User::find($aluno->user_id);
 
@@ -193,17 +196,23 @@ class BibliotecarioController extends Controller
         $requisicao->status = 'Rejeitado';
         $requisicao->updated_at = time();
         $idUser = Auth::user()->id;
-        $bibliotecario = Bibliotecario::find($idUser);
+        $bibliotecario = Bibliotecario::where('user_id',$idUser)->first();
         $requisicao->bibliotecario_id = $bibliotecario->id;
+
         $requisicao->update();
         return redirect(Route('listar-fichas'));
     }
 
     public function gerarFicha($requisicaoId) {
         $requisicao = Requisicao_documento::find($requisicaoId);
+        if($requisicao->status != 'Concluido'){ return redirect('home')->with('error', 'Ficha não concluida.'); }
         $ficha = FichaCatalografica::find($requisicao->ficha_catalografica_id);
         $palavras = PalavraChave::Where('ficha_catalografica_id', $ficha->id)->get();
         $tipo_documento= TipoDocumento::find($ficha->tipo_documento_id)->tipo;
+        $bibliotecario = Bibliotecario::find($requisicao->bibliotecario_id);
+        $userBibliotecario = User::find($bibliotecario->user_id);
+        $biblioteca = Biblioteca::find($bibliotecario->biblioteca_id);
+        $unidade = Unidade::find($biblioteca->unidade_id);
 
         if($tipo_documento == 'Monografia')
             $documento = Monografia::where('ficha_catalografica_id', $ficha->id)->first();
@@ -216,10 +225,15 @@ class BibliotecarioController extends Controller
         else
             $documento = Dissertacao::where('ficha_catalografica_id', $ficha->id)->first();
 
-        
-            //return view('telas_bibliotecario.gerar_ficha',compact('ficha','palavras', 'tipo_documento','documento'));
-        $pdf = Pdf::loadView('telas_bibliotecario.gerar_ficha',compact('ficha','palavras', 'tipo_documento','documento'));
+        $pdf = Pdf::loadView('telas_bibliotecario.gerar_ficha',compact('ficha','palavras', 'tipo_documento','documento', 'bibliotecario', 'unidade', 'userBibliotecario'));
         return $pdf->download($ficha->titulo . "_" . $ficha->autor . strtotime('now').".pdf");
+    }
+
+    public function baixarAnexo($requisicaoId) {
+
+        $requsicao = Requisicao_documento::find($requisicaoId);
+        $ficha = FichaCatalografica::find($requsicao->ficha_catalografica_id);
+        return Storage::download('fichas/'.$ficha->anexo);
     }
 
     public function createBibliotecario()
@@ -238,6 +252,7 @@ class BibliotecarioController extends Controller
             'bibliotecario' => $bibliotecario, 'biblioteca' => $biblioteca]);
 
     }
+
 
     public function storeBibliotecario(Request $request)
     {

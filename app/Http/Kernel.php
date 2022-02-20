@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\CheckFichaAluno;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -64,6 +65,7 @@ class Kernel extends HttpKernel
         'CheckServidor' => \App\Http\Middleware\CheckServidor::class,
         'CheckAdministrador' => \App\Http\Middleware\CheckAdministrador::class,
         'CheckBibliotecario' => \App\Http\Middleware\CheckBibliotecario::class,
+        'CheckFichaAluno' => \App\Http\Middleware\CheckFichaAluno::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'jwt.auth' => \Tymon\JWTAuth\Http\Middleware\Authenticate::class
     ];

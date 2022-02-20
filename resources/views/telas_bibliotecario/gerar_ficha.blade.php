@@ -108,32 +108,33 @@
 
 <body>
 <div style="font-family: 'Times New Roman', Times, serif; font-size: 12px; text-align: center;">
-    
+
     <p>Dados Internacionais de Catalogação na Publicação (CIP)<br></p>
-    <p>Universidade de Pernambuco (UPE)<br></p>
-    <p>Núcleo de Gestão de Bibliotecas e Documentação (NBID)<br></p><br>
-    
+    @if($unidade->nome == 'UPE - Campus Garanhuns')<p>Universidade de Pernambuco<br></p> @else <p>Universidade Federal do Agreste de Pernambuco<br></p>@endif
+    <p>Núcleo de Gestão de Bibliotecas e Documentação - NBID<br></p>
+    <p>Elaborado por {{ $userBibliotecario->name }} {{ $bibliotecario->matricula }}<br></p><br>
+
 </div>
 <div class="quadrado">
     <table style="font-family: 'Times New Roman', Times, serif; font-size: 12px;  margin-top: 15px">
 
-    
+
     <tr>
         <td valign=top style="width: 15%"><br><span style="margin-left: 5px;">{{ $ficha->cutter}}</span></td>
-               
+
         <td><table>
 
             <tr>
                 <td>{{ $ficha->autor}}</td>
             </tr>
             <tr>
-                <td>{{ $ficha->titulo }} : {{ $ficha->subtitulo }} / {{ $ficha->autor}} – {{ $ficha->local }}, {{ $ficha->ano }}.</td>   
+                <td>{{ $ficha->titulo }} : {{ $ficha->subtitulo }} / {{ $ficha->autor}} – {{ $ficha->local }}, {{ $ficha->ano }}.</td>
             </tr>
             <tr>
                 <td>{{ $ficha->folhas }} : {{ $ficha->ilustracao }}</td>
             </tr>
             <tr><td> <br> </td></tr>
-            
+
             @if($tipo_documento == 'Monografia')
             <tr>
                 <td>Orientador: {{ $documento->orientador }} {{ $documento->titulacao_orientador }}</td>
@@ -185,17 +186,17 @@
                 <td>1. @foreach($palavras as $palavra)
                 Palavra-chave: {{ $palavra->palavra }}
                 @endforeach I. {{ $documento->orientador }} II.{{ $documento->coorientador }} III. Universidade, campus, curso III. {{ $ficha->titulo }}</td>
-                
+
             </tr>
             <tr><td> <br> </td></tr>
             <tr><td valign=bottom align=right><span style="margin-right: 5px;">CDD</span></td></tr>
         </table></td>
-        
+
     </tr>
-    
+
 </table>
 
-</div> 
+</div>
 
     <h1>Titulo da ficha: {{ $ficha->titulo }}</h1>
     <h2>Ficha subtitulo: {{ $ficha->subtitulo }}</h2>

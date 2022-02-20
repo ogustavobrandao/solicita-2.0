@@ -89,6 +89,8 @@ Route::group(['middleware'=> 'CheckAluno'], function(){
     Route::post('/alterar-senha',[\App\Http\Controllers\PerfilAlunoController::class, 'storeAlterarSenha'])->name('alterar-senha')->middleware('CheckAluno');
     Route::get('/formulario-requisicao',[\App\Http\Controllers\RequisicaoController::class, 'index'])->name('formulario-requisicao')->middleware('CheckAluno');
     Route::post('/formulario-requisicao',[\App\Http\Controllers\RequisicaoController::class, 'storeRequisicao'])->name('formulario-requisicao-post')->middleware('CheckAluno');
+    Route::get('aluno/{requisicao_id}/gerar-ficha',[\App\Http\Controllers\BibliotecarioController::class, 'gerarFicha'])->name('gerar-ficha-aluno')->middleware('CheckFichaAluno');
+
 });
 
 //----------------------------------------------BIBLIOTECARIO---------------------------------------------------
@@ -101,11 +103,12 @@ Route::group(['middleware'=> 'CheckBibliotecario'], function(){
     Route::get('/editar-senha-bibliotecario',[\App\Http\Controllers\BibliotecarioController::class, 'editarSenha'])->name('editar-senha-bibliotecario')->middleware('CheckBibliotecario');
     Route::post('/atualizar-senha-bibliotecario',[\App\Http\Controllers\BibliotecarioController::class, 'atualizarSenha'])->name('atualizar-senha-bibliotecario')->middleware('CheckBibliotecario');
     Route::get('/listar-fichas',[\App\Http\Controllers\BibliotecarioController::class, 'listarSolicitacoes'])->name('listar-fichas');
-    Route::get('/editar-ficha/{ficha_id}',[\App\Http\Controllers\BibliotecarioController::class, 'editarFicha'])->name('editar-ficha')->middleware('CheckBibliotecario');
+    Route::get('/editar-ficha/{requisicao_id}',[\App\Http\Controllers\BibliotecarioController::class, 'editarFicha'])->name('editar-ficha')->middleware('CheckBibliotecario');
     Route::post('/atualizar-ficha',[\App\Http\Controllers\BibliotecarioController::class, 'atualizarFicha'])->name('atualizar-ficha')->middleware('CheckBibliotecario');
-    Route::get('/editar-ficha/{ficha_id}/rejeitar',[\App\Http\Controllers\BibliotecarioController::class, 'rejeitarFicha'])->name('rejeitar-ficha')->middleware('CheckBibliotecario');
-    Route::post('/editar-ficha/{ficha_id}/rejeitar-ficha',[\App\Http\Controllers\BibliotecarioController::class, 'atualizarRejeicao'])->name('atualizar-rejeicao')->middleware('CheckBibliotecario');
-    Route::get('/editar-ficha/{ficha_id}/gerar-ficha',[\App\Http\Controllers\BibliotecarioController::class, 'gerarFicha'])->name('gerar-ficha')->middleware('CheckBibliotecario');
+    Route::get('/editar-ficha/{requisicao_id}/rejeitar',[\App\Http\Controllers\BibliotecarioController::class, 'rejeitarFicha'])->name('rejeitar-ficha')->middleware('CheckBibliotecario');
+    Route::post('/editar-ficha/{requisicao_id}/rejeitar-ficha',[\App\Http\Controllers\BibliotecarioController::class, 'atualizarRejeicao'])->name('atualizar-rejeicao')->middleware('CheckBibliotecario');
+    Route::get('/editar-ficha/{requisicao_id}/gerar-ficha',[\App\Http\Controllers\BibliotecarioController::class, 'gerarFicha'])->name('gerar-ficha');
+    Route::get('/editar-ficha/{requisicao_id}/baixarAnexo',[\App\Http\Controllers\BibliotecarioController::class, 'baixarAnexo'])->name('baixar-anexo');
 
 });
 
