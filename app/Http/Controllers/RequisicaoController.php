@@ -169,7 +169,8 @@ class RequisicaoController extends Controller
     public function criarDocumento(Request $request)
     {
 
-
+        $idUser = Auth::user()->id;
+        $aluno = Aluno::where('user_id', $idUser)->first(); //Aluno autenticado
         //'cutter', 'classificacao'
 
         $ficha = new FichaCatalografica();
@@ -183,6 +184,16 @@ class RequisicaoController extends Controller
         $ficha->folhas = $request->folhas;
         $ficha->ilustracao = $request->ilustracao;
         $ficha->tipo_documento_id = $request->tipo_documento;
+        //Anexar arquivo
+        if (($request->hasFile('anexo') && $request->file('anexo')->isValid())) {
+
+            $anexo = $request->anexo->extension();
+            $nomeAnexo = "documento_".$aluno->cpf.date('Ymd').date('His').'.'.$anexo;
+            $ficha->anexo = $nomeAnexo;
+            $request->anexo->storeAs('fichas/', $nomeAnexo);
+            $request->anexo = $nomeAnexo;
+        }
+
         $ficha->save();
 
         if ($request->tipo_documento == 1) {
@@ -264,11 +275,7 @@ class RequisicaoController extends Controller
         }
 
         $requisicao = new Requisicao();
-        $idUser = Auth::user()->id;
-        $aluno = Aluno::where('user_id', $idUser)->first(); //Aluno autenticado
         $perfil = Perfil::where('id', $request->id_perfil)->first();
-        $date = date('d/m/Y');
-        $hour = date('H:i');
         $requisicao->data_pedido = date('Y-m-d');
         $requisicao->hora_pedido = date('H:i');
         $requisicao->perfil_id = $perfil->id;
@@ -282,6 +289,7 @@ class RequisicaoController extends Controller
         $documentosRequisitados->status = 'Em andamento';
         $documentosRequisitados->ficha_catalografica_id = $ficha->id;
         $documentosRequisitados->save();
+
 
         return redirect(Route('home-aluno'))->with('sucess', 'Ficha Catalografica Cadastrada Com Sucesso!');
     }

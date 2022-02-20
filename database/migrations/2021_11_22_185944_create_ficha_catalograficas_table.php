@@ -26,6 +26,7 @@ class CreateFichaCatalograficasTable extends Migration
             $table->string('ano');
             $table->integer('folhas');
             $table->string('ilustracao');
+            $table->string('anexo');
             $table->unsignedBigInteger('tipo_documento_id');
             $table->foreign('tipo_documento_id')->references('id')->on('tipo_documentos');
         });

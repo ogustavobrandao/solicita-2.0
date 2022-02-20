@@ -22,6 +22,7 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class BibliotecarioController extends Controller
 {
@@ -179,9 +180,8 @@ class BibliotecarioController extends Controller
     }
 
     public function rejeitarFicha($requisicaoId) {
-
         $requisicao = Requisicao_documento::find($requisicaoId);
-        $ficha = FichaCatalografica::find($requisicaoId);
+        $ficha = FichaCatalografica::find($requisicao->ficha_catalografica_id);
         $aluno = Aluno::find($requisicao->aluno_id);
         $usuario = User::find($aluno->user_id);
 
@@ -205,6 +205,7 @@ class BibliotecarioController extends Controller
 
     public function gerarFicha($requisicaoId) {
         $requisicao = Requisicao_documento::find($requisicaoId);
+        if($requisicao->status != 'Concluido'){ return redirect('home')->with('error', 'Ficha não concluida.'); }
         $ficha = FichaCatalografica::find($requisicao->ficha_catalografica_id);
         $palavras = PalavraChave::Where('ficha_catalografica_id', $ficha->id)->get();
         $tipo_documento= TipoDocumento::find($ficha->tipo_documento_id)->tipo;
@@ -228,6 +229,13 @@ class BibliotecarioController extends Controller
         return $pdf->download($ficha->titulo . "_" . $ficha->autor . strtotime('now').".pdf");
     }
 
+    public function baixarAnexo($requisicaoId) {
+
+        $requsicao = Requisicao_documento::find($requisicaoId);
+        $ficha = FichaCatalografica::find($requsicao->ficha_catalografica_id);
+        return Storage::download('fichas/'.$ficha->anexo);
+    }
+
     public function createBibliotecario()
     {
         $bibliotecas = Biblioteca::All();
@@ -244,6 +252,7 @@ class BibliotecarioController extends Controller
             'bibliotecario' => $bibliotecario, 'biblioteca' => $biblioteca]);
 
     }
+
 
     public function storeBibliotecario(Request $request)
     {

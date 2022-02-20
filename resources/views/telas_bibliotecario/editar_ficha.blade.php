@@ -176,6 +176,10 @@
                                         <option value="nao_possui" @if($fichaCatalografica->ilustracao == 'nao_possui') selected @endif>Não Possui</option>
                                     </select>
                                 </div>
+                                <div class ="forma-group">
+                                    <label for="anexoArquivo">Selecione o documento: <span style="color: red">*</span> </label><br>
+                                    <a class="btn btn-primary" href={{ route('baixar-anexo', $requisicao->id) }} style="margin-bottom: 10px">Baixar anexo</a>
+                                </div>
 
                             </div>
                         </div>

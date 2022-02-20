@@ -125,7 +125,7 @@
                                                           style="overflow: hidden; color:#db6700"
                                                           data-toggle="tooltip" data-placement="top"
                                                           title="Sua solicitação está em processamento.">
-                          </span>
+                                                    </span>
                                                 </li>
                                             @endif
                                             @if($rd->status=="Concluído - Disponível para retirada")
@@ -191,8 +191,14 @@
                                                 src="{{asset('images/trash-solid.svg')}}" alt="" style="width:20px">
                                         </button>
                                     @endif
-
                                 </form>
+                                <div>
+                                    @if(\App\Models\Requisicao_documento::where('requisicao_id',$r->id)->first()->status == 'Concluido')
+                                        <a type="button" href={{ route('gerar-ficha-aluno',\App\Models\Requisicao_documento::where('requisicao_id',$r->id)->first()->id) }}>
+                                            Baixar ficha
+                                        </a>
+                                    @endif
+                                </div>
                             </td>
                         </tr>
                     @endforeach

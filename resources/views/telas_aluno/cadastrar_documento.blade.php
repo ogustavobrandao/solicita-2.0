@@ -111,14 +111,17 @@
                                            placeholder="Digite a Quantidade de Folhas" value="" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="ilustracao">Ilustração <span style="color: red">*</span></label>
+                                    <label for="ilustracao">Ilustração: <span style="color: red">*</span></label>
                                     <select class="form-control" id="ilustracao" name="ilustracao">
                                         <option value="colorido">Colorido</option>
                                         <option value="preto_branco">Preto e Branco</option>
                                         <option value="nao_possui">Não Possui</option>
                                     </select>
                                 </div>
-
+                                <div class ="forma-group">
+                                    <label for="anexoArquivo">Selecione o documento: <span style="color: red">*</span> </label><br>
+                                    <input type="file" id="anexo" name="anexo" style="margin-bottom: 10px ">
+                                </div>
                             </div>
                         </div>
                         <hr>

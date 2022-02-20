@@ -54,7 +54,7 @@
                                         {{$requisicao->id}}
                                     </td>
                                     <td>
-                                        {{$ficha->autor}}
+                                        {{$ficha->autor_nome}}
                                     </td>
                                     <td>
                                         @if ($ficha->tipo_documento_id == 1)Monografia
@@ -106,6 +106,25 @@
             </div>
         </div>
     </div>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <script>
+        $('#table').DataTable({
+            searching: true,
+            "language": {
+                "lengthMenu": "Mostrar MENU registros por página",
+                "info": "Exibindo página PAGE de PAGES",
+                "infoEmpty": "Nenhum registro disponível",
+                "zeroRecords": "Nenhum registro disponível",
+                "paginate": {
+                    "previous": "Anterior",
+                    "next": "Próximo"
+                }
+            },
+            "order": [],
+            "columnDefs": [{
+                "targets": [5],
+                "orderable": false
+            }]
+        });
+    </script>
 @endsection
