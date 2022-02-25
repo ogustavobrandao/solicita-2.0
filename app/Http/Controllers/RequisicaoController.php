@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\AlertaFichaMail;
+use App\Models\Biblioteca;
+use App\Models\Bibliotecario;
 use App\Models\Dissertacao;
 use App\Models\FichaCatalografica;
 use App\Models\Monografia;
@@ -10,6 +13,7 @@ use App\Models\ProgramaEducacional;
 use App\Models\Tcc;
 use App\Models\Tese;
 use App\Models\TipoDocumento;
+use Brick\Math\BigDecimal;
 use Database\Seeders\TipoDocumentoSeeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -289,6 +293,18 @@ class RequisicaoController extends Controller
         $documentosRequisitados->status = 'Em andamento';
         $documentosRequisitados->ficha_catalografica_id = $ficha->id;
         $documentosRequisitados->save();
+
+
+        $bibliotecarios = Bibliotecario::all();
+        $unidadeId = $perfil->unidade_id;
+        foreach ($bibliotecarios as $bibliotecario) {
+            $bibliotecaBibliotecario = Biblioteca::find($bibliotecario->biblioteca_id);
+            $userBibliotecario = User::find($bibliotecario->user_id);
+            if($unidadeId == $bibliotecaBibliotecario->unidade_id) {
+                \Illuminate\Support\Facades\Mail::send(new AlertaFichaMail($userBibliotecario, Auth::user()));
+            }
+        }
+
 
 
         return redirect(Route('home-aluno'))->with('sucess', 'Ficha Catalografica Cadastrada Com Sucesso!');
