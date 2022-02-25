@@ -148,7 +148,7 @@
                 <td>Coorientador: {{ $documento->coorientador }} {{ $documento->titulacao_coorientador }}</td>
             </tr>
             <tr>
-                <td>Monografia () - Nome do Curso, Faculdade, {{ $documento->campus }}, {{ $ficha->local }}-Pernambuco, {{ $ficha->ano }}.</td>
+                <td>Monografia (Mestrado) - Nome do Curso, Faculdade, {{ $documento->campus }}, {{ $ficha->local }}-Pernambuco, {{ $ficha->ano }}.</td>
             </tr>
 
             <!-- Parte da tese -->
@@ -160,7 +160,7 @@
                 <td>Coorientador: {{ $documento->coorientador }} {{ $documento->titulacao_coorientador }}</td>
             </tr>
             <tr>
-                <td>Teses () - {{ $documento->programa }}, Faculdade, {{ $documento->campus }}, {{ $ficha->local }}-Pernambuco, {{ $ficha->ano }}.</td>
+                <td>Teses (Doutorado) - {{ $documento->programa }}, Faculdade, {{ $documento->campus }}, {{ $ficha->local }}-Pernambuco, {{ $ficha->ano }}.</td>
             </tr>
 
             <!-- Parte do TCC -->
@@ -202,40 +202,40 @@
             <!-- Palavras chave -->
             @if($tipo_documento == 'Monografia')
             <tr>
-                <td>@for ($i = 0; $i <= sizeof($palavras); $i++)
-                {{ ($i + 1) }} Palavra-chave: {{ $palavras[$i]->palavra }}
+                <td>@for ($i = 0; $i < sizeof($palavras); $i++)
+                {{ ($i + 1) }}. Palavra-chave: {{ $palavras[$i]->palavra }}
                 @endfor I. {{ $documento->orientador }} II.{{ $documento->coorientador }} III. Universidade, {{ $documento->campus }}, curso IV. {{ $ficha->titulo }}</td>
                 
             </tr>
 
             @elseif($tipo_documento == 'Tese')
             <tr>
-                <td>@for ($i = 0; $i <= sizeof($palavras); $i++)
-                {{ ($i + 1) }} Palavra-chave: {{ $palavras[$i]->palavra }}
+                <td>@for ($i = 0; $i < sizeof($palavras); $i++)
+                {{ ($i + 1) }}. Palavra-chave: {{ $palavras[$i]->palavra }}
                 @endfor I. {{ $documento->orientador }} II.{{ $documento->coorientador }} III. Universidade, {{ $documento->campus }}, {{ $documento->programa }} IV. {{ $ficha->titulo }}</td>
                 
             </tr>
 
             @elseif($tipo_documento = 'TCC')
             <tr>
-                <td>@for ($i = 0; $i <= sizeof($palavras); $i++)
-                {{ ($i + 1) }} Palavra-chave: {{ $palavras[$i]->palavra }}
+                <td>@for ($i = 0; $i < sizeof($palavras); $i++)
+                {{ ($i + 1) }}. Palavra-chave: {{ $palavras[$i]->palavra }}
                 @endfor I. Universidade II. Campus III. Curso IV. {{ $ficha->titulo }}</td>
                 
             </tr>
 
             @elseif($tipo_documento = 'ProgramaEduc')
             <tr>
-                <td>@for ($i = 0; $i <= sizeof($palavras); $i++)
-                {{ ($i + 1) }} Palavra-chave: {{ $palavras[$i]->palavra }}
+                <td>@for ($i = 0; $i < sizeof($palavras); $i++)
+                {{ ($i + 1) }}. Palavra-chave: {{ $palavras[$i]->palavra }}
                 @endfor I. {{ $documento->orientador }} II.{{ $documento->coorientador }} III. Universidade IV. {{ $ficha->titulo }}</td>
                 
             </tr>
 
             @else
             <tr>
-                <td>@for ($i = 0; $i <= sizeof($palavras); $i++)
-                {{ ($i + 1) }} Palavra-chave: {{ $palavras[$i]->palavra }}
+                <td>@for ($i = 0; $i < sizeof($palavras); $i++)
+                {{ ($i + 1) }}. Palavra-chave: {{ $palavras[$i]->palavra }}
                 @endfor I. {{ $documento->orientador }} II.{{ $documento->coorientador }} III. Universidade, {{ $documento->campus }}, {{ $documento->programa }} IV. {{ $ficha->titulo }}</td>
                 
             </tr>

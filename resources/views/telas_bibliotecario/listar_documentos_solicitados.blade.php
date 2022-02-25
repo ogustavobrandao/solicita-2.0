@@ -21,7 +21,7 @@
                 <option value="3">Three</option>
             </select>
         </div>--}}
-        <div class="row justify-content-sm-center">
+        <div style="margin-bottom: 15px; margin-top: 15git suapx;" class="row justify-content-sm-center">
             <div class="col-sm-10">
                 <h2 class="tituloTabela">{{Auth::user()->name}} - Lista de Requisições de Fichas Catalográficas</h2>
             </div>
@@ -110,14 +110,16 @@
     <script>
         $('#table').DataTable({
             searching: true,
+            
             "language": {
-                "lengthMenu": "Mostrar MENU registros por página",
-                "info": "Exibindo página PAGE de PAGES",
+                "lengthMenu": "Mostrar _MENU_ registros por página",
+                "info": "Exibindo página _PAGE_ de _PAGES_",
                 "infoEmpty": "Nenhum registro disponível",
                 "zeroRecords": "Nenhum registro disponível",
+                "search": "Pesquisar",
                 "paginate": {
                     "previous": "Anterior",
-                    "next": "Próximo"
+                    "next": "Próximo",
                 }
             },
             "order": [],
