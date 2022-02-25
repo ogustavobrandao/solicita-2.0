@@ -18,13 +18,15 @@ class CreateFichaCatalograficasTable extends Migration
             $table->timestamps();
             $table->string('cutter')->nullable();
             $table->string('classificacao')->nullable();
-            $table->string('autor');
+            $table->string('autor_nome');
+            $table->string('autor_sobrenome');
             $table->string('titulo');
             $table->string('subtitulo')->nullable();
             $table->string('local');
             $table->string('ano');
             $table->integer('folhas');
             $table->string('ilustracao');
+            $table->string('anexo');
             $table->unsignedBigInteger('tipo_documento_id');
             $table->foreign('tipo_documento_id')->references('id')->on('tipo_documentos');
         });

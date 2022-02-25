@@ -76,9 +76,14 @@
                         <div class="row">
                             <div class="col-md-12" style="margin-left: 15px;">
                                 <div class="form-group">
-                                    <label for="autor">Autor: <span style="color: red">*</span></label>
-                                    <input type="text" class="form-control" id="autor" name="autor"
+                                    <label for="autor_nome">Nome: <span style="color: red">*</span></label>
+                                    <input type="text" class="form-control" id="autor_nome" name="autor_nome"
                                            placeholder="Digite o nome do Autor" value="" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="autor_sobrenome">Sobrenome: <span style="color: red">*</span></label>
+                                    <input type="text" class="form-control" id="autor_sobrenome" name="autor_sobrenome"
+                                           placeholder="Digite o sobrenome do Autor" value="" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="titulo">Titulo: <span style="color: red">*</span></label>
@@ -106,14 +111,17 @@
                                            placeholder="Digite a Quantidade de Folhas" value="" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="ilustracao">Ilustração <span style="color: red">*</span></label>
+                                    <label for="ilustracao">Ilustração: <span style="color: red">*</span></label>
                                     <select class="form-control" id="ilustracao" name="ilustracao">
                                         <option value="colorido">Colorido</option>
                                         <option value="preto_branco">Preto e Branco</option>
                                         <option value="nao_possui">Não Possui</option>
                                     </select>
                                 </div>
-
+                                <div class ="forma-group">
+                                    <label for="anexoArquivo">Selecione o documento: <span style="color: red">*</span> </label><br>
+                                    <input type="file" id="anexo" name="anexo" style="margin-bottom: 10px ">
+                                </div>
                             </div>
                         </div>
                         <hr>
