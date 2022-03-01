@@ -115,4 +115,29 @@ class UsuarioController extends Controller
     $perfil->save();
     return redirect('/')->with('jsAlert','Usuário Cadastrado com sucesso.');
   }
+
+  public function listarUsuario() {
+
+      $usuarios = User::all();
+      return view('telas_admin.listar-usuarios', compact('usuarios'));
+
+  }
+
+  public function editarUsuario(Request $request) {
+      $usuario = User::where('id', $request->id_usuario)->first();
+      return view('telas_admin.editar-usuario', compact('usuario'));
+  }
+
+  public function atualizarUsuario(Request $request) {
+
+      $usuario = User::find($request->id_usuario);
+      $request->validate(['name' => ['required'], 'email' => ['required']]);
+      $usuario->name = $request->name;
+      $usuario->email = $request->email;
+      $usuario->update();
+
+      return redirect()->route('listar-usuario')->with('success', 'O usuário foi atualizado!');
+
+  }
+
 }
