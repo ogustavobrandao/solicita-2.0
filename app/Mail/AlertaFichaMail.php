@@ -37,7 +37,7 @@ class AlertaFichaMail extends Mailable
         $usuarioBibliotecario = $this->usuarioBibliotecario;
         $usuarioSolicitante = $this->usuarioSolicitante;
         $this->subject("Alerta ficha catalográfica");
-        $this->to($usuarioBibliotecario, $usuarioBibliotecario->name);
+        $this->to($usuarioBibliotecario->email, $usuarioBibliotecario->name);
         return $this->markdown('mails.alerta_ficha', compact("usuarioSolicitante","usuarioBibliotecario"));
     }
 }
