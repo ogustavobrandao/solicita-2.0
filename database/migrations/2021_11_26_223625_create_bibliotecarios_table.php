@@ -17,6 +17,7 @@ class CreateBibliotecariosTable extends Migration
             $table->id();
             $table->string('matricula')->unique();
             $table->timestamps();
+            $table->string('crb')->unique();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->unsignedBigInteger('biblioteca_id')->nullable();
