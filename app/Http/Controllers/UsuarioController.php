@@ -136,23 +136,23 @@ class UsuarioController extends Controller
               $perfil = Perfil::where('aluno_id', $usuarioEspecifico->id)->first();
               $unidadeEspecifica = Unidade::where('id', $perfil->unidade_id)->first();
               $cursoEspecifico = Curso::where('id', $perfil->curso_id)->first();
-              break;
+              return view('telas_admin.editar-usuario', compact('usuario', 'usuarioEspecifico', 'cursoEspecifico', 'unidadeEspecifica'));
 
           case "bibliotecario":
               $usuarioEspecifico = Bibliotecario::where('user_id', $usuario->id)->first();
               $bibliotecaEspecifica = Biblioteca::where('id', $usuarioEspecifico->biblioteca_id)->first();
-              break;
+              return view('telas_admin.editar-usuario', compact('usuario', 'usuarioEspecifico','bibliotecaEspecifica'));
 
           case "servidor":
-            $usuarioEspecifico = Servidor::where('user_id', $usuario->id)->first();
-            break;
+              $usuarioEspecifico = Servidor::where('user_id', $usuario->id)->first();
+              return view('telas_admin.editar-usuario', compact('usuario', 'usuarioEspecifico'));
 
           default:
-              dd($usuario);
+              return view('telas_admin.editar-usuario', compact('usuario'));
 
       }
 
-      return view('telas_admin.editar-usuario', compact('usuario', 'usuarioEspecifico'));
+
   }
 
   public function atualizarUsuario(Request $request) {

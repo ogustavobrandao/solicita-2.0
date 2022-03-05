@@ -90,7 +90,7 @@
                       <div class="col-sm-12">
                           <label for="email" class="field a-field a-field_a3 page__field ">
                               <input id="matricula" type="matricula" class="form-control @error('matricula') is-invalid @enderror field__input a-field__input"
-                                     name="matricula" value="{{ $usuarioEspecifico->matricula }}" required autocomplete="matricula" autofocus placeholder="matricula">
+                                     name="matricula" value="{{ $usuarioEspecifico->matricula }}" required autocomplete="matricula" placeholder="matricula">
 
                               <span class="a-field__label-wrap">
                         <span class="a-field__label">Matricula</span>
