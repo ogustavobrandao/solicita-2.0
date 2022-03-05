@@ -118,9 +118,14 @@
                                         <option value="nao_possui">Não Possui</option>
                                     </select>
                                 </div>
-                                <div class ="forma-group">
-                                    <label for="anexoArquivo">Anexar os elementos pré-textuais: <span style="color: red">*</span> </label><br>
-                                    <input type="file" id="anexo" name="anexo" style="margin-bottom: 10px ">
+                                <div class="form-group">
+                                    <label for="anexoArquivo">Selecione o documento: <span style="color: red">*</span>
+                                    </label><br>
+                                    <input type="file" id="anexo" accept="application/pdf, .docx" name="anexo"
+                                           style="margin-bottom: 0px" required>
+                                    <br>
+                                    <span id="tipoAnexo"
+                                          style="font-size: small; color: gray; margin-top: 0px; margin-bottom: 10px">Tipos permitidos: PDF, DOCX e DOC. </span>
                                 </div>
                             </div>
                         </div>
@@ -142,8 +147,10 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="subtitulo">Titulação do Orientador: <span style="color: red">*</span></label>
-                                        <select class="form-control" id="titulacao_orientador" name="titulacao_orientador">
+                                        <label for="subtitulo">Titulação do Orientador: <span
+                                                style="color: red">*</span></label>
+                                        <select class="form-control" id="titulacao_orientador"
+                                                name="titulacao_orientador">
                                             <option value="graduado">Graduado</option>
                                             <option value="especialista">Especialista</option>
                                             <option value="mestre">Mestre</option>
@@ -159,7 +166,8 @@
 
                                     <div class="form-group">
                                         <label for="subtitulo">Titulação do Coorientador:</label>
-                                        <select class="form-control" id="titulacao_coorientador" name="titulacao_coorientador">
+                                        <select class="form-control" id="titulacao_coorientador"
+                                                name="titulacao_coorientador">
                                             <option>Sem Coorientador</option>
                                             <option value="graduado">Graduado</option>
                                             <option value="especialista">Especialista</option>
@@ -197,8 +205,10 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="titulo_orientador">Titulação do Orientador: <span style="color: red">*</span></label>
-                                        <select class="form-control" id="titulacao_orientador" name="titulacao_orientador">
+                                        <label for="titulo_orientador">Titulação do Orientador: <span
+                                                style="color: red">*</span></label>
+                                        <select class="form-control" id="titulacao_orientador"
+                                                name="titulacao_orientador">
                                             <option value="graduado">Graduado</option>
                                             <option value="especialista">Especialista</option>
                                             <option value="mestre">Mestre</option>
@@ -214,7 +224,8 @@
 
                                     <div class="form-group">
                                         <label for="titulo-coorientador">Titulação do Coorientador:</label>
-                                        <select class="form-control" id="titulacao_coorientador" name="titulacao_coorientador">
+                                        <select class="form-control" id="titulacao_coorientador"
+                                                name="titulacao_coorientador">
                                             <option value="graduado">Graduado</option>
                                             <option value="especialista">Especialista</option>
                                             <option value="mestre">Mestre</option>
@@ -245,8 +256,10 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="subtitulo">Titulação do Orientador: <span style="color: red">*</span></label>
-                                        <select class="form-control" id="titulacao_orientador" name="titulacao_orientador">
+                                        <label for="subtitulo">Titulação do Orientador: <span
+                                                style="color: red">*</span></label>
+                                        <select class="form-control" id="titulacao_orientador"
+                                                name="titulacao_orientador">
                                             <option value="graduado">Graduado</option>
                                             <option value="especialista">Especialista</option>
                                             <option value="mestre">Mestre</option>
@@ -262,7 +275,8 @@
 
                                     <div class="form-group">
                                         <label for="subtitulo">Titulação do Coorientador:</label>
-                                        <select class="form-control" id="titulacao_coorientador" name="titulacao_coorientador">
+                                        <select class="form-control" id="titulacao_coorientador"
+                                                name="titulacao_coorientador">
                                             <option value="graduado">Graduado</option>
                                             <option value="especialista">Especialista</option>
                                             <option value="mestre">Mestre</option>
@@ -329,8 +343,10 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="subtitulo">Titulação do Orientador: <span style="color: red">*</span></label>
-                                        <select class="form-control" id="titulacao_orientador" name="titulacao_orientador">
+                                        <label for="subtitulo">Titulação do Orientador: <span
+                                                style="color: red">*</span></label>
+                                        <select class="form-control" id="titulacao_orientador"
+                                                name="titulacao_orientador">
                                             <option value="graduado">Graduado</option>
                                             <option value="especialista">Especialista</option>
                                             <option value="mestre">Mestre</option>
@@ -346,7 +362,8 @@
 
                                     <div class="form-group">
                                         <label for="subtitulo">Titulação do Coorientador:</label>
-                                        <select class="form-control" id="titulacao_coorientador" name="titulacao_coorientador">
+                                        <select class="form-control" id="titulacao_coorientador"
+                                                name="titulacao_coorientador">
                                             <option>Sem Coorientador</option>
                                             <option value="graduado">Graduado</option>
                                             <option value="especialista">Especialista</option>
@@ -408,8 +425,11 @@
                                 </div>
                             </div>
                             <div class="col text-center" style="padding-top: 0px">
-                                <a type="button" class="btn btn-secondary" style="margin-right: 10px" href="{{ route('prepara-requisicao-bibli') }}">Voltar</a>
-                                <button type="submit" class="btn btn-primary-lmts" style="margin-left: 10px" href="#">Enviar</button>
+                                <a type="button" class="btn btn-secondary" style="margin-right: 10px"
+                                   href="{{ route('prepara-requisicao-bibli') }}">Voltar</a>
+                                <button type="submit" class="btn btn-primary-lmts" style="margin-left: 10px" href="#">
+                                    Enviar
+                                </button>
                             </div>
                         </div>
                     </form>
@@ -418,5 +438,30 @@
         </div>
     </div>
 </div>
+
+<script>
+    var myFile = "";
+    $('#anexo').on('change', function () {
+        myFile = $('#anexo').val();
+        var extension = myFile.split('.').pop();
+        if (extension == 'pdf' || extension == 'docx' || extension == 'doc') {
+            $('#tipoAnexo').css('color', 'green');
+        } else {
+            $('#tipoAnexo').css('color', 'red');
+            alert('O Anexo deve ser de um dos seguites tipos: .pdf, .docx ou .doc.')
+        }
+    });
+
+    $('#formRequisicao').submit(function (e) {
+        myFile = $('#anexo').val();
+        var extension = myFile.split('.').pop();
+        if (extension == 'pdf' || extension == 'docx' || extension == 'doc') {
+            //$('#formRequisicao').submit();
+        } else {
+            alert('Os elementos pré-textuais devem ser de um dos tipos aceitos: .pdf, .docx ou .doc. Corrija!')
+            e.preventDefault();
+        }
+    });
+</script>
 
 @endsection
