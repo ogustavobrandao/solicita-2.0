@@ -277,6 +277,7 @@ class BibliotecarioController extends Controller
         $bibliotecario->matricula = $request->input('matricula');
         $bibliotecario->user_id = $usuario->id;
         $bibliotecario->biblioteca_id = $request->input('biblioteca');
+        $bibliotecario->crb = $request->crb;
         $bibliotecario->save();
         $usuario->sendEmailVerificationNotification();
         return redirect()->route('home')->with('success', 'Bibliotecario cadastrado com sucesso!');
