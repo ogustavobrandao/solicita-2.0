@@ -80,7 +80,7 @@ class BibliotecarioController extends Controller
 
     public function atualizarFicha(Request $request)
     {
-        dd($request);
+
         $ficha = FichaCatalografica::find($request->ficha_catalografica_id);
         $ficha->autor_nome = $request->autor_sobrenome;
         $ficha->autor_sobrenome = $request->autor_sobrenome;
