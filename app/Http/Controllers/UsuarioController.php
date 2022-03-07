@@ -88,7 +88,7 @@ class UsuarioController extends Controller
     $perfil->default = $curso->nome; //Nome do Curso
     //Situacao
         $vinculo = $request->vinculo;
-        if($vinculo==="1"){
+        if($vinculo ==="1"){
           $perfil->situacao = "Matriculado";
         }else if ($vinculo==="2"){
           $perfil->situacao = "Egresso";
@@ -136,23 +136,23 @@ class UsuarioController extends Controller
               $perfil = Perfil::where('aluno_id', $usuarioEspecifico->id)->first();
               $unidadeEspecifica = Unidade::where('id', $perfil->unidade_id)->first();
               $cursoEspecifico = Curso::where('id', $perfil->curso_id)->first();
-              break;
+              return view('telas_admin.editar-usuario', compact('usuario', 'usuarioEspecifico','perfil', 'cursoEspecifico', 'unidadeEspecifica'));
 
           case "bibliotecario":
               $usuarioEspecifico = Bibliotecario::where('user_id', $usuario->id)->first();
               $bibliotecaEspecifica = Biblioteca::where('id', $usuarioEspecifico->biblioteca_id)->first();
-              break;
+              return view('telas_admin.editar-usuario', compact('usuario', 'usuarioEspecifico','bibliotecaEspecifica'));
 
           case "servidor":
-            $usuarioEspecifico = Servidor::where('user_id', $usuario->id)->first();
-            break;
+              $usuarioEspecifico = Servidor::where('user_id', $usuario->id)->first();
+              return view('telas_admin.editar-usuario', compact('usuario', 'usuarioEspecifico'));
 
           default:
-              dd($usuario);
+              return view('telas_admin.editar-usuario', compact('usuario'));
 
       }
 
-      return view('telas_admin.editar-usuario', compact('usuario', 'usuarioEspecifico'));
+
   }
 
   public function atualizarUsuario(Request $request) {

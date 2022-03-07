@@ -83,26 +83,91 @@
                     </span>
                           @enderror
                       </div>
-                  </div>
-                  <H1>EU SOU ALUNO</H1>
-              @elseif($usuario->tipo == 'bibliotecario')
+                  </div><br>
                   <div class="row justify-content-center">
                       <div class="col-sm-12">
                           <label for="email" class="field a-field a-field_a3 page__field ">
-                              <input id="matricula" type="matricula" class="form-control @error('matricula') is-invalid @enderror field__input a-field__input"
-                                     name="matricula" value="{{ $usuarioEspecifico->matricula }}" required autocomplete="matricula" autofocus placeholder="matricula">
+                              <input id="cpf" type="cpf" class="form-control @error('cpf') is-invalid @enderror field__input a-field__input"
+                                     name="cpf" value="{{ $perfil->default }}" required autocomplete="cpf" placeholder="CPF" disabled>
 
                               <span class="a-field__label-wrap">
-                        <span class="a-field__label">Matricula</span>
+                        <span class="a-field__label">Curso principal</span>
                     </span>
                           </label>
-                          @error('matricula')
+                          @error('cpf')
                           <span class="invalid-feedback" role="alert" style="overflow: visible; display:block">
                     <strong>{{ $message }}</strong>
                     </span>
                           @enderror
                       </div>
+                  </div><br>
+                  <div class="row justify-content-center">
+                      <div class="col-sm-12">
+                          <label for="email" class="field a-field a-field_a3 page__field ">
+                              <input id="situacao" type="text" class="form-control @error('situacao') is-invalid @enderror field__input a-field__input"
+                                     name="situacao" value="{{ $perfil->situacao }}" required autocomplete="Situação" placeholder="Situação" disabled>
+                              <span class="a-field__label-wrap">
+                                <span class="a-field__label">Situação</span>
+                             </span>
+                          </label>
+                          @error('situacao')
+                          <span class="invalid-feedback" role="alert" style="overflow: visible; display:block">
+                            <strong>{{ $message }}</strong>
+                          </span>
+                          @enderror
+                      </div>
+                  </div><br>
+                  <div class="row justify-content-center">
+                      <div class="col-sm-12">
+                          <label for="unidade" class="field a-field a-field_a3 page__field ">
+                              <input id="unidade" type="text" class="form-control @error('unidade') is-invalid @enderror field__input a-field__input"
+                                     name="unidade" value="{{ $unidadeEspecifica->nome }}" required autocomplete="Unidade" placeholder="Unidade" disabled>
+                              <span class="a-field__label-wrap">
+                                <span class="a-field__label">Unidade</span>
+                             </span>
+                          </label>
+                          @error('unidade')
+                          <span class="invalid-feedback" role="alert" style="overflow: visible; display:block">
+                            <strong>{{ $message }}</strong>
+                          </span>
+                          @enderror
+                      </div>
                   </div>
+              @elseif($usuario->tipo == 'bibliotecario')
+                  <div class="row justify-content-center">
+                      <div class="col-sm-12">
+                          <label for="email" class="field a-field a-field_a3 page__field ">
+                              <input id="matricula" type="matricula" class="form-control @error('matricula') is-invalid @enderror field__input a-field__input"
+                                     name="matricula" value="{{ $usuarioEspecifico->matricula }}" required autocomplete="matricula" placeholder="matricula">
+
+                              <span class="a-field__label-wrap">
+                                 <span class="a-field__label">Matricula</span>
+                              </span>
+                          </label>
+                          @error('matricula')
+                          <span class="invalid-feedback" role="alert" style="overflow: visible; display:block">
+                            <strong>{{ $message }}</strong>
+                          </span>
+                          @enderror
+                      </div>
+                  </div><br>
+                  <div class="row justify-content-center">
+                      <div class="col-sm-12">
+                          <label for="crb" class="field a-field a-field_a3 page__field ">
+                              <input id="crb" type="matricula" class="form-control @error('matricula') is-invalid @enderror field__input a-field__input"
+                                     name="crb" value="{{ $usuarioEspecifico->crb }}" required autocomplete="crb" placeholder="crb">
+
+                              <span class="a-field__label-wrap">
+                                 <span class="a-field__label">CRB</span>
+                              </span>
+                          </label>
+                          @error('crb')
+                          <span class="invalid-feedback" role="alert" style="overflow: visible; display:block">
+                            <strong>{{ $message }}</strong>
+                          </span>
+                          @enderror
+                      </div>
+                  </div><br>
                   <h1>EU SOU BIBLIOTECARIO</h1>
               @endif
               <!-- Botões -->
