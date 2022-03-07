@@ -16,9 +16,11 @@ class CreateTesesTable extends Migration
         Schema::create('teses', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('orientador');
+            $table->string('nome_orientador');
+            $table->string('sobrenome_orientador');
             $table->string('titulacao_orientador');
-            $table->string('coorientador')->nullable();
+            $table->string('nome_coorientador')->nullable();
+            $table->string('sobrenome_coorientador')->nullable();
             $table->string('titulacao_coorientador')->nullable();
             $table->string('programa');
 

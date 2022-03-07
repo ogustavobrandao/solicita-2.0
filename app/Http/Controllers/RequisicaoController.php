@@ -202,8 +202,10 @@ class RequisicaoController extends Controller
 
         if ($request->tipo_documento == 1) {
             $monografia = new Monografia();
-            $monografia->orientador = $request->orientador;
-            $monografia->coorientador = $request->coorientador;
+            $monografia->nome_orientador = $request->nome_orientador;
+            $monografia->sobrenome_orientador = $request->sobrenome_orientador;
+            $monografia->nome_coorientador = $request->nome_coorientador;
+            $monografia->sobrenome_coorientador = $request->sobrenome_coorientador;
             $monografia->titulacao_orientador = $request->titulacao_orientador;
             $monografia->titulacao_coorientador = $request->titulacao_coorientador;
             $monografia->curso = $request->curso;
@@ -212,8 +214,10 @@ class RequisicaoController extends Controller
             $monografia->save();
         } elseif ($request->tipo_documento == 2) {
             $tese = new Tese();
-            $tese->orientador = $request->orientador;
-            $tese->coorientador = $request->coorientador;
+            $tese->nome_orientador = $request->nome_orientador;
+            $tese->sobrenome_orientador = $request->sobrenome_orientador;
+            $tese->nome_coorientador = $request->nome_coorientador;
+            $tese->sobrenome_coorientador = $request->sobrenome_coorientador;
             $tese->titulacao_orientador = $request->titulacao_orientador;
             $tese->titulacao_coorientador = $request->titulacao_coorientador;
             $tese->programa = $request->programa;
@@ -221,8 +225,10 @@ class RequisicaoController extends Controller
             $tese->save();
         } elseif ($request->tipo_documento == 3) {
             $tcc = new Tcc();
-            $tcc->orientador = $request->orientador;
-            $tcc->coorientador = $request->coorientador;
+            $tcc->nome_orientador = $request->nome_orientador;
+            $tcc->sobrenome_orientador = $request->sobrenome_orientador;
+            $tcc->nome_coorientador = $request->nome_coorientador;
+            $tcc->sobrenome_coorientador = $request->sobrenome_coorientador;
             $tcc->titulacao_orientador = $request->titulacao_orientador;
             $tcc->titulacao_coorientador = $request->titulacao_coorientador;
             $tcc->campus = $request->campus;
@@ -238,8 +244,10 @@ class RequisicaoController extends Controller
             $programaEduc->save();
         } elseif ($request->tipo_documento == 5) {
             $dissertacao = new Dissertacao();
-            $dissertacao->orientador = $request->orientador;
-            $dissertacao->coorientador = $request->coorientador;
+            $dissertacao->nome_orientador = $request->nome_orientador;
+            $dissertacao->sobrenome_orientador = $request->sobrenome_orientador;
+            $dissertacao->nome_coorientador = $request->nome_coorientador;
+            $dissertacao->sobrenome_coorientador = $request->sobrenome_coorientador;
             $dissertacao->titulacao_orientador = $request->titulacao_orientador;
             $dissertacao->titulacao_coorientador = $request->titulacao_coorientador;
             $dissertacao->campus = $request->campus;

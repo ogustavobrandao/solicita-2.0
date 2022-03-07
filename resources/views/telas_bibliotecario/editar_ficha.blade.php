@@ -177,8 +177,8 @@
                                     </select>
                                 </div>
                                 <div class ="forma-group">
-                                    <label for="anexoArquivo">Selecione o documento: <span style="color: red">*</span> </label><br>
-                                    <a class="btn btn-primary" href={{ route('baixar-anexo', $requisicao->id) }} style="margin-bottom: 10px">Baixar anexo</a>
+                                    <label for="anexoArquivo">Visualizar Anexo: <span style="color: red">*</span> </label><br>
+                                    <a class="btn btn-primary" href="{{ route('baixar-anexo', $requisicao->id) }}" style="margin-bottom: 10px">Baixar anexo</a>
                                 </div>
 
                             </div>
@@ -195,9 +195,15 @@
                             <div class="row">
                                 <div class="col-md-12" style="margin-left: 15px;">
                                     <div class="form-group">
-                                        <label for="orientador">Orientador: <span style="color: red">*</span></label>
-                                        <input type="text" class="form-control" id="orientador" name="orientador"
-                                               placeholder="Digite o Orientador" value="{{$documento->orientador}}" required>
+                                        <label for="nome_orientador">Nome do Orientador: <span style="color: red">*</span></label>
+                                        <input type="text" class="form-control" id="sobrenome_orientador" name="nome_orientador"
+                                               placeholder="Digite o Nome do Orientador" value="{{$documento->nome_orientador}}" required>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="sobrenome_orientador">Sobrenome do Orientador: <span style="color: red">*</span></label>
+                                        <input type="text" class="form-control" id="sobre_orientador" name="sobrenome_orientador"
+                                               placeholder="Digite o Sobreome do Orientador" value="{{$documento->sobrenome_orientador}}" required>
                                     </div>
 
                                     <div class="form-group">
@@ -211,9 +217,15 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="orientador">Coorientador: </label>
-                                        <input type="text" class="form-control" id="coorientador"
-                                               placeholder="Digite o Nome do Coorientador" value="{{$documento->coorientador}}" name="coorientador">
+                                        <label for="nome_coorientador">Nome do Coorientador: </label>
+                                        <input type="text" class="form-control" id="nome_coorientador"
+                                               placeholder="Digite o Nome do Coorientador" value="{{$documento->nome_coorientador}}" name="nome_coorientador">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="sobrenome_coorientador">Sobrenome do Coorientador: </label>
+                                        <input type="text" class="form-control" id="sobrenome_coorientador"
+                                               placeholder="Digite o Sobrenome do Coorientador" value="{{$documento->sobrenome_coorientador}}" name="sobrenome_coorientador">
                                     </div>
 
                                     <div class="form-group">
@@ -250,9 +262,15 @@
                             <div class="row">
                                 <div class="col-md-12" style="margin-left: 15px;">
                                     <div class="form-group">
-                                        <label for="orientador">Orientador: <span style="color: red">*</span></label>
-                                        <input type="text" class="form-control" id="orientador" name="orientador"
-                                               placeholder="Digite o Orientador" value="{{$documento->orientador}}">
+                                        <label for="orientador">Nome do Orientador: <span style="color: red">*</span></label>
+                                        <input type="text" class="form-control" id="nome_orientador" name="nome_orientador"
+                                               placeholder="Digite Nome do Orientador" value="{{$documento->nome_orientador}}">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="sobrenome_orientador">Sobrenome do Orientador: <span style="color: red">*</span></label>
+                                        <input type="text" class="form-control" id="sobrenome_orientador" name="sobrenome_orientador"
+                                               placeholder="Digite o Sobreome do Orientador" value="{{$documento->nome_orientador}}" required>
                                     </div>
 
                                     <div class="form-group">
@@ -266,9 +284,15 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="coorientador">Coorientador:</label>
-                                        <input type="text" class="form-control" id="coorientador" name="coorientador"
-                                               placeholder="Digite o Nome do Coorientador" value="{{$documento->coorientador}}">
+                                        <label for="nome_coorientador">Nome do Coorientador:</label>
+                                        <input type="text" class="form-control" id="nome_coorientador" name="nome_coorientador"
+                                               placeholder="Digite o Nome do Coorientador" value="{{$documento->nome_coorientador}}">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="sobrenome_coorientador">Sobrenome do Coorientador: </label>
+                                        <input type="text" class="form-control" id="sobrenome_coorientador"
+                                               placeholder="Digite o Sobrenome do Coorientador" value="{{$documento->sobrenome_coorientador}}" name="sobrenome_coorientador">
                                     </div>
 
                                     <div class="form-group">
@@ -299,9 +323,15 @@
                             <div class="row">
                                 <div class="col-md-12" style="margin-left: 15px;">
                                     <div class="form-group">
-                                        <label for="orientador">Orientador: <span style="color: red">*</span></label>
-                                        <input type="text" class="form-control" id="orientador" name="orientador"
-                                               placeholder="Digite o Orientador" value="{{$documento->orientador}}">
+                                        <label for="orientador">Nome do Orientador: <span style="color: red">*</span></label>
+                                        <input type="text" class="form-control" id="nome_orientador" name="nome_orientador"
+                                               placeholder="Digite o Nome do Orientador" value="{{$documento->nome_orientador}}">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="sobrenome_orientador">Sobrenome do Orientador: <span style="color: red">*</span></label>
+                                        <input type="text" class="form-control" id="sobrenome_orientador" name="sobrenome_orientador"
+                                               placeholder="Digite o Sobreome do Orientador" value="{{$documento->nome_orientador}}" required>
                                     </div>
 
                                     <div class="form-group">
@@ -315,9 +345,15 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="orientador">Coorientador: </label>
-                                        <input type="text" class="form-control" id="coorientador" name="coorientador"
-                                               placeholder="Digite o Nome do Coorientador" value="{{$documento->coorientador}}">
+                                        <label for="nome_coorientador">Nome do Coorientador: </label>
+                                        <input type="text" class="form-control" id="nome_coorientador" name="nome_coorientador"
+                                               placeholder="Digite o Nome do Coorientador" value="{{$documento->nome_coorientador}}">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="sobrenome_coorientador">Sobrenome do Coorientador: </label>
+                                        <input type="text" class="form-control" id="sobrenome_coorientador"
+                                               placeholder="Digite o Sobrenome do Coorientador" value="{{$documento->sobrenome_coorientador}}" name="sobrenome_coorientador">
                                     </div>
 
                                     <div class="form-group">
@@ -384,9 +420,15 @@
                             <div class="row">
                                 <div class="col-md-12" style="margin-left: 15px;">
                                     <div class="form-group">
-                                        <label for="orientador">Orientador: <span style="color: red">*</span></label>
-                                        <input type="text" class="form-control" id="orientador" name="orientador"
-                                               placeholder="Digite o Orientador" value="{{$documento->orientador}}" required>
+                                        <label for="nome_orientador">Nome do Orientador: <span style="color: red">*</span></label>
+                                        <input type="text" class="form-control" id="nome_orientador" name="nome_orientador"
+                                               placeholder="Digite o Nome do Orientador" value="{{$documento->nome_orientador}}" required>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="sobrenome_orientador">Sobrenome do Orientador: <span style="color: red">*</span></label>
+                                        <input type="text" class="form-control" id="sobrenome_orientador" name="sobrenome_orientador"
+                                               placeholder="Digite o Sobreome do Orientador" value="{{$documento->nome_orientador}}" required>
                                     </div>
 
                                     <div class="form-group">
@@ -400,9 +442,15 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="orientador">Coorientador: </label>
-                                        <input type="text" class="form-control" id="coorientador"
-                                               placeholder="Digite o Nome do Coorientador" value="{{$documento->coorientador}}" name="coorientador">
+                                        <label for="nome_corientador">Nome do Coorientador: </label>
+                                        <input type="text" class="form-control" id="nome_coorientador"
+                                               placeholder="Digite o Nome do Coorientador" value="{{$documento->nome_coorientador}}" name="nome_coorientador">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="sobrenome_coorientador">Sobrenome do Coorientador: </label>
+                                        <input type="text" class="form-control" id="sobrenome_coorientador"
+                                               placeholder="Digite o Sobrenome do Coorientador" value="{{$documento->sobrenome_coorientador}}" name="sobrenome_coorientador">
                                     </div>
 
                                     <div class="form-group">
