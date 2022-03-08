@@ -21,7 +21,7 @@
                 <option value="3">Three</option>
             </select>
         </div>--}}
-        <div style="margin-bottom: 15px; margin-top: 15git suapx;" class="row justify-content-sm-center">
+        <div style="margin-bottom: 15px; margin-top: 15px;" class="row justify-content-sm-center">
             <div class="col-sm-10">
                 <h2 class="tituloTabela">{{Auth::user()->name}} - Lista de Requisições de Fichas Catalográficas</h2>
             </div>
