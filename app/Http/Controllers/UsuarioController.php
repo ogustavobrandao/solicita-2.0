@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Biblioteca;
+use App\Models\Bibliotecario;
+use App\Models\Servidor;
 use Illuminate\Http\Request;
 
 use App\Models\Curso;
@@ -9,6 +12,7 @@ use App\Models\Aluno;
 use App\Models\User;
 use App\Models\Perfil;
 use App\Models\Unidade;
+use Illuminate\Support\Facades\Hash;
 
 class UsuarioController extends Controller
 {
@@ -84,7 +88,7 @@ class UsuarioController extends Controller
     $perfil->default = $curso->nome; //Nome do Curso
     //Situacao
         $vinculo = $request->vinculo;
-        if($vinculo==="1"){
+        if($vinculo ==="1"){
           $perfil->situacao = "Matriculado";
         }else if ($vinculo==="2"){
           $perfil->situacao = "Egresso";
@@ -125,7 +129,30 @@ class UsuarioController extends Controller
 
   public function editarUsuario(Request $request) {
       $usuario = User::where('id', $request->id_usuario)->first();
-      return view('telas_admin.editar-usuario', compact('usuario'));
+
+      switch($usuario->tipo){
+          case "aluno":
+              $usuarioEspecifico = Aluno::where('user_id', $usuario->id)->first();
+              $perfil = Perfil::where('aluno_id', $usuarioEspecifico->id)->first();
+              $unidadeEspecifica = Unidade::where('id', $perfil->unidade_id)->first();
+              $cursoEspecifico = Curso::where('id', $perfil->curso_id)->first();
+              return view('telas_admin.editar-usuario', compact('usuario', 'usuarioEspecifico','perfil', 'cursoEspecifico', 'unidadeEspecifica'));
+
+          case "bibliotecario":
+              $usuarioEspecifico = Bibliotecario::where('user_id', $usuario->id)->first();
+              $bibliotecaEspecifica = Biblioteca::where('id', $usuarioEspecifico->biblioteca_id)->first();
+              return view('telas_admin.editar-usuario', compact('usuario', 'usuarioEspecifico','bibliotecaEspecifica'));
+
+          case "servidor":
+              $usuarioEspecifico = Servidor::where('user_id', $usuario->id)->first();
+              return view('telas_admin.editar-usuario', compact('usuario', 'usuarioEspecifico'));
+
+          default:
+              return view('telas_admin.editar-usuario', compact('usuario'));
+
+      }
+
+
   }
 
   public function atualizarUsuario(Request $request) {
@@ -134,7 +161,19 @@ class UsuarioController extends Controller
       $request->validate(['name' => ['required'], 'email' => ['required']]);
       $usuario->name = $request->name;
       $usuario->email = $request->email;
+      if($request->password != null && $request->password != '*******') {
+          $usuario->password = Hash::make($request->password);
+      }
       $usuario->update();
+
+      switch ($usuario->tipo){
+          case "aluno":
+              break;
+          case "bibliotecario":
+              break;
+          case "servidor":
+              break;
+      }
 
       return redirect()->route('listar-usuario')->with('success', 'O usuário foi atualizado!');
 

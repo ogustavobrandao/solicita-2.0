@@ -141,9 +141,15 @@
                             <div class="row">
                                 <div class="col-md-12" style="margin-left: 15px;">
                                     <div class="form-group">
-                                        <label for="orientador">Orientador: <span style="color: red">*</span></label>
-                                        <input type="text" class="form-control" id="orientador" name="orientador"
-                                               placeholder="Digite o Orientador" value="" required>
+                                        <label for="nome_orientador">Nome do Orientador: <span style="color: red">*</span></label>
+                                        <input type="text" class="form-control" id="nome_orientador" name="nome_orientador"
+                                               placeholder="Digite o nome do orientador" value="" required>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="sobrenome_orientador">Sobrenome do Orientador: <span style="color: red">*</span></label>
+                                        <input type="text" class="form-control" id="sobrenome_orientador" name="sobrenome_orientador"
+                                               placeholder="Digite o Sobrenome do orientador" value="" required>
                                     </div>
 
                                     <div class="form-group">
@@ -159,9 +165,15 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="orientador">Coorientador: </label>
-                                        <input type="text" class="form-control" id="coorientador"
-                                               placeholder="Digite o Nome do Coorientador" value="" name="coorientador">
+                                        <label for="nome_coorientador">Nome do Coorientador: </label>
+                                        <input type="text" class="form-control" id="nome_coorientador"
+                                               placeholder="Digite o Nome do Coorientador" value="" name="nome_coorientador">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="sobrenome_coorientador">Sobrenome do Coorientador: </label>
+                                        <input type="text" class="form-control" id="sobrenome_coorientador"
+                                               placeholder="Digite o Sobrenome do Coorientador" value="" name="sobrenome_coorientador">
                                     </div>
 
                                     <div class="form-group">
@@ -199,9 +211,15 @@
                             <div class="row">
                                 <div class="col-md-12" style="margin-left: 15px;">
                                     <div class="form-group">
-                                        <label for="orientador">Orientador: <span style="color: red">*</span></label>
-                                        <input type="text" class="form-control" id="orientador" name="orientador"
-                                               placeholder="Digite o Orientador" value="">
+                                        <label for="nome_orientador">Nome do Orientador: <span style="color: red">*</span></label>
+                                        <input type="text" class="form-control" id="nome_orientador" name="nome_orientador"
+                                               placeholder="Digite o Nome do Orientador" value="">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="sobrenome_orientador">Sobrenome do Orientador: <span style="color: red">*</span></label>
+                                        <input type="text" class="form-control" id="sobrenome_orientador" name="sobrenome_orientador"
+                                               placeholder="Digite o Sobrenome do orientador" value="" required>
                                     </div>
 
                                     <div class="form-group">
@@ -217,9 +235,15 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="coorientador">Coorientador:</label>
-                                        <input type="text" class="form-control" id="coorientador" name="coorientador"
+                                        <label for="nome_coorientador">Nome do coorientador:</label>
+                                        <input type="text" class="form-control" id="nome_coorientador" name="nome_coorientador"
                                                placeholder="Digite o Nome do Coorientador" value="">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="sobrenome_coorientador">Sobrenome do Coorientador: </label>
+                                        <input type="text" class="form-control" id="sobrenome_coorientador"
+                                               placeholder="Digite o Sobrenome do Coorientador" value="" name="sobrenome_coorientador">
                                     </div>
 
                                     <div class="form-group">
@@ -250,9 +274,15 @@
                             <div class="row">
                                 <div class="col-md-12" style="margin-left: 15px;">
                                     <div class="form-group">
-                                        <label for="orientador">Orientador: <span style="color: red">*</span></label>
-                                        <input type="text" class="form-control" id="orientador" name="orientador"
-                                               placeholder="Digite o Orientador" value="">
+                                        <label for="nome_orientador">Nome do Orientador: <span style="color: red">*</span></label>
+                                        <input type="text" class="form-control" id="nome_orientador" name="nome_orientador"
+                                               placeholder="Digite o Nome do Orientador" value="">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="sobrenome_orientador">Sobrenome do Orientador: <span style="color: red">*</span></label>
+                                        <input type="text" class="form-control" id="sobrenome_orientador" name="sobrenome_orientador"
+                                               placeholder="Digite o Sobrenome do orientador" value="" required>
                                     </div>
 
                                     <div class="form-group">
@@ -268,9 +298,15 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="orientador">Coorientador: </label>
-                                        <input type="text" class="form-control" id="coorientador" name="coorientador"
+                                        <label for="nome_orientador">Nome do Coorientador: </label>
+                                        <input type="text" class="form-control" id="nome_coorientador" name="nome_coorientador"
                                                placeholder="Digite o Nome do Coorientador" value="">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="sobrenome_coorientador">Sobrenome do Coorientador: </label>
+                                        <input type="text" class="form-control" id="sobrenome_coorientador"
+                                               placeholder="Digite o Sobrenome do Coorientador" value="" name="sobrenome_coorientador">
                                     </div>
 
                                     <div class="form-group">
@@ -337,9 +373,15 @@
                             <div class="row">
                                 <div class="col-md-12" style="margin-left: 15px;">
                                     <div class="form-group">
-                                        <label for="orientador">Orientador: <span style="color: red">*</span></label>
-                                        <input type="text" class="form-control" id="orientador" name="orientador"
-                                               placeholder="Digite o Orientador" value="" required>
+                                        <label for="nome_orientador">Nome do Orientador: <span style="color: red">*</span></label>
+                                        <input type="text" class="form-control" id="nome_orientador" name="nome_orientador"
+                                               placeholder="Digite o Nome do Orientador" value="" required>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="sobrenome_orientador">Sobrenome do Orientador: <span style="color: red">*</span></label>
+                                        <input type="text" class="form-control" id="sobrenome_orientador" name="sobrenome_orientador"
+                                               placeholder="Digite o Sobrenome do Orientador" value="" required>
                                     </div>
 
                                     <div class="form-group">
@@ -355,9 +397,15 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="orientador">Coorientador: </label>
-                                        <input type="text" class="form-control" id="coorientador"
-                                               placeholder="Digite o Nome do Coorientador" value="" name="coorientador">
+                                        <label for="nome_coorientador">Nome do Coorientador: </label>
+                                        <input type="text" class="form-control" id="nome_coorientador"
+                                               placeholder="Digite o Nome do Coorientador" value="" name="nome_coorientador">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="sobrenome_coorientador">Sobrenome do Coorientador: </label>
+                                        <input type="text" class="form-control" id="sobrenome_coorientador"
+                                               placeholder="Digite o Sobrenome do Coorientador" value="" name="sobrenome_coorientador">
                                     </div>
 
                                     <div class="form-group">

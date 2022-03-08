@@ -80,7 +80,7 @@ class BibliotecarioController extends Controller
 
     public function atualizarFicha(Request $request)
     {
-
+        dd($request);
         $ficha = FichaCatalografica::find($request->ficha_catalografica_id);
         $ficha->autor_nome = $request->autor_sobrenome;
         $ficha->autor_sobrenome = $request->autor_sobrenome;
@@ -100,8 +100,10 @@ class BibliotecarioController extends Controller
 
         if ($request->tipo_documento == 1) {
             $monografia = Monografia::where('ficha_catalografica_id', $request->ficha_catalografica_id)->first();
-            $monografia->orientador = $request->orientador;
-            $monografia->coorientador = $request->coorientador;
+            $monografia->nome_orientador = $request->nome_orientador;
+            $monografia->sobrenome_orientador = $request->sobrenome_orientador;
+            $monografia->nome_coorientador = $request->nome_coorientador;
+            $monografia->sobrenome_coorientador = $request->sobrenome_coorientador;
             $monografia->titulacao_orientador = $request->titulacao_orientador;
             $monografia->titulacao_coorientador = $request->titulacao_coorientador;
             $monografia->curso = $request->curso;
@@ -109,16 +111,20 @@ class BibliotecarioController extends Controller
             $monografia->update();
         } elseif ($request->tipo_documento == 2) {
             $tese = Tese::where('ficha_catalografica_id', $request->ficha_catalografica_id)->first();
-            $tese->orientador = $request->orientador;
-            $tese->coorientador = $request->coorientador;
+            $tese->nome_orientador = $request->nome_orientador;
+            $tese->nome_coorientador = $request->nome_coorientador;
+            $tese->sobrenome_orientador = $request->sobrenome_orientador;
+            $tese->sobrenome_coorientador = $request->sobrenome_coorientador;
             $tese->titulacao_orientador = $request->titulacao_orientador;
             $tese->titulacao_coorientador = $request->titulacao_coorientador;
             $tese->programa = $request->programa;
             $tese->update();
         } elseif ($request->tipo_documento == 3) {
             $tcc = Tcc::where('ficha_catalografica_id', $request->ficha_catalografica_id)->first();
-            $tcc->orientador = $request->orientador;
-            $tcc->coorientador = $request->coorientador;
+            $tcc->nome_orientador = $request->nome_orientador;
+            $tcc->nome_coorientador = $request->nome_coorientador;
+            $tcc->sobrenome_orientador = $request->sobrenome_orientador;
+            $tcc->sobrenome_coorientador = $request->sobrenome_coorientador;
             $tcc->titulacao_orientador = $request->titulacao_orientador;
             $tcc->titulacao_coorientador = $request->titulacao_coorientador;
             $tcc->campus = $request->campus;
@@ -132,8 +138,10 @@ class BibliotecarioController extends Controller
             $programaEduc->update();
         } elseif ($request->tipo_documento == 5) {
             $dissertacao = Dissertacao::where('ficha_catalografica_id', $request->ficha_catalografica_id)->first();
-            $dissertacao->orientador = $request->orientador;
-            $dissertacao->coorientador = $request->coorientador;
+            $dissertacao->nome_orientador = $request->nome_orientador;
+            $dissertacao->nome_coorientador = $request->nome_coorientador;
+            $dissertacao->sobrenome_orientador = $request->sobrenome_orientador;
+            $dissertacao->sobrenome_coorientador = $request->sobrenome_coorientador;
             $dissertacao->titulacao_orientador = $request->titulacao_orientador;
             $dissertacao->titulacao_coorientador = $request->titulacao_coorientador;
             $dissertacao->campus = $request->campus;
@@ -277,6 +285,7 @@ class BibliotecarioController extends Controller
         $bibliotecario->matricula = $request->input('matricula');
         $bibliotecario->user_id = $usuario->id;
         $bibliotecario->biblioteca_id = $request->input('biblioteca');
+        $bibliotecario->crb = $request->crb;
         $bibliotecario->save();
         $usuario->sendEmailVerificationNotification();
         return redirect()->route('home')->with('success', 'Bibliotecario cadastrado com sucesso!');

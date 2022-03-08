@@ -110,7 +110,7 @@
     <script>
         $('#table').DataTable({
             searching: true,
-            
+
             "language": {
                 "lengthMenu": "Mostrar _MENU_ registros por página",
                 "info": "Exibindo página _PAGE_ de _PAGES_",
