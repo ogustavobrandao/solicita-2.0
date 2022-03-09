@@ -82,7 +82,7 @@ class BibliotecarioController extends Controller
     {
         $request;
         $ficha = FichaCatalografica::find($request->ficha_catalografica_id);
-        $ficha->autor_nome = $request->autor_sobrenome;
+        $ficha->autor_nome = $request->autor_nome;
         $ficha->autor_sobrenome = $request->autor_sobrenome;
         if($ficha-> cutter == null)
             $ficha->cutter = $request->cutter;
