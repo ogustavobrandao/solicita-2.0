@@ -91,9 +91,9 @@
                                            placeholder="Digite o Titulo" value="" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="subtitulo">Subtitulo:</label>
+                                    <label for="subtitulo">Subtitulo: <span style="color: red">@if($tipo_documento == 2 || $tipo_documento == 4)* @endif</span> </label>
                                     <input type="text" class="form-control" id="subtitulo" name="subtitulo"
-                                           placeholder="Digite o Subtitulo" value="">
+                                           placeholder="Digite o Subtitulo" value="" @if($tipo_documento == 2 || $tipo_documento == 4) required @endif>
                                 </div>
                                 <div class="form-group">
                                     <label for="local">Local: <span style="color: red">*</span></label>
