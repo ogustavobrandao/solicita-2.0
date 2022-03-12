@@ -9,6 +9,7 @@
 
     <script src="{{ asset('js/jquery-3.4.1.min.js')}}"></script>
     <script src="{{ asset('js/jquery-mask-plugin.js')}}"></script>
+    <link rel="stylesheet" href="{{ asset ('css/styles/var.css') }}">
     <link rel="stylesheet" href="{{ asset ('css/stylelmts.css') }}">
     <link rel="stylesheet" href="{{ asset ('css/app.css') }}">
     <link href="{{ asset('css/field-animation.css') }}" rel="stylesheet">

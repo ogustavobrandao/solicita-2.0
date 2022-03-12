@@ -2,7 +2,7 @@
 
 @section('conteudo')
     <div>@include('componentes.mensagens')</div>
-    <div class="container-fluid" style="min-height:38vh">
+    <div class="container-fluid" style="min-height:38vh;">
 
         {{-- <div class="row jusify-content-center d-flex justify-content-center">
           <div class="col-sm-10">
@@ -21,6 +21,7 @@
                 <option value="3">Three</option>
             </select>
         </div>--}}
+
         <div style="margin-bottom: 15px; margin-top: 15px;" class="row justify-content-sm-center">
             <div class="col-sm-10">
                 <h2 class="tituloTabela">{{Auth::user()->name}} - Lista de Requisições de Fichas Catalográficas</h2>
