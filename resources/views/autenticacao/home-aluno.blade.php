@@ -3,7 +3,7 @@
 
 @section('titulo','Home Aluno')
 
-@section('navbar')
+@section('navbar2.blade.php')
     Home
 @endsection
 <div class="container" style="min-height:70vh">

@@ -23,6 +23,6 @@ class navbarBibliotecario extends Component
      */
     public function render()
     {
-        return view('components.navbar-bibliotecario');
+        return view('components.navbar2.blade.php-bibliotecario');
     }
 }

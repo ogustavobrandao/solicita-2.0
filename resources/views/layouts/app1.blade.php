@@ -182,7 +182,7 @@
         .dropdown:hover .dropbtn {
           background-color: #3097D1;
         }
-        .separador-lmts{     /*       Separador de navbar */
+        .separador-lmts{     /*       Separador de navbar2.blade.php */
           color: white;
           font-weight: bold;
           font-size: 20;

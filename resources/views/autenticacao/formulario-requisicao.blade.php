@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('conteudo')
-<!-- @section('navbar')
+<!-- @section('navbar2.blade.php')
     Home
 @endsection -->
 <div class="container" style="min-height:80vh" >

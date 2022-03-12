@@ -2,7 +2,7 @@
 @section('conteudo')
 
 @section('titulo','Home Administrador')
-@section('navbar')
+@section('navbar2.blade.php')
     Home
 @endsection
 
