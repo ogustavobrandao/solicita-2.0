@@ -57,8 +57,8 @@ Route::group(['middleware'=> ['CheckServidor', 'verified']], function(){
     Route::get('/home-servidor',[\App\Http\Controllers\ServidorController::class, 'index'])->name('home_servidor')->middleware('CheckServidor');
     Route::get('/home-servidor',[\App\Http\Controllers\RequisicaoController::class, 'index'])->name('cadastro-servidor')->middleware('CheckServidor');
     Route::post('/novo-servidor',[\App\Http\Controllers\RequisicaoController::class, 'storeServidor'])->name('novo-servidor')->middleware('CheckServidor');
-    Route::get('/alterar-senha-servidor',[\App\Http\Controllers\RequisicaoController::class, 'alterarSenhaServidor'])->name('alterar-senha-servidor')->middleware('CheckServidor');
-    Route::post('/alterar-senha-servidor',[\App\Http\Controllers\RequisicaoController::class, 'storeAlterarSenhaServidor'])->name('alterar-senha-servidor')->middleware('CheckServidor');
+    Route::get('/alterar-senha-servidor',[\App\Http\Controllers\ServidorController::class, 'alterarSenhaServidor'])->name('alterar-senha-servidor')->middleware('CheckServidor');
+    Route::post('/alterar-senha-servidor',[\App\Http\Controllers\ServidorController::class, 'storeAlterarSenhaServidor'])->name('alterar-senha-servidor')->middleware('CheckServidor');
     Route::get('/home-servidor',[\App\Http\Controllers\RequisicaoController::class, 'index'])->name('home_servidor')->middleware('CheckServidor');
 });
 //----------------------------------------------ALUNO---------------------------------------------------
