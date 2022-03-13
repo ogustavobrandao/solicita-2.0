@@ -1,23 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Sen:wght@400;700;800&display=swap');
+
+body, html{
+    font-family: 'Segoe UI', 'Sen';
+}
+
 /*classes da home*/
 
-.campoDeTexto{
-    background-color: var(--background);
-    border-radius: 0.5rem;
-    height: 33px;
-    padding-left: 10px;
-    margin: 0;
-}
-
 .tituloHome{
-
+    font-size: 33px;
+    color: var(--padrao);
+    font-weight: 600;
 }
 
-.textoHome{}
+.textoHome{
+    font-weight: 600;
+    font-size: 20px;
+    color: var(--textcolor);
+    text-align: justify;
+}
 
-.botao{
+.caixa{
+    border-radius: 0.5rem;
+    background-color: white;
+}
+
+.componenteTabela{
+    color: var(--textcolor);
+    font-size: 17px;
+    font-weight: 600;
+}
+
+/*classes das telas iniciais*/
+
+.caixaSelecao{
+    border-radius: 1rem;
+    width: 250px;
+}
+
+.textoCaixa{
     color: white;
     font-weight: 600;
-    font-family: 'Segoe UI';
+    font-size: 23px;
+}
+
+.titulo{
+    color: var(--textcolor);
+    font-size: 40px;
+    font-weight: 700;
+}
+
+/*formulario ficha catalografica*/
+
+.tituloFicha{
+    color: var(--textcolor);
+    font-size: 30px;
+    font-weight: 600;
+}
+
+.cabecalho{
+    background-color: var(--monografia);
+    border-top-right-radius: 0.5rem;
+    border-top-left-radius: 0.5rem;
+
+}
+
+.corpoFicha{
+    background-color: white;
+    border-bottom-right-radius: 0.5rem;
+    border-bottom-left-radius: 0.5rem;
+}
+
+.tituloCabecalho{
+    color: white;
+    font-weight: 600;
+    font-size: 24px;
+}
+
+.textoFicha{
+    color: var(--textcolor);
     font-size: 16px;
-    border-radius: 0.5rem;
+    font-weight: 600;
 }

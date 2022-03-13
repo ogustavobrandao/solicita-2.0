@@ -5,203 +5,208 @@
     Home
 @endsection -->
 
-<style>
-    hr {
-        border: none;
-        height: 2px;
-        /* Set the hr color */
-        color: #333; /* old IE */
-        background-color: #1B2E4F; /* Modern Browsers */
-        margin-top: 0px;
-    }
-
-    .center {
-        margin: auto;
-        width: 50%;
-        padding: 10px;
-    }
-
-    h3 {
-        font-size: 22px;
-        margin-bottom: 5px;
-    }
-
-    .form-control {
-        width: 97%;
-    }
-</style>
-
-<div class="container-fluid background-blue" style="min-height:110vh">
+<div class="container">
     <div class="row justify-content-center">
-        <div class="col-sm-8">
-            <div class="card card-cadastro card-cadastro-servidor">
-                <div class="card-body">
+        <div class="col-md-7">
+            <div class="row mt-5 tituloFicha">
+                <div class="col-md-12">
+                    Ficha Catalográfica -
+                        @if($tipo_documento == 1)Monografia
+                        @elseif($tipo_documento == 2)Tese
+                        @elseif($tipo_documento == 3)Trabalho de Conclusão de Curso
+                        @elseif($tipo_documento == 4)Produto Educacional
+                        @elseif($tipo_documento == 5)Dissertação
+                        @endif
+                </div>
+            </div>
+            <form method="POST" enctype="multipart/form-data" id="formRequisicao" action="{{ route('criarDocumentoBibli') }}">
+                @csrf
+                <input type="hidden" name="tipo_documento" value="{{$tipo_documento}}">
 
-                    <div class="row justify-content-center">
-                        <h2>Ficha Catalográfica - @if($tipo_documento == 1)Monografia
-                            @elseif($tipo_documento == 2)Tese
-                            @elseif($tipo_documento == 3)Trabalho de Conclusão de Curso
-                            @elseif($tipo_documento == 4)Produto Educacional
-                            @elseif($tipo_documento == 5)Dissertação
-                            @endif</h2>
+                <! –– Dados Pessoais ––>
+
+                <div class="col-md-12 corpoFicha shadow my-4">
+                    <div class="row">
+                        <div class="col-md-12 cabecalho py-2">
+                            <span class="tituloCabecalho">Dados Pessoais</span>
+                        </div>
                     </div>
-                    <form method="POST" enctype="multipart/form-data" id="formRequisicao"
-                          action="{{ route('criarDocumentoBibli') }}">
-                        @csrf
-                        <input type="hidden" name="tipo_documento" value="{{$tipo_documento}}">
-                        <! –– Dados Pessoais ––>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <h3>Dados Pessoais</h3>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12" style="margin-left: 15px;">
-                                <div class="form-group">
-                                    <label for="exampleFormControlInput1">Nome<span style="color: red">*</span>:</label>
-                                    <input type="text" class="form-control" id="nome" name="nome"
-                                           placeholder="Nome" value="{{\Illuminate\Support\Facades\Auth::user()->name}}"
-                                           disabled>
-                                </div>
-                            </div>
-                        </div>
-                        <input type="hidden" name="id_perfil" value="{{ $id_perfil }}">
-                        <hr>
-                        <! –– Dados do Trabalho ––>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <h3>Dados do Trabalho</h3>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12" style="margin-left: 15px;">
-                                <div class="form-group">
-                                    <label for="autor_nome">Nome: <span style="color: red">*</span></label>
-                                    <input type="text" class="form-control" id="autor_nome" name="autor_nome"
-                                           placeholder="Digite o nome do Autor" value="" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="autor_sobrenome">Sobrenome: <span style="color: red">*</span></label>
-                                    <input type="text" class="form-control" id="autor_sobrenome" name="autor_sobrenome"
-                                           placeholder="Digite o sobrenome do Autor" value="" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="titulo">Titulo: <span style="color: red">*</span></label>
-                                    <input type="text" class="form-control" id="titulo" name="titulo"
-                                           placeholder="Digite o Titulo" value="" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="subtitulo">Subtitulo: <span style="color: red">@if($tipo_documento == 2 || $tipo_documento == 4)* @endif</span> </label>
-                                    <input type="text" class="form-control" id="subtitulo" name="subtitulo"
-                                           placeholder="Digite o Subtitulo" value="" @if($tipo_documento == 2 || $tipo_documento == 4) required @endif>
-                                </div>
-                                <div class="form-group">
-                                    <label for="local">Local: <span style="color: red">*</span></label>
-                                    <input type="text" class="form-control" id="local" name="local"
-                                           placeholder="Digite o Local" value="" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="ano">Ano: <span style="color: red">*</span></label>
-                                    <input class="form-control" type="number" min="1900" max="2099" step="1" name="ano"
-                                           value="{{date('Y')}}" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="folhas">Folhas: <span style="color: red">*</span></label>
-                                    <input type="number" class="form-control" id="folhas" name="folhas"
-                                           placeholder="Digite a Quantidade de Folhas" value="" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="ilustracao">Ilustração: <span style="color: red">*</span></label>
-                                    <select class="form-control" id="ilustracao" name="ilustracao">
-                                        <option value="colorido">Colorido</option>
-                                        <option value="preto_branco">Preto e Branco</option>
-                                        <option value="nao_possui">Não Possui</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="anexoArquivo">Selecione o documento: <span style="color: red">*</span>
-                                    </label><br>
-                                    <input type="file" id="anexo" accept="application/pdf, .docx" name="anexo"
-                                           style="margin-bottom: 0px" required>
-                                    <br>
-                                    <span id="tipoAnexo"
-                                          style="font-size: small; color: gray; margin-top: 0px; margin-bottom: 10px">Tipos permitidos: PDF, DOCX e DOC. </span>
-                                </div>
-                            </div>
-                        </div>
-                        <hr>
 
-                        <! –– Dados Especificos ––>
-                        @if($tipo_documento == 1)
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <h3>Monografia</h3>
-                                </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group py-2">
+                                <label class="textoFicha" for="exampleFormControlInput1">Nome<span style="color: red">*</span>:</label>
+                                <input type="text" class="form-control" id="nome" name="nome"
+                                       placeholder="Nome" value="{{\Illuminate\Support\Facades\Auth::user()->name}}"
+                                       disabled>
                             </div>
-                            <div class="row">
-                                <div class="col-md-12" style="margin-left: 15px;">
+                        </div>
+                    </div>
+                    <input type="hidden" name="id_perfil" value="{{ $id_perfil }}">
+                </div>
+
+                <! –– Dados do Trabalho ––>
+
+                <div class="col-md-12 corpoFicha shadow my-4">
+
+                    <div class="row">
+                        <div class="col-md-12 cabecalho py-2">
+                            <span class="tituloCabecalho">Dados do Trabalho</span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12 py-2 textoFicha">
+                            <div class="form-group">
+                                <label for="autor_nome">Nome: <span style="color: red">*</span></label>
+                                <input type="text" class="form-control" id="autor_nome" name="autor_nome"
+                                       placeholder="Digite o nome do Autor" value="" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="autor_sobrenome">Sobrenome: <span style="color: red">*</span></label>
+                                <input type="text" class="form-control" id="autor_sobrenome" name="autor_sobrenome"
+                                       placeholder="Digite o sobrenome do Autor" value="" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="titulo">Titulo: <span style="color: red">*</span></label>
+                                <input type="text" class="form-control" id="titulo" name="titulo"
+                                       placeholder="Digite o Titulo" value="" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="subtitulo">Subtitulo: <span style="color: red">@if($tipo_documento == 2 || $tipo_documento == 4)* @endif</span> </label>
+                                <input type="text" class="form-control" id="subtitulo" name="subtitulo"
+                                       placeholder="Digite o Subtitulo" value="" @if($tipo_documento == 2 || $tipo_documento == 4) required @endif>
+                            </div>
+                            <div class="form-group">
+                                <label for="local">Local: <span style="color: red">*</span></label>
+                                <input type="text" class="form-control" id="local" name="local"
+                                       placeholder="Digite o Local" value="" required>
+                            </div>
+                            <div class="row justify-content-between">
+                                <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="nome_orientador">Nome do Orientador: <span style="color: red">*</span></label>
-                                        <input type="text" class="form-control" id="nome_orientador" name="nome_orientador"
-                                               placeholder="Digite o nome do orientador" value="" required>
+                                        <label for="ano">Ano: <span style="color: red">*</span></label>
+                                        <input class="form-control" type="number" min="1900" max="2099" step="1" name="ano"
+                                               value="{{date('Y')}}" required>
                                     </div>
+                                </div>
 
+                                <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="sobrenome_orientador">Sobrenome do Orientador: <span style="color: red">*</span></label>
-                                        <input type="text" class="form-control" id="sobrenome_orientador" name="sobrenome_orientador"
-                                               placeholder="Digite o Sobrenome do orientador" value="" required>
+                                        <label for="folhas">Folhas: <span style="color: red">*</span></label>
+                                        <input type="number" class="form-control" id="folhas" name="folhas"
+                                               placeholder="Quantidade de Folhas" value="" required>
                                     </div>
+                                </div>
 
+                                <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="subtitulo">Titulação do Orientador: <span
-                                                style="color: red">*</span></label>
-                                        <select class="form-control" id="titulacao_orientador"
-                                                name="titulacao_orientador">
-                                            <option value="graduado">Graduado</option>
-                                            <option value="especialista">Especialista</option>
-                                            <option value="mestre">Mestre</option>
-                                            <option value="doutor">Doutor</option>
+                                        <label for="ilustracao">Ilustração: <span style="color: red">*</span></label>
+                                        <select class="form-control" id="ilustracao" name="ilustracao">
+                                            <option value="colorido">Colorido</option>
+                                            <option value="preto_branco">Preto e Branco</option>
+                                            <option value="nao_possui">Não Possui</option>
                                         </select>
                                     </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="anexoArquivo">Selecione o documento: <span style="color: red">*</span>
+                                </label><br>
+                                <input type="file" id="anexo" accept="application/pdf, .docx" name="anexo"
+                                       style="margin-bottom: 0px" required>
+                                <br>
+                                <span id="tipoAnexo"
+                                      style="font-size: small; color: gray; margin-top: 0px; margin-bottom: 10px">Tipos permitidos: PDF, DOCX e DOC. </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-                                    <div class="form-group">
-                                        <label for="nome_coorientador">Nome do Coorientador: </label>
-                                        <input type="text" class="form-control" id="nome_coorientador"
-                                               placeholder="Digite o Nome do Coorientador" value="" name="nome_coorientador">
+                <! –– Dados Especificos ––>
+
+                @if($tipo_documento == 1) <! -- MONOGRAFIA --!>
+                    <div class="col-md-12 corpoFicha shadow my-4">
+                        <div class="row">
+                            <div class="col-md-12 cabecalho py-2">
+                                <span class="tituloCabecalho">Monografia</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 py-2 textoFicha">
+                                <div class="form-group">
+                                    <label for="nome_orientador">Nome do Orientador: <span style="color: red">*</span></label>
+                                    <input type="text" class="form-control" id="nome_orientador" name="nome_orientador"
+                                           placeholder="Digite o nome do orientador" value="" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="sobrenome_orientador">Sobrenome do Orientador: <span style="color: red">*</span></label>
+                                    <input type="text" class="form-control" id="sobrenome_orientador" name="sobrenome_orientador"
+                                           placeholder="Digite o Sobrenome do orientador" value="" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="nome_coorientador">Nome do Coorientador: </label>
+                                    <input type="text" class="form-control" id="nome_coorientador"
+                                           placeholder="Digite o Nome do Coorientador" value="" name="nome_coorientador">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="sobrenome_coorientador">Sobrenome do Coorientador: </label>
+                                    <input type="text" class="form-control" id="sobrenome_coorientador"
+                                           placeholder="Digite o Sobrenome do Coorientador" value="" name="sobrenome_coorientador">
+                                </div>
+
+                                <div class="row justify-content-between">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="subtitulo">Titulação do Orientador: <span
+                                                    style="color: red">*</span></label>
+                                            <select class="form-control" id="titulacao_orientador"
+                                                    name="titulacao_orientador">
+                                                <option value="graduado">Graduado</option>
+                                                <option value="especialista">Especialista</option>
+                                                <option value="mestre">Mestre</option>
+                                                <option value="doutor">Doutor</option>
+                                            </select>
+                                        </div>
                                     </div>
-
-                                    <div class="form-group">
-                                        <label for="sobrenome_coorientador">Sobrenome do Coorientador: </label>
-                                        <input type="text" class="form-control" id="sobrenome_coorientador"
-                                               placeholder="Digite o Sobrenome do Coorientador" value="" name="sobrenome_coorientador">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="subtitulo">Titulação do Coorientador:</label>
+                                            <select class="form-control" id="titulacao_coorientador"
+                                                    name="titulacao_coorientador">
+                                                <option>Sem Coorientador</option>
+                                                <option value="graduado">Graduado</option>
+                                                <option value="especialista">Especialista</option>
+                                                <option value="mestre">Mestre</option>
+                                                <option value="doutor">Doutor</option>
+                                            </select>
+                                        </div>
                                     </div>
+                                </div>
 
-                                    <div class="form-group">
-                                        <label for="subtitulo">Titulação do Coorientador:</label>
-                                        <select class="form-control" id="titulacao_coorientador"
-                                                name="titulacao_coorientador">
-                                            <option>Sem Coorientador</option>
-                                            <option value="graduado">Graduado</option>
-                                            <option value="especialista">Especialista</option>
-                                            <option value="mestre">Mestre</option>
-                                            <option value="doutor">Doutor</option>
-                                        </select>
+                                <div class="row justify-content-between">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="campus">Curso: <span style="color: red">*</span></label>
+                                            <input type="text" class="form-control" id="curso" name="curso"
+                                                   placeholder="Digite o Nome do Curso" value="" required>
+                                        </div>
                                     </div>
-
-                                    <div class="form-group">
-                                        <label for="campus">Curso: <span style="color: red">*</span></label>
-                                        <input type="text" class="form-control" id="curso" name="curso"
-                                               placeholder="Digite o Nome do Curso" value="" required>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="campus">Campus: <span style="color: red">*</span></label>
-                                        <input type="text" class="form-control" id="campus" name="campus"
-                                               placeholder="Digite o Nome do Campus" value="" required>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="campus">Campus: <span style="color: red">*</span></label>
+                                            <input type="text" class="form-control" id="campus" name="campus"
+                                                   placeholder="Digite o Nome do Campus" value="" required>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <hr>
+                        </div>
+                    </div>
+
                         @elseif($tipo_documento == 2)
                             <div class="row">
                                 <div class="col-md-12">
@@ -435,55 +440,62 @@
                             </div>
                             <hr>
                         @endif
-                        <div class="row">
-                            <div class="col-md-12">
-                                <h3>Palavras-chave</h3>
+
+                <! -- PALAVRAS CHAVE -- !>
+                <div class="col-md-12 corpoFicha shadow my-4">
+                    <div class="row">
+                        <div class="col-md-12 cabecalho py-2">
+                            <span class="tituloCabecalho">Palavras-chave</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 py-2 textoFicha">
+                            <div class="form-group">
+                                <label for="primeira">Primeira Palavra:<span style="color: red">*</span></label>
+                                <input type="text" class="form-control" id="primeira" name="primeira_chave"
+                                       placeholder="1. Palavras-chave" value="">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="segunda">Segunda Palavra:<span style="color: red">*</span></label>
+                                <input type="text" class="form-control" id="segunda" name="segunda_chave"
+                                       placeholder="2. Palavras-chave" value="">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="terceira">Terceira Palavra:<span style="color: red">*</span></label>
+                                <input type="text" class="form-control" id="terceira" name="terceira_chave"
+                                       placeholder="3. Palavras-chave" value="">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="quarta">Quarta Palavra:</label>
+                                <input type="text" class="form-control" id="quarta" name="quarta_chave"
+                                       placeholder="4. Palavras-chave" value="">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="quinta">Quinta Palavra:</label>
+                                <input type="text" class="form-control" id="quinta" name="quinta_chave"
+                                       placeholder="5. Palavras-chave" value="">
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-12" style="margin-left: 15px;">
-                                <div class="form-group">
-                                    <label for="primeira">Primeira Palavra:<span style="color: red">*</span></label>
-                                    <input type="text" class="form-control" id="primeira" name="primeira_chave"
-                                           placeholder="1. Palavras-chave" value="">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="segunda">Segunda Palavra:<span style="color: red">*</span></label>
-                                    <input type="text" class="form-control" id="segunda" name="segunda_chave"
-                                           placeholder="2. Palavras-chave" value="">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="terceira">Terceira Palavra:<span style="color: red">*</span></label>
-                                    <input type="text" class="form-control" id="terceira" name="terceira_chave"
-                                           placeholder="3. Palavras-chave" value="">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="quarta">Quarta Palavra:</label>
-                                    <input type="text" class="form-control" id="quarta" name="quarta_chave"
-                                           placeholder="4. Palavras-chave" value="">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="quinta">Quinta Palavra:</label>
-                                    <input type="text" class="form-control" id="quinta" name="quinta_chave"
-                                           placeholder="5. Palavras-chave" value="">
-                                </div>
-                            </div>
-                            <div class="col text-center" style="padding-top: 0px">
-                                <a type="button" class="btn btn-secondary" style="margin-right: 10px"
-                                   href="{{ route('prepara-requisicao-bibli') }}">Voltar</a>
-                                <button type="submit" class="btn btn-primary-lmts" style="margin-left: 10px" href="#">
-                                    Enviar
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+                    </div>
                 </div>
+                <div class="row justify-content-between mt-5">
+                    <div class="col-md-4">
+                        <a type="button" class="btn btn-block" style="background-color: var(--padrao); border-radius: 0.5rem; color: white;"
+                           href="{{ route('prepara-requisicao-bibli') }}">Voltar</a>
+                    </div>
+                    <div class="col-md-4 text-right">
+                        <button type="submit" class="btn btn-block" style="background-color: var(--confirmar); border-radius: 0.5rem; color: white;" href="#">
+                            Enviar
+                        </button>
+                    </div>
+                </div>
+                    </form>
             </div>
-        </div>
+
     </div>
 </div>
 
