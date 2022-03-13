@@ -242,13 +242,13 @@
                                     <div class="form-group">
                                         <label for="campus">Curso: <span style="color: red">*</span></label>
                                         <input type="text" class="form-control" id="curso" name="curso"
-                                               placeholder="Digite o Nome do Curso" value="{{$documento->curso}}" required>
+                                               placeholder="Digite o Nome do Curso" value="{{$documento->curso}}" required disabled>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="campus">Campus: <span style="color: red">*</span></label>
                                         <input type="text" class="form-control" id="campus" name="campus"
-                                               placeholder="Digite o Nome do Campus" value="{{$documento->campus}}" required>
+                                               placeholder="Digite o Nome do Campus" value="{{$documento->campus}}" required disabled>
                                     </div>
                                 </div>
                             </div>
@@ -370,13 +370,13 @@
                                     <div class="form-group">
                                         <label for="campus">Curso: <span style="color: red">*</span></label>
                                         <input type="text" class="form-control" id="curso" name="curso"
-                                               placeholder="Digite o Nome do Curso" value="{{$documento->curso}}">
+                                               placeholder="Digite o Nome do Curso" value="{{$documento->curso}}" disabled>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="campus">Campus: <span style="color: red">*</span></label>
                                         <input type="text" class="form-control" id="campus" name="campus"
-                                               placeholder="Digite o Nome do Campus" value="{{$documento->campus}}">
+                                               placeholder="Digite o Nome do Campus" value="{{$documento->campus}}" disabled>
                                     </div>
 
                                     <div class="form-group">
@@ -405,7 +405,7 @@
                                     <div class="form-group">
                                         <label for="campus">Campus: <span style="color: red">*</span></label>
                                         <input type="text" class="form-control" id="campus" name="campus"
-                                               placeholder="Digite o Nome do Campus" value="{{$documento->campus}}">
+                                               placeholder="Digite o Nome do Campus" value="{{$documento->campus}}" disabled>
                                     </div>
 
                                 </div>
@@ -473,7 +473,7 @@
                                     <div class="form-group">
                                         <label for="campus">Campus: <span style="color: red">*</span></label>
                                         <input type="text" class="form-control" id="campus" name="campus"
-                                               placeholder="Digite o Nome do Campus" value="{{$documento->campus}}" required>
+                                               placeholder="Digite o Nome do Campus" value="{{$documento->campus}}" required disabled>
                                     </div>
                                 </div>
                             </div>
