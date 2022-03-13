@@ -68,14 +68,14 @@
                                        placeholder="Digite o sobrenome do Autor" value="" required>
                             </div>
                             <div class="form-group">
-                                <label for="titulo">Titulo: <span style="color: red">*</span></label>
+                                <label for="titulo">Título: <span style="color: red">*</span></label>
                                 <input type="text" class="form-control" id="titulo" name="titulo"
-                                       placeholder="Digite o Titulo" value="" required>
+                                       placeholder="Digite o Título" value="" required>
                             </div>
                             <div class="form-group">
-                                <label for="subtitulo">Subtitulo: <span style="color: red">@if($tipo_documento != 1 && $tipo_documento != 5)* @endif</span> </label>
+                                <label for="subtitulo">Subtítulo: <span style="color: red">@if($tipo_documento != 1 && $tipo_documento != 5)* @endif</span> </label>
                                 <input type="text" class="form-control" id="subtitulo" name="subtitulo"
-                                       placeholder="Digite o Subtitulo" value="" @if($tipo_documento != 1 && $tipo_documento != 5) required @endif>
+                                       placeholder="Digite o Subtítulo" value="" @if($tipo_documento != 1 && $tipo_documento != 5) required @endif>
                             </div>
                             <div class="form-group">
                                 <label for="local">Local: <span style="color: red">*</span></label>

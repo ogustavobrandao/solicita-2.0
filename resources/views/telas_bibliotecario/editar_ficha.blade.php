@@ -144,14 +144,14 @@
                                            placeholder="Digite o sobrenome do Autor" value="{{$fichaCatalografica->autor_sobrenome}}" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="titulo">Titulo: <span style="color: red">*</span></label>
+                                    <label for="titulo">Título: <span style="color: red">*</span></label>
                                     <input type="text" class="form-control" id="titulo" name="titulo"
-                                           placeholder="Digite o Titulo" value="{{$fichaCatalografica->titulo}}" required>
+                                           placeholder="Digite o Título" value="{{$fichaCatalografica->titulo}}" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="subtitulo">Subtitulo:</label>
                                     <input type="text" class="form-control" id="subtitulo" name="subtitulo"
-                                           placeholder="Digite o Subtitulo" value="{{$fichaCatalografica->subtitulo}}">
+                                           placeholder="Digite o Subtítulo" value="{{$fichaCatalografica->subtitulo}}">
                                 </div>
                                 <div class="form-group">
                                     <label for="local">Local: <span style="color: red">*</span></label>
