@@ -2,30 +2,7 @@
 
 
 @section('conteudo')
-    <style>
-        .backgroundGray {
-            background-color: #f5f5f5;
-            border: 0px;
-        }
-
-        label {
-            font-weight: bold;
-        }
-
-        .tituloCadastro {
-            border-bottom: black 2px solid;
-            font-size: 40px;
-            font-weight: bolder;
-        }
-
-        .btn-enviar {
-            background-color: #4BC76C;
-        }
-
-        .btn-voltar {
-            background-color: #0D2579;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ asset ('css/cadastro.css') }}">
 
     <div class="container-fluid py-5">
         <div class="row justify-content-center">
