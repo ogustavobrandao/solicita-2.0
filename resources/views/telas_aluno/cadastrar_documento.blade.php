@@ -19,7 +19,7 @@
                         @endif
                 </div>
             </div>
-            <form method="POST" enctype="multipart/form-data" id="formRequisicao" action="{{ route('criarDocumentoBibli') }}">
+            <div method="POST" enctype="multipart/form-data" id="formRequisicao" action="{{ route('criarDocumentoBibli') }}">
                 @csrf
                 <input type="hidden" name="tipo_documento" value="{{$tipo_documento}}">
 
@@ -68,14 +68,14 @@
                                        placeholder="Digite o sobrenome do Autor" value="" required>
                             </div>
                             <div class="form-group">
-                                <label for="titulo">Titulo: <span style="color: red">*</span></label>
+                                <label for="titulo">Título: <span style="color: red">*</span></label>
                                 <input type="text" class="form-control" id="titulo" name="titulo"
-                                       placeholder="Digite o Titulo" value="" required>
+                                       placeholder="Digite o Título" value="" required>
                             </div>
                             <div class="form-group">
-                                <label for="subtitulo">Subtitulo: <span style="color: red">@if($tipo_documento == 2 || $tipo_documento == 4)* @endif</span> </label>
+                                <label for="subtitulo">Subtítulo: <span style="color: red">@if($tipo_documento != 1 && $tipo_documento != 5)* @endif</span> </label>
                                 <input type="text" class="form-control" id="subtitulo" name="subtitulo"
-                                       placeholder="Digite o Subtitulo" value="" @if($tipo_documento == 2 || $tipo_documento == 4) required @endif>
+                                       placeholder="Digite o Subtítulo" value="" @if($tipo_documento != 1 && $tipo_documento != 5) required @endif>
                             </div>
                             <div class="form-group">
                                 <label for="local">Local: <span style="color: red">*</span></label>
@@ -186,35 +186,19 @@
                                         </div>
                                     </div>
                                 </div>
-
-                                <div class="row justify-content-between">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="campus">Curso: <span style="color: red">*</span></label>
-                                            <input type="text" class="form-control" id="curso" name="curso"
-                                                   placeholder="Digite o Nome do Curso" value="" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="campus">Campus: <span style="color: red">*</span></label>
-                                            <input type="text" class="form-control" id="campus" name="campus"
-                                                   placeholder="Digite o Nome do Campus" value="" required>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
 
-                        @elseif($tipo_documento == 2)
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <h3>Tese</h3>
+                        @elseif($tipo_documento == 2) <! -- TESE --!>
+                            <div class="col-md-12 corpoFicha shadow my-4">
+                                <div class="row">
+                                    <div class="col-md-12 cabecalho py-2">
+                                        <span class="tituloCabecalho">Tese</span>
+                                    </div>
                                 </div>
-                            </div>
                             <div class="row">
-                                <div class="col-md-12" style="margin-left: 15px;">
+                                <div class="col-md-12 py-2 textoFicha">
                                     <div class="form-group">
                                         <label for="nome_orientador">Nome do Orientador: <span style="color: red">*</span></label>
                                         <input type="text" class="form-control" id="nome_orientador" name="nome_orientador"
@@ -225,18 +209,6 @@
                                         <label for="sobrenome_orientador">Sobrenome do Orientador: <span style="color: red">*</span></label>
                                         <input type="text" class="form-control" id="sobrenome_orientador" name="sobrenome_orientador"
                                                placeholder="Digite o Sobrenome do orientador" value="" required>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="titulo_orientador">Titulação do Orientador: <span
-                                                style="color: red">*</span></label>
-                                        <select class="form-control" id="titulacao_orientador"
-                                                name="titulacao_orientador">
-                                            <option value="graduado">Graduado</option>
-                                            <option value="especialista">Especialista</option>
-                                            <option value="mestre">Mestre</option>
-                                            <option value="doutor">Doutor</option>
-                                        </select>
                                     </div>
 
                                     <div class="form-group">
@@ -251,15 +223,33 @@
                                                placeholder="Digite o Sobrenome do Coorientador" value="" name="sobrenome_coorientador">
                                     </div>
 
-                                    <div class="form-group">
-                                        <label for="titulo-coorientador">Titulação do Coorientador:</label>
-                                        <select class="form-control" id="titulacao_coorientador"
-                                                name="titulacao_coorientador">
-                                            <option value="graduado">Graduado</option>
-                                            <option value="especialista">Especialista</option>
-                                            <option value="mestre">Mestre</option>
-                                            <option value="doutor">Doutor</option>
-                                        </select>
+                                    <div class="row justify-content-between">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="subtitulo">Titulação do Orientador: <span
+                                                        style="color: red">*</span></label>
+                                                <select class="form-control" id="titulacao_orientador"
+                                                        name="titulacao_orientador">
+                                                    <option value="graduado">Graduado</option>
+                                                    <option value="especialista">Especialista</option>
+                                                    <option value="mestre">Mestre</option>
+                                                    <option value="doutor">Doutor</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="subtitulo">Titulação do Coorientador:</label>
+                                                <select class="form-control" id="titulacao_coorientador"
+                                                        name="titulacao_coorientador">
+                                                    <option>Sem Coorientador</option>
+                                                    <option value="graduado">Graduado</option>
+                                                    <option value="especialista">Especialista</option>
+                                                    <option value="mestre">Mestre</option>
+                                                    <option value="doutor">Doutor</option>
+                                                </select>
+                                            </div>
+                                        </div>
                                     </div>
 
                                     <div class="form-group">
@@ -269,176 +259,168 @@
                                     </div>
                                 </div>
                             </div>
-                            <hr>
+                            </div>
                         @elseif($tipo_documento == 3)
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <h3>Trabalho de Conclusão de Curso</h3>
+                            <div class="col-md-12 corpoFicha shadow my-4">
+                                <div class="row">
+                                    <div class="col-md-12 cabecalho py-2">
+                                        <span class="tituloCabecalho">Trabalho de Conclusão de Curso</span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12" style="margin-left: 15px;">
-                                    <div class="form-group">
-                                        <label for="nome_orientador">Nome do Orientador: <span style="color: red">*</span></label>
-                                        <input type="text" class="form-control" id="nome_orientador" name="nome_orientador"
-                                               placeholder="Digite o Nome do Orientador" value="">
-                                    </div>
+                                <div class="row">
+                                    <div class="col-md-12 textoFicha py-2">
+                                        <div class="form-group">
+                                            <label for="nome_orientador">Nome do Orientador: <span style="color: red">*</span></label>
+                                            <input type="text" class="form-control" id="nome_orientador" name="nome_orientador"
+                                                   placeholder="Digite o Nome do Orientador" value="">
+                                        </div>
 
-                                    <div class="form-group">
-                                        <label for="sobrenome_orientador">Sobrenome do Orientador: <span style="color: red">*</span></label>
-                                        <input type="text" class="form-control" id="sobrenome_orientador" name="sobrenome_orientador"
-                                               placeholder="Digite o Sobrenome do orientador" value="" required>
-                                    </div>
+                                        <div class="form-group">
+                                            <label for="sobrenome_orientador">Sobrenome do Orientador: <span style="color: red">*</span></label>
+                                            <input type="text" class="form-control" id="sobrenome_orientador" name="sobrenome_orientador"
+                                                   placeholder="Digite o Sobrenome do orientador" value="" required>
+                                        </div>
 
-                                    <div class="form-group">
-                                        <label for="subtitulo">Titulação do Orientador: <span
-                                                style="color: red">*</span></label>
-                                        <select class="form-control" id="titulacao_orientador"
-                                                name="titulacao_orientador">
-                                            <option value="graduado">Graduado</option>
-                                            <option value="especialista">Especialista</option>
-                                            <option value="mestre">Mestre</option>
-                                            <option value="doutor">Doutor</option>
-                                        </select>
-                                    </div>
+                                        <div class="form-group">
+                                            <label for="nome_orientador">Nome do Coorientador: </label>
+                                            <input type="text" class="form-control" id="nome_coorientador" name="nome_coorientador"
+                                                   placeholder="Digite o Nome do Coorientador" value="">
+                                        </div>
 
-                                    <div class="form-group">
-                                        <label for="nome_orientador">Nome do Coorientador: </label>
-                                        <input type="text" class="form-control" id="nome_coorientador" name="nome_coorientador"
-                                               placeholder="Digite o Nome do Coorientador" value="">
-                                    </div>
+                                        <div class="form-group">
+                                            <label for="sobrenome_coorientador">Sobrenome do Coorientador: </label>
+                                            <input type="text" class="form-control" id="sobrenome_coorientador"
+                                                   placeholder="Digite o Sobrenome do Coorientador" value="" name="sobrenome_coorientador">
+                                        </div>
 
-                                    <div class="form-group">
-                                        <label for="sobrenome_coorientador">Sobrenome do Coorientador: </label>
-                                        <input type="text" class="form-control" id="sobrenome_coorientador"
-                                               placeholder="Digite o Sobrenome do Coorientador" value="" name="sobrenome_coorientador">
-                                    </div>
+                                        <div class="row justify-content-between">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="subtitulo">Titulação do Orientador: <span
+                                                            style="color: red">*</span></label>
+                                                    <select class="form-control" id="titulacao_orientador"
+                                                            name="titulacao_orientador">
+                                                        <option value="graduado">Graduado</option>
+                                                        <option value="especialista">Especialista</option>
+                                                        <option value="mestre">Mestre</option>
+                                                        <option value="doutor">Doutor</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="subtitulo">Titulação do Coorientador:</label>
+                                                    <select class="form-control" id="titulacao_coorientador"
+                                                            name="titulacao_coorientador">
+                                                        <option>Sem Coorientador</option>
+                                                        <option value="graduado">Graduado</option>
+                                                        <option value="especialista">Especialista</option>
+                                                        <option value="mestre">Mestre</option>
+                                                        <option value="doutor">Doutor</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
 
-                                    <div class="form-group">
-                                        <label for="subtitulo">Titulação do Coorientador:</label>
-                                        <select class="form-control" id="titulacao_coorientador"
-                                                name="titulacao_coorientador">
-                                            <option value="graduado">Graduado</option>
-                                            <option value="especialista">Especialista</option>
-                                            <option value="mestre">Mestre</option>
-                                            <option value="doutor">Doutor</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="campus">Curso: <span style="color: red">*</span></label>
-                                        <input type="text" class="form-control" id="curso" name="curso"
-                                               placeholder="Digite o Nome do Curso" value="">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="campus">Campus: <span style="color: red">*</span></label>
-                                        <input type="text" class="form-control" id="campus" name="campus"
-                                               placeholder="Digite o Nome do Campus" value="">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="referencias">Referências: <span style="color: red">*</span></label>
-                                        <input type="text" class="form-control" id="referencia" name="referencia"
-                                               placeholder="Digite as referências" value="">
+                                        <div class="form-group">
+                                            <label for="referencias">Referências: <span style="color: red">*</span></label>
+                                            <input type="text" class="form-control" id="referencia" name="referencia"
+                                                   placeholder="Digite as referências" value="">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <hr>
+
                         @elseif($tipo_documento == 4)
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <h3>Produto Educacional</h3>
+                            <div class="col-md-12 corpoFicha shadow my-4">
+                                <div class="row">
+                                    <div class="col-md-12 cabecalho py-2">
+                                        <span class="tituloCabecalho">Produto Educacional</span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12" style="margin-left: 15px;">
+                                <div class="row">
+                                    <div class="col-md-12 textoFicha py-2">
 
-                                    <div class="form-group">
-                                        <label for="programa">Programa: <span style="color: red">*</span></label>
-                                        <input type="text" class="form-control" id="programa" name="programa"
-                                               placeholder="Digite o Nome do Programa" value="">
+                                        <div class="form-group">
+                                            <label for="programa">Programa: <span style="color: red">*</span></label>
+                                            <input type="text" class="form-control" id="programa" name="programa"
+                                                   placeholder="Digite o Nome do Programa" value="">
+                                        </div>
                                     </div>
-
-                                    <div class="form-group">
-                                        <label for="campus">Campus: <span style="color: red">*</span></label>
-                                        <input type="text" class="form-control" id="campus" name="campus"
-                                               placeholder="Digite o Nome do Campus" value="">
                                     </div>
-
                                 </div>
-                            </div>
-                            <hr>
-                        @elseif($tipo_documento == 5)
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <h3>Dissertação</h3>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12" style="margin-left: 15px;">
-                                    <div class="form-group">
-                                        <label for="nome_orientador">Nome do Orientador: <span style="color: red">*</span></label>
-                                        <input type="text" class="form-control" id="nome_orientador" name="nome_orientador"
-                                               placeholder="Digite o Nome do Orientador" value="" required>
-                                    </div>
 
-                                    <div class="form-group">
-                                        <label for="sobrenome_orientador">Sobrenome do Orientador: <span style="color: red">*</span></label>
-                                        <input type="text" class="form-control" id="sobrenome_orientador" name="sobrenome_orientador"
-                                               placeholder="Digite o Sobrenome do Orientador" value="" required>
+                            @elseif($tipo_documento == 5)
+                                <div class="col-md-12 corpoFicha shadow my-4">
+                                    <div class="row">
+                                        <div class="col-md-12 cabecalho py-2">
+                                            <span class="tituloCabecalho">Dissertação</span>
+                                        </div>
                                     </div>
+                                    <div class="row">
+                                        <div class="col-md-12 py-2 textoFicha">
+                                            <div class="form-group">
+                                                <label for="nome_orientador">Nome do Orientador: <span style="color: red">*</span></label>
+                                                <input type="text" class="form-control" id="nome_orientador" name="nome_orientador"
+                                                       placeholder="Digite o Nome do Orientador" value="" required>
+                                            </div>
 
-                                    <div class="form-group">
-                                        <label for="subtitulo">Titulação do Orientador: <span
-                                                style="color: red">*</span></label>
-                                        <select class="form-control" id="titulacao_orientador"
-                                                name="titulacao_orientador">
-                                            <option value="graduado">Graduado</option>
-                                            <option value="especialista">Especialista</option>
-                                            <option value="mestre">Mestre</option>
-                                            <option value="doutor">Doutor</option>
-                                        </select>
-                                    </div>
+                                            <div class="form-group">
+                                                <label for="sobrenome_orientador">Sobrenome do Orientador: <span style="color: red">*</span></label>
+                                                <input type="text" class="form-control" id="sobrenome_orientador" name="sobrenome_orientador"
+                                                       placeholder="Digite o Sobrenome do Orientador" value="" required>
+                                            </div>
 
-                                    <div class="form-group">
-                                        <label for="nome_coorientador">Nome do Coorientador: </label>
-                                        <input type="text" class="form-control" id="nome_coorientador"
-                                               placeholder="Digite o Nome do Coorientador" value="" name="nome_coorientador">
-                                    </div>
+                                            <div class="form-group">
+                                                <label for="nome_coorientador">Nome do Coorientador: </label>
+                                                <input type="text" class="form-control" id="nome_coorientador"
+                                                       placeholder="Digite o Nome do Coorientador" value="" name="nome_coorientador">
+                                            </div>
 
-                                    <div class="form-group">
-                                        <label for="sobrenome_coorientador">Sobrenome do Coorientador: </label>
-                                        <input type="text" class="form-control" id="sobrenome_coorientador"
-                                               placeholder="Digite o Sobrenome do Coorientador" value="" name="sobrenome_coorientador">
-                                    </div>
+                                            <div class="form-group">
+                                                <label for="sobrenome_coorientador">Sobrenome do Coorientador: </label>
+                                                <input type="text" class="form-control" id="sobrenome_coorientador"
+                                                       placeholder="Digite o Sobrenome do Coorientador" value="" name="sobrenome_coorientador">
+                                            </div>
 
-                                    <div class="form-group">
-                                        <label for="subtitulo">Titulação do Coorientador:</label>
-                                        <select class="form-control" id="titulacao_coorientador"
-                                                name="titulacao_coorientador">
-                                            <option>Sem Coorientador</option>
-                                            <option value="graduado">Graduado</option>
-                                            <option value="especialista">Especialista</option>
-                                            <option value="mestre">Mestre</option>
-                                            <option value="doutor">Doutor</option>
-                                        </select>
-                                    </div>
+                                            <div class="row justify-content-between">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="subtitulo">Titulação do Orientador: <span
+                                                                style="color: red">*</span></label>
+                                                        <select class="form-control" id="titulacao_orientador"
+                                                                name="titulacao_orientador">
+                                                            <option value="graduado">Graduado</option>
+                                                            <option value="especialista">Especialista</option>
+                                                            <option value="mestre">Mestre</option>
+                                                            <option value="doutor">Doutor</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="subtitulo">Titulação do Coorientador:</label>
+                                                        <select class="form-control" id="titulacao_coorientador"
+                                                                name="titulacao_coorientador">
+                                                            <option>Sem Coorientador</option>
+                                                            <option value="graduado">Graduado</option>
+                                                            <option value="especialista">Especialista</option>
+                                                            <option value="mestre">Mestre</option>
+                                                            <option value="doutor">Doutor</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="programa">Programa: <span style="color: red">*</span></label>
+                                                <input type="text" class="form-control" id="programa" name="programa"
+                                                       placeholder="Digite o Nome do Programa" value="">
+                                            </div>
 
-                                    <div class="form-group">
-                                        <label for="programa">Programa: <span style="color: red">*</span></label>
-                                        <input type="text" class="form-control" id="programa" name="programa"
-                                               placeholder="Digite o Nome do Programa" value="">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="campus">Campus: <span style="color: red">*</span></label>
-                                        <input type="text" class="form-control" id="campus" name="campus"
-                                               placeholder="Digite o Nome do Campus" value="" required>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <hr>
                         @endif
 
                 <! -- PALAVRAS CHAVE -- !>
@@ -495,7 +477,7 @@
                 </div>
                     </form>
             </div>
-
+        </div>
     </div>
 </div>
 
