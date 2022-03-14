@@ -2,8 +2,8 @@
 
 body, html{
     font-family: 'Segoe UI', 'Sen';
+    background-color: var(--background);
 }
-
 /*classes da home*/
 
 .tituloHome{
@@ -62,6 +62,17 @@ body, html{
     border-top-right-radius: 0.5rem;
     border-top-left-radius: 0.5rem;
 
+}
+
+.cabecalho-requisicao{
+    background-color: var(--caixa);
+    border-top-right-radius: 0.5rem;
+    border-top-left-radius: 0.5rem;
+    border-bottom: 2px solid var(--textcolor);
+}
+
+.corpoRequisicao{
+    border-radius: 20px;
 }
 
 .corpoFicha{
