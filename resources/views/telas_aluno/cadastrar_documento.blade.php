@@ -19,7 +19,7 @@
                         @endif
                 </div>
             </div>
-            <div method="POST" enctype="multipart/form-data" id="formRequisicao" action="{{ route('criarDocumentoBibli') }}">
+            <form method="POST" enctype="multipart/form-data" id="formRequisicao" action="{{ route('criarDocumentoBibli') }}">
                 @csrf
                 <input type="hidden" name="tipo_documento" value="{{$tipo_documento}}">
 
@@ -420,7 +420,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </form>
                         @endif
 
                 <! -- PALAVRAS CHAVE -- !>
