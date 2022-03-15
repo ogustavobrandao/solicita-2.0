@@ -295,7 +295,9 @@
 </div> --}}
 @include('layouts.navbar2')
 <!-- barra de menu -->
-@yield('conteudo')
+<div class="min-h-screen">
+    @yield('conteudo')
+</div>
 <!-- rodape -->
 @include('layouts.footer')
 <!--x rodape x-->

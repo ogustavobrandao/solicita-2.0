@@ -3,7 +3,9 @@
 body, html{
     font-family: 'Segoe UI', 'Sen';
     background-color: var(--background);
+    overflow-x: hidden;
 }
+
 /*classes da home*/
 
 .tituloHome{
@@ -35,6 +37,16 @@ body, html{
 .caixaSelecao{
     border-radius: 1rem;
     width: 250px;
+}
+
+:root{
+    --textorodape: black;
+}
+
+.textoRodape{
+    font-weight: bolder;
+    font-size: 20px;
+    font-weight: 500;
 }
 
 .textoCaixa{
@@ -73,6 +85,10 @@ body, html{
 
 .corpoRequisicao{
     border-radius: 20px;
+}
+
+.min-h-screen {
+    min-height: 80vh;
 }
 
 .corpoFicha{
