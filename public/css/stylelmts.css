@@ -64,17 +64,6 @@ body, html{
 
 }
 
-.cabecalho-requisicao{
-    background-color: var(--caixa);
-    border-top-right-radius: 0.5rem;
-    border-top-left-radius: 0.5rem;
-    border-bottom: 2px solid var(--textcolor);
-}
-
-.corpoRequisicao{
-    border-radius: 20px;
-}
-
 .corpoFicha{
     background-color: white;
     border-bottom-right-radius: 0.5rem;
@@ -91,4 +80,17 @@ body, html{
     color: var(--textcolor);
     font-size: 16px;
     font-weight: 600;
+}
+
+/* telas de requisições */
+
+.corpoRequisicao{
+    background-color: white;
+    border-radius: 1rem;
+}
+
+.tituoRequisicao{
+    color: var(--textcolor);
+    font-weight: 600;
+    font-size: 27px;
 }

@@ -6,20 +6,24 @@
 @section('navbar2.blade.php')
     Home
 @endsection
-<div class="container" style="min-height:70vh">
+<div class="container">
+
    <div>@include('componentes.mensagens')</div>
 
-   <div class="row justify-content-center d-flex align-items-center">
-      <div class="col-sm-4 d-flex justify-content-center">
-         <a href="{{ route('listar-fichas') }}" style="text-decoration:none; color: inherit;">
-            <div class="card cartao text-center " style="border-radius: 30px">
-             <div class="card-body d-flex justify-content-center">
-                  <h2 style="padding-top:15px">Listar Documentos Solicitados</h2>
-               </div>
-            </div>
-         </a>
-      </div>
-   </div>
+    <div class="row justify-content-center mt-5">
+        <div class="text-center p-5 shadow caixaSelecao" style="background-color: var(--biblioteca)">
+            <a href="{{ route('listar-fichas') }}">
+                <div class="col-md-12 ">
+                    <div class="text-center">
+                        <i style="color: white" class="pb-3 fa-solid fa-list-check fa-8x"></i>
+                    </div>
+                    <div class="text-center align-middle">
+                        <div class="textoCaixa">Documentos Solicitados</div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
 
 </div>
 @endsection
