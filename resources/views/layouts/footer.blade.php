@@ -1,6 +1,6 @@
 <footer class="container-fluid pt-1" style="background-color: white">
     <div class="container-fluid px-lg-5">
-        <div class="row justify-content-between align-items-center my-2">
+        <div class="row justify-content-between  my-2">
             <div class="col-md-4 text-center py-1">
                 <a class="navbar-brand mx-3" href="">
                     <img width="200px" src="{{asset('images/logo.png')}}">

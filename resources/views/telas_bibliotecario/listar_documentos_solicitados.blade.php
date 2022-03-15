@@ -1,6 +1,28 @@
 @extends('layouts.app')
 
 @section('conteudo')
+    <style>
+        html {
+            overflow: hidden;
+            height: 100%;
+        }
+        body {
+            overflow: auto;
+            height: 100%;
+        }
+
+        body.modal-open {
+            overflow: auto;
+        }
+        body.modal-open[style] {
+            padding-right: 0px !important;
+        }
+
+        .modal::-webkit-scrollbar {
+            width: 0 !important; /*removes the scrollbar but still scrollable*/
+            /* reference: http://stackoverflow.com/a/26500272/2259400 */
+        }
+    </style>
     <div>@include('componentes.mensagens')</div>
     <div class="container-fluid" style="min-height:38vh;">
 
@@ -78,18 +100,34 @@
                                         <a href="{{ route('editar-ficha', $requisicao->id) }}"><i class="fa fa-file-text fa-sm" aria-hidden="true" size="10px"></i> Abrir</a>
                                         @if($requisicao->status != 'Em andamento')
                                             <div class="btn-group-vertical">
-                                                <a class="btn btn-light dropdown-toggle" data-toggle="dropdown" href="#">
+                                                <a class="btn btn-light dropdown-toggle" data-toggle="modal" data-target="#exampleModal">
                                                     <span class="fa fa-info-circle" title="Exibir explicação da rejeição"></span>
                                                 </a>
-                                                <ul class="dropdown-menu">
-                                                    @if($requisicao->status == 'Concluido')
+                                                <!-- Modal -->
+                                                <div class="modal fade" id="exampleModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLabel">Status da Analise</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                @if($requisicao->status == 'Concluido')
 
-                                                        <p style="margin-left: 3px">Requisição analisada e aprovada por: <Strong>{{\App\Models\User::where('id',\App\Models\Bibliotecario::where('id',$requisicao->bibliotecario_id)->first()->user_id)->first()->name}}</Strong></p>
-                                                    @elseif($requisicao->status == 'Rejeitado' && $requisicao->bibliotecario_id != null)
-                                                        <p style="margin: 1rem">Requisição analisada e rejeitada por: <Strong>{{\App\Models\User::where('id',\App\Models\Bibliotecario::where('id',$requisicao->bibliotecario_id)->first()->user_id)->first()->name}}</Strong> <br></p>
-                                                        <p style="margin-left: 1rem">Motivo: <strong style="color: #4c110f">{{ $requisicao->anotacoes }}</strong></p>
-                                                    @endif
-                                                </ul>
+                                                                    <p style="margin-left: 3px">Requisição analisada e aprovada por: <Strong>{{\App\Models\User::where('id',\App\Models\Bibliotecario::where('id',$requisicao->bibliotecario_id)->first()->user_id)->first()->name}}</Strong></p>
+                                                                @elseif($requisicao->status == 'Rejeitado' && $requisicao->bibliotecario_id != null)
+                                                                    <p style="margin: 1rem">Requisição analisada e rejeitada por: <Strong>{{\App\Models\User::where('id',\App\Models\Bibliotecario::where('id',$requisicao->bibliotecario_id)->first()->user_id)->first()->name}}</Strong> <br></p>
+                                                                    <p style="margin-left: 1rem">Motivo: <strong style="color: #4c110f">{{ $requisicao->anotacoes }}</strong></p>
+                                                                @endif
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         @endif
                                     </td>
@@ -130,6 +168,4 @@
             }]
         });
     </script>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 @endsection
