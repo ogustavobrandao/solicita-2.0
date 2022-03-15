@@ -76,6 +76,7 @@ body, html{
 
 }
 
+<<<<<<< HEAD
 .cabecalho-requisicao{
     background-color: var(--caixa);
     border-top-right-radius: 0.5rem;
@@ -107,4 +108,17 @@ body, html{
     color: var(--textcolor);
     font-size: 16px;
     font-weight: 600;
+}
+
+/* telas de requisições */
+
+.corpoRequisicao{
+    background-color: white;
+    border-radius: 1rem;
+}
+
+.tituoRequisicao{
+    color: var(--textcolor);
+    font-weight: 600;
+    font-size: 27px;
 }
