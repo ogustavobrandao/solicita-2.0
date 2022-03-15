@@ -7,8 +7,10 @@
     Home
 @endsection
 
-<div class="container mt-5" style="border-bottom: var(--background) 3px solid;">
-    <span class="titulo">Solicitações</span>
+<div class="container mt-5">
+    <div class="row" style="border-bottom: var(--textcolor) 2px solid">
+        <span class="titulo">Solicitações</span>
+    </div>
 </div>
 
 <div class="container text-center">
