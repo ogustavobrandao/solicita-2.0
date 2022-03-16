@@ -483,7 +483,19 @@
 
 <script>
     var myFile = "";
+    var size = 0;
     $('#anexo').on('change', function () {
+
+        if (typeof ($("#anexo")[0].files) != "undefined") {
+            size = parseFloat($("#anexo")[0].files[0].size / 1024).toFixed(2);
+            if(size > 10000){
+                alert('Os elementos pré-textuais devem ter um tamanho maximo de 10MB Corrija!')
+            }
+
+        } else {
+            alert("This browser does not support HTML5.");
+        }
+
         myFile = $('#anexo').val();
         var extension = myFile.split('.').pop();
         if (extension == 'pdf' || extension == 'docx' || extension == 'doc') {
@@ -499,6 +511,10 @@
         var extension = myFile.split('.').pop();
         if (extension == 'pdf' || extension == 'docx' || extension == 'doc') {
             //$('#formRequisicao').submit();
+        }
+        if(size > 10000){
+            alert('Os elementos pré-textuais devem ter um tamanho maximo de 10MB Corrija!')
+            e.preventDefault();
         } else {
             alert('Os elementos pré-textuais devem ser de um dos tipos aceitos: .pdf, .docx ou .doc. Corrija!')
             e.preventDefault();
