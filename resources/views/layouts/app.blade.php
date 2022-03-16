@@ -295,7 +295,7 @@
 </div> --}}
 @include('layouts.navbar2')
 <!-- barra de menu -->
-<div class="min-h-screen">
+<div class="min-h-screen py-4">
     @yield('conteudo')
 </div>
 <!-- rodape -->

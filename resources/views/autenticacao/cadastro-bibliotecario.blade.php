@@ -8,7 +8,7 @@
             <div class="col-md-7 corpoRequisicao shadow pb-3">
                 <div class="row mx-1" style="border-bottom: var(--textcolor) 2px solid">
                     <div class="col-md-12 tituoRequisicao mt-3 p-0">
-                        Cadastro de Servidor
+                        Cadastro de Bibliotecário
                     </div>
                 </div>
 
