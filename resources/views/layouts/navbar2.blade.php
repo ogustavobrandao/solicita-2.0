@@ -42,4 +42,8 @@
         </nav>
     @endif
 
+    <div>
+        @include('componentes.mensagens')
+    </div>
+
 </div>

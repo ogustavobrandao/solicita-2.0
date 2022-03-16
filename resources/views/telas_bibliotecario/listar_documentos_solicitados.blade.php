@@ -100,11 +100,11 @@
                                         <a href="{{ route('editar-ficha', $requisicao->id) }}"><i class="fa fa-file-text fa-sm" aria-hidden="true" size="10px"></i> Abrir</a>
                                         @if($requisicao->status != 'Em andamento')
                                             <div class="btn-group-vertical">
-                                                <a class="btn btn-light dropdown-toggle" data-toggle="modal" data-target="#exampleModal">
+                                                <a class="btn btn-light dropdown-toggle" data-toggle="modal" data-target="#exampleModal{{$requisicao->id}}">
                                                     <span class="fa fa-info-circle" title="Exibir explicação da rejeição"></span>
                                                 </a>
                                                 <!-- Modal -->
-                                                <div class="modal fade" id="exampleModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal fade" id="exampleModal{{$requisicao->id}}" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header">

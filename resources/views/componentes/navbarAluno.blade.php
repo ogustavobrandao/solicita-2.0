@@ -27,8 +27,4 @@
         @endif
     </ul>
 </div>
-
-<div>
-    @include('componentes.mensagens')
-</div>
 @php($url = str_replace(URL::to('/'),'',URL::current()))
