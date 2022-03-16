@@ -43,7 +43,7 @@
                 <div class="row justify-content-center text-center">
                     <a href="https://www.facebook.com/LMTSUFAPE/" target="_blank" class="col-md-1 p-0"> <img height="40"
                                                                                                              src="{{asset('images/facebook_logo.png')}}"></a>
-                    <a href="https://www.instagram.com/lmts_ufape/" target="_blank" class="col-md-1 p-0"> <img
+                    <a href="https://www.instagram.com/lmts_ufape/" target="_blank" class="col-md-1 p-0 mx-2"> <img
                             height="40" src="{{asset('images/instagram_logo.png')}}"></a>
                     <a href="mailto:lmts@ufrpe.br" class="col-md-1 p-0"> <img height="40"
                                                                               src="{{asset('images/google_logo.png')}}"></a>
