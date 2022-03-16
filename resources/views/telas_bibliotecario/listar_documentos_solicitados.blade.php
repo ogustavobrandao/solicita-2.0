@@ -115,7 +115,6 @@
                                                             </div>
                                                             <div class="modal-body">
                                                                 @if($requisicao->status == 'Concluido')
-
                                                                     <p style="margin-left: 3px">Requisição analisada e aprovada por: <Strong>{{\App\Models\User::where('id',\App\Models\Bibliotecario::where('id',$requisicao->bibliotecario_id)->first()->user_id)->first()->name}}</Strong></p>
                                                                 @elseif($requisicao->status == 'Rejeitado' && $requisicao->bibliotecario_id != null)
                                                                     <p style="margin: 1rem">Requisição analisada e rejeitada por: <Strong>{{\App\Models\User::where('id',\App\Models\Bibliotecario::where('id',$requisicao->bibliotecario_id)->first()->user_id)->first()->name}}</Strong> <br></p>

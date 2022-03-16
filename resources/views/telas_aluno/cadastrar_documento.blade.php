@@ -111,7 +111,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="anexoArquivo">Selecione o documento: <span style="color: red">*</span>
+                                <label for="anexoArquivo">Anexar os elementos pré-textuais: <span style="color: red">*</span>
                                 </label><br>
                                 <input type="file" id="anexo" accept="application/pdf, .docx" name="anexo"
                                        style="margin-bottom: 0px" required>
