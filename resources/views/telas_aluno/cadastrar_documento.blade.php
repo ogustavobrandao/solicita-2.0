@@ -512,11 +512,12 @@
         if (extension == 'pdf' || extension == 'docx' || extension == 'doc') {
             //$('#formRequisicao').submit();
         }
+        else {
+            alert('Os elementos pré-textuais devem ser de um dos tipos aceitos: .pdf, .docx ou .doc. Corrija!')
+            e.preventDefault();
+        }
         if(size > 10000){
             alert('Os elementos pré-textuais devem ter um tamanho maximo de 10MB Corrija!')
-            e.preventDefault();
-        } else {
-            alert('Os elementos pré-textuais devem ser de um dos tipos aceitos: .pdf, .docx ou .doc. Corrija!')
             e.preventDefault();
         }
     });
