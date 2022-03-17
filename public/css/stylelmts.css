@@ -126,3 +126,16 @@ body, html{
     font-weight: 600;
     font-size: 27px;
 }
+
+.textoProtocolo{
+    color: var(--textcolor);
+    font-size: 17px;
+    background-color: var(--background);
+    border-radius: 0.5rem
+}
+
+.tituloProtocolo{
+    color: var(--textcolor);
+    font-size: 19px;
+    font-weight: 600
+}

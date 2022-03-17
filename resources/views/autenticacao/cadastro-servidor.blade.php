@@ -3,9 +3,9 @@
 
 @section('conteudo')
 
-    <div class="container mt-5">
-        <div class="row justify-content-center mt-5">
-            <div class="col-md-7 corpoRequisicao shadow" pb-3>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-7 corpoRequisicao shadow">
                 <div class="row mx-1 p-0" style="border-bottom: var(--textcolor) 2px solid">
                     <div class="col-md-12 tituoRequisicao mt-3 p-0">
                         Cadastro de Servidor
