@@ -126,3 +126,10 @@ body, html{
     font-weight: 600;
     font-size: 27px;
 }
+
+.tituloListagem{
+    font-weight: 600;
+    font-size: 30px;
+    border-bottom: 2px solid var(--textcolor);
+    margin-bottom: 0px;
+}

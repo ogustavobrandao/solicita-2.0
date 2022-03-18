@@ -22,8 +22,21 @@
             width: 0 !important; /*removes the scrollbar but still scrollable*/
             /* reference: http://stackoverflow.com/a/26500272/2259400 */
         }
+
+        .here{
+        }
+
+        .search-input{
+            height: 70%;
+            width: 90%;
+            border: none;
+            outline: none;
+        }
+        .center {
+            margin: auto;
+            width: 100% !important;
+        }
     </style>
-    <div>@include('componentes.mensagens')</div>
     <div class="container-fluid" style="min-height:38vh;">
 
         {{-- <div class="row jusify-content-center d-flex justify-content-center">
@@ -46,13 +59,15 @@
 
         <div style="margin-bottom: 15px; margin-top: 15px;" class="row justify-content-sm-center">
             <div class="col-sm-10">
-                <h2 class="tituloTabela">{{Auth::user()->name}} - Lista de Requisições de Fichas Catalográficas</h2>
+                <h2 class="tituloListagem">Listagem de Requisições de Fichas Catalográficas</h2>
             </div>
         </div>
+
         <div class="row justify-content-center">
             <div class="col-sm-10">
-                <table class="table table-responsive-lg table-borderless" id="table">
-                    <thead class="lmts-primary" style="border-color:#1B2E4F;">
+
+                <table class="table table-hover mb-2" id="table">
+                    <thead>
                     <tr>
                         <th scope="col" align="center">#</th>
                         <th scope="col" align="center" class="titleColumn"
@@ -72,7 +87,7 @@
                     @foreach($requisicoesFichas as $requisicao)
                         @foreach($fichas as $ficha)
                             @if($ficha->id == $requisicao->ficha_catalografica_id)
-                                <tr style="background-color: #f9f9f9">
+                                <tr>
                                     <td scope="row">
                                         {{$requisicao->id}}
                                     </td>
@@ -97,7 +112,7 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <a href="{{ route('editar-ficha', $requisicao->id) }}"><i class="fa fa-file-text fa-sm" aria-hidden="true" size="10px"></i> Abrir</a>
+                                        <a href="{{ route('editar-ficha', $requisicao->id) }}"><i class="fa fa-file-text fa-sm" aria-hidden="true" size="10px"></i> Editar</a>
                                         @if($requisicao->status != 'Em andamento')
                                             <div class="btn-group-vertical">
                                                 <a class="btn btn-light dropdown-toggle" data-toggle="modal" data-target="#exampleModal{{$requisicao->id}}">
@@ -146,6 +161,7 @@
     </div>
 
     <script>
+
         $('#table').DataTable({
             searching: true,
 
@@ -154,17 +170,28 @@
                 "info": "Exibindo página _PAGE_ de _PAGES_",
                 "infoEmpty": "Nenhum registro disponível",
                 "zeroRecords": "Nenhum registro disponível",
-                "search": "Pesquisar",
+                "search": "",
                 "paginate": {
                     "previous": "Anterior",
                     "next": "Próximo",
                 }
             },
+            "dom": '<"top"f>rt<"bottom"lp><"clear">',
             "order": [],
             "columnDefs": [{
                 "targets": [5],
                 "orderable": false
             }]
         });
+
+        $('.dataTables_filter').addClass('here');
+        $('.dataTables_filter').addClass('row');
+        $('.here').addClass('center');
+        $('.here').removeClass('dataTables_filter');
+        $('.here').find('input').addClass('search-input');
+        $('.here').find('input').addClass('align-middle');
+        $('.here').find('label').contents().unwrap();
+        $('.here').find('input').wrap('<div class="col-md-12 my-3" style="background-color: #C2C2C2; border-radius: 1rem;"> <div class="col-md-7 my-2"> <div class="col-md-12 p-1 img-search" style="background-color: white; border-radius: 0.5rem;"> </div> </div> </div>');
+        $('.img-search').prepend('<img src="{{asset('images/search.png')}}" width="25px">')
     </script>
 @endsection
