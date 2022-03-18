@@ -66,7 +66,7 @@
         <div class="row justify-content-center">
             <div class="col-sm-10">
 
-                <table class="table table-hover mb-2" id="table">
+                <table class="table table-hover mb-2 shadow" style="background-color: white; border: 0; border-radius: 1rem" id="table">
                     <thead>
                     <tr>
                         <th scope="col" align="center">#</th>
@@ -188,6 +188,7 @@
         $('.dataTables_filter').addClass('row');
         $('.here').addClass('center');
         $('.here').removeClass('dataTables_filter');
+        $('.table-hover').removeClass('dataTable');
         $('.here').find('input').addClass('search-input');
         $('.here').find('input').addClass('align-middle');
         $('.here').find('label').contents().unwrap();
