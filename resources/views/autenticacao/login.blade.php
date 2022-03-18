@@ -5,7 +5,7 @@
 @section('conteudo')
 <div class="container">
 
-    <div class="row justify-content-between mt-3">
+    <div class="row justify-content-between">
         {{-- info texto --}}
 
         <div class="col-md-8 py-3">

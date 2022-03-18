@@ -127,6 +127,12 @@ body, html{
     font-size: 27px;
 }
 
+.textoProtocolo{
+    color: var(--textcolor);
+    font-size: 17px;
+    background-color: var(--background);
+    border-radius: 0.5rem
+}
 .tituloListagem{
     font-weight: 600;
     font-size: 30px;

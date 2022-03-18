@@ -3,7 +3,7 @@
 
 @section('conteudo')
 
-    <div class="container mt-5">
+    <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-7 corpoRequisicao shadow pb-3">
                 <div class="row mx-1" style="border-bottom: var(--textcolor) 2px solid">

@@ -4,8 +4,8 @@
     <!-- @section('navbar2.blade.php')
     Home
 @endsection -->
-<div class="container mt-5">
-    <div class="row justify-content-center mt-5">
+<div class="container">
+    <div class="row justify-content-center">
         <div class="col-md-7 corpoRequisicao shadow">
 
             <!-- TITULO -->
@@ -23,7 +23,7 @@
                     <form method="POST" enctype="multipart/form-data" id="formRequisicao"
                           action="{{ route('cadastrarDocumento') }}">
                         @csrf
-                        <div class="py-3 ">
+                        <div class="py-3">
                             <label class="textoFicha">Aluno(a):</label>
                             <input class="form-control" type="text" name="nome" size="100%" disabled value="{{Auth::user()->name}}">
                         </div>
