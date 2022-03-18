@@ -133,9 +133,9 @@ body, html{
     background-color: var(--background);
     border-radius: 0.5rem
 }
-
-.tituloProtocolo{
-    color: var(--textcolor);
-    font-size: 19px;
-    font-weight: 600
+.tituloListagem{
+    font-weight: 600;
+    font-size: 30px;
+    border-bottom: 2px solid var(--textcolor);
+    margin-bottom: 0px;
 }
