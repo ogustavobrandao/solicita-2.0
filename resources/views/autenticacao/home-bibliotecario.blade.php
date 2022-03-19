@@ -10,7 +10,7 @@
 
    <div>@include('componentes.mensagens')</div>
 
-    <div class="row justify-content-center mt-5">
+    <div class="row justify-content-center">
         <div class="text-center p-5 shadow caixaSelecao" style="background-color: var(--biblioteca)">
             <a href="{{ route('listar-fichas') }}">
                 <div class="col-md-12 ">

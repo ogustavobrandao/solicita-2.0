@@ -7,7 +7,7 @@
     Home
 @endsection
 
-<div class="container mt-5">
+<div class="container">
     <div class="row" style="border-bottom: var(--textcolor) 2px solid">
         <span class="titulo">Solicitações</span>
     </div>
