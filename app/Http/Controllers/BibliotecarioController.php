@@ -65,6 +65,16 @@ class BibliotecarioController extends Controller
         $tipo_documento = $fichaCatalografica->tipo_documento_id;
         $documentoEspecificoNome = TipoDocumento::where('id', $tipo_documento)->first()->tipo;
         $bibliotecario = Bibliotecario::find($requisicao->bibliotecario_id);
+        $bibli = Bibliotecario::where('user_id', Auth::user()->id)->first();
+        if($requisicao->bibliotecario_id == null) {
+            $requisicao->bibliotecario_id = $bibli->id;
+            $requisicao->save();
+        }
+        if($bibliotecario != null && ($requisicao->status == 'Concluido' || $requisicao->status == 'Rejeitado')){
+            return redirect(route('listar-fichas'))->with('error', 'Esta requisição foi concluida ou rejeitada pelo bibliotecario: '.$bibliotecario->user->name);
+        } elseif($bibliotecario != null && $requisicao->status == 'Em andamento' && $bibliotecario->id != $bibli->id){
+            return redirect(route('listar-fichas'))->with('error', 'Esta requisição está sendo analisada pelo bibliotecario: '.$bibliotecario->user->name);
+        }
         if($documentoEspecificoNome == 'Monografia')
             $documento = Monografia::where('ficha_catalografica_id', $fichaCatalografica->id)->first();
         elseif ($documentoEspecificoNome == 'Tese')
@@ -182,8 +192,7 @@ class BibliotecarioController extends Controller
         $documentosRequisitados->updated_at = time();
         $documentosRequisitados->bibliotecario_id = $bibliotecario->id;
         $documentosRequisitados->update();
-
-        return redirect(Route('gerar-ficha',$documentosRequisitados->id));
+        return redirect(Route('listar-fichas'))->with('success', 'Ficha Atualizada com Sucesso!');
     }
 
     public function rejeitarFicha($requisicaoId) {

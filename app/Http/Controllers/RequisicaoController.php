@@ -316,7 +316,7 @@ class RequisicaoController extends Controller
 
 
 
-        return redirect(Route('home-aluno'))->with('sucess', 'Ficha Catalografica Cadastrada Com Sucesso!');
+        return redirect(Route('home-aluno'))->with('success', 'Ficha Catalografica Cadastrada Com Sucesso!');
     }
 
     public function novaRequisicao(Request $request)
