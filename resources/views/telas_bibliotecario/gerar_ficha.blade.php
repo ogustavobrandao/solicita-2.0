@@ -108,18 +108,19 @@
 
 <body>
 
-<div style="font-family: 'Times New Roman', Times, serif; font-size: 12px; text-align: center;">
+<div style="font-family: 'Times New Roman', Times, serif; font-size: 10px; text-align: center;">
 
     <!-- Topo da ficha -->
 
     <p>Dados Internacionais de Catalogação na Publicação (CIP)<br></p>
     @if($unidade->nome == 'UPE - Campus Garanhuns')<p>Universidade de Pernambuco<br></p> @else <p>Universidade Federal do Agreste de Pernambuco<br></p>@endif
-    <p>Núcleo de Gestão de Bibliotecas e Documentação - NBID<br></p>
-    <p>Elaborado por {{ $userBibliotecario->name }} {{ $bibliotecario->crb }}<br></p><br>
+    @if($unidade->nome == 'UPE - Campus Garanhuns')<p>Núcleo de Gestão de Bibliotecas e Documentação - NBID<br></p> @else <p>Sistema Integrado de Bibliotecas (SIB-UFAPE)<br></p>@endif
+    
+
 
 </div>
 <div class="quadrado">
-    <table style="font-family: 'Times New Roman', Times, serif; font-size: 12px;  margin-top: 15px">
+    <table style="font-family: 'Times New Roman', Times, serif; font-size: 10px;  margin-top: 12px">
 
 
     <tr>
@@ -258,6 +259,7 @@
 
 </table>
 
+    <p>Elaborado por {{ $userBibliotecario->name }} {{ $bibliotecario->crb }}<br></p><br>
 
 </body>
 </html>
