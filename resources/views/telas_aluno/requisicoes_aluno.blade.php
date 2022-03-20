@@ -95,11 +95,11 @@
 
                                                 @if($ficha->id == $rd->ficha_catalografica_id)
                                                     <li>
-                                                        Ficha Catalográfica - @if ($ficha->tipo_documento_id == 1)Monografia
-                                                        @elseif ($ficha->tipo_documento_id == 2)Tese
-                                                        @elseif ($ficha->tipo_documento_id == 3)TCC
-                                                        @elseif ($ficha->tipo_documento_id == 4)Produto Educacional
-                                                        @elseif ($ficha->tipo_documento_id == 5)Dissertação
+                                                        Ficha Catalográfica - @if ($ficha->tipo_documento_id == 1)
+                                                            Dissertação
+                                                        @elseif ($ficha->tipo_documento_id == 2)Monografia
+                                                        @elseif ($ficha->tipo_documento_id == 3)Produto Educacional
+                                                        @elseif ($ficha->tipo_documento_id == 4)Tese
                                                         @endif
                                                     </li>
                                                 @endif
@@ -166,14 +166,18 @@
                                             @endif
                                             @if($rd->status == "Rejeitado")
                                                 <li style="color: darkred">
-                                                {{ $rd->status }}
-                                                <a data-toggle="tooltip" data-placement="left"
-                                                   title="Seu pedido foi rejeitado pelo(s) seguinte(s) motivo: {{$rd->anotacoes}}">
+                                                    @if($rd->status == 'Rejeitado')
+                                                        Indeferido
+                                                    @else
+                                                        {{ $rd->status }}
+                                                    @endif
+                                                    <a data-toggle="tooltip" data-placement="left"
+                                                       title="Seu pedido foi indeferido pelo(s) seguinte(s) motivo: {{$rd->anotacoes}}">
                                                         <span onclick="exibirAnotacoes({{$rd->id}})"
                                                               class="glyphicon glyphicon-eye-open"
                                                               aria-hidden="true"></span>
-                                                @component('componentes.popup', ["titulo"=>"Seu pedido foi rejeitado pelo(s) seguinte(s) motivo:" ,"conteudo" => $rd->anotacoes, "id"=>$rd->id ])
-                                                @endcomponent
+                                                    @component('componentes.popup', ["titulo"=>"Seu pedido foi indeferido pelo(s) seguinte(s) motivo:" ,"conteudo" => $rd->anotacoes, "id"=>$rd->id ])
+                                                    @endcomponent
                                                 </li>
                                             @endif
                                         @endif
@@ -194,7 +198,8 @@
                                 </form>
                                 <div>
                                     @if(\App\Models\Requisicao_documento::where('requisicao_id',$r->id)->first()->status == 'Concluido')
-                                        <a type="button" href={{ route('gerar-ficha-aluno',\App\Models\Requisicao_documento::where('requisicao_id',$r->id)->first()->id) }}>
+                                        <a type="button"
+                                           href={{ route('gerar-ficha-aluno',\App\Models\Requisicao_documento::where('requisicao_id',$r->id)->first()->id) }}>
                                             Baixar ficha
                                         </a>
                                     @endif

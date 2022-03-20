@@ -66,7 +66,10 @@ class BibliotecarioController extends Controller
         $documentoEspecificoNome = TipoDocumento::where('id', $tipo_documento)->first()->tipo;
         $bibliotecario = Bibliotecario::find($requisicao->bibliotecario_id);
         $bibli = Bibliotecario::where('user_id', Auth::user()->id)->first();
-        if($requisicao->bibliotecario_id == null) {
+
+        $data_bibi = date_create_from_format('Y-m-d H:i:s' ,$requisicao->updated_at);
+        $data_agora = date_create_from_format('Y-m-d H:i:s', date('Y-m-d H:i:s'));
+        if($requisicao->bibliotecario_id == null || (date_diff($data_bibi, $data_agora)->h >= 2 && $requisicao->status == 'Em andamento')) {
             $requisicao->bibliotecario_id = $bibli->id;
             $requisicao->save();
         }
@@ -107,52 +110,35 @@ class BibliotecarioController extends Controller
 
 
 
-        if ($request->tipo_documento == 1) {
+        if ($request->tipo_documento == 2) {
             $monografia = Monografia::where('ficha_catalografica_id', $request->ficha_catalografica_id)->first();
             $monografia->nome_orientador = $request->nome_orientador;
             $monografia->sobrenome_orientador = $request->sobrenome_orientador;
             $monografia->nome_coorientador = $request->nome_coorientador;
             $monografia->sobrenome_coorientador = $request->sobrenome_coorientador;
-            $monografia->titulacao_orientador = $request->titulacao_orientador;
-            $monografia->titulacao_coorientador = $request->titulacao_coorientador;
             $monografia->curso = $request->curso;
             $monografia->campus = $request->campus;
+            $monografia->tipo_curso = $request->tipo_curso;
             $monografia->update();
-        } elseif ($request->tipo_documento == 2) {
+        } elseif ($request->tipo_documento == 4) {
             $tese = Tese::where('ficha_catalografica_id', $request->ficha_catalografica_id)->first();
             $tese->nome_orientador = $request->nome_orientador;
             $tese->nome_coorientador = $request->nome_coorientador;
             $tese->sobrenome_orientador = $request->sobrenome_orientador;
             $tese->sobrenome_coorientador = $request->sobrenome_coorientador;
-            $tese->titulacao_orientador = $request->titulacao_orientador;
-            $tese->titulacao_coorientador = $request->titulacao_coorientador;
             $tese->programa = $request->programa;
             $tese->update();
         } elseif ($request->tipo_documento == 3) {
-            $tcc = Tcc::where('ficha_catalografica_id', $request->ficha_catalografica_id)->first();
-            $tcc->nome_orientador = $request->nome_orientador;
-            $tcc->nome_coorientador = $request->nome_coorientador;
-            $tcc->sobrenome_orientador = $request->sobrenome_orientador;
-            $tcc->sobrenome_coorientador = $request->sobrenome_coorientador;
-            $tcc->titulacao_orientador = $request->titulacao_orientador;
-            $tcc->titulacao_coorientador = $request->titulacao_coorientador;
-            $tcc->campus = $request->campus;
-            $tcc->curso = $request->curso;
-            $tcc->referencia = $request->referencia;
-            $tcc->update();
-        } elseif ($request->tipo_documento == 4) {
             $programaEduc = ProgramaEducacional::where('ficha_catalografica_id', $request->ficha_catalografica_id)->first();
             $programaEduc->programa = $request->programa;
             $programaEduc->campus = $request->campus;
             $programaEduc->update();
-        } elseif ($request->tipo_documento == 5) {
+        } elseif ($request->tipo_documento == 1) {
             $dissertacao = Dissertacao::where('ficha_catalografica_id', $request->ficha_catalografica_id)->first();
             $dissertacao->nome_orientador = $request->nome_orientador;
             $dissertacao->nome_coorientador = $request->nome_coorientador;
             $dissertacao->sobrenome_orientador = $request->sobrenome_orientador;
             $dissertacao->sobrenome_coorientador = $request->sobrenome_coorientador;
-            $dissertacao->titulacao_orientador = $request->titulacao_orientador;
-            $dissertacao->titulacao_coorientador = $request->titulacao_coorientador;
             $dissertacao->campus = $request->campus;
             $dissertacao->programa = $request->programa;
             $dissertacao->update();

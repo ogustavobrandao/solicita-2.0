@@ -83,7 +83,7 @@
                                     <input id="crb" type="string"
                                            class="form-control @error('crb') is-invalid @enderror backgroundGray"
                                            name="crb" value="{{ old('crb') }}" required autocomplete="name"
-                                           placeholder="CRB">
+                                           placeholder="Exemplo: CRB-4/1322">
                                     @error('crb')
                                     <span class="invalid-feedback" role="alert" style="overflow: visible; display:block">
                                         <strong>{{ $message }}</strong>

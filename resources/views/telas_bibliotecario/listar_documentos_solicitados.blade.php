@@ -95,11 +95,10 @@
                                         {{$ficha->autor_nome}}
                                     </td>
                                     <td>
-                                        @if ($ficha->tipo_documento_id == 1)Monografia
-                                        @elseif ($ficha->tipo_documento_id == 2)Tese
-                                        @elseif ($ficha->tipo_documento_id == 3)TCC
-                                        @elseif ($ficha->tipo_documento_id == 4)Produto Educacional
-                                        @elseif ($ficha->tipo_documento_id == 5)Dissertação
+                                        @if ($ficha->tipo_documento_id == 2)Monografia
+                                        @elseif ($ficha->tipo_documento_id == 4)Tese
+                                        @elseif ($ficha->tipo_documento_id == 3)Produto Educacional
+                                        @elseif ($ficha->tipo_documento_id == 1)Dissertação
                                         @endif
                                     </td>
                                     <td>
