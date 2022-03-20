@@ -3,129 +3,108 @@
 
 @section('conteudo')
 
-<div class="container-fluid background-blue" style="min-height:110vh">
-  <div class="row justify-content-center">
-    <div class="col-sm-3">
-      <div class="card card-cadastro card-cadastro-servidor">
-        <div class="card-body">
-
-          <div class="row justify-content-center">
-            <h2>Cadastrar Servidor</h2>
-          </div>
-          <form action="{{  route('confirmacao-servidor')  }}" method="POST">
-            @csrf
-            <div class="row justify-content-center">
-              <div class="col-sm-12">
-                <label for="name" class="field a-field a-field_a3 page__field ">
-                <input id="nomeServidor" type="name" class="form-control @error('name') is-invalid @enderror field__input a-field__input"
-                name="name" value="{{ old('name') }}" required autocomplete="name" autofocus placeholder="Nome Completo">
-
-                <span class="a-field__label-wrap">
-                    <span class="a-field__label">Nome Completo</span>
-                </span>
-                </label>
-                @error('name')
-                <span class="invalid-feedback" role="alert" style="overflow: visible; display:block">
-                <strong>{{ $message }}</strong>
-                </span>
-                @enderror
-              </div>
-            </div>
-
-            <div class="row justify-content-center">
-              <div class="col-sm-12">
-                <label for="name" class="field a-field a-field_a3 page__field ">
-                <input id="matriculaServidor" type="number" class="form-control @error('matricula') is-invalid @enderror field__input a-field__input"
-                name="matricula" value="{{ old('matricula') }}" required autocomplete="name" autofocus placeholder="Matricula">
-
-                <span class="a-field__label-wrap">
-                    <span class="a-field__label">Matricula</span>
-                </span>
-                </label>
-                @error('matricula')
-                <span class="invalid-feedback" role="alert" style="overflow: visible; display:block">
-                <strong>{{ $message }}</strong>
-                </span>
-                @enderror
-              </div>
-            </div>
-
-            <div class="row justify-content-center">
-              <div class="col-sm-12">
-                <label for="email" class="field a-field a-field_a3 page__field ">
-                <input id="emailServidor" type="email" class="form-control @error('email') is-invalid @enderror field__input a-field__input"
-                name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="E-Mail">
-
-                <span class="a-field__label-wrap">
-                    <span class="a-field__label">E-mail</span>
-                </span>
-                </label>
-                @error('email')
-                <span class="invalid-feedback" role="alert" style="overflow: visible; display:block">
-                <strong>{{ $message }}</strong>
-                </span>
-                @enderror
-              </div>
-            </div>
-
-            <div class="row justify-content-center">
-              <div class="col-sm-12">
-                <label for="password" class="field a-field a-field_a3 page__field" >
-                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror field__input a-field__input"
-                name="password" required autocomplete="current-password" placeholder="Senha">
-
-                <span class="a-field__label-wrap">
-                    <span class="a-field__label">Senha</span>
-                </span>
-                </label>
-                @error('password')
-                <span class="invalid-feedback" role="alert" style="overflow: visible; display:block;">
-                <strong>{{ $message }}</strong>
-                </span>
-                @enderror
-              </div>
-            </div>
-
-            <div class="row justify-content-center">
-              <div class="col-sm-12">
-                <label for="password-confirm" class="field a-field a-field_a3 page__field" >
-                <input id="password-confirm" type="password" class="form-control @error('password-confirm') is-invalid @enderror field__input a-field__input"
-                name="password_confirmation" required autocomplete="new-password" placeholder="Confirmar Senha">
-
-                <span class="a-field__label-wrap">
-                    <span class="a-field__label">Confirmar Senha</span>
-                </span>
-                </label>
-                @error('password')
-                <span class="invalid-feedback" role="alert" style="overflow: visible; display:block;">
-                <strong>{{ $message }}</strong>
-                </span>
-                @enderror
-              </div>
-            </div>
-
-            <!-- Botões -->
-            <div class="form-group row justify-content-center" style="margin-top:60px">
-                <div class="col-sm-6">
-                <a class="btn btn-secondary btn-cadastro-primary" href="{{  route('home')}}" >Voltar</a>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-7 corpoRequisicao shadow">
+                <div class="row mx-1 p-0" style="border-bottom: var(--textcolor) 2px solid">
+                    <div class="col-md-12 tituoRequisicao mt-3 p-0">
+                        Cadastro de Servidor
+                    </div>
                 </div>
+                <div class="row py-3">
+                    <div class="col-md-12">
+                        <form action="{{  route('confirmacao-servidor')  }}" method="POST">
+                            @csrf
+                            <div class="row justify-content-center py-2 mt-2">
+                                <div class="col-md-12">
+                                    <label class="textoFicha" for="name">Nome:</label>
+                                    <input id="nomeServidor" type="name"
+                                           class="form-control @error('name') is-invalid @enderror backgroundGray"
+                                           name="name" value="{{ old('name') }}" required autocomplete="name"
+                                           autofocus placeholder="Digite o Nome Completo">
+                                    @error('name')
+                                    <span class="invalid-feedback" role="alert" style="overflow: visible; display:block">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
 
-                <div class="col-sm-6">
-                    <button type="submit" class="btn lmts-primary btn-cadastro-primary" href="{{  route('confirmacao-servidor')}}"
-                    onclick="confirmacaoCadastro();">
-                        {{ __('Cadastrar') }}
-                    </button>
+                            <div class="row justify-content-between py-2">
+                                <div class="col-md-6">
+                                    <label class="textoFicha" for="matriculaServidor">Matricula:</label>
+                                    <input id="matriculaServidor" type="number"
+                                           class="form-control @error('matricula') is-invalid @enderror backgroundGray"
+                                           name="matricula" value="{{ old('matricula') }}" required autocomplete="name"
+                                           autofocus placeholder="Digite a Matricula do Servidor">
+                                    @error('matricula')
+                                    <span class="invalid-feedback" role="alert" style="overflow: visible; display:block">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="textoFicha" for="emailServidor">E-mail:</label>
+                                    <input id="emailServidor" type="email"
+                                           class="form-control @error('email') is-invalid @enderror backgroundGray"
+                                           name="email" value="{{ old('email') }}" required autocomplete="email"
+                                           autofocus placeholder="Digite o Email do Servidor">
+                                    @error('email')
+                                    <span class="invalid-feedback" role="alert" style="overflow: visible; display:block">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="row justify-content-between py-2">
+
+                                <div class="col-md-6">
+                                    <label class="textoFicha" for="password">Senha:</label>
+                                    <input id="password" type="password"
+                                           class="form-control @error('password') is-invalid @enderror backgroundGray"
+                                           name="password" required autocomplete="current-password"
+                                           autofocus placeholder="Digite a Senha do Servidor">
+                                    @error('password')
+                                    <span class="invalid-feedback" role="alert" style="overflow: visible; display:block;">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="textoFicha" for="password-confirm">Confirmação de Senha:</label>
+                                    <input id="password-confirm" type="password"
+                                           class="form-control @error('password-confirm') is-invalid @enderror backgroundGray"
+                                           name="password_confirmation" required autocomplete="new-password"
+                                           autofocus placeholder="Confirme a Senha do Servidor">
+                                    @error('password')
+                                    <span class="invalid-feedback" role="alert" style="overflow: visible; display:block;">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <!-- Botões -->
+                            <div class="row justify-content-between py-2">
+                                <div class="col-md-6">
+                                    <a style="background-color: var(--padrao); border-radius: 0.5rem; color: white; font-size: 17px" class="btn btn-cadastro-primary" href="{{  route('home')}}" >Voltar</a>
+                                </div>
+
+                                <div class="col-md-6 text-right">
+                                    <button style="background-color: var(--confirmar); border-radius: 0.5rem; color: white; font-size: 17px" type="submit" class="btn" href="{{  route('confirmacao-servidor')}}"
+                                            onclick="confirmacaoCadastro();">
+                                        {{ __('Cadastrar') }}
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-
             </div>
-
-          </form>
         </div>
-      </div>
-
     </div>
-  </div>
-</div>
-
 
 @endsection

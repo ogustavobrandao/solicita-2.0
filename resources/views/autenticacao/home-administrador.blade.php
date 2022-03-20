@@ -2,44 +2,67 @@
 @section('conteudo')
 
 @section('titulo','Home Administrador')
-@section('navbar')
+@section('navbar2.blade.php')
     Home
 @endsection
+<div class="container">
+    <div class="row" style="border-bottom: var(--textcolor) 2px solid">
+        <span class="titulo">Cadastros</span>
+    </div>
+</div>
 
-          <div class="card-deck d-flex justify-content-center">
-            <div class="conteudo-central d-flex justify-content-center">
-                <!-- Solicitar Documento-->
-               <a href="{{ route("cadastro-servidor")}}" style="text-decoration:none; color: inherit;">
-                  <div class="card cartao text-center " style="border-radius: 30px">
-                        <div class="card-body d-flex justify-content-center">
-                            <h2 style="padding-top:15px">Cadastrar Servidor</h2>
-                        </div>
-                  </div>
-               </a>
+<div class="container text-center">
+    <div>@include('componentes.mensagens')</div>
 
-                <a href="{{ route("cadastro-bibliotecario")}}" style="text-decoration:none; color: inherit;">
-                    <div class="card cartao text-center " style="border-radius: 30px">
-                        <div class="card-body d-flex justify-content-center">
-                            <h2 style="padding-top:15px">Cadastrar Bibliotecario</h2>
-                        </div>
+    <div class="row justify-content-between mt-5">
+
+        <div class="text-center p-5 shadow caixaSelecao" style="background-color: var(--escolaridade);">
+            <a href="{{ route("cadastro-servidor")}}">
+                <div class="text-center pt-4 pb-3">
+                    <img class="" src="images/escolaridade-adm.svg" height="100px">
+                </div>
+                <div class="text-center">
+                    <div class="textoCaixa">Servidor</div>
+                </div>
+            </a>
+        </div>
+
+        <div class="text-center p-5 shadow caixaSelecao" style="background-color: var(--biblioteca)">
+            <a href="{{ route("cadastro-bibliotecario")}}">
+                <div class="col-md-12 pt-4">
+                    <div class="text-center">
+                        <img class="pb-3" src="images/biblioteca-aluno.svg" height="120px">
                     </div>
-                </a>
-
-                <a href="{{ route("listar-biblioteca")}}" style="text-decoration:none; color: inherit;">
-                    <div class="card cartao text-center " style="border-radius: 30px">
-                        <div class="card-body d-flex justify-content-center">
-                            <h2 style="padding-top:15px">Listar Biblioteca</h2>
-                        </div>
+                    <div class="text-center align-middle">
+                        <div class="textoCaixa">Bibliotecário</div>
                     </div>
-                </a>
+                </div>
+            </a>
+        </div>
 
-              <a href="{{ route("listar-usuario")}}" style="text-decoration:none; color: inherit;">
-                  <div class="card cartao text-center " style="border-radius: 30px">
-                        <div class="card-body d-flex justify-content-center">
-                            <h2 style="padding-top:15px">Listar Usuário</h2>
-                        </div>
-                  </div>
-               </a>
-            </div>
-          </div>
+        <div class="text-center p-5 shadow caixaSelecao">
+            <a href="{{ route("listar-biblioteca")}}">
+                <div class="text-center pb-3">
+                    <img class="" src="images/listagem de biblioteca.svg" height="100px">
+                </div>
+                <div class="text-center">
+                    <div style="color: var(--textcolor)" class="textoCaixa">Listagem de Bibliotecas</div>
+                </div>
+            </a>
+        </div>
+
+        <div class="text-center p-5 shadow caixaSelecao">
+            <a href="{{ route("listar-usuario")}}">
+                <div class="text-center pb-3">
+                    <i style="color: var(--textcolor)" class="fa-regular fa-address-book fa-7x"></i>
+                </div>
+                <div class="text-center">
+                    <div style="color: var(--textcolor)" class="textoCaixa">Listagem de Usuários</div>
+                </div>
+            </a>
+        </div>
+
+    </div>
+</div>
+
 @endsection

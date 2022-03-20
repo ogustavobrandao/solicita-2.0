@@ -1,91 +1,79 @@
 @extends('layouts.app')
 
 @section('conteudo')
-    <!-- @section('navbar')
+    <!-- @section('navbar2.blade.php')
     Home
 @endsection -->
-<div class="container" style="min-height:80vh">
-
+<div class="container">
     <div class="row justify-content-center">
-        <div class="col-sm-8">
-            <div class="card card-cadastro">
-                <div class="card-body">
+        <div class="col-md-7 corpoRequisicao shadow">
 
-                    <div class="row justify-content-center">
-                        <h2>Solicitar Ficha Catalográfica</h2>
-                    </div>
+            <!-- TITULO -->
+
+            <div class="row mx-1 p-0" style="border-bottom: var(--textcolor) 2px solid">
+                <div class="col-md-12 tituoRequisicao mt-3 p-0">
+                    Biblioteca
+                </div>
+            </div>
+
+            <!-- OPÇOES -->
+
+            <div class="row py-2">
+                <div class="col-md-12">
                     <form method="POST" enctype="multipart/form-data" id="formRequisicao"
                           action="{{ route('cadastrarDocumento') }}">
                         @csrf
-
-                        <div class="form-group row justify-content-center">
-                            <div class="col-sm-12">
-
-                                <label>Aluno</label>
-                                <h4>&nbsp{{Auth::user()->name}}</h4>
-                            </div>
+                        <div class="py-3">
+                            <label class="textoFicha">Aluno(a):</label>
+                            <input class="form-control" type="text" name="nome" size="100%" disabled value="{{Auth::user()->name}}">
                         </div>
-                        <div class="form-group row justify-content-center">
-                            <div class="col-sm-12">
-                                <label>Perfil</label>
-                                <select name="default" class="custom-select custom-select-lg " style="font-size: 90%">
+                        <div class="py-3">
+                            <label class="textoFicha">Perfil:</label>
+                            <select name="default" class="form-control" style="background-color: var(--background)">
                                 @foreach($perfis as $perfil)
-                                    <!-- <label for='perfil' style="width: 14.5rem; margin-left:25px"><b>Curso</b></label> -->
-                                        <option @if($perfil->valor==true) selected
-                                                @endif value="{{$perfil->id}}">{{$perfil->default}}
-                                            - {{$perfil->situacao}}</option></br>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="form-group row justify-content-center">
-                            <div class="col-sm-12">
-                                <label>Tipo de Ficha</label>
-
-                                @foreach($tipos_documentos as $tipo)
-                                    <div>
-                                        <input type="radio" name="documento" value="{{$tipo->id}}"
-                                               id="{{$tipo->tipo}}" @if($tipo->tipo == 'Monografia') checked @endif>
-                                        @if($tipo->tipo == 'Monografia')Monografia
-                                        @elseif($tipo->tipo == 'Tese')Tese
-                                        @elseif($tipo->tipo == 'TCC')Trabalho de Conclusão de Curso
-                                        @elseif($tipo->tipo == 'ProgramaEduc')Produto Educacional
-                                        @elseif($tipo->tipo == 'Dissertacao')Dissertação
-                                        @else {{$tipo->tipo}}
-                                        @endif</input>
-                                    </div>
+                                    <option @if($perfil->valor==true) selected
+                                            @endif value="{{$perfil->id}}">{{$perfil->default}}
+                                        - {{$perfil->situacao}}
+                                    </option>
                                 @endforeach
-                                <div class="form-group row mb-0" style="margin-top:10px">
-                                    <div class="col-md-8 offset-md-4">
-
-                                        <a class="btn btn-secondary" href="{{ route('cancela-requisicao')}}"
-                                           style="margin-right:10px">
-                                            {{ ('Cancelar') }}
-                                        </a>
-
-                                        <button type="submit" class="btn btn-primary-lmts"
-                                                style="margin-right:10px">
-                                            {{ ('Solicitar') }}
-                                        </button>
-                                    </div>
+                            </select>
+                        </div>
+                        <div class="py-3 ">
+                            <label class="textoFicha">Tipo de Documento:</label>
+                            @foreach($tipos_documentos as $tipo)
+                                <div>
+                                    <input type="radio" name="documento" value="{{$tipo->id}}"
+                                           id="{{$tipo->tipo}}" @if($tipo->tipo == 'Monografia') checked @endif>
+                                    @if($tipo->tipo == 'Monografia')Monografia
+                                    @elseif($tipo->tipo == 'Tese')Tese
+                                    @elseif($tipo->tipo == 'TCC')Trabalho de Conclusão de Curso
+                                    @elseif($tipo->tipo == 'ProgramaEduc')Produto Educacional
+                                    @elseif($tipo->tipo == 'Dissertacao')Dissertação
+                                    @else {{$tipo->tipo}}
+                                    @endif</input>
                                 </div>
-
-
-                            </div>
+                            @endforeach
                         </div>
 
-
+                        <!-- BOTOES -->
+                        <div class="row justify-content-between my-3">
+                            <div class="col-md-6">
+                                <a class="btn" href="{{ route('cancela-requisicao')}}" style="background-color: var(--padrao); border-radius: 0.5rem; color: white; font-size: 17px">
+                                    {{ ('Cancelar') }}
+                                </a>
+                            </div>
+                            <div class="col-md-6 text-right">
+                                <button type="submit" class="btn" style="background-color: var(--confirmar); border-radius: 0.5rem; color: white; font-size: 17px">
+                                    {{ ('Solicitar') }}
+                                </button>
+                            </div>
+                        </div>
                     </form>
-
                 </div>
             </div>
         </div>
     </div>
-
+</div>
 </div>
 
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"
-      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"
->
 @endsection

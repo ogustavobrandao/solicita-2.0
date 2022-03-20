@@ -3,53 +3,55 @@
 
 @section('titulo','Home Aluno')
 
-@section('navbar')
+@section('navbar2.blade.php')
     Home
 @endsection
-<div class="container" style="min-height:70vh">
-    <div>@include('componentes.mensagens')</div>
 
-    <div class="row justify-content-center d-flex align-items-center">
-        <div class="col-sm-3 d-flex justify-content-center">
-            <a href="{{ route("prepara-requisicao")}}" style="text-decoration:none; color: inherit;">
-                <div class="card cartao text-center " style="border-radius: 30px">
-                    <div class="card-body d-flex justify-content-center">
-                        <h2 style="padding-top:15px">Solicitar Documentos Escolaridade</h2>
-                    </div>
-                </div>
-            </a>
-        </div>
-
-        <div class="col-sm-3 d-flex justify-content-center">
-            <a href="{{ route("prepara-requisicao-bibli")}}" style="text-decoration:none; color: inherit;">
-                <div class="card cartao text-center " style="border-radius: 30px">
-                    <div class="card-body d-flex justify-content-center">
-                        <h2 style="padding-top:15px">Solicitar Documentos Biblioteca</h2>
-                    </div>
-                </div>
-            </a>
-        </div>
-
-        <div class="col-sm-3 d-flex justify-content-center">
-            <a href="{{ route("listar-requisicoes-aluno", ["titulo" => "Listar Documentos Solicitados"]) }}"
-               style="text-decoration:none; color: inherit;">
-                <div class="card cartao text-center " style="border-radius: 30px">
-                    <div class="card-body d-flex justify-content-center">
-                        <h2 style="padding-top:15px">Listar Documentos Solicitados</h2>
-                    </div>
-                </div>
-            </a>
-        </div>
-        <div class="col-sm-3 d-flex justify-content-center">
-            <a href="{{ route("perfil-aluno") }}" style="text-decoration:none; color: inherit;">
-                <div class="card cartao text-center " style="border-radius: 30px">
-                    <div class="card-body d-flex justify-content-center">
-                        <h2 style="padding-top:15px">Adicionar/ Editar Perfil</h2>
-                    </div>
-                </div>
-            </a>
-        </div>
+<div class="container">
+    <div class="row" style="border-bottom: var(--textcolor) 2px solid">
+        <span class="titulo">Solicitações</span>
     </div>
+</div>
 
+<div class="container text-center">
+
+    <div class="row justify-content-between mt-5">
+
+        <div class="text-center p-5 shadow caixaSelecao" style="background-color: var(--escolaridade);">
+            <a href="{{ route("prepara-requisicao")}}">
+                <div class="text-center pt-4">
+                    <img class="pb-3" src="images/escolaridade-aluno.svg" height="120px">
+                </div>
+                <div class="text-center">
+                    <div class="textoCaixa">Escolaridade</div>
+                </div>
+            </a>
+        </div>
+
+        <div class="text-center p-5 shadow caixaSelecao" style="background-color: var(--biblioteca)">
+            <a href="{{ route("prepara-requisicao-bibli")}}">
+                <div class="col-md-12 pt-4">
+                    <div class="text-center">
+                        <img class="pb-3" src="images/biblioteca-aluno.svg" height="120px">
+                    </div>
+                    <div class="text-center align-middle">
+                        <div class="textoCaixa">Biblioteca</div>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="text-center p-5 shadow caixaSelecao">
+            <a href="{{ route("listar-requisicoes-aluno", ["titulo" => "Listar Documentos Solicitados"]) }}">
+                <div class="text-center">
+                    <img class="" src="images/vertical_split.svg" height="120px">
+                </div>
+                <div class="text-center">
+                    <div style="color: var(--textcolor)" class="textoCaixa">Listagem de Documentos</div>
+                </div>
+            </a>
+        </div>
+
+    </div>
 </div>
 @endsection

@@ -102,162 +102,207 @@
             margin-left: auto;
             margin-right: auto;
         }
+
+        .recuo {
+            text-indent: 1.3em;
+            text-align: justify;
+        }
+
+        .fixCDD {
+            position: fixed;
+            bottom: 0px;
+        }
+
     </style>
 
 </head>
 
 <body>
 
-<div style="font-family: 'Times New Roman', Times, serif; font-size: 12px; text-align: center;">
+<div style="font-family: 'Times New Roman', Times, serif; font-size: 10px; text-align: center; margin-bottom: 10px">
 
     <!-- Topo da ficha -->
 
     <p>Dados Internacionais de Catalogação na Publicação (CIP)<br></p>
-    @if($unidade->nome == 'UPE - Campus Garanhuns')<p>Universidade de Pernambuco<br></p> @else <p>Universidade Federal do Agreste de Pernambuco<br></p>@endif
-    <p>Núcleo de Gestão de Bibliotecas e Documentação - NBID<br></p>
-    <p>Elaborado por {{ $userBibliotecario->name }} {{ $bibliotecario->crb }}<br></p><br>
+    @if($unidade->nome == 'UPE - Campus Garanhuns')<p>Universidade de Pernambuco<br></p> @else <p>Universidade Federal
+        do Agreste de Pernambuco<br></p>@endif
+    @if($unidade->nome == 'UPE - Campus Garanhuns')<p>Núcleo de Gestão de Bibliotecas e Documentação - NBID<br>
+    </p> @else <p>Sistema Integrado de Bibliotecas (SIB-UFAPE)</p><br>@endif
+
 
 </div>
 <div class="quadrado">
-    <table style="font-family: 'Times New Roman', Times, serif; font-size: 12px;  margin-top: 15px">
+    <table style="font-family: 'Times New Roman', Times, serif; font-size: 10px;  margin-top: 12px;">
 
 
-    <tr>
-        <td valign=top style="width: 15%"><br><span style="margin-left: 5px;">{{ $ficha->cutter}}</span></td>
+        <tr>
+            <td valign=top style="width: 13%"><br><span style="margin-left: 10px;">{{ $ficha->cutter}}</span></td>
 
-        <td><table>
-            <!-- Parte padrão -->
-            <tr>
-                <td>{{ $ficha->autor_sobrenome }}, {{ $ficha->autor_nome }}</td>
-            </tr>
-            <tr>
-                <td>{{ $ficha->titulo }} : {{ $ficha->subtitulo }} / {{ $ficha->autor}} – {{ $ficha->local }}, {{ $ficha->ano }}.</td>
-            </tr>
-            <tr>
-                <td>{{ $ficha->folhas }} : {{ $ficha->ilustracao }}</td>
-            </tr>
-            <tr><td> <br> </td></tr>
+            <td>
+                <table>
+                    <!-- Parte padrão -->
+                    <tr>
+                        <td>{{ $ficha->autor_sobrenome }}, {{ $ficha->autor_nome }}</td>
+                    </tr>
+                    <tr>
+                        <td class="recuo">@if(strlen($ficha->titulo) > 160){{substr($ficha->titulo, 0, strpos($ficha->titulo, ' ', 160 )).'...' }} @else{{$ficha->titulo}} @endif  @if($ficha->subtitulo != null): {{ $ficha->subtitulo }}@endif
+                            / {{ $ficha->autor_nome . ' ' . $ficha->autor_sobrenome . '.'}} – {{ $ficha->local }}, {{ $ficha->ano }}.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="recuo">{{ $ficha->folhas }} f. @if($ficha->ilustracao == 'colorido'): il. color. @elseif($ficha->ilustracao == 'nao_possui')@else: il. @endif</td>
+                    </tr>
+                    <tr>
+                        <td><br></td>
+                    </tr>
 
 
-            <!-- Parte da Monografia -->            
-            @if($tipo_documento == 'Monografia')
-            <tr>
-                <td>Orientador: {{ $documento->nome_orientador }} {{ $documento->sobrenome_orientador }} {{ $documento->titulacao_orientador }}</td>
-            </tr>
-            <tr>
-                <td>Coorientador: {{ $documento->nome_coorientador }} {{ $documento->sobrenome_coorientador }} {{ $documento->titulacao_coorientador }}</td>
-            </tr>
-            <tr>
-                <td>Monografia (Mestrado) - {{ $documento->curso }}, @if($unidade->nome == 'UPE - Campus Garanhuns')<p>Universidade de Pernambuco</p> @else <p>Universidade Federal do Agreste de Pernambuco</p>@endif, {{ $unidade->nome }}, {{ $ficha->local }}-Pernambuco, {{ $ficha->ano }}.</td>
-            </tr>
+                    <!-- Parte da Monografia -->
+                    @if($tipo_documento == 'Monografia')
+                        <tr>
+                            <td class="recuo">Orientador(a): {{ $documento->nome_orientador }} {{ $documento->sobrenome_orientador }} </td>
+                        </tr>
+                        <tr>
+                            <td class="recuo">@if($documento->nome_coorientador != null)Coorientador(a): {{ $documento->nome_coorientador }} {{ $documento->sobrenome_coorientador }} @endif </td>
+                        </tr>
+                        <tr>
+                            <td class="recuo">Monografia @if($documento->tipo_curso == 'especializacao') (Especialização) @elseif($documento->tipo_curso == 'graduacao') (Graduação) @elseif($documento->tipo_curso == 'mba') (MBA) @endif -
+                                 @if($unidade->nome == 'UPE - Campus Garanhuns')<p>Universidade de Pernambuco</p> @else
+                                    <p>Universidade Federal do Agreste de Pernambuco</p>@endif, Curso: {{ $documento->curso }},
+                                 {{ $ficha->local }}, BR-PE, {{ $ficha->ano }}.
+                            </td>
+                        </tr>
 
-            <!-- Parte da tese -->
-            @elseif($tipo_documento == 'Tese')
-            <tr>
-                <td>Orientador: {{ $documento->nome_orientador }} {{ $documento->sobrenome_orientador }} {{ $documento->titulacao_orientador }}</td>
-            </tr>
-            <tr>
-                <td>Coorientador: {{ $documento->nome_coorientador }} {{ $documento->sobrenome_coorientador }} {{ $documento->titulacao_coorientador }}</td>
-            </tr>
-            <tr>
-                <td>Teses (Doutorado) - {{ $documento->programa }}, @if($unidade->nome == 'UPE - Campus Garanhuns')<p>Universidade de Pernambuco</p> @else <p>Universidade Federal do Agreste de Pernambuco</p>@endif, {{ $unidade->nome }}, {{ $ficha->local }}-Pernambuco, {{ $ficha->ano }}.</td>
-            </tr>
+                        <!-- Parte da tese -->
+                    @elseif($tipo_documento == 'Tese')
+                        <tr>
+                            <td class="recuo">Orientador(a): {{ $documento->nome_orientador }} {{ $documento->sobrenome_orientador }}. </td>
+                        </tr>
+                        <tr>
+                            <td class="recuo">@if($documento->nome_coorientador != null)Coorientador(a):  {{ $documento->nome_coorientador }} {{ $documento->sobrenome_coorientador }}. @endif
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="recuo">Tese (Doutorado) - @if($unidade->nome == 'UPE - Campus Garanhuns')<p>Universidade de Pernambuco</p> @else
+                                    <p>Universidade Federal do Agreste de Pernambuco</p>@endif, {{ $documento->programa }},
+                                {{ $ficha->local }}, BR-PE, {{ $ficha->ano }}.
+                            </td>
+                        </tr>
+                    @elseif($tipo_documento == 'ProgramaEduc')
+                        <tr>
+                            <td class="recuo">Produto Educacional que acompanha Dissertação (Mestrado) - {{ $documento->programa }} - @if($unidade->nome == 'UPE - Campus Garanhuns')<p>
+                                    Universidade de Pernambuco</p> @else <p>Universidade Federal do Agreste de
+                                    Pernambuco</p>@endif, {{ $unidade->nome }}.
+                            </td>
+                        </tr>
 
-            <!-- Parte do TCC -->
-            @elseif($tipo_documento = 'TCC')
-            <tr>
-                <td>Orientador: {{ $documento->nome_orientador }} {{ $documento->sobrenome_orientador }} {{ $documento->titulacao_orientador }}</td>
-            </tr>
-            <tr>
-                <td>Coorientador: {{ $documento->nome_coorientador }} {{ $documento->sobrenome_coorientador }} {{ $documento->titulacao_coorientador }}</td>
-            </tr>
-            <tr>
-                <td>TCC ( {{$documento->curso}} ) - @if($unidade->nome == 'UPE - Campus Garanhuns')<p>Universidade de Pernambuco</p> @else <p>Universidade Federal do Agreste de Pernambuco</p>@endif , {{ $unidade->nome }}, {{ $ficha->local }}-Pernambuco, {{ $ficha->ano }}. </td>
-            </tr>
-            <!-- <p>Referência: {{ $documento->referencia }}</p>
-            <p>Campus: {{ $unidade->nome }}</p>
-            <p>Curso: {{ $documento->curso }}</p> -->
-
-            <!-- Parte do programa educacional -->
-            @elseif($tipo_documento = 'ProgramaEduc')
-            <tr>
-                <td>Programa: {{ $documento->programa }} - {{ $documento->programa }} - @if($unidade->nome == 'UPE - Campus Garanhuns')<p>Universidade de Pernambuco</p> @else <p>Universidade Federal do Agreste de Pernambuco</p>@endif , {{ $unidade->nome }}, {{ $ficha->local }}-Pernambuco.  </td>
-            </tr>
-            <tr>
-                <td>Coorientador (a): {{ $documento->nome_orientador }} {{ $documento->sobrenome_orientador }}</td>
-            </tr>
-            <tr>
-                <td>Coorientador (a): {{ $documento->nome_coorientador }} {{ $documento->sobrenome_coorientador }}</td>
-            </tr>
-
-            <!-- Parte da Dissertacao -->
-            @else
-            <tr>
-                <td>Orientador: {{ $documento->nome_orientador }} {{ $documento->sobrenome_orientador }} {{ $documento->titulacao_orientador }}</td>
-            </tr>
-            <tr>
-                <td>Coorientador: {{ $documento->nome_coorientador }} {{ $documento->sobrenome_coorientador }} {{ $documento->titulacao_coorientador }}</td>
-            </tr>
-            <tr>
-                <td>Dissertação () - {{ $documento->programa }}, @if($unidade->nome == 'UPE - Campus Garanhuns')<p>Universidade de Pernambuco</p> @else <p>Universidade Federal do Agreste de Pernambuco</p>@endif, {{ $unidade->nome }}, {{ $ficha->local }}-Pernambuco, {{ $ficha->ano }}.</td>
-            </tr>
-            <!--<p>Programa: {{ $documento->programa }}</p>
+                        <!-- Parte da Dissertacao -->
+                    @else
+                        <tr>
+                            <td class="recuo">Orientador(a): {{ $documento->nome_orientador }} {{ $documento->sobrenome_orientador }}.</td>
+                        </tr>
+                        <tr>
+                            <td class="recuo">@if($documento->nome_coorientador != null)Coorientador(a): {{ $documento->nome_coorientador }} {{ $documento->sobrenome_coorientador }}. @endif</td>
+                        </tr>
+                        <tr>
+                            <td class="recuo">Dissertação (Mestrado) - @if($unidade->nome == 'UPE - Campus Garanhuns')<p>Universidade de Pernambuco</p> @else
+                                    <p>Universidade Federal do Agreste de Pernambuco</p>@endif, {{ $documento->programa }},
+                                 {{ $ficha->local }}, BR-PE, {{ $ficha->ano }}.
+                            </td>
+                        </tr>
+                    <!--<p>Programa: {{ $documento->programa }}</p>
             <p>Campus: {{ $unidade->nome }}</p> -->
-            @endif 
+                    @endif
 
-            <tr><td> <br> </td></tr>
-            <!-- Palavras chave -->
-            @if($tipo_documento == 'Monografia')
-            <tr>
-                <td>@for ($i = 0; $i < sizeof($palavras); $i++)
-                {{ ($i + 1) }}. Palavra-chave: {{ $palavras[$i]->palavra }}
-                @endfor I. {{ $documento->sobrenome_orientador }}, {{ $documento->nome_orientador }} II. {{ $documento->sobrenome_coorientador }}, {{ $documento->nome_coorientador }} III. @if($unidade->nome == 'UPE - Campus Garanhuns')<p>Universidade de Pernambuco</p> @else <p>Universidade Federal do Agreste de Pernambuco</p>@endif, {{ $unidade->nome }}, {{ $documento->curso }} IV. {{ $ficha->titulo }}</td>
-                
-            </tr>
+                    <tr>
+                        <td><br></td>
+                    </tr>
+                    <!-- Palavras chave -->
+                    @if($tipo_documento == 'Monografia')
+                        <tr>
+                            <td class="recuo">@for ($i = 0; $i < sizeof($palavras); $i++)
+                                    {{ ($i + 1) }}. {{ $palavras[$i]->palavra }}
+                                @endfor I. {{ $documento->sobrenome_orientador }}, {{ $documento->nome_orientador }} (orient.)
+                                @if($documento->titulacao_coorientador != 'Sem Coorientador')II. {{ $documento->sobrenome_coorientador }}, {{ $documento->nome_coorientador }} (coorient.)
+                                III. @if($unidade->nome == 'UPE - Campus Garanhuns')<p>Universidade de
+                                    Pernambuco</p> @else <p>Universidade Federal do Agreste de Pernambuco</p>@endif IV. Título
+                                @else
+                                    II. @if($unidade->nome == 'UPE - Campus Garanhuns')<p>Universidade de
+                                        Pernambuco</p> @else <p>Universidade Federal do Agreste de Pernambuco</p>@endif III. Título
+                                @endif</td>
 
-            @elseif($tipo_documento == 'Tese')
-            <tr>
-                <td>@for ($i = 0; $i < sizeof($palavras); $i++)
-                {{ ($i + 1) }}. Palavra-chave: {{ $palavras[$i]->palavra }}
-                @endfor I. {{ $documento->sobrenome_orientador }}, {{ $documento->nome_orientador }} II. {{ $documento->sobrenome_coorientador }}, {{ $documento->nome_coorientador }} III. @if($unidade->nome == 'UPE - Campus Garanhuns')<p>Universidade de Pernambuco</p> @else <p>Universidade Federal do Agreste de Pernambuco</p>@endif, {{ $unidade->nome }}, {{ $documento->programa }} IV. {{ $ficha->titulo }}</td>
-                
-            </tr>
+                        </tr>
 
-            @elseif($tipo_documento = 'TCC')
-            <tr>
-                <td>@for ($i = 0; $i < sizeof($palavras); $i++)
-                {{ ($i + 1) }}. Palavra-chave: {{ $palavras[$i]->palavra }}
-                @endfor I. @if($unidade->nome == 'UPE - Campus Garanhuns')<p>Universidade de Pernambuco</p> @else <p>Universidade Federal do Agreste de Pernambuco</p>@endif II. {{ $unidade->nome }} III. {{ $documento->curso }} IV. {{ $ficha->titulo }}</td>
-                
-            </tr>
+                    @elseif($tipo_documento == 'Tese')
+                        <tr>
+                            <td class="recuo">@for ($i = 0; $i < sizeof($palavras); $i++)
+                                    {{ ($i + 1) }}. {{ $palavras[$i]->palavra }}
+                                @endfor I. {{ $documento->sobrenome_orientador }}, {{ $documento->nome_orientador }} (orient.)
+                                @if($documento->titulacao_coorientador != 'Sem Coorientador')II. {{ $documento->sobrenome_coorientador }}, {{ $documento->nome_coorientador }} (coorient.)
+                                III. @if($unidade->nome == 'UPE - Campus Garanhuns')<p>Universidade de
+                                    Pernambuco</p> @else <p>Universidade Federal do Agreste de Pernambuco</p>@endif,
+                                 {{ $documento->programa }} IV. Título
+                                @else II. @if($unidade->nome == 'UPE - Campus Garanhuns')<p>Universidade de
+                                    Pernambuco</p> @else <p>Universidade Federal do Agreste de Pernambuco</p>@endif,
+                                 {{ $documento->programa }} III. Título
 
-            @elseif($tipo_documento = 'ProgramaEduc')
-            <tr>
-                <td>@for ($i = 0; $i < sizeof($palavras); $i++)
-                {{ ($i + 1) }}. Palavra-chave: {{ $palavras[$i]->palavra }}
-                @endfor I. {{ $documento->sobrenome_orientador }}, {{ $documento->nome_orientador }} II. {{ $documento->sobrenome_coorientador }}, {{ $documento->nome_coorientador }} III. @if($unidade->nome == 'UPE - Campus Garanhuns')<p>Universidade de Pernambuco</p> @else <p>Universidade Federal do Agreste de Pernambuco</p>@endif IV. {{ $ficha->titulo }}</td>
-                
-            </tr>
+                                @endif</td>
 
-            @else
-            <tr>
-                <td>@for ($i = 0; $i < sizeof($palavras); $i++)
-                {{ ($i + 1) }}. Palavra-chave: {{ $palavras[$i]->palavra }}
-                @endfor I. {{ $documento->sobrenome_orientador }}, {{ $documento->nome_orientador }} II. {{ $documento->sobrenome_coorientador }}, {{ $documento->nome_coorientador }} III. @if($unidade->nome == 'UPE - Campus Garanhuns')<p>Universidade de Pernambuco</p> @else <p>Universidade Federal do Agreste de Pernambuco</p>@endif, {{ $unidade->nome }}, {{ $documento->programa }} IV. {{ $ficha->titulo }}</td>
-                
-            </tr>
+                        </tr>
+                    @elseif($tipo_documento == 'ProgramaEduc')
+                        <tr>
+                            <td class="recuo">@for ($i = 0; $i < sizeof($palavras); $i++)
+                                    {{ ($i + 1) }}. {{ $palavras[$i]->palavra }}
+                                @endfor
 
-            @endif
+                                I. @if($unidade->nome == 'UPE - Campus Garanhuns')<p>Universidade de
+                                    Pernambuco</p> @else <p>Universidade Federal do Agreste de Pernambuco</p>@endif
+                                II. Título
 
-            <tr><td> <br> </td></tr>
-            <!-- Parte do CDD -->
-            <tr><td valign=bottom align=right><span style="margin-right: 5px;">CDD {{ $ficha->classificacao }}</span></td></tr>
-        </table></td>
+                                I. @if($unidade->nome == 'UPE - Campus Garanhuns')<p>Universidade de
+                                    Pernambuco</p> @else <p>Universidade Federal do Agreste de Pernambuco</p>@endif
+                                II. Título
+                                </td>
+                        </tr>
 
-    </tr>
+                    @else
+                        <tr>
+                            <td class="recuo">@for ($i = 0; $i < sizeof($palavras); $i++)
+                                    {{ ($i + 1) }}. {{ $palavras[$i]->palavra }}
+                                @endfor I. {{ $documento->sobrenome_orientador }}, {{ $documento->nome_orientador }} (orient.)
+                                @if($documento->titulacao_coorientador != 'Sem Coorientador')II. {{ $documento->sobrenome_coorientador }}, {{ $documento->nome_coorientador }} (coorient.)
+                                III. @if($unidade->nome == 'UPE - Campus Garanhuns')<p>Universidade de
+                                    Pernambuco</p> @else <p>Universidade Federal do Agreste de Pernambuco</p>@endif,
+                                 {{ $documento->programa }} IV. Título
+                                @else
+                                    II. @if($unidade->nome == 'UPE - Campus Garanhuns')<p>Universidade de
+                                        Pernambuco</p> @else <p>Universidade Federal do Agreste de Pernambuco</p>@endif,
+                                      {{ $documento->programa }} III. Título
+                                @endif</td>
 
-</table>
+                        </tr>
 
+                    @endif
+
+                    <tr>
+                        <td><br></td>
+                    </tr>
+                    <!-- Parte do CDD -->
+                    <tr>
+                        <td  align=right><span
+                                style="margin-right: 5px;">CDD {{ $ficha->classificacao }}</span></td>
+                    </tr>
+                </table>
+            </td>
+
+            <td valign=top style="width: 6%"></td>
+        </tr>
+
+    </table>
+</div>
+
+<div class="text-center" style="font-family: 'Times New Roman', Times, serif; font-size: 10px; margin-top: 10px"><span>Elaborado por {{ $userBibliotecario->name }} ({{ $bibliotecario->crb }})</span>
+</div>
 
 </body>
 </html>
