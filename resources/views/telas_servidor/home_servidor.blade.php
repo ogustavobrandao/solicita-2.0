@@ -1,53 +1,109 @@
 @extends('layouts.app')
 @section('conteudo')
 
-<div class="tela-servidor ">
-  <div>@include('componentes.mensagens')</div>
-  <div class="centro-cartao">
-      <label for="cursos" style="margin-left:275px; ">Selecionar Curso</label>
-      <div class="justify-content-right" style="margin-left: 275px">
-        <select name="cursos" id="cursos" onchange="getSelectValue();"
-        class="browser-default custom-select custom-select-lg mb-1" style="width: 400px">
-          @foreach($cursos as $curso)
-              <option id="optionComOValor" value="{{$curso->id}}" onclick="quantidades({{$curso->id}})">{{$curso->nome}}</option>
-          @endforeach
-        </select>
-      </div>
-      <script>
-          function getSelectValue(){
-              var selectedValue = document.getElementById("cursos").value;
-              document.getElementById('cursoIdDeclaracao1').value = selectedValue;
-              document.getElementById('cursoIdDeclaracao2').value = selectedValue;
-              document.getElementById('cursoIdDeclaracao3').value = selectedValue;
-              document.getElementById('cursoIdDeclaracao4').value = selectedValue;
-              document.getElementById('cursoIdDeclaracao5').value = selectedValue;
-              document.getElementById('cursoIdDeclaracao6').value = selectedValue;
-              document.getElementById('cursoIdDeclaracao7').value = selectedValue;
-
-          }
-      </script>
-
-      <div class="card-deck d-flex justify-content-center">
-        <div class="conteudo-central d-flex  justify-content-center align-content-start flex-wrap">
-          <!-- Para a retirada do card "TODOS", foi reduzido o offset do laço para 5, em vez de 6 -->
-          @for($i = 1;$i <= 5; $i++)
-              <a id="click" href="{{ route('listar-requisicoes') }}" onclick="event.preventDefault(); document.getElementById('listar-requisicoes{{$i}}-form').submit();" style="text-decoration:none; color: inherit;">
-                 <div -class="card cartao text-center " style="border-radius: 20px">
-                   <div class="card-body d-flex justify-content-center">
-                     <h3 style="padding-top:20px">{{$tipoDocumento[$i-1]}}</h3>
-                   </div>
-                   <h5 id="quantidades{{$i}}"></h5>
-                 </div>
-              </a>
-              <form id="listar-requisicoes{{$i}}-form" action="{{ route('listar-requisicoes') }}" method="GET" style="display: none;">
-                <input id="cursoIdDeclaracao{{$i}}" type="hidden" name="curso_id" value="1">
-                <input  type="hidden" name="titulo_id" value="{{$i}}">
-              </form>
-          @endfor
+    <div class="container">
+        <div class="row" style="border-bottom: var(--textcolor) 2px solid">
+            <span class="titulo">Solicitações</span>
         </div>
-      </div>
-  </div>
-</div>
+    </div>
+
+    <div class="container">
+        <div>@include('componentes.mensagens')</div>
+        <div class="row my-3 p-1 py-3 align-middle" style="background-color: #C2C2C2; border-radius: 1rem">
+            <div class="col-md-12">
+                <select name="cursos" id="cursos" onchange="getSelectValue();" class="browser-default custom-select custom-select col-md-12">
+                    @foreach($cursos as $curso)
+                        <option id="optionComOValor" value="{{$curso->id}}" onclick="quantidades({{$curso->id}})">{{$curso->nome}}</option>
+                    @endforeach
+                </select>
+                <script>
+                    function getSelectValue(){
+                        var selectedValue = document.getElementById("cursos").value;
+                        document.getElementById('cursoIdDeclaracao1').value = selectedValue;
+                        document.getElementById('cursoIdDeclaracao2').value = selectedValue;
+                        document.getElementById('cursoIdDeclaracao3').value = selectedValue;
+                        document.getElementById('cursoIdDeclaracao4').value = selectedValue;
+                        document.getElementById('cursoIdDeclaracao5').value = selectedValue;
+                        document.getElementById('cursoIdDeclaracao6').value = selectedValue;
+                        document.getElementById('cursoIdDeclaracao7').value = selectedValue;
+
+                    }
+                </script>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row justify-content-between">
+            @for($i = 1;$i <= 5; $i++)
+                @if($i == 1)
+                    <div class="caixaSelecao shadow text-center p-5 my-3" style="background-color: #3C498F">
+                        <a id="click" href="{{ route('listar-requisicoes') }}"
+                           onclick="event.preventDefault(); document.getElementById('listar-requisicoes{{$i}}-form').submit();"
+                           style="text-decoration:none; color: inherit;">
+
+                            <div class="card-body d-flex justify-content-center">
+                                <span class="textoCaixa">{{$tipoDocumento[$i-1]}}</span>
+                            </div>
+                            <span class="textoCaixa2" id="quantidades{{$i}}"></span>
+                        </a>
+                    </div>
+                @elseif($i == 2)
+                    <div class="caixaSelecao shadow text-center p-5 my-3" style="background-color: #102AB8">
+                        <a id="click" href="{{ route('listar-requisicoes') }}"
+                           onclick="event.preventDefault(); document.getElementById('listar-requisicoes{{$i}}-form').submit();"
+                           style="text-decoration:none; color: inherit;">
+
+                            <div class="card-body d-flex justify-content-center">
+                                <span class="textoCaixa">{{$tipoDocumento[$i-1]}}</span>
+                            </div>
+                            <span class="textoCaixa2" id="quantidades{{$i}}"></span>
+                        </a>
+                    </div>
+                @elseif($i==3)
+                    <div class="caixaSelecao shadow text-center p-5 my-3" style="background-color: #4D64DF">
+                        <a id="click" href="{{ route('listar-requisicoes') }}"
+                           onclick="event.preventDefault(); document.getElementById('listar-requisicoes{{$i}}-form').submit();"
+                           style="text-decoration:none; color: inherit;">
+
+                            <div class="card-body d-flex justify-content-center mt-3">
+                                <span class="textoCaixa">{{$tipoDocumento[$i-1]}}</span>
+                            </div>
+                            <span class="textoCaixa2" id="quantidades{{$i}}"></span>
+                        </a>
+                    </div>
+                @elseif($i==4)
+                    <div class="caixaSelecao shadow text-center py-5 px-4 my-3" style="background-color: #102490">
+                        <a id="click" href="{{ route('listar-requisicoes') }}"
+                           onclick="event.preventDefault(); document.getElementById('listar-requisicoes{{$i}}-form').submit();"
+                           style="text-decoration:none; color: inherit;">
+
+                            <div class="card-body d-flex justify-content-center">
+                                <span class="textoCaixa">{{$tipoDocumento[$i-1]}}</span>
+                            </div>
+                            <span class="textoCaixa2" id="quantidades{{$i}}"></span>
+                        </a>
+                    </div>
+                @elseif($i==5)
+                    <div class="caixaSelecao shadow text-center p-5 my-3" style="background-color: #121E5C">
+                        <a id="click" href="{{ route('listar-requisicoes') }}"
+                           onclick="event.preventDefault(); document.getElementById('listar-requisicoes{{$i}}-form').submit();"
+                           style="text-decoration:none; color: inherit;">
+                            <div class="card-body d-flex justify-content-center">
+                                <span class="textoCaixa">{{$tipoDocumento[$i-1]}}</span>
+                            </div>
+                            <span class="textoCaixa2 pb-2" id="quantidades{{$i}}"></span>
+                        </a>
+                    </div>
+                @endif
+                <form id="listar-requisicoes{{$i}}-form" action="{{ route('listar-requisicoes') }}" method="GET"
+                      style="display: none;">
+                    <input id="cursoIdDeclaracao{{$i}}" type="hidden" name="curso_id" value="1">
+                    <input type="hidden" name="titulo_id" value="{{$i}}">
+                </form>
+            @endfor
+        </div>
+    </div>
 
 <script>
     function quantidades(curso){ //id do curso
@@ -91,8 +147,6 @@
       document.getElementById('quantidades3').innerHTML = 'Nº de Requisições: ' + historico;
       document.getElementById('quantidades4').innerHTML = 'Nº de Requisições: ' + programa;
       document.getElementById('quantidades5').innerHTML = 'Nº de Requisições: ' + outros;
-      //document.getElementById('quantidades6').innerHTML = 'Nº de Requisições: ' + concluidos;
-      //document.getElementById('quantidades7').innerHTML = 'Nº de Requisições: ' + indeferidos;
     }
 
     quantidades(document.getElementById('optionComOValor').value);
@@ -107,42 +161,6 @@
       quantidades(document.getElementById('optionComOValor').value);
     })
 
-    //atualizar pagina
-    // var time = 60000; // 60s
-
-    // setTimeout(function(){
-    //    window.location.reload();
-    // }, time);
-
-
 </script>
 @endsection
 
-
-{{--  --}}
-
-{{-- <div class="container-fluid">
-  <div class="row">
-    <div class="col-md-6 col-xl-12">
-      <div class="card-deck">
-        <div class="">
-
-            @for($i = 1;$i <= 6; $i++)
-                <a id="click" href="{{ route('listar-requisicoes') }}" onclick="event.preventDefault(); document.getElementById('listar-requisicoes{{$i}}-form').submit();" style="text-decoration:none; color: inherit;">
-                   <div class="card cartao text-center " style="border-radius: 20px">
-                     <div class="card-body d-flex justify-content-center">
-                       <h3 style="padding-top:20px">{{$tipoDocumento[$i-1]}}</h3>
-                     </div>
-                     <h5 id="quantidades{{$i}}"></h5>
-                   </div>
-                </a>
-                <form id="listar-requisicoes{{$i}}-form" action="{{ route('listar-requisicoes') }}" method="GET" style="display: none;">
-                  <input id="cursoIdDeclaracao{{$i}}" type="hidden" name="curso_id" value="1">
-                  <input  type="hidden" name="titulo_id" value="{{$i}}">
-                </form>
-            @endfor
-          </div>
-      </div>
-    </div>
-  </div>
-</div> --}}

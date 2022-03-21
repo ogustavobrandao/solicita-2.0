@@ -55,6 +55,12 @@ body, html{
     font-size: 23px;
 }
 
+.textoCaixa2{
+    color: white;
+    font-weight: 500;
+    font-size: 17px;
+}
+
 .titulo{
     color: var(--textcolor);
     font-size: 40px;
@@ -137,5 +143,32 @@ body, html{
     font-weight: 600;
     font-size: 30px;
     border-bottom: 2px solid var(--textcolor);
-    margin-bottom: 0px;
+}
+
+.search-input{
+    height: 70%;
+    width: 90%;
+    border: none;
+    outline: none;
+}
+
+html {
+    overflow: hidden;
+    height: 100%;
+}
+body {
+    overflow: auto;
+    height: 100%;
+}
+
+body.modal-open {
+    overflow: auto;
+}
+body.modal-open[style] {
+    padding-right: 0px !important;
+}
+
+.modal::-webkit-scrollbar {
+    width: 0 !important; /removes the scrollbar but still scrollable/
+    /* reference: http://stackoverflow.com/a/26500272/2259400 */
 }
