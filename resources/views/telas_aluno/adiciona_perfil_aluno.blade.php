@@ -2,10 +2,7 @@
 
 @section('conteudo')
 <div class="container-fluid background-blue">
-  <div class="row justify-content-center">
-    <div>@include('componentes.mensagens')</div>
-  </div>
-  
+
   <div class="row justify-content-center">
     <div class="col-sm-3">
       <div class="card card-cadastro">

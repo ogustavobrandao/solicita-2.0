@@ -2,7 +2,6 @@
 @section('conteudo')
 
 <div class="tela-servidor ">
-  <div>@include('componentes.mensagens')</div>
   <div class="centro-cartao">
       <label for="cursos" style="margin-left:275px; ">Selecionar Curso</label>
       <div class="justify-content-right" style="margin-left: 275px">

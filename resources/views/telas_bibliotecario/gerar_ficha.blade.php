@@ -148,8 +148,8 @@
                     <tr>
                         <td class="recuo">@if(strlen($ficha->titulo) > 160){{substr($ficha->titulo, 0, strpos($ficha->titulo, ' ', 160 )).'...' }} @else{{$ficha->titulo}} @endif  @if($ficha->subtitulo != null)
                                 : {{ $ficha->subtitulo }}@endif
-                            / {{ $ficha->autor_nome . ' ' . $ficha->autor_sobrenome . '.'}} – {{ $ficha->local }}
-                            , {{ $ficha->ano }}.
+                            / {{ $ficha->autor_nome . ' ' . $ficha->autor_sobrenome . '.'}} – {{ $ficha->local }},
+                             {{ $ficha->ano }}.
                         </td>
                     </tr>
                     <tr>
@@ -180,13 +180,11 @@
                         <!-- Parte da tese -->
                     @elseif($tipo_documento == 'Tese')
                         <tr>
-                            <td class="recuo" style="padding-top: 10px">
-                                Orientador(a): {{ $documento->nome_orientador }} {{ $documento->sobrenome_orientador }}.
+                            <td class="recuo" style="padding-top: 10px">Orientador(a): {{ $documento->nome_orientador }} {{ $documento->sobrenome_orientador }}.
                             </td>
                         </tr>
                         <tr>
-                            <td class="recuo">@if($documento->nome_coorientador != null)
-                                    Coorientador(a):  {{ $documento->nome_coorientador }} {{ $documento->sobrenome_coorientador }}
+                            <td class="recuo">@if($documento->nome_coorientador != null)Coorientador(a):  {{ $documento->nome_coorientador }} {{ $documento->sobrenome_coorientador }}
                                     . @endif
                             </td>
                         </tr>
@@ -242,13 +240,11 @@
                         <!-- Parte da Dissertacao -->
                     @else
                         <tr>
-                            <td class="recuo" style="padding-top: 10px">
-                                Orientador(a): {{ $documento->nome_orientador }} {{ $documento->sobrenome_orientador }}.
+                            <td class="recuo" style="padding-top: 10px">Orientador(a): {{ $documento->nome_orientador }} {{ $documento->sobrenome_orientador }}.
                             </td>
                         </tr>
                         <tr>
-                            <td class="recuo">@if($documento->nome_coorientador != null)
-                                    Coorientador(a): {{ $documento->nome_coorientador }} {{ $documento->sobrenome_coorientador }}
+                            <td class="recuo">@if($documento->nome_coorientador != null)Coorientador(a): {{ $documento->nome_coorientador }} {{ $documento->sobrenome_coorientador }}
                                     . @endif</td>
                         </tr>
                         <tr>
@@ -276,7 +272,7 @@
                             <td class="recuo" style="padding-top: 10px">@for ($i = 0; $i < sizeof($palavras); $i++){{ ($i + 1) }}. {{ $palavras[$i]->palavra }}
                                 @endfor I. {{ $documento->sobrenome_orientador }}, {{ $documento->nome_orientador }}
                                 (orient.)
-                                @if($documento->titulacao_coorientador != 'Sem Coorientador')
+                                @if($documento->nome_coorientador != null)
                                     II. {{ $documento->sobrenome_coorientador }}, {{ $documento->nome_coorientador }}
                                     (coorient.)
                                     III. @if($unidade->nome == 'UPE - Campus Garanhuns')<p>Universidade de
@@ -295,7 +291,7 @@
                             <td class="recuo" style="padding-top: 10px">@for ($i = 0; $i < sizeof($palavras); $i++){{ ($i + 1) }}. {{ $palavras[$i]->palavra }}
                                 @endfor I. {{ $documento->sobrenome_orientador }}, {{ $documento->nome_orientador }}
                                 (orient.)
-                                @if($documento->titulacao_coorientador != 'Sem Coorientador')
+                                @if($documento->nome_coorientador != null)
                                     II. {{ $documento->sobrenome_coorientador }}, {{ $documento->nome_coorientador }}
                                     (coorient.)
                                     III. @if($unidade->nome == 'UPE - Campus Garanhuns')<p>Universidade de
@@ -312,7 +308,7 @@
                         <tr>
                             <td class="recuo" style="padding-top: 10px">@for ($i = 0; $i < sizeof($palavras); $i++){{ ($i + 1) }}. {{ $palavras[$i]->palavra }}
                                 @endfor I. {{ $documento->sobrenome_orientador }}, {{ $documento->nome_orientador }}(orient.)
-                                @if($documento->titulacao_coorientador != 'Sem Coorientador')
+                                @if($documento->nome_coorientador != null)
                                     II. {{ $documento->sobrenome_coorientador }}, {{ $documento->nome_coorientador }}(coorient.)
                                     III. @if($unidade->nome == 'UPE - Campus Garanhuns')<p>Universidade de
                                         Pernambuco</p> @else <p>Universidade Federal do Agreste De Pernambuco</p>@endif
@@ -331,7 +327,7 @@
                             <td class="recuo" style="padding-top: 10px">@for ($i = 0; $i < sizeof($palavras); $i++){{ ($i + 1) }}. {{ $palavras[$i]->palavra }}
                                 @endfor I. {{ $documento->sobrenome_orientador }}, {{ $documento->nome_orientador }}
                                 (orient.)
-                                @if($documento->titulacao_coorientador != 'Sem Coorientador')
+                                @if($documento->nome_coorientador != null)
                                     II. {{ $documento->sobrenome_coorientador }}, {{ $documento->nome_coorientador }}
                                     (coorient.)
                                     III. @if($unidade->nome == 'UPE - Campus Garanhuns')<p>Universidade de

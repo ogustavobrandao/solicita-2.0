@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('conteudo')
-<div>@include('componentes.mensagens')</div>
 <div class="container-fluid" style="min-height:100vh">
 
   {{-- <div class="row jusify-content-center d-flex justify-content-center">
@@ -21,14 +20,14 @@
   <div class="row justify-content-center">
     <div class="col-sm-10">
       <table class="table table-responsive-lg table-borderless" id="table">
-          <thead class="lmts-primary " style="border-color:#1B2E4F;">  
+          <thead class="lmts-primary " style="border-color:#1B2E4F;">
                 <tr>
                     <th scope="col" align="center">#</th>
                     <th scope="col" align="center" class="titleColumn" onclick="sortTable(0)" style="cursor:pointer">CURSO<img src="{{asset('images/sort.png')}}" style="height:15px"></th>
                     <th scope="col" align="center" class="titleColumn" onclick="sortTable(1)" style="cursor:pointer">DATA E HORA DA REQUISIÇÃO<img src="{{asset('images/sort.png')}}" style="height:15px"></th>
                     <th scope="col" align="center" style="cursor:pointer">DOCUMENTOS SOLICITADOS</th>
                     <th scope="col" align="center" style="cursor:pointer">STATUS</th>
-                    
+
                 </tr>
           </thead>
           <tbody>
@@ -43,7 +42,7 @@
                   @endforeach
                 </td>
                 <td>{{date_format(date_create($r->data_pedido), 'd/m/Y')}}, {{$r->hora_pedido}}</td>
-                
+
                 <td>
                   <ol style="margin-left:-30px">
                     @foreach($requisicoes_documentos as $rd)
@@ -56,25 +55,25 @@
                                         {{$d->tipo}}
                                         <a data-toggle="tooltip" data-placement="left" title="Informações:{{$rd['detalhes']}} ">
                                           {{-- Status do indeferimento com imagem do olho --}}
-                                          <span onclick="exibirAnotacoes('dlgPrograma')" class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> 
+                                          <span onclick="exibirAnotacoes('dlgPrograma')" class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
                                           @component('componentes.popup', ["titulo"=>"Informações", "conteudo"=>$rd->detalhes,"id"=>"dlgPrograma"])
-                                          @endcomponent                             
+                                          @endcomponent
                                         </a>
-    
-                                      @elseif($d->tipo == "Outros") 
+
+                                      @elseif($d->tipo == "Outros")
                                         {{$d->tipo}}
                                         <a data-toggle="tooltip" data-placement="left" title="Informações:{{$rd['detalhes']}} ">
                                           {{-- Status do indeferimento com imagem do olho --}}
-                                          <span onclick="exibirAnotacoes('dlgOutros')" class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> 
+                                          <span onclick="exibirAnotacoes('dlgOutros')" class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
                                           @component('componentes.popup', ["titulo"=>"Informações", "conteudo"=>$rd->detalhes, "id"=>"dlgOutros"])
-                                          @endcomponent                             
+                                          @endcomponent
                                         </a>
-    
-    
+
+
                                       @else
-    
+
                                         {{$d->tipo}}
-                                        
+
                                       @endif
                                     </li>
                                   @endif
@@ -83,12 +82,12 @@
                     @endforeach
                   </ol>
                 </td>
-                
+
                 <td align="center">
                   @php
                     $tudoAndamento = true
                   @endphp
-                  
+
                   <ol>
                   @foreach($requisicoes_documentos as $rd)
                     @if($rd->requisicao_id == $r->id)
@@ -122,17 +121,17 @@
                             <li style="color:red">
                               {{$rd->status}}
                               <a data-toggle="tooltip" data-placement="left" title="Seu pedido foi Indeferido pelo(s) seguinte(s) motivo: {{$rd->anotacoes}}">
-                                  <span onclick="exibirAnotacoes({{$rd->id}})" class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> 
+                                  <span onclick="exibirAnotacoes({{$rd->id}})" class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
                                   @component('componentes.popup', ["titulo"=>"Seu pedido foi Indeferido pelo(s) seguinte(s) motivo:" ,"conteudo" => $rd->anotacoes, "id"=>$rd->id ])
-                                  @endcomponent                             
-                              </a>                          
+                                  @endcomponent
+                              </a>
                             </li>
                         @endif
                       @endif
                   @endforeach
                   </ol>
                 </td>
-                
+
             </tr>
           @endforeach
           </tbody>
@@ -143,11 +142,11 @@
   <div class="row justify-content-center" align="center">
     <div class="col-sm-12">
       <form method="GET" action="{{ url()->previous() }}">
-  
+
         <button type="submit"class="btn btn-primary btn-primary-lmts" align="center" style="margin-bottom:20px">
         {{ __('Voltar para o Inicio') }}
         </button>
-      </form>    
+      </form>
 
     </div>
   </div>
@@ -223,14 +222,14 @@
         }
       }
 
-      function exibirAnotacoes(id){ 
+      function exibirAnotacoes(id){
         var s = '#'+id;
         $(s).modal('show');
-        console.log(s) 
-    
+        console.log(s)
+
       }
 
-      
+
 
     </script>
 
