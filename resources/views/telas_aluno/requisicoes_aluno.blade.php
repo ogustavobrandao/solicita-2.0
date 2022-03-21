@@ -2,7 +2,6 @@
 
 @section('conteudo')
 
-    <div>@include('componentes.mensagens')</div>
     <div class="container-fluid" style="min-height:100vh">
 
         {{-- <div class="row jusify-content-center d-flex justify-content-center">
