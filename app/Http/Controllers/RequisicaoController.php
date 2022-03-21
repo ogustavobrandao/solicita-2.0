@@ -188,6 +188,8 @@ class RequisicaoController extends Controller
         $ficha->folhas = $request->folhas;
         $ficha->ilustracao = $request->ilustracao;
         $ficha->tipo_documento_id = $request->tipo_documento;
+        $ficha->inclui_anexo = $request->inclui_anexo;
+        $ficha->inclui_apendice = $request->inclui_apendice;
         //Anexar arquivo
         if (($request->hasFile('anexo') && $request->file('anexo')->isValid())) {
 
@@ -225,6 +227,11 @@ class RequisicaoController extends Controller
             $programaEduc->programa = $request->programa;
             $programaEduc->campus = $unidade->nome;
             $programaEduc->ficha_catalografica_id = $ficha->id;
+            $programaEduc->nome_orientador = $request->nome_orientador;
+            $programaEduc->sobrenome_orientador = $request->sobrenome_orientador;
+            $programaEduc->nome_coorientador = $request->nome_coorientador;
+            $programaEduc->sobrenome_coorientador = $request->sobrenome_coorientador;
+            $programaEduc->produto = $request->produto;
             $programaEduc->save();
         } elseif ($request->tipo_documento == 1) {
             $dissertacao = new Dissertacao();

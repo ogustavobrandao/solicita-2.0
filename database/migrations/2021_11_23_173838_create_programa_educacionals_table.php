@@ -19,6 +19,13 @@ class CreateProgramaEducacionalsTable extends Migration
             $table->string('programa');
             $table->string('campus');
 
+            $table->string('nome_orientador');
+            $table->string('sobrenome_orientador');
+            $table->string('nome_coorientador')->nullable();
+            $table->string('sobrenome_coorientador')->nullable();
+
+            $table->string('produto');
+
             $table->unsignedBigInteger('ficha_catalografica_id');
             $table->foreign('ficha_catalografica_id')->references('id')->on('ficha_catalograficas');
         });
