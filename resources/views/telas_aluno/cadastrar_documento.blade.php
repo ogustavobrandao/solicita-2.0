@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('conteudo')
-    <!-- @section('navbar2.blade.php')
-    Home
-@endsection -->
+@section('navbar2.blade.php')
+
+@endsection
 
 <div class="container">
     <div class="row justify-content-center">
@@ -74,11 +74,9 @@
                                        placeholder="Digite o Título" value="" required>
                             </div>
                             <div class="form-group">
-                                <label for="subtitulo">Subtítulo: <span style="color: red">@if($tipo_documento != 1 && $tipo_documento != 5)
-                                            * @endif</span> </label>
+                                <label for="subtitulo">Subtítulo:</label>
                                 <input type="text" class="form-control" id="subtitulo" name="subtitulo"
-                                       placeholder="Digite o Subtítulo" value=""
-                                       @if($tipo_documento != 1 && $tipo_documento != 5) required @endif>
+                                       placeholder="Digite o Subtítulo" value="">
                             </div>
                             <div class="form-group">
                                 <label for="local">Local: <span style="color: red">*</span></label>
@@ -114,6 +112,29 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="row justify-content-between">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="inclui_anexo">Inclui Anexo ? <span style="color: red">*</span></label>
+                                        <select class="form-control" id="inclui_anexo" name="inclui_anexo">
+                                            <option value="0">Não</option>
+                                            <option value="1">Sim</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="inclui_apendice">Inclui Apendice ? <span style="color: red">*</span></label>
+                                        <select class="form-control" id="inclui_apendice" name="inclui_apendice">
+                                            <option value="0">Não</option>
+                                            <option value="1">Sim</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="form-group">
                                 <label for="anexoArquivo">Anexar os elementos pré-textuais: <span
                                         style="color: red">*</span>
@@ -239,14 +260,73 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-12 textoFicha py-2">
+                            <div class="col-md-12 py-2 textoFicha">
+                                <div class="form-group">
+                                    <label for="nome_orientador">Nome do Orientador: <span
+                                            style="color: red">*</span></label>
+                                    <input type="text" class="form-control" id="nome_orientador" name="nome_orientador"
+                                           placeholder="Digite o Nome do Orientador" value="" required>
+                                </div>
 
+                                <div class="form-group">
+                                    <label for="sobrenome_orientador">Sobrenome do Orientador: <span style="color: red">*</span></label>
+                                    <input type="text" class="form-control" id="sobrenome_orientador"
+                                           name="sobrenome_orientador"
+                                           placeholder="Digite o Sobrenome do Orientador" value="" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="nome_coorientador">Nome do Coorientador: </label>
+                                    <input type="text" class="form-control" id="nome_coorientador"
+                                           placeholder="Digite o Nome do Coorientador" value=""
+                                           name="nome_coorientador">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="sobrenome_coorientador">Sobrenome do Coorientador: </label>
+                                    <input type="text" class="form-control" id="sobrenome_coorientador"
+                                           placeholder="Digite o Sobrenome do Coorientador" value=""
+                                           name="sobrenome_coorientador">
+                                </div>
                                 <div class="form-group">
                                     <label for="programa">Nome do Programa de Pós-Graduação <span
                                             style="color: red">*</span></label>
                                     <input type="text" class="form-control" id="programa" name="programa"
                                            placeholder="Digite o Nome do Programa" value="">
                                 </div>
+                                <div class="row justify-content-between">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="tipo_curso">Selecione o Tipo do Produto: <span
+                                                    style="color: red">*</span></label>
+                                            <select class="form-control" aria-label="Selecione o tipo do produto"
+                                                    name="produto" id="produto">
+                                                <option value="produto_bibliografico">Produto Bibliográfico</option>
+                                                <option value="ativos_propriedade">Ativos de Propriedade (Ex: Patente, Marca e etc.)</option>
+                                                <option value="tecnologia_social">Tecnologia Social</option>
+                                                <option value="curso_formacao">Curso para Formação Profissional</option>
+                                                <option value="produto_editoracao">Produto de Editoração</option>
+                                                <option value="material_didatico">Material Didático</option>
+                                                <option value="software">Software/Aplicativo (Programa de computador)</option>
+                                                <option value="evento">Evento Organizado</option>
+                                                <option value="norma">Norma ou Marco Regulatório</option>
+                                                <option value="relatorio">Relatório técnico conclusivo</option>
+                                                <option value="manual">Manual/Protocolo</option>
+                                                <option value="traducao">Tradução</option>
+                                                <option value="acervo">Acervo</option>
+                                                <option value="base_dados">Base de dados técnico-científica</option>
+                                                <option value="cultivar">Cultivar</option>
+                                                <option value="produto_comunicacao">Produto de Comunicação</option>
+                                                <option value="carta">Carta, mapa ou simila</option>
+                                                <option value="produto_sigilo">Produtos/Processos em Sigilo</option>
+                                                <option value="taxonomia">Taxonomias, Ontologias e Tesauros</option>
+                                                <option value="empresa_social">Empresa ou Organização Social Inovadora</option>
+                                                <option value="processo">Processo / Tecnologia e Produto / Material não patenteáveis</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>
