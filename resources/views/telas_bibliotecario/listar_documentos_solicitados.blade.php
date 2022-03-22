@@ -73,19 +73,19 @@
                        style="background-color: white; border: 0; border-radius: 1rem" id="table">
                     <thead>
                     <tr>
-                        <th scope="col" align="center">#</th>
-                        <th scope="col" align="center" class="titleColumn"
+                        <th class="text-center" scope="col" align="center">#</th>
+                        <th class="text-center" scope="col" align="center" class="titleColumn"
                             style="cursor:pointer">Autor
                         </th>
-                        <th scope="col" align="center" class="titleColumn"
+                        <th class="text-center" scope="col" align="center" class="titleColumn"
                             style="cursor:pointer">Tipo do Documento
                         </th>
-                        <th scope="col" align="center" class="titleColumn"
+                        <th class="text-center" scope="col" align="center" class="titleColumn"
                             style="cursor:pointer">Data da Requisição
                         </th>
-                        <th scope="col" align="center">Status</th>
-                        <th scope="col" align="center">Ação</th>
-                        <th scope="col" align="center">Data de análise</th>
+                        <th class="text-center" scope="col" align="center">Status</th>
+                        <th class="text-center" scope="col" align="center">Ação</th>
+                        <th class="text-center" scope="col" align="center">Data de análise</th>
 
                     </tr>
                     </thead>
@@ -94,23 +94,23 @@
                         @foreach($fichas as $ficha)
                             @if($ficha->id == $requisicao->ficha_catalografica_id)
                                 <tr>
-                                    <td scope="row">
+                                    <td align="center" scope="row">
                                         {{$requisicao->id}}
                                     </td>
-                                    <td>
+                                    <td align="center">
                                         {{$ficha->autor_nome}}
                                     </td>
-                                    <td>
+                                    <td align="center">
                                         @if ($ficha->tipo_documento_id == 2)Monografia
                                         @elseif ($ficha->tipo_documento_id == 4)Tese
                                         @elseif ($ficha->tipo_documento_id == 3)Produto Educacional
                                         @elseif ($ficha->tipo_documento_id == 1)Dissertação
                                         @endif
                                     </td>
-                                    <td>
+                                    <td align="center">
                                         {{ date('d/m/Y H:i:s', strtotime($ficha->created_at)) }}
                                     </td>
-                                    <td>
+                                    <td align="center">
                                         @if($requisicao->status == 'Concluido')<p style="color: #1d643b; "><strong>Concluido</strong>
                                         </p>
                                         @elseif($requisicao->status == 'Em andamento')<p style="color: #857b26"><strong>Em
@@ -119,7 +119,7 @@
                                         </p>
                                         @endif
                                     </td>
-                                    <td>
+                                    <td align="center">
                                         @if($requisicao->status == 'Em andamento')
                                             @if($requisicao->bibliotecario_id != null)
                                                 <a class="btn" href="{{ route('editar-ficha', $requisicao->id) }}">
@@ -187,7 +187,7 @@
                                             </div>
                                         @endif
                                     </td>
-                                    <td>
+                                    <td align="center">
                                         @if($requisicao->status != 'Em andamento')
                                             {{ date('d/m/Y H:i:s', strtotime($requisicao->updated_at)) }}
                                         @endif
