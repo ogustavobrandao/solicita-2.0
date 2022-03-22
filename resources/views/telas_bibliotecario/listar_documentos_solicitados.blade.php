@@ -30,23 +30,23 @@
                         @foreach($fichas as $ficha)
                             @if($ficha->id == $requisicao->ficha_catalografica_id)
                                 <tr>
-                                    <td align="center" scope="row">
+                                    <td class="align-middle text-center" scope="row">
                                         {{$requisicao->id}}
                                     </td>
-                                    <td align="center">
+                                    <td class="align-middle text-center">
                                         {{$ficha->autor_nome}}
                                     </td>
-                                     <td class="text-center">
+                                     <td class="align-middle text-center">
                                         @if ($ficha->tipo_documento_id == 2)Monografia
                                         @elseif ($ficha->tipo_documento_id == 4)Tese
                                         @elseif ($ficha->tipo_documento_id == 3)Produto Educacional
                                         @elseif ($ficha->tipo_documento_id == 1)Dissertação
                                         @endif
                                     </td>
-                                    <td align="center">
+                                    <td class="align-middle text-center">
                                         {{ date('d/m/Y H:i:s', strtotime($ficha->created_at)) }}
                                     </td>
-                                    <td align="center">
+                                    <td class="align-middle text-center">
                                         @if($requisicao->status == 'Concluido')<p style="color: #1d643b; "><strong>Concluido</strong>
                                         </p>
                                         @elseif($requisicao->status == 'Em andamento')<p style="color: #857b26"><strong>Em
@@ -55,19 +55,23 @@
                                         </p>
                                         @endif
                                     </td>
-                                    <td align="center">
+                                    <td class="align-middle text-center btn-group">
+                                        <?php
+                                        $data_bibi = date_create_from_format('Y-m-d H:i:s', $requisicao->updated_at);
+                                        $data_agora = date_create_from_format('Y-m-d H:i:s', date('Y-m-d H:i:s'));
+                                        ?>
                                         @if($requisicao->status == 'Em andamento')
-                                            @if($requisicao->bibliotecario_id != null)
+                                            @if($requisicao->bibliotecario_id != null && (date_diff($data_bibi, $data_agora)->h < 2))
                                                 <a class="btn" href="{{ route('editar-ficha', $requisicao->id) }}">
-                                                    <img src="images/botao_editar.svg" height="40px" title="Botão de Editar - Edição não permitida">
+                                                    <img src="images/botao_editar_proibido.svg" height="30px" title="Botão de Editar - Alguém já está editando">
                                                 <a class="btn rounded-0" href="{{ route('visualizar-ficha', $requisicao->id) }}">
-                                                    <img src="images/botao_editar.svg" height="40px" title="Botão de Editar - Edição permitida">
+                                                    <img src="images/botao_visualizar.svg" height="30px" title="Botão de Visualizar Ficha">
                                                 </a>
                                             @else
-                                                <a class="btn rounded-0" href="{{ route('editar-ficha', $requisicao->id) }}">
-                                                    <img src="images/botao_editar.svg" height="40px" title="Botão de Editar - Edição permitida">
-                                                <a class="btn rounded-0" href="{{ route('visualizar-ficha', $requisicao->id) }}">
-                                                    <img src="images/botao_editar.svg" height="40px" title="Botão de Editar - Edição permitida">
+                                                <a class="btn" href="{{ route('editar-ficha', $requisicao->id) }}">
+                                                    <img src="images/botao_editar.svg" height="30px" title="Botão de Editar - Edição permitida">
+                                                <a class="btn" href="{{ route('visualizar-ficha', $requisicao->id) }}">
+                                                <img src="images/botao_visualizar.svg" height="30px" title="Botão de Visualizar Ficha">
                                                 </a>
 
                                             @endif
@@ -75,13 +79,13 @@
 
                                         @if($requisicao->status == 'Concluido')
                                             <a class="btn" href="{{ route('visualizar-ficha', $requisicao->id) }}">
-                                                <img src="images/botao_editar.svg" height="40px" title="Botão de Editar - Edição permitida">
+                                                <img src="images/botao_visualizar.svg" height="30px" title="Botão de Visualizar Ficha">
                                             </a>
                                         @endif
                                         @if($requisicao->status == 'Rejeitado')
                                             <a class="btn" data-toggle="modal"
                                                data-target="#exampleModal{{$requisicao->id}}">
-                                                <img src="images/botao_info.svg" height="40px" title="Botão de Informação">
+                                                <img src="images/botao_info.svg" height="30px" title="Botão de Informação">
                                             </a>
                                             <!-- Modal -->
                                             <div class="modal fade" id="exampleModal{{$requisicao->id}}"
@@ -123,7 +127,7 @@
                                             </div>
                                         @endif
                                     </td>
-                                    <td class="text-center">
+                                    <td class="align-middle text-center">
                                         @if($requisicao->status != 'Em andamento')
                                             {{ date('d/m/Y H:i:s', strtotime($requisicao->updated_at)) }}
                                         @endif

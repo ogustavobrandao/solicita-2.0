@@ -67,10 +67,6 @@ class BibliotecarioController extends Controller
         $tipo_documento = $fichaCatalografica->tipo_documento_id;
         $documentoEspecificoNome = TipoDocumento::where('id', $tipo_documento)->first()->tipo;
         $bibliotecario = Bibliotecario::find($requisicao->bibliotecario_id);
-        $bibli = Bibliotecario::where('user_id', Auth::user()->id)->first();
-
-        $data_bibi = date_create_from_format('Y-m-d H:i:s', $requisicao->updated_at);
-        $data_agora = date_create_from_format('Y-m-d H:i:s', date('Y-m-d H:i:s'));
 
         if ($documentoEspecificoNome == 'Monografia')
             $documento = Monografia::where('ficha_catalografica_id', $fichaCatalografica->id)->first();
