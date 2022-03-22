@@ -620,18 +620,12 @@
 </div>
 
 <script>
-    $('#formRequisicao').submit(function (e) {
-            e.preventDefault();
-    });
-
     $("#btn_gerar_ficha").on("click",function () {
         $('#formRequisicao').attr("action", "{{route('preview')}}");
-        $('#formRequisicao').submit();
     });
 
     $("#btn_enviar_ficha").click(function () {
         $('#formRequisicao').attr("action", "{{route('atualizar-ficha')}}");
-        $('#formRequisicao').submit();
     });
 
     var sel = $('#produto');
