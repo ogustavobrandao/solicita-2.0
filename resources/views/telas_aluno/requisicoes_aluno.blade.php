@@ -1,55 +1,42 @@
 @extends('layouts.app')
 
 @section('conteudo')
-
-    <div class="container-fluid" style="min-height:100vh">
-
-        {{-- <div class="row jusify-content-center d-flex justify-content-center">
-          <div class="col-sm-10">
-            <div class="alert alert-danger" role="alert">
-              <h3 align="center">Atenção</h3>
-            <h4 align="center">A entrega dos documentos solicitados está condicionada a apresentação de <b>Documento Oficial com foto</b>!</h4>
-            </div>
-          </div>
-        </div>
-       --}}
+    <div class="container">
         <div class="row justify-content-sm-center">
-            <div class="col-sm-10">
-                <h2 class="tituloTabela">{{Auth::user()->name}}</h2>
+            <div class="col-md-11">
+                <h2 class="tituloListagem">Suas Requisições</h2>
             </div>
         </div>
+
         <div class="row justify-content-center">
-            <div class="col-sm-10">
-                <table class="table table-responsive-lg table-borderless" id="table">
-                    <thead class="lmts-primary " style="border-color:#1B2E4F;">
+            <div class="col-md-11">
+                <table class="table table-borderless shadow table-hover mb-2" style="border-radius: 1rem; background-color: white; border: none" id="table">
+                    <thead>
                     <tr>
                         <th scope="col" align="center">#</th>
-                        <th scope="col" align="center" class="titleColumn" onclick="sortTable(0)"
-                            style="cursor:pointer">CURSO<img src="{{asset('images/sort.png')}}" style="height:15px">
+                        <th scope="col" align="center" class="titleColumn text-center" style="cursor: pointer">Curso
                         </th>
-                        <th scope="col" align="center" class="titleColumn" onclick="sortTable(1)"
-                            style="cursor:pointer">DATA E HORA DA REQUISIÇÃO<img src="{{asset('images/sort.png')}}"
-                                                                                 style="height:15px"></th>
-                        <th scope="col" align="center" style="cursor:pointer">DOCUMENTOS SOLICITADOS</th>
-                        <th scope="col" align="center" style="cursor:pointer">STATUS</th>
-                        <th scope="col" align="center">AÇÃO</th>
+                        <th scope="col" align="center" class="titleColumn text-center" style="cursor:pointer;">Data e Hora</th>
+                        <th class="text-center" scope="col" align="center" style="cursor:pointer">Tipo de Documento</th>
+                        <th class="text-center" scope="col" align="center" style="cursor:pointer">Status</th>
+                        <th class="text-center" scope="col" align="center">Ação</th>
                     </tr>
                     </thead>
                     <tbody>
                     @foreach($requisicoes as $r)
                         <tr>
-                            <th scope="row">{{$r->id}}</th>
-                            <td>
+                            <th class="align-middle" scope="row">{{$r->id}}</th>
+                            <td class="align-middle text-center">
                                 @foreach($perfis as $p)
                                     @if($p->id == $r->perfil_id)
                                         {{$p->default}}
                                     @endif
                                 @endforeach
                             </td>
-                            <td>{{date_format(date_create($r->data_pedido), 'd/m/Y')}}, {{$r->hora_pedido}}</td>
+                            <td class="text-center align-middle">{{date_format(date_create($r->data_pedido), 'd/m/Y')}}, {{$r->hora_pedido}}</td>
 
-                            <td>
-                                <ol style="margin-left:-30px">
+                            <td class="align-middle text-center">
+                                <ul class="list-group-item" style="list-style: none; border: none">
                                 @foreach($requisicoes_documentos as $rd)
                                     @if($rd->requisicao_id == $r->id)
                                         <!-- Documentos Solicitados -->
@@ -105,20 +92,20 @@
                                             @endforeach
                                         @endif
                                     @endforeach
-                                </ol>
+                                </ul class="list-group-item">
                             </td>
 
-                            <td align="center">
+                            <td class="text-center align-middle" style="width: 20%">
                                 @php
                                     $tudoAndamento = true
                                 @endphp
 
-                                <ol>
+                                <ul class="list-group-item justify-content-center" style="list-style: none; border: none">
                                 @foreach($requisicoes_documentos as $rd)
                                     @if($rd->requisicao_id == $r->id)
                                         <!-- Documentos Solicitados -->
                                             @if($rd->status=="Em andamento")
-                                                <li style="color:#db6700">
+                                                <li class="my-1" style="color:#D07D00; background-color: #FBBC04; border-radius: 0.5rem">
                                                     {{$rd->status}}
                                                     <span class="glyphicon glyphicon-time"
                                                           style="overflow: hidden; color:#db6700"
@@ -131,13 +118,14 @@
                                                 @php
                                                     $tudoAndamento = false
                                                 @endphp
-                                                <li style="color:green">
+                                                <li style="color:#00650A; background-color: var(--confirmar); border-radius: 0.5rem">
                                                     {{$rd->status}}
                                                     <span class="glyphicon glyphicon-ok-sign"
                                                           style="overflow: hidden; color:green"
                                                           data-toggle="tooltip" data-placement="top"
                                                           title="Seu documento está disponível para a retirada.">
-                          </span>
+
+                                                    </span>
                                                 </li>
                                             @endif
                                             {{-- Status do indeferimento com imagem do olho --}}
@@ -145,7 +133,7 @@
                                                 @php
                                                     $tudoAndamento = false
                                                 @endphp
-                                                <li style="color:red">
+                                                <li style="color: #1C477E; background-color: #438EEF; border-radius: 0.5rem;">
                                                     {{$rd->status}}
                                                     <a data-toggle="tooltip" data-placement="left"
                                                        title="Seu pedido foi Indeferido pelo(s) seguinte(s) motivo: {{$rd->anotacoes}}">
@@ -159,31 +147,27 @@
                                             @endif
                                             {{-- Status ficha Concluida --}}
                                             @if($rd->status == "Concluido")
-                                                <li style="color:darkgreen">
+                                                <li style="color:#00650A; background-color: var(--confirmar); border-radius: 0.5rem">
                                                     {{ $rd->status }}
                                                 </li>
                                             @endif
                                             @if($rd->status == "Rejeitado")
-                                                <li style="color: darkred">
-                                                    @if($rd->status == 'Rejeitado')
-                                                        Indeferido
-                                                    @else
-                                                        {{ $rd->status }}
-                                                    @endif
+                                                <li style="color: #BE0303; background-color: var(--destaque); border-radius: 0.5rem;">
+                                                    {{ $rd->status }}
                                                     <a data-toggle="tooltip" data-placement="left"
-                                                       title="Seu pedido foi indeferido pelo(s) seguinte(s) motivo: {{$rd->anotacoes}}">
+                                                       title="Seu pedido foi rejeitado pelo(s) seguinte(s) motivo: {{$rd->anotacoes}}">
                                                         <span onclick="exibirAnotacoes({{$rd->id}})"
                                                               class="glyphicon glyphicon-eye-open"
                                                               aria-hidden="true"></span>
-                                                    @component('componentes.popup', ["titulo"=>"Seu pedido foi indeferido pelo(s) seguinte(s) motivo:" ,"conteudo" => $rd->anotacoes, "id"=>$rd->id ])
+                                                    @component('componentes.popup', ["titulo"=>"Seu pedido foi rejeitado pelo(s) seguinte(s) motivo:" ,"conteudo" => $rd->anotacoes, "id"=>$rd->id ])
                                                     @endcomponent
                                                 </li>
                                             @endif
                                         @endif
                                     @endforeach
-                                </ol>
+                                </ul>
                             </td>
-                            <td align="center">
+                            <td class="text-center align-middle">
                                 <form id="formExcluirRequisicao" onclick="confirmarExclusao()"
                                       action="{{route('excluir-requisicao',$r->id)}}" method="POST">
                                     @csrf
@@ -210,101 +194,53 @@
                 </table>
             </div>
         </div>
-
-        <div class="row justify-content-center" align="center">
-            <div class="col-sm-12">
-                <form method="GET" action="{{ route('home-aluno') }}">
-
-                    <button type="submit" class="btn btn-primary btn-primary-lmts" align="center"
-                            style="margin-bottom:20px">
-                        {{ __('Voltar para o Inicio') }}
-                    </button>
-                </form>
-
-            </div>
-        </div>
-
     </div>
 
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-11">
+                <a class="btn btn-secondary" href="{{ route('cancela-requisicao')}}" style="background-color: var(--padrao); border-radius: 0.5rem; color: white; font-size: 17px">
+                    {{ ('Voltar') }}
+                </a>
+            </div>
+        </div>
+    </div>
 
     <script>
-        function confirmarExclusao() {
-            confirma = confirm('Você tem certeza que deseja excluir esta requisição?');
-            if (confirma) {
-                document.getElementById("formExcluirRequisicao").submit();
-            } else {
-                event.preventDefault();
-            }
-        }
 
+        $('#table').DataTable({
+            searching: true,
 
-        function sortTable(n) {
-            var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-            table = document.getElementById("table");
-            switching = true;
-            // Set the sorting direction to ascending:
-            dir = "asc";
-            /* Make a loop that will continue until
-            no switching has been done: */
-            while (switching) {
-                // Start by saying: no switching is done:
-                switching = false;
-                rows = table.rows;
-                /* Loop through all table rows (except the
-                first, which contains table headers): */
-                for (i = 1; i < (rows.length - 1); i++) {
-                    // Start by saying there should be no switching:
-                    shouldSwitch = false;
-                    /* Get the two elements you want to compare,
-                    one from current row and one from the next: */
-                    x = rows[i].getElementsByTagName("TD")[n];
-                    y = rows[i + 1].getElementsByTagName("TD")[n];
-                    console.log(rows[i].getElementsByTagName("TD")[n], rows[i + 1].getElementsByTagName("TD")[n])
-                    /* Check if the two rows should switch place,
-                    based on the direction, asc or desc: */
-                    if (dir == "asc") {
-                        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-                            // If so, mark as a switch and break the loop:
-                            shouldSwitch = true;
-                            break;
-                        }
-                    } else if (dir == "desc") {
-                        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
-                            // If so, mark as a switch and break the loop:
-                            shouldSwitch = true;
-                            break;
-                        }
-                    }
+            "language": {
+                "lengthMenu": "Mostrar _MENU_ registros por página",
+                "info": "Exibindo página _PAGE_ de _PAGES_",
+                "infoEmpty": "Nenhum registro disponível",
+                "zeroRecords": "Nenhum registro disponível",
+                "search": "",
+                "paginate": {
+                    "previous": "Anterior",
+                    "next": "Próximo",
                 }
-                if (shouldSwitch) {
-                    /* If a switch has been marked, make the switch
-                    and mark that a switch has been done: */
-                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-                    switching = true;
-                    // Each time a switch is done, increase this count by 1:
-                    switchcount++;
-                } else {
-                    /* If no switching has been done AND the direction is "asc",
-                    set the direction to "desc" and run the while loop again. */
-                    if (switchcount == 0 && dir == "asc") {
-                        dir = "desc";
-                        switching = true;
-                    }
-                }
-            }
-        }
+            },
+            "dom": '<"top"f>rt<"bottom"p><"clear">',
+            "order": [],
+            "columnDefs": [{
+                "targets": [5],
+                "orderable": false
+            }]
+        });
 
-        function exibirAnotacoes(id) {
-            var s = '#' + id;
-            $(s).modal('show');
-            console.log(s)
-
-        }
-
+        $('.dataTables_filter').addClass('here');
+        $('.dataTables_filter').addClass('');
+        $('.here').addClass('center');
+        $('.here').removeClass('dataTables_filter');
+        $('.table-hover').removeClass('dataTable');
+        $('.here').find('input').addClass('search-input');
+        $('.here').find('input').addClass('align-middle');
+        $('.here').find('label').contents().unwrap();
+        $('.here').find('input').wrap('<div class="col-md-12 my-3 py-1" style="background-color: #C2C2C2; border-radius: 1rem;"> <div class="col-md-7 my-2"> <div class="col-md-12 p-1 img-search" style="background-color: white; border-radius: 0.5rem;"> </div> </div> </div>');
+        $('.img-search').prepend('<img src="{{asset('images/search.png')}}" width="25px">');
 
     </script>
-
 
 @endsection
