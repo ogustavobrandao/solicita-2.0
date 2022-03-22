@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\AlertaFichaMail;
 use App\Models\Aluno;
 use App\Models\Biblioteca;
 use App\Models\Bibliotecario;
@@ -23,6 +24,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use App\Mail\AlertaFichaGerada;
 
 class BibliotecarioController extends Controller
 {
@@ -211,6 +213,9 @@ class BibliotecarioController extends Controller
         $documentosRequisitados->updated_at = time();
         $documentosRequisitados->bibliotecario_id = $bibliotecario->id;
         $documentosRequisitados->update();
+        $alunoUser = User::find(Aluno::find($documentosRequisitados->aluno_id)->user_id);
+
+        \Illuminate\Support\Facades\Mail::send(new AlertaFichaGerada($alunoUser, $documentosRequisitados));
         return redirect(Route('listar-fichas'))->with('success', 'Ficha Atualizada com Sucesso!');
     }
 
@@ -237,6 +242,10 @@ class BibliotecarioController extends Controller
         $requisicao->bibliotecario_id = $bibliotecario->id;
 
         $requisicao->update();
+
+        $alunoUser = User::find(Aluno::find($requisicao->aluno_id)->user_id);
+
+        \Illuminate\Support\Facades\Mail::send(new AlertaFichaGerada($alunoUser, $requisicao));
         return redirect(Route('listar-fichas'));
     }
 

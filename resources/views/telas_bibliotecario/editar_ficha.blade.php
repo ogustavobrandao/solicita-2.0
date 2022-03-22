@@ -58,17 +58,13 @@
                             <div class="form-group">
                                 <label for="cutter">Cutter: <span style="color: red">*</span></label>
                                 <input type="text" class="form-control" id="cutter" name="cutter"
-                                       placeholder="Digite o código de Cutter" @if($fichaCatalografica->cutter == null)
-                                       value="" required @else value="{{ $fichaCatalografica->cutter }}"
-                                       disabled @endif>
+                                       value="" placeholder="Digite o código de Cutter" required>
                             </div>
 
                             <div class="form-group">
                                 <label for="classificacao">Classificação: <span style="color: red">*</span></label>
                                 <input type="number" class="form-control" id="classificacao" name="classificacao"
-                                       placeholder="Digite a classificação"
-                                       @if($fichaCatalografica->classificacao == null) value="" required
-                                       @else value="{{ $fichaCatalografica->classificacao  }}" disabled @endif>
+                                       value="" placeholder="Digite a classificação" required>
                             </div>
                             <div class="form-group">
                                 <a href="https://www.tabelacutter.com/" target="_blank" class="btn btn-block"
@@ -574,13 +570,14 @@
                         </div>
 
                         <div class="col-md-3">
-                            <a type="button" class="btn btn-block" id="btn_gerar_ficha"
-                               style="background-color: #1A2876; border-radius: 0.5rem; color: white;"
-                               href="#">Visualizar Ficha</a>
+                            <button type="submit" class="btn btn-block" id="btn_gerar_ficha"
+                                    style="background-color: #1A2876; border-radius: 0.5rem; color: white;"
+                                    href="#">Visualizar Ficha
+                            </button>
                         </div>
 
                         <div class="col-md-3">
-                            <button type="button" class="btn btn-block" id="btn_enviar_ficha"
+                            <button type="submit" class="btn btn-block" id="btn_enviar_ficha"
                                     style="background-color: var(--confirmar); border-radius: 0.5rem; color: white;"
                                     href="#">
                                 Enviar Ficha
