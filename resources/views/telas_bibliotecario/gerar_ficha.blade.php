@@ -104,7 +104,7 @@
         }
 
         .recuo {
-            text-indent: 1.3em;
+            text-indent: 1.32em;
             text-align: justify;
         }
 
@@ -170,7 +170,7 @@
                             <td class="recuo">Monografia @if($documento->tipo_curso == 'especializacao')
                                     (Especialização) @elseif($documento->tipo_curso == 'graduacao')
                                     (Graduação) @elseif($documento->tipo_curso == 'mba') (MBA) @endif -
-                                @if($unidade->nome == 'UPE - Campus Garanhuns')<p>Universidade De Pernambuco</p>, @else
+                                @if($unidade->nome == 'UPE - Campus Garanhuns')<p>Universidade de Pernambuco</p>, @else
                                     <p>Universidade Federal do Agreste De Pernambuco</p>,@endif
                                 Curso: {{ $documento->curso }},
                                 {{ $ficha->local }}, BR-PE, {{ $ficha->ano }}.
@@ -190,7 +190,7 @@
                         </tr>
                         <tr>
                             <td class="recuo">Tese (Doutorado) - @if($unidade->nome == 'UPE - Campus Garanhuns')<p>
-                                    Universidade De Pernambuco</p>, @else
+                                    Universidade de Pernambuco</p>, @else
                                     <p>Universidade Federal do Agreste De Pernambuco</p>,@endif
                                  {{ $documento->programa }},
                                 {{ $ficha->local }}, BR-PE, {{ $ficha->ano }}.
@@ -249,7 +249,7 @@
                         </tr>
                         <tr>
                             <td class="recuo" >Dissertação (Mestrado) - @if($unidade->nome == 'UPE - Campus Garanhuns')
-                                    <p>Universidade De Pernambuco</p>, @else
+                                    <p>Universidade de Pernambuco</p>, @else
                                     <p>Universidade Federal do Agreste De Pernambuco</p>,@endif
                                  {{ $documento->programa }},
                                 {{ $ficha->local }}, BR-PE, {{ $ficha->ano }}.
@@ -260,10 +260,11 @@
                     @endif
 
                     <tr>
-                        <td class="recuo" style="padding-top: 10px"><span>Inclui referências</span>@if($ficha->inclui_anexo == '1' && $ficha->inclui_apendice == 0) e Anexo
-                            @elseif($ficha->inclui_anexo == '0' && $ficha->inclui_apendice == 1) e Apêndice
-                            @elseif($ficha->inclui_anexo == '1' && $ficha->inclui_apendice == 1), Anexo e Apêndice
-                        @endif.</td>
+                        <td class="recuo" style="padding-top: 10px"><span>Inclui referências</span>@if($ficha->inclui_anexo == '1' && $ficha->inclui_apendice == 0) e anexo.
+                            @elseif($ficha->inclui_anexo == '0' && $ficha->inclui_apendice == 1) e apêndice.
+                            @elseif($ficha->inclui_anexo == '1' && $ficha->inclui_apendice == 1), anexo e apêndice.
+                            @else().
+                            @endif</td>
                     </tr>
 
                     <!-- Palavras chave -->
