@@ -1,9 +1,9 @@
 @extends('layouts.app')
 @section('conteudo')
-
     <div class="container">
         <div class="row" style="border-bottom: var(--textcolor) 2px solid">
             <span class="titulo">Solicitações</span>
+
         </div>
     </div>
 

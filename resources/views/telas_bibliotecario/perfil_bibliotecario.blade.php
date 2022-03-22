@@ -2,7 +2,6 @@
 
 @section('conteudo')
 <!-- Informações do bibliotecario -->
-@include('componentes.mensagens')
 
 <div class="row justify-content-center">
   <div class="col-sm-8">

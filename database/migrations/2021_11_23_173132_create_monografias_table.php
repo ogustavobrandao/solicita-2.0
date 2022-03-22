@@ -18,12 +18,11 @@ class CreateMonografiasTable extends Migration
             $table->timestamps();
             $table->string('nome_orientador');
             $table->string('sobrenome_orientador');
-            $table->string('titulacao_orientador');
             $table->string('nome_coorientador')->nullable();
             $table->string('sobrenome_coorientador')->nullable();
-            $table->string('titulacao_coorientador')->nullable();
             $table->string('curso');
             $table->string('campus');
+            $table->string('tipo_curso');
 
             $table->unsignedBigInteger('ficha_catalografica_id');
             $table->foreign('ficha_catalografica_id')->references('id')->on('ficha_catalograficas');

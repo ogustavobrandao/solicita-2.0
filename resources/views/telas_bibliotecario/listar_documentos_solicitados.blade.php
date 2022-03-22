@@ -6,9 +6,9 @@
         <div class="row justify-content-sm-center">
             <div class="col-md-11">
                 <h2 class="tituloListagem">Requisições de Fichas Catalográficas</h2>
+
             </div>
         </div>
-
         <div class="row justify-content-center">
             <div class="col-md-11">
                 <table class="table table-borderless shadow table-hover mb-2" style="border-radius: 1rem; background-color: white; border: none" id="table">
@@ -24,6 +24,7 @@
                         <th scope="col" class="text-center">Ação</th>
                         <th scope="col" class="text-center">Data de análise</th>
 
+
                     </tr>
                     </thead>
                     <tbody class="align-middle">
@@ -37,12 +38,12 @@
                                     <td>
                                         {{$ficha->autor_nome}}
                                     </td>
-                                    <td class="text-center">
-                                        @if ($ficha->tipo_documento_id == 1)Monografia
-                                        @elseif ($ficha->tipo_documento_id == 2)Tese
-                                        @elseif ($ficha->tipo_documento_id == 3)TCC
-                                        @elseif ($ficha->tipo_documento_id == 4)Produto Educacional
-                                        @elseif ($ficha->tipo_documento_id == 5)Dissertação
+
+                                     <td class="text-center">
+                                        @if ($ficha->tipo_documento_id == 2)Monografia
+                                        @elseif ($ficha->tipo_documento_id == 4)Tese
+                                        @elseif ($ficha->tipo_documento_id == 3)Produto Educacional
+                                        @elseif ($ficha->tipo_documento_id == 1)Dissertação
                                         @endif
                                     </td>
                                     <td class="text-center">
@@ -54,33 +55,57 @@
                                         @elseif($requisicao->status == 'Rejeitado')<p style="color: #BE0303; background-color: var(--destaque); border-radius: 0.5rem;">Rejeitado</p>
                                         @endif
                                     </td>
+  
+                           
                                     <td class="text-center">
-                                        <a href="{{ route('editar-ficha', $requisicao->id) }}"><i class="fa fa-file-text fa-sm" aria-hidden="true" size="10px"></i> Editar</a>
+                                        <a href="{{ route('editar-ficha', $requisicao->id) }}"><i
+                                                class="fa fa-file-text fa-sm" aria-hidden="true" size="10px"></i> Editar</a>
+                                        @if($requisicao->status == 'Concluido')
+                                            <a href="{{ route('visualizar-ficha', $requisicao->id) }}"><i
+                                                    class="fa fa-file-text fa-sm" aria-hidden="true" size="10px"></i>
+                                                Visualizar</a>
+                                        @endif
                                         @if($requisicao->status != 'Em andamento')
                                             <div class="btn-group-vertical">
-                                                <a class="btn btn-light dropdown-toggle" data-toggle="modal" data-target="#exampleModal{{$requisicao->id}}">
-                                                    <span class="fa fa-info-circle" title="Exibir explicação da rejeição"></span>
+                                                <a class="btn btn-light dropdown-toggle" data-toggle="modal"
+                                                   data-target="#exampleModal{{$requisicao->id}}">
+                                                    <span class="fa fa-info-circle"
+                                                          title="Exibir explicação da rejeição"></span>
                                                 </a>
                                                 <!-- Modal -->
-                                                <div class="modal fade" id="exampleModal{{$requisicao->id}}" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal fade" id="exampleModal{{$requisicao->id}}"
+                                                     role="dialog" aria-labelledby="exampleModalLabel"
+                                                     aria-hidden="true">
                                                     <div class="modal-dialog" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLabel">Status da Analise</h5>
-                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <h5 class="modal-title" id="exampleModalLabel">Status da
+                                                                    Analise</h5>
+                                                                <button type="button" class="close" data-dismiss="modal"
+                                                                        aria-label="Close">
                                                                     <span aria-hidden="true">&times;</span>
                                                                 </button>
                                                             </div>
                                                             <div class="modal-body">
                                                                 @if($requisicao->status == 'Concluido')
-                                                                    <p style="margin-left: 3px">Requisição analisada e aprovada por: <Strong>{{\App\Models\User::where('id',\App\Models\Bibliotecario::where('id',$requisicao->bibliotecario_id)->first()->user_id)->first()->name}}</Strong></p>
+                                                                    <p style="margin-left: 3px">Requisição analisada e
+                                                                        aprovada por:
+                                                                        <Strong>{{\App\Models\User::where('id',\App\Models\Bibliotecario::where('id',$requisicao->bibliotecario_id)->first()->user_id)->first()->name}}</Strong>
+                                                                    </p>
                                                                 @elseif($requisicao->status == 'Rejeitado' && $requisicao->bibliotecario_id != null)
-                                                                    <p style="margin: 1rem">Requisição analisada e rejeitada por: <Strong>{{\App\Models\User::where('id',\App\Models\Bibliotecario::where('id',$requisicao->bibliotecario_id)->first()->user_id)->first()->name}}</Strong> <br></p>
-                                                                    <p style="margin-left: 1rem">Motivo: <strong style="color: #4c110f">{{ $requisicao->anotacoes }}</strong></p>
+                                                                    <p style="margin: 1rem">Requisição analisada e
+                                                                        rejeitada por:
+                                                                        <Strong>{{\App\Models\User::where('id',\App\Models\Bibliotecario::where('id',$requisicao->bibliotecario_id)->first()->user_id)->first()->name}}</Strong>
+                                                                        <br></p>
+                                                                    <p style="margin-left: 1rem">Motivo: <strong
+                                                                            style="color: #4c110f">{{ $requisicao->anotacoes }}</strong>
+                                                                    </p>
                                                                 @endif
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                <button type="button" class="btn btn-secondary"
+                                                                        data-dismiss="modal">Close
+                                                                </button>
                                                             </div>
                                                         </div>
                                                     </div>

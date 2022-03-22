@@ -12,7 +12,6 @@
 </div>
 
 <div class="container text-center">
-    <div>@include('componentes.mensagens')</div>
 
     <div class="row justify-content-between mt-5">
 

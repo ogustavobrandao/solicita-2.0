@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('conteudo')
-
     <div class="container">
         <div class="row justify-content-sm-center">
             <div class="col-md-11">
@@ -83,11 +82,10 @@
                                                 @if($ficha->id == $rd->ficha_catalografica_id)
                                                     <li>
                                                         Ficha Catalográfica - @if ($ficha->tipo_documento_id == 1)
-                                                            Monografia
-                                                        @elseif ($ficha->tipo_documento_id == 2)Tese
-                                                        @elseif ($ficha->tipo_documento_id == 3)TCC
-                                                        @elseif ($ficha->tipo_documento_id == 4)Produto Educacional
-                                                        @elseif ($ficha->tipo_documento_id == 5)Dissertação
+                                                            Dissertação
+                                                        @elseif ($ficha->tipo_documento_id == 2)Monografia
+                                                        @elseif ($ficha->tipo_documento_id == 3)Produto Educacional
+                                                        @elseif ($ficha->tipo_documento_id == 4)Tese
                                                         @endif
                                                     </li>
                                                 @endif

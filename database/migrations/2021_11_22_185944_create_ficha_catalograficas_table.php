@@ -25,6 +25,8 @@ class CreateFichaCatalograficasTable extends Migration
             $table->string('local');
             $table->string('ano');
             $table->integer('folhas');
+            $table->integer('inclui_anexo');
+            $table->integer('inclui_apendice');
             $table->string('ilustracao');
             $table->string('anexo');
             $table->unsignedBigInteger('tipo_documento_id');

@@ -43,9 +43,6 @@
 
         <div class="col-md-3 mt-5">
             <div class="col-md-12 px-4 py-3 shadow mt-5 caixa">
-                <div>
-                    @include('componentes.mensagens')
-                </div>
 
                 <div class="row">
                     <div class="col-md-12" style="color: var(--textcolor); font-weight: 700; font-size: 33px;">Entrar</div>

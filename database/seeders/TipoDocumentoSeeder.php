@@ -14,7 +14,7 @@ class TipoDocumentoSeeder extends Seeder
      */
     public function run()
     {
-        $documentos = ['Monografia', 'Tese', 'TCC', 'ProgramaEduc', 'Dissertacao'];
+        $documentos = ['Dissertacao', 'Monografia', 'ProgramaEduc', 'Tese'];
 
         for ($i = 0; $i < sizeof($documentos); $i++) {
             DB::table('tipo_documentos')->insert([

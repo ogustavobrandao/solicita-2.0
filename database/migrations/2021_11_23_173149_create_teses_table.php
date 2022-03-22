@@ -18,10 +18,10 @@ class CreateTesesTable extends Migration
             $table->timestamps();
             $table->string('nome_orientador');
             $table->string('sobrenome_orientador');
-            $table->string('titulacao_orientador');
             $table->string('nome_coorientador')->nullable();
             $table->string('sobrenome_coorientador')->nullable();
-            $table->string('titulacao_coorientador')->nullable();
+            $table->string('nome_segundo_coorientador')->nullable();
+            $table->string('sobrenome_segundo_coorientador')->nullable();
             $table->string('programa');
 
             $table->unsignedBigInteger('ficha_catalografica_id');
