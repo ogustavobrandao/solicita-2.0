@@ -571,8 +571,8 @@
 
                         <div class="col-md-3">
                             <button type="submit" class="btn btn-block" id="btn_gerar_ficha"
-                                    style="background-color: #1A2876; border-radius: 0.5rem; color: white;"
-                                    href="#">Visualizar Ficha
+                               style="background-color: #1A2876; border-radius: 0.5rem; color: white;"
+                               href="#">Visualizar Ficha
                             </button>
                         </div>
 
