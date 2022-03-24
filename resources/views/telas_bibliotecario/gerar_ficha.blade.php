@@ -261,8 +261,8 @@
 
                     <tr>
                         <td class="recuo" style="padding-top: 10px"><span>Inclui referências</span>@if($ficha->inclui_anexo == '1' && $ficha->inclui_apendice == 0) e anexo.
-                            @elseif($ficha->inclui_anexo == '0' && $ficha->inclui_apendice == 1) e apêndice.
-                            @elseif($ficha->inclui_anexo == '1' && $ficha->inclui_apendice == 1), anexo e apêndice.
+                            @elseif($ficha->inclui_anexo == '0' && $ficha->inclui_apendice == 1) e apêndice(s).
+                            @elseif($ficha->inclui_anexo == '1' && $ficha->inclui_apendice == 1), anexo e apêndice(s).
                             @else().
                             @endif</td>
                     </tr>
