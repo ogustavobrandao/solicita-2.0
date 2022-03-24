@@ -163,8 +163,9 @@
                             </td>
                         </tr>
                         <tr>
-                            <td class="recuo">@if($documento->nome_coorientador != null)Coorientador(a): {{ $documento->nome_coorientador }} {{ $documento->sobrenome_coorientador }}.
-                                    @endif </td>
+                            @if($documento->nome_coorientador != null)
+                            <td class="recuo">Coorientador(a): {{ $documento->nome_coorientador }} {{ $documento->sobrenome_coorientador }}.
+                                     </td>@endif
                         </tr>
                         <tr>
                             <td class="recuo">Monografia @if($documento->tipo_curso == 'especializacao')
@@ -184,9 +185,10 @@
                             </td>
                         </tr>
                         <tr>
-                            <td class="recuo">@if($documento->nome_coorientador != null)Coorientador(a):  {{ $documento->nome_coorientador }} {{ $documento->sobrenome_coorientador }}.
-                                    @endif
-                            </td>
+                            @if($documento->nome_coorientador != null)
+                            <td class="recuo">Coorientador(a):  {{ $documento->nome_coorientador }} {{ $documento->sobrenome_coorientador }}.
+
+                            </td>@endif
                         </tr>
                         <tr>
                             <td class="recuo">Tese (Doutorado) - @if($unidade->nome == 'UPE - Campus Garanhuns')<p>
@@ -202,8 +204,9 @@
                             </td>
                         </tr>
                         <tr>
-                            <td class="recuo">@if($documento->nome_coorientador != null)Coorientador(a): {{ $documento->nome_coorientador }} {{ $documento->sobrenome_coorientador }}.
-                                    @endif</td>
+                            @if($documento->nome_coorientador != null)
+                            <td class="recuo">Coorientador(a): {{ $documento->nome_coorientador }} {{ $documento->sobrenome_coorientador }}.
+                                    </td>@endif
                         </tr>
                         <tr>
                             <td class="recuo">Produto técnico/tecnológico que acompanha Dissertação (Mestrado)
@@ -243,9 +246,9 @@
                             <td class="recuo" style="padding-top: 10px">Orientador(a): {{ $documento->nome_orientador }} {{ $documento->sobrenome_orientador }}.
                             </td>
                         </tr>
-                        <tr>
-                            <td class="recuo">@if($documento->nome_coorientador != null)Coorientador(a): {{ $documento->nome_coorientador }} {{ $documento->sobrenome_coorientador }}.
-                                    @endif</td>
+                        <tr>@if($documento->nome_coorientador != null)
+                            <td class="recuo">Coorientador(a): {{ $documento->nome_coorientador }} {{ $documento->sobrenome_coorientador }}.
+                                    </td>@endif
                         </tr>
                         <tr>
                             <td class="recuo" >Dissertação (Mestrado) - @if($unidade->nome == 'UPE - Campus Garanhuns')
