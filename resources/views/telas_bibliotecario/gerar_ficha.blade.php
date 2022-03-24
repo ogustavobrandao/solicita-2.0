@@ -172,7 +172,7 @@
                                     (Graduação) @elseif($documento->tipo_curso == 'mba') (MBA) @endif -
                                 @if($unidade->nome == 'UPE - Campus Garanhuns')<p>Universidade de Pernambuco</p>, @else
                                     <p>Universidade Federal do Agreste de Pernambuco</p>,@endif
-                                Curso: {{ $documento->curso }},
+                                {{ $documento->curso }},
                                 {{ $ficha->local }}, BR-PE, {{ $ficha->ano }}.
                             </td>
                         </tr>
