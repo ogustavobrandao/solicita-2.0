@@ -38,6 +38,8 @@ Route::group(['middleware'=> ['CheckAdministrador', 'verified']], function(){
     Route::get('/listar-usuario',[\App\Http\Controllers\UsuarioController::class,'listarUsuario'])->name('listar-usuario');
     Route::get('/editar-usuario',[\App\Http\Controllers\UsuarioController::class,'editarUsuario'])->name('editar-usuario');
     Route::post('/editar-usuario',[\App\Http\Controllers\UsuarioController::class,'atualizarUsuario'])->name('atualizar-usuario');
+    Route::get('/cadastro-campus',[\App\Http\Controllers\UnidadeController::class,'createCampus'])->name('cadastro-campus');
+    Route::post('/cadastro-campus',[\App\Http\Controllers\UnidadeController::class,'storeCampus'])->name('criar-campus');
 });
 
 //----------------------------------------------SERVIDOR----------------------------------------------------------------

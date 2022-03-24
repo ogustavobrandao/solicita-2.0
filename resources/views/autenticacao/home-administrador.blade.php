@@ -61,6 +61,17 @@
             </a>
         </div>
 
+        <div class="text-center p-5 mt-3  shadow caixaSelecao">
+            <a href="{{ route("cadastro-campus")}}">
+                <div class="text-center p-3">
+                    <i style="color: var(--textcolor)" class="fa-solid fa-building-columns fa-7x"></i>
+                </div>
+                <div class="text-center">
+                    <div style="color: var(--textcolor)" class="textoCaixa">Adicionar Campus</div>
+                </div>
+            </a>
+        </div>
+
     </div>
 </div>
 
