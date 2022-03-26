@@ -21,4 +21,9 @@ class UnidadeController extends Controller
         $unidade->save();
         return redirect()->route('home')->with('Unidade cadastrada com sucesso!');
     }
+
+    public function gerenciarCampi() {
+        $unidades = Unidade::all();
+        return view('telas_admin.listar-campi', compact('unidades'));
+    }
 }

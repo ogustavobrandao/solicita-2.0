@@ -5,8 +5,8 @@
 
         <div class="row justify-content-sm-center">
             <div class="col-md-11">
-                <h2 class="tituloListagem">Biblioteca(s) da {{ $unidade->nome }}</h2>
-                <a href="{{ route('cadastro-biblioteca', ['unidade_id' => $unidade->id]) }}">
+                <h2 class="tituloListagem">Listagem de Campus</h2>
+                <a href="{{ route('cadastro-campus') }}">
                     <img src="/images/botao_add.svg" style="background-color: #1b1e21">
                 </a>
             </div>
@@ -17,27 +17,41 @@
                 <table class="table table-borderless shadow table-hover mb-2" style="border-radius: 1rem; background-color: white; border: none" id="table">
                     <thead>
                     <tr>
-                        <th scope="col" class="titleColumn text-center" >ID</th>
-                        <th scope="col" class="titleColumn text-center" style="cursor:pointer">Curso</th>
+                        <th scope="col">#</th>
+                        <th scope="col" class="titleColumn text-center" style="cursor:pointer">Campus</th>
+                        <th scope="col" class="titleColumn text-center"
+                            style="cursor:pointer">Instituição</th>
                         <th scope="col"  class="titleColumn text-center"
                             style="cursor:pointer">Ação</th>
                     </tr>
                     </thead>
                     <tbody class="align-middle">
-                    @foreach($bibliotecas as $biblioteca)
-                        @if($biblioteca->unidade_id == $unidade->id)
-                            <tr>
-                                <td class="align-middle text-center">
-                                    {{ $biblioteca->id }}
-                                </td>
-                                <td class="align-middle text-center">
-                                    {{ $biblioteca->nome }}
-                                </td>
-                                <td class="align-middle text-center">
-                                    <a href="{{ route("editar-biblioteca", ['biblioteca_id' => $biblioteca->id]) }}">Editar Biblioteca</a>
-                                </td>
-                            </tr>
-                        @endif
+                    @foreach($unidades as $unidade)
+                        <tr>
+                            <td class="align-middle text-center">
+                                {{ $unidade->id }}
+                            </td>
+                            <td class="align-middle text-center">
+                                {{ $unidade->nome }}
+                            </td>
+                             <td class="align-middle text-center">
+                                 {{ \App\Models\Instituicao::find($unidade->instituicao_id)->nome }}
+                            </td>
+                            <td class="align-middle text-center">
+                                <div>
+                                    <a href="{{ route("listar-cursos", ['unidade_id' => $unidade->id]) }}">Listar Cursos</a>
+                                </div>
+                                <div>
+                                    <a href="{{ route("cadastro-curso", ['unidade_id' => $unidade->id]) }}">Cadastrar Curso</a>
+                                </div>
+                                <div>
+                                    <a href="{{ route("listar-bibliotecas", ['unidade_id' => $unidade->id]) }}">Listar Bibliotecas</a>
+                                </div>
+                                <div>
+                                    <a href="{{ route("cadastro-biblioteca", ['unidade_id' => $unidade->id]) }}">Cadastrar Biblioteca</a>
+                                </div>
+                            </td>
+                        </tr>
                     @endforeach
                     </tbody>
                 </table>
@@ -64,7 +78,7 @@
             "dom": '<"top"f>rt<"bottom"p><"clear">',
             "order": [],
             "columnDefs": [{
-                "targets": [2],
+                "targets": [3],
                 "orderable": false
             }]
         });
