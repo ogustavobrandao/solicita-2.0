@@ -5,8 +5,8 @@
 
         <div class="row justify-content-sm-center">
             <div class="col-md-11">
-                <h2 class="tituloListagem">Biblioteca(s) da {{ $unidade->nome }}</h2>
-                <a href="{{ route('cadastro-biblioteca', ['unidade_id' => $unidade->id]) }}">
+                <h2 class="tituloListagem">Cursos da {{ $unidade->nome }}</h2>
+                <a href="{{ route('cadastro-curso', ['unidade_id' => $unidade->id]) }}">
                     <img src="/images/botao_add.svg" style="background-color: #1b1e21">
                 </a>
             </div>
@@ -19,22 +19,26 @@
                     <tr>
                         <th scope="col" class="titleColumn text-center" >ID</th>
                         <th scope="col" class="titleColumn text-center" style="cursor:pointer">Curso</th>
+                        <th scope="col" class="titleColumn text-center" style="cursor:pointer">Abreviação</th>
                         <th scope="col"  class="titleColumn text-center"
                             style="cursor:pointer">Ação</th>
                     </tr>
                     </thead>
                     <tbody class="align-middle">
-                    @foreach($bibliotecas as $biblioteca)
-                        @if($biblioteca->unidade_id == $unidade->id)
+                    @foreach($cursos as $curso)
+                        @if($curso->unidade_id == $unidade->id)
                             <tr>
                                 <td class="align-middle text-center">
-                                    {{ $biblioteca->id }}
+                                    {{ $curso->id }}
                                 </td>
                                 <td class="align-middle text-center">
-                                    {{ $biblioteca->nome }}
+                                    {{ $curso->nome }}
                                 </td>
                                 <td class="align-middle text-center">
-                                    <a href="{{ route("editar-biblioteca", ['biblioteca_id' => $biblioteca->id]) }}">Editar Biblioteca</a>
+                                    {{ $curso->abreviatura }}
+                                </td>
+                                <td class="align-middle text-center">
+                                    <a href="{{ route("editar-curso", ['curso_id' => $curso->id]) }}">Editar Curso</a>
                                 </td>
                             </tr>
                         @endif
@@ -64,7 +68,7 @@
             "dom": '<"top"f>rt<"bottom"p><"clear">',
             "order": [],
             "columnDefs": [{
-                "targets": [2],
+                "targets": [3],
                 "orderable": false
             }]
         });

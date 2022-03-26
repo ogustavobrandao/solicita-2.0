@@ -29,15 +29,25 @@ Route::group(['middleware'=> ['CheckAdministrador', 'verified']], function(){
     Route::post('/confirmacao-servidor',[\App\Http\Controllers\ServidorController::class, 'storeServidor'])->name('confirmacao-servidor')->middleware('CheckAdministrador');
     Route::get('/cancela-cadastro',[\App\Http\Controllers\ServidorController::class, 'cancel'])->name('cancela-cadastro')->middleware('CheckAdministrador');
     Route::get('/cadastro-biblioteca',[\App\Http\Controllers\BibliotecaController::class,'createBiblioteca'])->name('cadastro-biblioteca');
-    Route::post('/criar-biblioteca',[\App\Http\Controllers\BibliotecaController::class,'storeBiblioteca'])->name('criar-biblioteca');
+    Route::post('/cadastro-biblioteca',[\App\Http\Controllers\BibliotecaController::class,'storeBiblioteca'])->name('criar-biblioteca');
     Route::get('/cadastro-bibliotecario',[\App\Http\Controllers\BibliotecarioController::class,'createBibliotecario'])->name('cadastro-bibliotecario');
     Route::post('/criar-bibliotecario',[\App\Http\Controllers\BibliotecarioController::class,'storeBibliotecario'])->name('criar-bibliotecario');
     Route::get('/editar-biblioteca',[\App\Http\Controllers\BibliotecaController::class,'editarBiblioteca'])->name('editar-biblioteca');
     Route::post('/editar-biblioteca',[\App\Http\Controllers\BibliotecaController::class,'atualizarBiblioteca'])->name('atualizar-biblioteca');
-    Route::get('/listar-biblioteca',[\App\Http\Controllers\BibliotecaController::class,'listarBiblioteca'])->name('listar-biblioteca');
+    Route::get('/listar-bibliotecas',[\App\Http\Controllers\BibliotecaController::class,'listarBiblioteca'])->name('listar-bibliotecas');
     Route::get('/listar-usuario',[\App\Http\Controllers\UsuarioController::class,'listarUsuario'])->name('listar-usuario');
     Route::get('/editar-usuario',[\App\Http\Controllers\UsuarioController::class,'editarUsuario'])->name('editar-usuario');
     Route::post('/editar-usuario',[\App\Http\Controllers\UsuarioController::class,'atualizarUsuario'])->name('atualizar-usuario');
+    Route::get('/cadastro-campus',[\App\Http\Controllers\UnidadeController::class,'createCampus'])->name('cadastro-campus');
+    Route::post('/cadastro-campus',[\App\Http\Controllers\UnidadeController::class,'storeCampus'])->name('criar-campus');
+    Route::get('/gerenciar-campi',[\App\Http\Controllers\UnidadeController::class, 'gerenciarCampi'])->name('gerenciar-campi');
+    Route::get('/cadastro-curso',[\App\Http\Controllers\CursoController::class,'createCurso'])->name('cadastro-curso');
+    Route::post('/cadastro-curso',[\App\Http\Controllers\CursoController::class,'storeCurso'])->name('criar-curso');
+    Route::get('/listar-cursos',[\App\Http\Controllers\CursoController::class,'listarCursos'])->name('listar-cursos');
+    Route::get('/editar-cursos',[\App\Http\Controllers\CursoController::class,'editarCurso'])->name('editar-curso');
+    Route::post('/editar-cursos',[\App\Http\Controllers\CursoController::class,'atualizarCurso'])->name('atualizar-curso');
+
+
 });
 
 //----------------------------------------------SERVIDOR----------------------------------------------------------------
