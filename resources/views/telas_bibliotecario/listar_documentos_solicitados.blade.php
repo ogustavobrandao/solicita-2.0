@@ -5,27 +5,29 @@
 
         <div class="row justify-content-sm-center">
             <div class="col-md-11">
-                <h2 class="tituloListagem">Requisições de Fichas Catalográficas</h2>
-
+                <div class="tituloListagem">Requisições de Fichas Catalográficas</div>
             </div>
         </div>
         <div class="row justify-content-center">
             <div class="col-md-11">
-                <table class="table table-borderless shadow table-hover mb-2" style="border-radius: 1rem; background-color: white; border: none" id="table">
+                <table class="table table-borderless shadow table-hover mb-2"
+                       style="border-radius: 1rem; background-color: white; border: none" id="table">
                     <thead>
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col" class="titleColumn" style="cursor:pointer">Autor</th>
                         <th scope="col" class="titleColumn text-center"
-                            style="cursor:pointer">Tipo do Documento</th>
-                        <th scope="col"  class="titleColumn text-center"
-                            style="cursor:pointer">Data da Requisição</th>
+                            style="cursor:pointer">Tipo do Documento
+                        </th>
+                        <th scope="col" class="titleColumn text-center"
+                            style="cursor:pointer">Data da Requisição
+                        </th>
                         <th scope="col" class="text-center">Status</th>
                         <th scope="col" class="text-center">Ação</th>
                         <th scope="col" class="text-center">Data de análise</th>
                     </tr>
                     </thead>
-                    <tbody class="align-middle">
+                    <tbody class="">
                     @foreach($requisicoesFichas as $requisicao)
                         @foreach($fichas as $ficha)
                             @if($ficha->id == $requisicao->ficha_catalografica_id)
@@ -33,10 +35,10 @@
                                     <td class="align-middle text-center" scope="row">
                                         {{$requisicao->id}}
                                     </td>
-                                    <td class="align-middle text-center">
+                                    <td class="align-middle">
                                         {{$ficha->autor_nome}}
                                     </td>
-                                     <td class="align-middle text-center">
+                                    <td class="align-middle text-center">
                                         @if ($ficha->tipo_documento_id == 2)Monografia
                                         @elseif ($ficha->tipo_documento_id == 4)Tese
                                         @elseif ($ficha->tipo_documento_id == 3)Produto Educacional
@@ -44,48 +46,63 @@
                                         @endif
                                     </td>
                                     <td class="align-middle text-center">
-                                        {{ date('d/m/Y H:i:s', strtotime($ficha->created_at)) }}
+                                        {{ date('d/m/Y H:i:s',strtotime($ficha->created_at)) }}
                                     </td>
                                     <td class="align-middle text-center">
-                                        @if($requisicao->status == 'Concluido')<p style="color: #1d643b; "><strong>Concluido</strong>
-                                        </p>
-                                        @elseif($requisicao->status == 'Em andamento')<p style="color: #857b26"><strong>Em
-                                                andamento</strong></p>
-                                        @elseif($requisicao->status == 'Rejeitado')<p style="color: #4c110f"><strong>Rejeitado</strong>
-                                        </p>
+                                        @if($requisicao->status == 'Concluido')<span style="color: #00A23E; "><strong>Concluido</strong>
+                                        </span>
+                                        @elseif($requisicao->status == 'Em andamento')<span
+                                            style="color: #F9CB2A"><strong>Em andamento</strong></span>
+                                        @elseif($requisicao->status == 'Rejeitado')<span style="color: #D20101"><strong>Rejeitado</strong>
+                                        </span>
                                         @endif
                                     </td>
-                                    <td class="align-middle text-center btn-group">
+                                    <td class="align-middle text-center">
                                         <?php
                                         $data_bibi = date_create_from_format('Y-m-d H:i:s', $requisicao->updated_at);
                                         $data_agora = date_create_from_format('Y-m-d H:i:s', date('Y-m-d H:i:s'));
                                         ?>
                                         @if($requisicao->status == 'Em andamento')
                                             @if($requisicao->bibliotecario_id != null && (date_diff($data_bibi, $data_agora)->h < 2))
-                                                <a class="btn" href="{{ route('editar-ficha', $requisicao->id) }}">
-                                                    <img src="images/botao_editar_proibido.svg" height="30px" title="Botão de Editar - Alguém já está editando">
-                                                <a class="btn rounded-0" href="{{ route('visualizar-ficha', $requisicao->id) }}">
-                                                    <img src="images/botao_visualizar.svg" height="30px" title="Botão de Visualizar Ficha">
-                                                </a>
+                                                <div class="btn-group">
+                                                    <a class="btn px-1" href="{{ route('editar-ficha', $requisicao->id) }}">
+                                                        <img src="images/botao_editar_proibido.svg" height="30px"
+                                                             title="Botão de Editar - Alguém já está editando">
+                                                    </a>
+                                                    <a class="btn px-1"
+                                                       href="{{ route('visualizar-ficha', $requisicao->id) }}">
+                                                        <img src="images/botao_visualizar.svg" height="30px"
+                                                             title="Botão de Visualizar Ficha">
+                                                    </a>
+                                                </div>
                                             @else
-                                                <a class="btn" href="{{ route('editar-ficha', $requisicao->id) }}">
-                                                    <img src="images/botao_editar.svg" height="30px" title="Botão de Editar - Edição permitida">
-                                                <a class="btn" href="{{ route('visualizar-ficha', $requisicao->id) }}">
-                                                <img src="images/botao_visualizar.svg" height="30px" title="Botão de Visualizar Ficha">
-                                                </a>
-
+                                                <div class="btn-group">
+                                                    <a class="btn px-1"
+                                                       href="{{ route('editar-ficha', $requisicao->id) }}">
+                                                        <img src="images/botao_editar.svg" height="30px"
+                                                             title="Botão de Editar - Edição permitida">
+                                                    </a>
+                                                    <a class="btn px-1"
+                                                       href="{{ route('visualizar-ficha', $requisicao->id) }}">
+                                                        <img src="images/botao_visualizar.svg" height="30px"
+                                                             title="Botão de Visualizar Ficha">
+                                                    </a>
+                                                </div>
                                             @endif
                                         @endif
 
                                         @if($requisicao->status == 'Concluido')
-                                            <a class="btn" href="{{ route('visualizar-ficha', $requisicao->id) }}">
-                                                <img src="images/botao_visualizar.svg" height="30px" title="Botão de Visualizar Ficha">
+                                            <a class="btn"
+                                               href="{{ route('visualizar-ficha', $requisicao->id) }}">
+                                                <img src="images/botao_visualizar.svg" height="30px"
+                                                     title="Botão de Visualizar Ficha">
                                             </a>
                                         @endif
                                         @if($requisicao->status == 'Rejeitado')
                                             <a class="btn" data-toggle="modal"
                                                data-target="#exampleModal{{$requisicao->id}}">
-                                                <img src="images/botao_info.svg" height="30px" title="Botão de Informação">
+                                                <img src="images/botao_info.svg" height="30px"
+                                                     title="Botão de Informação">
                                             </a>
                                             <!-- Modal -->
                                             <div class="modal fade" id="exampleModal{{$requisicao->id}}"
