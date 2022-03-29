@@ -8,7 +8,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-7">
-            <div class="row mt-5 tituloFicha">
+            <div class="row tituloFicha">
                 <div class="col-md-12">
                     Ficha Catalográfica -
                     @if($tipo_documento == 2)Monografia

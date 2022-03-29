@@ -5,10 +5,14 @@
 
         <div class="row justify-content-sm-center">
             <div class="col-md-11">
-                <h2 class="tituloListagem">Listagem de Campus</h2>
-                <a href="{{ route('cadastro-campus') }}">
-                    <img src="/images/botao_add.svg" style="background-color: #1b1e21">
-                </a>
+                <div class="col-md-12">
+                    <div class="row justify-content-between tituloListagem">
+                        Campus
+                        <a href="{{ route('cadastro-campus') }}">
+                            <img src="/images/botao_add.svg" width="37px" style="background-color: var(--textcolor); border-radius: 0.5rem">
+                        </a>
+                    </div>
+                </div>
             </div>
 
         </div>
@@ -18,8 +22,8 @@
                     <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col" class="titleColumn text-center" style="cursor:pointer">Campus</th>
-                        <th scope="col" class="titleColumn text-center"
+                        <th scope="col" class="titleColumn" style="cursor:pointer">Campus</th>
+                        <th scope="col" class="titleColumn"
                             style="cursor:pointer">Instituição</th>
                         <th scope="col"  class="titleColumn text-center"
                             style="cursor:pointer">Ação</th>
@@ -31,10 +35,10 @@
                             <td class="align-middle text-center">
                                 {{ $unidade->id }}
                             </td>
-                            <td class="align-middle text-center">
+                            <td class="align-middle">
                                 {{ $unidade->nome }}
                             </td>
-                             <td class="align-middle text-center">
+                             <td class="align-middle">
                                  {{ \App\Models\Instituicao::find($unidade->instituicao_id)->nome }}
                             </td>
                             <td class="align-middle text-center">

@@ -105,8 +105,8 @@
                                     @if($rd->requisicao_id == $r->id)
                                         <!-- Documentos Solicitados -->
                                             @if($rd->status=="Em andamento")
-                                                <li class="my-1" style="color:#D07D00; background-color: #FBBC04; border-radius: 0.5rem">
-                                                    {{$rd->status}}
+                                                <li class="my-1" style="color: #F9CB2A">
+                                                    <strong>{{$rd->status}}</strong>
                                                     <span class="glyphicon glyphicon-time"
                                                           style="overflow: hidden; color:#db6700"
                                                           data-toggle="tooltip" data-placement="top"
@@ -118,8 +118,8 @@
                                                 @php
                                                     $tudoAndamento = false
                                                 @endphp
-                                                <li style="color:#00650A; background-color: var(--confirmar); border-radius: 0.5rem">
-                                                    {{$rd->status}}
+                                                <li style="color: #00A23E;" >
+                                                    <strong>{{$rd->status}}</strong>
                                                     <span class="glyphicon glyphicon-ok-sign"
                                                           style="overflow: hidden; color:green"
                                                           data-toggle="tooltip" data-placement="top"
@@ -152,8 +152,8 @@
                                                 </li>
                                             @endif
                                             @if($rd->status == "Rejeitado")
-                                                <li style="color: #BE0303; background-color: var(--destaque); border-radius: 0.5rem;">
-                                                    {{ $rd->status }}
+                                                <li  style="color: #D20101">
+                                                    <strong>{{ $rd->status }}</strong>
                                                     <a data-toggle="tooltip" data-placement="left"
                                                        title="Seu pedido foi rejeitado pelo(s) seguinte(s) motivo: {{$rd->anotacoes}}">
                                                         <span onclick="exibirAnotacoes({{$rd->id}})"
