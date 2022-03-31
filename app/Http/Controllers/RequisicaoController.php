@@ -571,7 +571,8 @@ class RequisicaoController extends Controller
 
     public function exibirPesquisa()
     {
-        return view('telas_servidor.pesquisa_servidor');
+        $alunos = Aluno::all();
+        return view('telas_servidor.pesquisa_servidor', compact('alunos'));
     }
 
     public function pesquisarAluno(Request $request)

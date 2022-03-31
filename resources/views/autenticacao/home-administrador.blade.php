@@ -56,7 +56,7 @@
                     <i style="color: var(--textcolor)" class="fa-solid fa-building-columns fa-7x"></i>
                 </div>
                 <div class="text-center">
-                    <div style="color: var(--textcolor)" class="textoCaixa">Gerenciar Campus</div>
+                    <div style="color: var(--textcolor)" class="textoCaixa">Gerenciar Campi</div>
                 </div>
             </a>
         </div>

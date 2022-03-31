@@ -4,41 +4,47 @@
     <div class="container">
 
         <div class="row justify-content-sm-center">
-            <div class="col-md-11">
-                <h2 class="tituloListagem">Cursos da {{ $unidade->nome }}</h2>
-                <a href="{{ route('cadastro-curso', ['unidade_id' => $unidade->id]) }}">
-                    <img src="/images/botao_add.svg" style="background-color: #1b1e21">
-                </a>
+            <div class="col-md-10">
+                <div class="col-md-12">
+                    <div class="row justify-content-between  tituloListagem">
+                        <span class="">Cursos da {{ $unidade->nome }}</span>
+                        <a href="{{ route('cadastro-curso', ['unidade_id' => $unidade->id]) }}">
+                            <img src="/images/botao_add.svg" width="37px" style="background-color: var(--textcolor); border-radius: 0.5rem">
+                        </a>
+                    </div>
+                </div>
             </div>
 
         </div>
         <div class="row justify-content-center">
-            <div class="col-md-11">
+            <div class="col-md-10">
                 <table class="table table-borderless shadow table-hover mb-2" style="border-radius: 1rem; background-color: white; border: none" id="table">
                     <thead>
                     <tr>
-                        <th scope="col" class="titleColumn text-center" >ID</th>
-                        <th scope="col" class="titleColumn text-center" style="cursor:pointer">Curso</th>
+                        <th scope="col" class="titleColumn" >ID</th>
+                        <th scope="col" class="titleColumn" style="cursor:pointer">Curso</th>
                         <th scope="col" class="titleColumn text-center" style="cursor:pointer">Abreviação</th>
-                        <th scope="col"  class="titleColumn text-center"
-                            style="cursor:pointer">Ação</th>
+                        <th scope="col"  class="titleColumn text-center" style="cursor:pointer">Ação</th>
                     </tr>
                     </thead>
                     <tbody class="align-middle">
                     @foreach($cursos as $curso)
                         @if($curso->unidade_id == $unidade->id)
                             <tr>
-                                <td class="align-middle text-center">
+                                <td class="align-middle">
                                     {{ $curso->id }}
                                 </td>
-                                <td class="align-middle text-center">
+                                <td class="align-middle">
                                     {{ $curso->nome }}
                                 </td>
                                 <td class="align-middle text-center">
                                     {{ $curso->abreviatura }}
                                 </td>
                                 <td class="align-middle text-center">
-                                    <a href="{{ route("editar-curso", ['curso_id' => $curso->id]) }}">Editar Curso</a>
+                                    <a href="{{ route("editar-curso", ['curso_id' => $curso->id]) }}">
+                                        <img src="images/botao_editar.svg" height="30px"
+                                             title="Botão de Visualizar Ficha">
+                                    </a>
                                 </td>
                             </tr>
                         @endif

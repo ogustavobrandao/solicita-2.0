@@ -7,10 +7,15 @@
             <div class="col-md-11">
                 <div class="col-md-12">
                     <div class="row justify-content-between tituloListagem">
-                        Campus
-                        <a href="{{ route('cadastro-campus') }}">
-                            <img src="/images/botao_add.svg" width="37px" style="background-color: var(--textcolor); border-radius: 0.5rem">
-                        </a>
+                        Listagem de Campus
+                        <div>
+                            <a href="{{ route('cadastro-campus') }}">
+                                <img src="/images/botao_add.svg" width="37px" style="background-color: var(--textcolor); border-radius: 0.5rem">
+                            </a>
+                            <a href="{{ route('cadastro-campus') }}">
+                                <img src="/images/botao_add.svg" width="37px" style="background-color: var(--textcolor); border-radius: 0.5rem">
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -42,17 +47,23 @@
                                  {{ \App\Models\Instituicao::find($unidade->instituicao_id)->nome }}
                             </td>
                             <td class="align-middle text-center">
-                                <div>
-                                    <a href="{{ route("listar-cursos", ['unidade_id' => $unidade->id]) }}">Listar Cursos</a>
-                                </div>
-                                <div>
-                                    <a href="{{ route("cadastro-curso", ['unidade_id' => $unidade->id]) }}">Cadastrar Curso</a>
-                                </div>
-                                <div>
-                                    <a href="{{ route("listar-bibliotecas", ['unidade_id' => $unidade->id]) }}">Listar Bibliotecas</a>
-                                </div>
-                                <div>
-                                    <a href="{{ route("cadastro-biblioteca", ['unidade_id' => $unidade->id]) }}">Cadastrar Biblioteca</a>
+                                <div class="btn-group">
+                                    <a class="mx-1" href="{{ route("listar-cursos", ['unidade_id' => $unidade->id]) }}">
+                                        <img src="images/listagem_curso.svg" height="30px"
+                                             title="Botão de Visualizar Ficha">
+                                    </a>
+                                    <a class="mx-1" href="{{ route("cadastro-curso", ['unidade_id' => $unidade->id]) }}">
+                                        <img src="images/adicionar_curso.svg" height="30px"
+                                             title="Botão de Visualizar Ficha">
+                                    </a>
+                                    <a class="mx-1" href="{{ route("listar-bibliotecas", ['unidade_id' => $unidade->id]) }}">
+                                        <img src="images/listagem_bibliotecas.svg" height="30px"
+                                             title="Botão de Visualizar Ficha">
+                                    </a>
+                                    <a class="mx-1" href="{{ route("cadastro-biblioteca", ['unidade_id' => $unidade->id]) }}">
+                                        <img src="images/adicionar_biblioteca.svg" height="30px"
+                                             title="Botão de Visualizar Ficha">
+                                    </a>
                                 </div>
                             </td>
                         </tr>
