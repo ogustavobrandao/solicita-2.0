@@ -67,12 +67,12 @@
                                                 <div class="btn-group">
                                                     <a class="btn px-1" href="{{ route('editar-ficha', $requisicao->id) }}">
                                                         <img src="images/botao_editar_proibido.svg" height="30px"
-                                                             title="Botão de Editar - Alguém já está editando">
+                                                             title="Edição em Andamento">
                                                     </a>
                                                     <a class="btn px-1"
                                                        href="{{ route('visualizar-ficha', $requisicao->id) }}">
                                                         <img src="images/botao_visualizar.svg" height="30px"
-                                                             title="Botão de Visualizar Ficha">
+                                                             title="Visualizar Ficha">
                                                     </a>
                                                 </div>
                                             @else
@@ -80,12 +80,12 @@
                                                     <a class="btn px-1"
                                                        href="{{ route('editar-ficha', $requisicao->id) }}">
                                                         <img src="images/botao_editar.svg" height="30px"
-                                                             title="Botão de Editar - Edição permitida">
+                                                             title="Editar">
                                                     </a>
                                                     <a class="btn px-1"
                                                        href="{{ route('visualizar-ficha', $requisicao->id) }}">
                                                         <img src="images/botao_visualizar.svg" height="30px"
-                                                             title="Botão de Visualizar Ficha">
+                                                             title="Visualizar Ficha">
                                                     </a>
                                                 </div>
                                             @endif
@@ -95,14 +95,14 @@
                                             <a class="btn"
                                                href="{{ route('visualizar-ficha', $requisicao->id) }}">
                                                 <img src="images/botao_visualizar.svg" height="30px"
-                                                     title="Botão de Visualizar Ficha">
+                                                     title="Visualizar Ficha">
                                             </a>
                                         @endif
                                         @if($requisicao->status == 'Rejeitado')
                                             <a class="btn" data-toggle="modal"
                                                data-target="#exampleModal{{$requisicao->id}}">
                                                 <img src="images/botao_info.svg" height="30px"
-                                                     title="Botão de Informação">
+                                                     title="Informações">
                                             </a>
                                             <!-- Modal -->
                                             <div class="modal fade" id="exampleModal{{$requisicao->id}}"

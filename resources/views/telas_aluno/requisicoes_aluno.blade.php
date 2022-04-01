@@ -175,7 +175,7 @@
 
                                         @else
                                             <button class="btn" type="submit" style="background-color: transparent">
-                                                <img src="images/botao_remover.svg" height="30px" title="Botão de Visualizar Ficha">
+                                                <img src="images/botao_remover.svg" height="30px" title="Excluir Solicitação">
                                             </button>
                                         @endif
                                     </form>
@@ -184,7 +184,7 @@
                                             <a type="button"
                                                href={{ route('gerar-ficha-aluno',\App\Models\Requisicao_documento::where('requisicao_id',$r->id)->first()->id) }}>
                                                 <button class="btn" style="background-color: transparent">
-                                                    <img src="images/botao_dowload_aquivo.svg" height="30px" title="Botão de Visualizar Ficha">
+                                                    <img src="images/botao_dowload_aquivo.svg" height="30px" title="Baixar Ficha">
                                                 </button>
                                             </a>
                                         @endif

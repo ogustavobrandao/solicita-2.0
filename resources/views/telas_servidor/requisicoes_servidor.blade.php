@@ -195,7 +195,7 @@
                                        data-anotacoes="{{$requisicao_documento['detalhes']}}">
 
                                         <img src="images/botao_remover.svg" height="30px"
-                                             title="Botão de Visualizar Ficha">
+                                             title="Indeferir Solicitação">
 
                                         <span class="glyphicon glyphicon-remove-circle"
                                               style="overflow: hidden; color:red"

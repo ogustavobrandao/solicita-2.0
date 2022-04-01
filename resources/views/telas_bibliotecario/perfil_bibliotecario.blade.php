@@ -15,10 +15,10 @@
                         <div class="col-md-6 text-right">
                             <a href="{{route('editar-senha-bibliotecario')}}" class="btn p-0">
                                 <img src="images/alterar_senha.svg" height="35px"
-                                     title="Botão de Visualizar Ficha"></a>
+                                     title="Alterar Senha"></a>
                             <a href="{{route('editar-bibliotecario')}}" class="btn p-0">
                                 <img src="images/botao_editar.svg" height="35px"
-                                     title="Botão de Visualizar Ficha"></a>
+                                     title="Editar Perfil"></a>
                         </div>
                     </div>
                 </div>

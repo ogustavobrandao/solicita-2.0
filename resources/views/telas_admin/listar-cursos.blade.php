@@ -43,7 +43,7 @@
                                 <td class="align-middle text-center">
                                     <a href="{{ route("editar-curso", ['curso_id' => $curso->id]) }}">
                                         <img src="images/botao_editar.svg" height="30px"
-                                             title="Botão de Visualizar Ficha">
+                                             title="Editar Curso">
                                     </a>
                                 </td>
                             </tr>

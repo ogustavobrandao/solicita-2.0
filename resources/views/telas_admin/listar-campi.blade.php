@@ -12,9 +12,6 @@
                             <a href="{{ route('cadastro-campus') }}">
                                 <img src="/images/botao_add.svg" width="37px" style="background-color: var(--textcolor); border-radius: 0.5rem">
                             </a>
-                            <a href="{{ route('cadastro-campus') }}">
-                                <img src="/images/botao_add.svg" width="37px" style="background-color: var(--textcolor); border-radius: 0.5rem">
-                            </a>
                         </div>
                     </div>
                 </div>
@@ -50,19 +47,19 @@
                                 <div class="btn-group">
                                     <a class="mx-1" href="{{ route("listar-cursos", ['unidade_id' => $unidade->id]) }}">
                                         <img src="images/listagem_curso.svg" height="30px"
-                                             title="Botão de Visualizar Ficha">
+                                             title="Listagem de Cursos">
                                     </a>
                                     <a class="mx-1" href="{{ route("cadastro-curso", ['unidade_id' => $unidade->id]) }}">
                                         <img src="images/adicionar_curso.svg" height="30px"
-                                             title="Botão de Visualizar Ficha">
+                                             title="Adicionar Curso">
                                     </a>
                                     <a class="mx-1" href="{{ route("listar-bibliotecas", ['unidade_id' => $unidade->id]) }}">
                                         <img src="images/listagem_bibliotecas.svg" height="30px"
-                                             title="Botão de Visualizar Ficha">
+                                             title="Listagem de Bibliotecas">
                                     </a>
                                     <a class="mx-1" href="{{ route("cadastro-biblioteca", ['unidade_id' => $unidade->id]) }}">
                                         <img src="images/adicionar_biblioteca.svg" height="30px"
-                                             title="Botão de Visualizar Ficha">
+                                             title="Adicionar Biblioteca">
                                     </a>
                                 </div>
                             </td>

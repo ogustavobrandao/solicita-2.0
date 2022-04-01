@@ -32,7 +32,7 @@
                         <td>{{ $usuario->email }}</td>
                         <td class="text-center"><a href="{{ route('editar-usuario', ['id_usuario' => $usuario->id]) }}">
                                 <img src="images/botao_editar.svg" height="30px"
-                                     title="Botão de Visualizar Ficha"></a></td>
+                                     title="Editar Usuário"></a></td>
                     </tr>
                 @endforeach
 
