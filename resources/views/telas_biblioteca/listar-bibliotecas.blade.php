@@ -5,10 +5,14 @@
 
         <div class="row justify-content-sm-center">
             <div class="col-md-11">
-                <h2 class="tituloListagem">Biblioteca(s) da {{ $unidade->nome }}</h2>
-                <a href="{{ route('cadastro-biblioteca', ['unidade_id' => $unidade->id]) }}">
-                    <img src="/images/botao_add.svg" style="background-color: #1b1e21">
-                </a>
+                <div class="col-md-12">
+                    <div class="row justify-content-between tituloListagem">
+                        <span class="">Biblioteca(s) da {{ $unidade->nome }}</span>
+                        <a href="{{ route('cadastro-biblioteca', ['unidade_id' => $unidade->id]) }}">
+                            <img src="/images/botao_add.svg" width="37px" style="background-color: var(--textcolor); border-radius: 0.5rem">
+                        </a>
+                    </div>
+                </div>
             </div>
 
         </div>
@@ -17,8 +21,8 @@
                 <table class="table table-borderless shadow table-hover mb-2" style="border-radius: 1rem; background-color: white; border: none" id="table">
                     <thead>
                     <tr>
-                        <th scope="col" class="titleColumn text-center" >ID</th>
-                        <th scope="col" class="titleColumn text-center" style="cursor:pointer">Curso</th>
+                        <th scope="col" class="titleColumn" >ID</th>
+                        <th scope="col" class="titleColumn" style="cursor:pointer">Campus</th>
                         <th scope="col"  class="titleColumn text-center"
                             style="cursor:pointer">Ação</th>
                     </tr>
@@ -27,14 +31,17 @@
                     @foreach($bibliotecas as $biblioteca)
                         @if($biblioteca->unidade_id == $unidade->id)
                             <tr>
-                                <td class="align-middle text-center">
+                                <td class="align-middle">
                                     {{ $biblioteca->id }}
                                 </td>
-                                <td class="align-middle text-center">
+                                <td class="align-middle">
                                     {{ $biblioteca->nome }}
                                 </td>
                                 <td class="align-middle text-center">
-                                    <a href="{{ route("editar-biblioteca", ['biblioteca_id' => $biblioteca->id]) }}">Editar Biblioteca</a>
+                                    <a href="{{ route("editar-biblioteca", ['biblioteca_id' => $biblioteca->id]) }}">
+                                        <img src="images/botao_editar.svg" height="30px"
+                                             title="Botão de Visualizar Ficha">
+                                    </a>
                                 </td>
                             </tr>
                         @endif

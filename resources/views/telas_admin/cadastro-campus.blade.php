@@ -54,7 +54,7 @@
                             <!-- Botões -->
                             <div class="row justify-content-between my-2">
                                 <div class="col-md-6">
-                                    <a style="background-color: var(--padrao); border-radius: 0.5rem; color: white; font-size: 17px" class="btn" href="{{  route('home')}}">{{ __('Voltar') }}</a>
+                                    <a style="background-color: var(--padrao); border-radius: 0.5rem; color: white; font-size: 17px" class="btn" href="{{  route('gerenciar-campi')}}">{{ __('Voltar') }}</a>
                                 </div>
                                 <div class="col-md-6 text-right">
                                     <button style="background-color: var(--confirmar); border-radius: 0.5rem; color: white; font-size: 17px" type="submit" class="btn"
