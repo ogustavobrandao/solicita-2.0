@@ -6,15 +6,13 @@
             <div class="col-md-4 corpoRequisicao shadow">
                 <div class="row mx-1 p-0" style="border-bottom: var(--textcolor) 2px solid">
                     <div class="col-md-12 tituoRequisicao mt-3 p-0">
-                        Alterar Senha
+                        Alterar Informações
                     </div>
                 </div>
-
                 <div class="col-md-12 p-0">
                         <form action="{{  route('editar-info')  }}" method="POST">
                             @csrf
                             <div class="form-group">
-
                                 <!-- Form Senha Antiga -->
                                 <div class="form-group row justify-content-center mt-3">
                                     <div class="col-md-12">
@@ -53,7 +51,6 @@
 
                                 <!-- Botões -->
                                 <div class="form-group row mb-0">
-
                                     <div class="col-md-6 " style="">
                                         <a style="background-color: var(--padrao); border-radius: 0.5rem; color: white; font-size: 17px" class="btn" href="{{route('perfil-aluno')}}">Voltar</a>
                                     </div>
@@ -63,9 +60,8 @@
                                             {{ __('Salvar') }}
                                         </button>
                                     </div>
-
-
                                 </div>
+
                             </div>
                         </form>
                     </div>
