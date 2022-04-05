@@ -47,12 +47,8 @@
                             Tutoriais
                         </div>
                         <div class="py-2">
-                            <img src="images/tag.svg" width="30px">
                             <span class="px-1 textoHome">Solicitação de ficha catalográfica.</span>
-                            <div>
-                                <img src="images/tag.svg" width="30px">
-                                <span class="px-1 textoHome">Solicitação de documentos ao DRCA.</span>
-                            </div>
+                            <span class="px-1 textoHome">Solicitação de documentos ao DRCA.</span>
                         </div>
                     </div>
                 </div>
