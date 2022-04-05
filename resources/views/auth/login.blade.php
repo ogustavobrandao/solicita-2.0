@@ -48,7 +48,9 @@
                         </div>
                         <div class="py-2">
                             <span class="px-1 textoHome">Solicitação de ficha catalográfica.</span>
-                            <span class="px-1 textoHome">Solicitação de documentos ao DRCA.</span>
+                            <div>
+                                <span class="px-1 textoHome">Solicitação de documentos ao DRCA.</span>
+                            </div>
                         </div>
                     </div>
                 </div>
