@@ -100,5 +100,18 @@
 
         </div>
     </div>
-    </div>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#unidade").change(function() {
+            unidadeId = $(this).val();
+            $.ajax({
+                url: '/load-cursos/' + unidadeId,
+                success: function(data) {
+                    $("#cursos").html(data);
+                },
+            });
+        });
+    })
+</script>
+
 @endsection

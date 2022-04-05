@@ -1,5 +1,5 @@
 <div class="container" style="background-color:white">
-    <p><font face="Times New Roman" font size="4" color="black">Olá, {{ $usuarioBibliotecario->name }}.</font><br>
+    <p><font face="Times New Roman" font size="4" color="black">Olá, Bibliotecarios da {{ $biblioteca->nome }}.</font><br>
         <font face="Times New Roman" font size="4" color="black">Há uma nova solicitação de ficha catalográfica feita pelo aluno: {{ $usuarioSolicitante->name }}!</font></p>
     <a href="{{route('home')}}">CLIQUE AQUI PARA ACESSAR O SOLICITA</a><br>
     <p align="center"><font face="Times New Roman" font size="4" color="black">Atenciosamente, </font></p>
@@ -14,3 +14,4 @@
                     Sistema Integrado de Bibliotecas (SIB-UFAPE)</strong></font></p>
     @endif
 </div>
+
