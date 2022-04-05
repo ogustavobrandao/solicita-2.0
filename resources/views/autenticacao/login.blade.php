@@ -14,27 +14,43 @@
             </div>
             <div class="row justify-content-center">
                 <div class="col-md-11 pt-4">
-                    <div class="tituloHome">
-                        O que é o “Solicita”?
-                    </div>
-                    <div class="py-2 textoHome">
-                        É uma ferramenta desenvolvida para o atendimento das solicitações de documentos no Setor de Escolaridade da Universidade Federal do Agreste de Pernambuco - UFAPE / Unidade Acadêmica de Garanhuns.
-                    </div>
-                    <div class="tituloHome">
-                        Quais os benefícios em utilizar o “Solicita”?
-                    </div>
-                    <div class="py-2">
-                        <img src="images/tag.svg" width="30px">
-                        <span class="px-1 textoHome">Solicitar documentos de qualquer lugar e horário</span>
-                        <div>
-                            <img src="images/tag.svg" width="30px">
-                            <span class="px-1 textoHome">Acompanhar a situação de seu pedido</span>
+                <div class="py-2 textoHome">
+                        O Solicita teve sua primeira versão desenvolvida pela Unidade Acadêmica de Garanhuns da Universidade Federal Rural de Pernambuco, sendo posteriormente continuada e mantida pela Universidade Federal do Agreste de Pernambuco – UFAPE para atender demandas do setor da Escolaridade (atual DRCA). Em 2022, por meio de cooperação técnica com a Universidade de Pernambuco – UPE, fora implantado módulo de solicitação de fichas catalográficas para atender demandas de ambas as IES.
                         </div>
-                        <div>
-                            <img src="images/tag.svg" width="30px">
-                            <span class="px-1 textoHome">Evitar deslocamento ao setor, antes da emissão do documento</span>
+                        <div class="tituloHome">
+                            Quais documentos eu posso solicitar?
                         </div>
-                    </div>
+                        <div class="py-2">
+                            <img src="images/tag.svg" width="30px">
+                            <span class="px-1 textoHome">Comprovante de matrícula.</span>
+                            <div>
+                                <img src="images/tag.svg" width="30px">
+                                <span class="px-1 textoHome">Declaração de vínculo.</span>
+                            </div>
+                            <div>
+                                <img src="images/tag.svg" width="30px">
+                                <span class="px-1 textoHome">Ficha catalográfica.</span>
+                            </div>
+                            <div>
+                                <img src="images/tag.svg" width="30px">
+                                <span class="px-1 textoHome">Histórico Escolar.</span>
+                            </div>
+                            <div>
+                                <img src="images/tag.svg" width="30px">
+                                <span class="px-1 textoHome">Programa de disciplinas e outros.</span>
+                            </div>
+                        </div>
+                        <div class="tituloHome">
+                            Tutoriais
+                        </div>
+                        <div class="py-2">
+                            <img src="images/tag.svg" width="30px">
+                            <span class="px-1 textoHome">Solicitação de ficha catalográfica.</span>
+                            <div>
+                                <img src="images/tag.svg" width="30px">
+                                <span class="px-1 textoHome">Solicitação de documentos ao DRCA.</span>
+                            </div>
+                        </div>
                 </div>
             </div>
         </div>
