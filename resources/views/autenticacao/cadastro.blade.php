@@ -17,7 +17,7 @@
 
                 <!--CORPO-->
 
-                <form action="{{  route('register')  }}" method="POST" class="py-4">
+                <form action="{{  route('register')  }}" method="POST" class="py-4" name="cadastroForm" id="cadastroForm">
                     @csrf
                     {{-- Nome --}}
                     <div class="row justify-content-center form-group mb-0">
@@ -69,8 +69,8 @@
                         </div>
 
                         <div class="form-group col-sm-4">
-                            <label for="unidade" class="row px-3 textoFicha">Instituição:</label>
-                            <select name="unidade" id="unidade"class="browser-default custom-select">
+                            <label for="unidade" class="row px-3 textoFicha">Unidade:</label>
+                            <select name="unidade" id="unidade" class="browser-default custom-select">
                                 <option value="" disable hidden>-- Selecionar Unidade --</option>
                                 @foreach($unidades as $unidade)
                                     <option value="{{$unidade->id}}">{{$unidade->nome}}</option>
@@ -165,12 +165,23 @@
             </div>
         </div>
     </div>
-
 <script type="text/javascript" >
   $(document).ready(function($){
     $('#cpf').mask('000.000.000-00');
 
   });
+
+  $(document).ready(function() {
+      $("#unidade").change(function() {
+          unidadeId = $(this).val();
+          $.ajax({
+              url: '/load-cursos/' + unidadeId,
+              success: function(data) {
+                  $("#cursos").html(data);
+              },
+          });
+      });
+  })
 
   function validateEmail(email)
   {
@@ -203,4 +214,5 @@
 
 
 </script>
+
 @endsection
