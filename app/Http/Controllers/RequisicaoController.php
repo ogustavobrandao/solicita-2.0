@@ -298,7 +298,7 @@ class RequisicaoController extends Controller
             $bibliotecaBibliotecario = Biblioteca::find($bibliotecario->biblioteca_id);
             $userBibliotecario = User::find($bibliotecario->user_id);
             if($unidadeId == $bibliotecaBibliotecario->unidade_id) {
-                \Illuminate\Support\Facades\Mail::send(new AlertaFichaMail($userBibliotecario, Auth::user()));
+                \Illuminate\Support\Facades\Mail::send(new AlertaFichaMail($userBibliotecario, Auth::user(), $unidade));
             }
         }
 
