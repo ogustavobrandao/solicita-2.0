@@ -21,6 +21,8 @@ Auth::routes(['verify' => true]);
 // ---------------------------------------------ALUNO-------------------------------------------------------------------
 Route::get('/cadastro',[\App\Http\Controllers\AlunoController::class,'createAluno'])->name('cadastro');
 Route::post('/cadastro',[\App\Http\Controllers\AlunoController::class,'storeAluno'])->name('cadastro');
+Route::get('/load-cursos/{id}',[\App\Http\Controllers\AlunoController::class, 'loadCursos'])->name('loadCursos');
+
 
 //----------------------------------------------ADMINISTRADOR-----------------------------------------------------------
 Route::group(['middleware'=> ['CheckAdministrador', 'verified']], function(){
@@ -103,7 +105,6 @@ Route::group(['middleware'=> 'CheckAluno'], function(){
     Route::get('/formulario-requisicao',[\App\Http\Controllers\RequisicaoController::class, 'index'])->name('formulario-requisicao')->middleware('CheckAluno');
     Route::post('/formulario-requisicao',[\App\Http\Controllers\RequisicaoController::class, 'storeRequisicao'])->name('formulario-requisicao-post')->middleware('CheckAluno');
     Route::get('aluno/{requisicao_id}/gerar-ficha',[\App\Http\Controllers\BibliotecarioController::class, 'gerarFicha'])->name('gerar-ficha-aluno')->middleware('CheckFichaAluno');
-
 });
 
 //----------------------------------------------BIBLIOTECARIO---------------------------------------------------
