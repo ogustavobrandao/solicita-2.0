@@ -36,6 +36,9 @@ Route::group(['middleware'=> ['CheckAdministrador', 'verified']], function(){
     Route::post('/editar-biblioteca',[\App\Http\Controllers\BibliotecaController::class,'atualizarBiblioteca'])->name('atualizar-biblioteca');
     Route::get('/listar-biblioteca',[\App\Http\Controllers\BibliotecaController::class,'listarBiblioteca'])->name('listar-biblioteca');
     Route::get('/listar-usuario',[\App\Http\Controllers\UsuarioController::class,'listarUsuario'])->name('listar-usuario');
+});
+
+Route::group(['middleware'=> ['CheckAdministradorServidor', 'verified']], function(){
     Route::get('/editar-usuario',[\App\Http\Controllers\UsuarioController::class,'editarUsuario'])->name('editar-usuario');
     Route::post('/editar-usuario',[\App\Http\Controllers\UsuarioController::class,'atualizarUsuario'])->name('atualizar-usuario');
 });
@@ -59,6 +62,8 @@ Route::group(['middleware'=> ['CheckServidor', 'verified']], function(){
     Route::get('/alterar-senha-servidor',[\App\Http\Controllers\ServidorController::class, 'alterarSenhaServidor'])->name('alterar-senha-servidor')->middleware('CheckServidor');
     Route::post('/alterar-senha-servidor',[\App\Http\Controllers\ServidorController::class, 'storeAlterarSenhaServidor'])->name('alterar-senha-servidor')->middleware('CheckServidor');
     Route::get('/home-servidor',[\App\Http\Controllers\RequisicaoController::class, 'index'])->name('home_servidor')->middleware('CheckServidor');
+    Route::get('/listar-alunos', [\App\Http\Controllers\UsuarioController::class, 'listarAlunos'])->name('listar_alunos');
+
 });
 //----------------------------------------------ALUNO---------------------------------------------------
 // Route::group(['middleware'=> 'verified'], function(){
