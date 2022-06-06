@@ -454,7 +454,9 @@ class BibliotecarioController extends Controller
     public function atualizarBibliotecario(Request $request)
     {
         //atualização dos dados
+
         $user = Auth::user();
+        $bibliotecario = Bibliotecario::where('user_id', $user->id)->first();
         if ($user->email != $request->email) {
             $request->validate([
                 'email' => ['bail', 'required', 'string', 'email', 'max:255', 'unique:users'],
@@ -462,7 +464,11 @@ class BibliotecarioController extends Controller
         }
         $user->name = $request->name;
         $user->email = $request->email;
+        $bibliotecario->crb = $request->crb;
+
         $user->save();
+        $bibliotecario->save();
+
         //dados para ser exibido na view
         $idUser = Auth::user()->id;
         $user = User::find($idUser); //Usuário Autenticado
