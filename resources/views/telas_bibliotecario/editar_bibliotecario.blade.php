@@ -33,6 +33,24 @@
                   </div>
                 </div>
 
+                  <div class="row justify-content-center">
+                      <div class="col-sm-12">
+                          <label for="name" class="field a-field a-field_a3 page__field ">
+                              <input id="crb" type="text" class="form-control @error('crb') is-invalid @enderror field__input a-field__input"
+                                     name="crb" value="{{ $bibliotecario->crb }}" required autocomplete="crb" autofocus placeholder="Digite o CRB">
+
+                              <span class="a-field__label-wrap">
+                        <span class="a-field__label">CRB</span>
+                    </span>
+                          </label>
+                          @error('crb')
+                          <span class="invalid-feedback" role="alert" style="overflow: visible; display:block">
+                    <strong>{{ $message }}</strong>
+                    </span>
+                          @enderror
+                      </div>
+                  </div>
+
                 <div class="row justify-content-center">
                   <div class="col-sm-12">
                     <label for="email" class="field a-field a-field_a3 page__field ">

@@ -23,7 +23,7 @@
 
         <p align="center" style=""><font face="Times New Roman" font size="4" color="black"> <strong>
                     Universidade Federal do Agreste de Pernambuco<br>
-                    Setor Escolaridade</strong></font></p>
+                    SIB-UFAPE</strong></font></p>
     </div>
 @else
     <div class="container" style="background-color:white">
@@ -41,7 +41,7 @@
 
         <p align="center" style=""><font face="Times New Roman" font size="4" color="black"> <strong> Universidade
                     Federal do Agreste de Pernambuco<br>
-                    Setor da Biblioteca</strong></font></p>
+                    SIB-UFAPE</strong></font></p>
     </div>
 @endif
 
