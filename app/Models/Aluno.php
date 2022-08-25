@@ -10,7 +10,7 @@ class Aluno extends Model
     protected $fillable = ['cpf', 'user_id'];
 
     public function perfil(){
-        return $this->hasMany('App\Models\Perfil');
+        return $this->hasOne('App\Models\Perfil');
     }
 
     public function user(){
