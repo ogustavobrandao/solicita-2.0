@@ -54,6 +54,9 @@
                                 </div>
                             @endforeach
                         </div>
+                        <div>
+                            <a href="https://www.gov.br/governodigital/pt-br/assinatura-eletronica" target="_blank">{{('Assinatura digital gov.br')}}</a>
+                        </div>
 
                         <!-- BOTOES -->
                         <div class="row justify-content-between my-3">
