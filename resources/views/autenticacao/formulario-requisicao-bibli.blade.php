@@ -39,7 +39,7 @@
                             </select>
                         </div>
                         <div class="py-3 ">
-                            <label class="textoFicha">Tipo de Documento:</label>
+                            <label class="textoFicha">Ficha catalográfica:</label>
                             @foreach($tipos_documentos as $tipo)
                                 <div>
                                     <input type="radio" name="documento" value="{{$tipo->id}}"
@@ -53,6 +53,15 @@
                                     @endif</input>
                                 </div>
                             @endforeach
+                        </div>
+
+                        <div class="pt-1 pb-3">
+                            <label class="textoFicha">Outros documentos:</label>
+                            <div>
+                                <input type="radio" name="documento" value="comprovante" id="ComprovanteNadaConsta">
+                                    Comprovante Nada Consta
+                                </input>
+                            </div>
                         </div>
 
                         <!-- BOTOES -->
