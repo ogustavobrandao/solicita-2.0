@@ -69,7 +69,9 @@
                                                style="margin-bottom: 10px">Visualizar</a>
                                         </div>
                                     </div>
-
+                                    <div>
+                                        <a href="https://assinador.iti.br/assinatura/index.xhtml" target="_blank">{{('Assinatura digital gov.br')}}</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>

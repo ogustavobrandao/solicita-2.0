@@ -420,10 +420,6 @@
                         </div>
                     </div>
                 </div>
-                <div>
-                    <input type="checkbox" id="checkBoxConfirma" name="checkBoxConfirma" onchange="verificaCheckBoxConfirma()">
-                    <label for="other"> Eu autorizo que o Sistema Integrado de Bibliotecas da UFAPE faça uso dos dados acima informados para o atendimento de minha solicitação. E também confirmo que as informações enviadas por mim, neste documento, são verdadeiras. </label>
-                </div>
                 <div class="row justify-content-between mt-5">
                     <div class="col-md-4">
                         <a type="button" class="btn btn-block"
@@ -432,7 +428,6 @@
                     </div>
                     <div class="col-md-4 text-right">
                         <button type="submit" class="btn btn-block"
-                                id="botaoEnviar"
                                 style="background-color: var(--confirmar); border-radius: 0.5rem; color: white;"
                                 href="#">
                             Enviar
@@ -492,16 +487,6 @@
     sel.html('').append(opts_list);
     sel.val(selected); // set cached selected value
     
-    function verificaCheckBoxConfirma() {
-        var checkBoxConfirma = document.getElementById("checkBoxConfirma");
-        var botaoEnviar = document.getElementById("botaoEnviar");
-        if (checkBoxConfirma.checked == true){
-            botaoEnviar.disabled = false;
-        } else {
-            botaoEnviar.disabled = true;
-        }
-    }
-    verificaCheckBoxConfirma()
 </script>
 
 @endsection
