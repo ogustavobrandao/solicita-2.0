@@ -54,6 +54,9 @@
                                 </div>
                             @endforeach
                         </div>
+                        <div>
+                            <a href="https://www.gov.br/governodigital/pt-br/assinatura-eletronica" target="_blank">{{('Assinatura digital gov.br')}}</a>
+                        </div>
 
                         <div class="pt-1 pb-3">
                             <label class="textoFicha">Outros documentos:</label>
