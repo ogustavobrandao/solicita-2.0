@@ -62,6 +62,11 @@
                                     Comprovante Nada Consta
                                 </input>
                             </div>
+                            <div>
+                                <input type="radio" name="documento" value="ComprovanteDepositoTrabalhoConclusao" id="ComprovanteDepositoTrabalhoConclusao">
+                                    Comprovante de Deposito
+                                </input>
+                            </div>
                         </div>
 
                         <!-- BOTOES -->
