@@ -13,6 +13,16 @@ class Perfil extends Model
     protected $fillable = ['default','situacao', 'valor', 'aluno_id', 'unidade_id', 'curso_id'];
     protected $dates = ['deleted_at'];
 
+    public const SITUACAO_ENUM = [
+        'Matriculado',
+        'Egresso',
+        'Especial',
+        'REMT - Regime Especial de Movimentação Temporária',
+        'Desistente',
+        'Matrícula Trancada',
+        'Intercâmbio',
+    ];
+
     public function requisicao(){
         return $this->hasMany('App\Models\Requisicao');
     }
