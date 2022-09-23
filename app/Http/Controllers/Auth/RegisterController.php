@@ -60,7 +60,7 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['bail','required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'cpf' => ['bail','required','unique:alunos'],
+            'cpf' => ['bail','required', 'cpf', 'unique:alunos'],
             // 'cpf' => ['required','integer','unique:alunos'],
             'vinculo' => ['required'],
             'unidade' => ['required'],
