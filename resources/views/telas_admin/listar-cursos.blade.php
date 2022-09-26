@@ -4,11 +4,11 @@
     <div class="container">
 
         <div class="row justify-content-sm-center">
-            <div class="col-md-11">
+            <div class="col-md-10">
                 <div class="col-md-12">
-                    <div class="row justify-content-between tituloListagem">
-                        <span class="">Biblioteca(s) da {{ $unidade->nome }}</span>
-                        <a href="{{ route('cadastro-biblioteca', ['unidade_id' => $unidade->id]) }}">
+                    <div class="row justify-content-between  tituloListagem">
+                        <span class="">Cursos da {{ $unidade->nome }}</span>
+                        <a href="{{ route('cadastro-curso', ['unidade_id' => $unidade->id]) }}">
                             <img src="/images/botao_add.svg" width="37px" style="background-color: var(--textcolor); border-radius: 0.5rem">
                         </a>
                     </div>
@@ -17,30 +17,33 @@
 
         </div>
         <div class="row justify-content-center">
-            <div class="col-md-11">
+            <div class="col-md-10">
                 <table class="table table-borderless shadow table-hover mb-2" style="border-radius: 1rem; background-color: white; border: none" id="table">
                     <thead>
                     <tr>
                         <th scope="col" class="titleColumn" >ID</th>
-                        <th scope="col" class="titleColumn" style="cursor:pointer">Campus</th>
-                        <th scope="col"  class="titleColumn text-center"
-                            style="cursor:pointer">Ação</th>
+                        <th scope="col" class="titleColumn" style="cursor:pointer">Curso</th>
+                        <th scope="col" class="titleColumn text-center" style="cursor:pointer">Abreviação</th>
+                        <th scope="col"  class="titleColumn text-center" style="cursor:pointer">Ação</th>
                     </tr>
                     </thead>
                     <tbody class="align-middle">
-                    @foreach($bibliotecas as $biblioteca)
-                        @if($biblioteca->unidade_id == $unidade->id)
+                    @foreach($cursos as $curso)
+                        @if($curso->unidade_id == $unidade->id)
                             <tr>
                                 <td class="align-middle">
-                                    {{ $biblioteca->id }}
+                                    {{ $curso->id }}
                                 </td>
                                 <td class="align-middle">
-                                    {{ $biblioteca->nome }}
+                                    {{ $curso->nome }}
                                 </td>
                                 <td class="align-middle text-center">
-                                    <a href="{{ route("editar-biblioteca", ['biblioteca_id' => $biblioteca->id]) }}">
+                                    {{ $curso->abreviatura }}
+                                </td>
+                                <td class="align-middle text-center">
+                                    <a href="{{ route("editar-curso", ['curso_id' => $curso->id]) }}">
                                         <img src="images/botao_editar.svg" height="30px"
-                                             title="Botão de Visualizar Ficha">
+                                             title="Editar Curso">
                                     </a>
                                 </td>
                             </tr>
@@ -71,7 +74,7 @@
             "dom": '<"top"f>rt<"bottom"p><"clear">',
             "order": [],
             "columnDefs": [{
-                "targets": [2],
+                "targets": [3],
                 "orderable": false
             }]
         });
