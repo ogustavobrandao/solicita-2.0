@@ -7,10 +7,12 @@
             <div class="col-md-11">
                 <div class="col-md-12">
                     <div class="row justify-content-between tituloListagem">
-                        <span class="">Biblioteca(s) da {{ $unidade->nome }}</span>
-                        <a href="{{ route('cadastro-biblioteca', ['unidade_id' => $unidade->id]) }}">
-                            <img src="/images/botao_add.svg" width="37px" style="background-color: var(--textcolor); border-radius: 0.5rem">
-                        </a>
+                        Listagem de Campus
+                        <div>
+                            <a href="{{ route('cadastro-campus') }}">
+                                <img src="/images/botao_add.svg" width="37px" style="background-color: var(--textcolor); border-radius: 0.5rem">
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -21,30 +23,47 @@
                 <table class="table table-borderless shadow table-hover mb-2" style="border-radius: 1rem; background-color: white; border: none" id="table">
                     <thead>
                     <tr>
-                        <th scope="col" class="titleColumn" >ID</th>
+                        <th scope="col">#</th>
                         <th scope="col" class="titleColumn" style="cursor:pointer">Campus</th>
+                        <th scope="col" class="titleColumn"
+                            style="cursor:pointer">Instituição</th>
                         <th scope="col"  class="titleColumn text-center"
                             style="cursor:pointer">Ação</th>
                     </tr>
                     </thead>
                     <tbody class="align-middle">
-                    @foreach($bibliotecas as $biblioteca)
-                        @if($biblioteca->unidade_id == $unidade->id)
-                            <tr>
-                                <td class="align-middle">
-                                    {{ $biblioteca->id }}
-                                </td>
-                                <td class="align-middle">
-                                    {{ $biblioteca->nome }}
-                                </td>
-                                <td class="align-middle text-center">
-                                    <a href="{{ route("editar-biblioteca", ['biblioteca_id' => $biblioteca->id]) }}">
-                                        <img src="images/botao_editar.svg" height="30px"
-                                             title="Botão de Visualizar Ficha">
+                    @foreach($unidades as $unidade)
+                        <tr>
+                            <td class="align-middle text-center">
+                                {{ $unidade->id }}
+                            </td>
+                            <td class="align-middle">
+                                {{ $unidade->nome }}
+                            </td>
+                             <td class="align-middle">
+                                 {{ \App\Models\Instituicao::find($unidade->instituicao_id)->nome }}
+                            </td>
+                            <td class="align-middle text-center">
+                                <div class="btn-group">
+                                    <a class="mx-1" href="{{ route("listar-cursos", ['unidade_id' => $unidade->id]) }}">
+                                        <img src="images/listagem_curso.svg" height="30px"
+                                             title="Listagem de Cursos">
                                     </a>
-                                </td>
-                            </tr>
-                        @endif
+                                    <a class="mx-1" href="{{ route("cadastro-curso", ['unidade_id' => $unidade->id]) }}">
+                                        <img src="images/adicionar_curso.svg" height="30px"
+                                             title="Adicionar Curso">
+                                    </a>
+                                    <a class="mx-1" href="{{ route("listar-bibliotecas", ['unidade_id' => $unidade->id]) }}">
+                                        <img src="images/listagem_bibliotecas.svg" height="30px"
+                                             title="Listagem de Bibliotecas">
+                                    </a>
+                                    <a class="mx-1" href="{{ route("cadastro-biblioteca", ['unidade_id' => $unidade->id]) }}">
+                                        <img src="images/adicionar_biblioteca.svg" height="30px"
+                                             title="Adicionar Biblioteca">
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
                     @endforeach
                     </tbody>
                 </table>
@@ -71,7 +90,7 @@
             "dom": '<"top"f>rt<"bottom"p><"clear">',
             "order": [],
             "columnDefs": [{
-                "targets": [2],
+                "targets": [3],
                 "orderable": false
             }]
         });

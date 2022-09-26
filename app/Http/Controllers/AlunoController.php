@@ -52,7 +52,7 @@ class AlunoController extends Controller
   }
   //cadastro de aluno
   public function createAluno(){
-    $cursos = Curso::all();
+    $cursos = Curso::where('id', '=', '0')->get();
     $unidades = Unidade::all();
     // $usuario = User::find(Auth::user()->id);
     $perfis = Perfil::all();
@@ -144,5 +144,10 @@ class AlunoController extends Controller
   }
   public function home(){
     return view ('autenticacao.home-aluno');
+  }
+
+  public function loadCursos($id) {
+    $cursos = Curso::where('unidade_id', $id)->get();
+    return view('autenticacao.cursos', compact('cursos'));
   }
 }

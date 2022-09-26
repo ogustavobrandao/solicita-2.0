@@ -14,7 +14,7 @@
 
         /** Define now the real margins of every page in the PDF **/
         body {
-            margin-top: 3cm;
+            margin-top: 15cm;
             margin-left: 2cm;
             margin-right: 2cm;
             margin-bottom: 2cm;
@@ -137,7 +137,7 @@
 
 
         <tr>
-            <td style="width: 13%; vertical-align:top; float: top"><br><span style="margin-left: 10px; position: absolute; top: 16.1% ">{{ $ficha->cutter}}</span></td>
+            <td style="width: 13%; vertical-align:top; float: top"><br><span style="margin-left: 10px; top: 16.1% ">{{ $ficha->cutter}}</span></td>
 
             <td>
                 <table>
