@@ -63,7 +63,7 @@ Route::group(['middleware'=> ['CheckServidor', 'verified']], function(){
     Route::post('/indefere-requisicoes/{requisicao_id?}', [\App\Http\Controllers\RequisicaoController::class, 'indeferirRequisicao'])->name('indefere-requisicoes-post')->middleware('CheckServidor');
     Route::get('/listar-requisicoes', [\App\Http\Controllers\RequisicaoController::class, 'getRequisicoes'])->name('listar-requisicoes')->middleware('CheckServidor');
     Route::get('/relatorio-requisicoes',[\App\Http\Controllers\RequisicaoController::class, 'exibirBusca'])->name('relatorio-requisicoes')->middleware('CheckServidor');
-    Route::get('/listar-requisicoes-aluno-servidor/{id}',[\App\Http\Controllers\RequisicaoController::class, 'listarRequisicoes'])->name('listar-requisicoes-servidor')->middleware('CheckServidor');
+    Route::get('/listar-requisicoes-aluno-servidor/{id}',[\App\Http\Controllers\RequisicaoController::class, 'listarRequisicoesAluno'])->name('listar-requisicoes-servidor')->middleware('CheckServidor');
     Route::post('/relatorio-requisicoes',[\App\Http\Controllers\RequisicaoController::class, 'gerarRelatorio'])->name('listar-relatorio-post')->middleware('CheckServidor');
     Route::get('/pesquisar-aluno',[\App\Http\Controllers\RequisicaoController::class, 'exibirPesquisa'])->name('pesquisar-aluno')->middleware('CheckServidor');
     Route::post('/pesquisar-aluno',[\App\Http\Controllers\RequisicaoController::class, 'pesquisarAluno'])->name('pesquisar-aluno-post')->middleware('CheckServidor');

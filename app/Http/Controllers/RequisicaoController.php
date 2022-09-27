@@ -481,10 +481,12 @@ class RequisicaoController extends Controller
         return view('/autenticacao.home-aluno');
     }
 
-    public function listarRequisicoesAluno()
+    public function listarRequisicoesAluno($id)
     {
-        $requisicao = Requisicao::paginate(10);
-        return view('/home-aluno')->with($requisicao);
+        $aluno = Aluno::find($id);
+        $requisicoes = $aluno->requisicoes()->orderBy('created_at', 'DESC')->paginate(10);
+        $perfis = Perfil::where('aluno_id', $aluno->id)->get();
+        return view('telas_servidor.requisicoes_aluno_servidor', compact('requisicoes', 'aluno', 'perfis'));
     }
 
     public function indeferirRequisicao(Request $request)

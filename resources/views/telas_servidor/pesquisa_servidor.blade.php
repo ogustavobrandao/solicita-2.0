@@ -29,16 +29,15 @@
                             <td class="align-middle">
                                 {{$aluno->id}}
                             </td>
-                            <td class="align-middle">{{\App\Models\User::where('id',$aluno->user_id)->first()->name}}</td>
+                            <td class="align-middle">{{$aluno->user->name}}</td>
                             <td class="align-middle">{{$aluno->cpf}}</td>
-                            <td class="align-middle">{{\App\Models\User::where('id',$aluno->user_id)->first()->email}}</td>
-                            <td class="text-center"><form action="{{  route('listar-requisicoes-servidor', ['id'=> $aluno->id])  }}" method="GET">
-                                    @csrf
-                                    <button type="submit" class="btn" style="background-color: transparent">
+                            <td class="align-middle">{{$aluno->user->email}}</td>
+                            <td class="text-center">
+                                <a href="{{  route('listar-requisicoes-servidor', ['id'=> $aluno->id])  }}" class="btn" style="background-color: transparent">
                                         <img src="images/botao_info.svg" height="30px"
-                                             title="Histórico do Usuário">
-                                    </button>
-                                </form></td>
+                                    title="Histórico do Usuário">
+                                </a>
+                            </td>
                         </tr>
                     @endforeach
 

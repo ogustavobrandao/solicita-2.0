@@ -16,7 +16,7 @@ class Requisicao_documento extends Model
         return $this->belongsTo('App\Models\Requisicao', 'requisicao_id');
     }
     public function documento(){
-        return $this->hasMany('App\Models\Documento');
+        return $this->belongsTo(Documento::class);
     }
     public function aluno(){
         return $this->belongsTo('App\Models\Aluno','aluno_id');
