@@ -54,6 +54,13 @@ class User extends Authenticatable implements MustVerifyEmail, JWTSubject
         'email_verified_at' => 'datetime',
     ];
 
+    public const TIPO = [
+        'servidor' => 'servidor',
+        'administrador' => 'administrador',
+        'aluno' => 'aluno',
+        'bibliotecario' => 'bibliotecario',
+    ];
+
 
     public function administrador(){
         return $this->hasOne('App\Models\Administrador');
