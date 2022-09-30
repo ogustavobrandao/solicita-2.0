@@ -8,7 +8,7 @@
             <div class="col-md-5 corpoRequisicao shadow">
 
                 <div class="tituoRequisicao mt-3 p-0">
-                    Editar Usuário - {{$usuario->tipo}}
+                    Editar Usuário - {{ucfirst($usuario->tipo)}}
                 </div>
 
                 <form class="my-3" action="{{  route('atualizar-usuario')  }}" method="POST">
@@ -43,22 +43,6 @@
                                        placeholder="E-Mail">
                             </label>
                             @error('email')
-                            <span class="invalid-feedback" role="alert" style="overflow: visible; display:block">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <!--SENHA-->
-                    <div class="row justify-content-center">
-                        <div class="form-group col-md-12">
-                            <label for="password" class="textoFicha px-3 row">Alterar senha:
-                                <input id="password" type="text"
-                                       class="form-control @error('password') is-invalid @enderror"
-                                       name="password" value="*******" autocomplete="senha" placeholder="Senha">
-                            </label>
-                            @error('password')
                             <span class="invalid-feedback" role="alert" style="overflow: visible; display:block">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -175,7 +159,7 @@
                     <div class="form-group row justify-content-between mt-2">
                         <div class="col-sm-6">
                             <a style="background-color: var(--padrao); border-radius: 0.5rem; color: white; font-size: 17px" class="btn btn-secondary btn-cadastro-primary"
-                               href="{{  route('listar-usuario')}}">Voltar</a>
+                               href="@can('isServidor', \App\Models\User::class){{  route('listar_alunos')}} @else {{  route('listar-usuario')}} @endcan">Voltar</a>
                         </div>
                         <div class="col-sm-6 text-right">
                             <button style="background-color: var(--confirmar); border-radius: 0.5rem; color: white; font-size: 17px" type="submit" class="btn lmts-primary btn-cadastro-primary">
