@@ -97,7 +97,6 @@
 
                                         @endif
                                 @endforeach
-                                </ul class="list-group-item">
                             </td>
 
                             <td class="text-center align-middle" style="width: 20%">
@@ -139,12 +138,11 @@
                                                     $tudoAndamento = false
                                                 @endphp
                                                 <li style="color: #1C477E">
-                                                    <strong>{{$rd->status}}</strong>
                                                     <a data-toggle="tooltip" data-placement="left"
                                                        title="Seu pedido foi Indeferido pelo(s) seguinte(s) motivo: {{$rd->anotacoes}}">
                                                         <span onclick="exibirAnotacoes({{$rd->id}})"
                                                               class="glyphicon glyphicon-eye-open"
-                                                              aria-hidden="true"></span>
+                                                              aria-hidden="true"><strong>{{$rd->status}}</strong></span>
                                                         @component('componentes.popup', ["titulo"=>"Seu pedido foi Indeferido pelo(s) seguinte(s) motivo:" ,"conteudo" => $rd->anotacoes, "id"=>$rd->id ])
                                                         @endcomponent
                                                     </a>
@@ -158,12 +156,11 @@
                                             @endif
                                             @if($rd->status == "Rejeitado")
                                                 <li  style="color: #D20101">
-                                                    <strong>{{ $rd->status }}</strong>
                                                     <a data-toggle="tooltip" data-placement="left"
                                                        title="Seu pedido foi rejeitado pelo(s) seguinte(s) motivo: {{$rd->anotacoes}}">
                                                         <span onclick="exibirAnotacoes({{$rd->id}})"
                                                               class="glyphicon glyphicon-eye-open"
-                                                              aria-hidden="true"></span>
+                                                              aria-hidden="true"><strong>{{ $rd->status }}</strong></span>
                                                     @component('componentes.popup', ["titulo"=>"Seu pedido foi rejeitado pelo(s) seguinte(s) motivo:" ,"conteudo" => $rd->anotacoes, "id"=>$rd->id ])
                                                     @endcomponent
                                                 </li>
@@ -249,6 +246,14 @@
         $('.here').find('label').contents().unwrap();
         $('.here').find('input').wrap('<div class="col-md-12 my-3 py-1" style="background-color: #C2C2C2; border-radius: 1rem;"> <div class="col-md-7 my-2"> <div class="col-md-12 p-1 img-search" style="background-color: white; border-radius: 0.5rem;"> </div> </div> </div>');
         $('.img-search').prepend('<img src="{{asset('images/search.png')}}" width="25px">');
+
+
+        function exibirAnotacoes(id) {
+            var s = '#' + id;
+            $(s).modal('show');
+            $(".modal-backdrop").remove();
+            console.log(s)
+        }
 
     </script>
 
