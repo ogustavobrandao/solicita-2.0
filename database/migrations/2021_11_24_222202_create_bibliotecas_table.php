@@ -16,7 +16,6 @@ class CreateBibliotecasTable extends Migration
         Schema::create('bibliotecas', function (Blueprint $table) {
             $table->id();
             $table->string('nome')->unique();
-            $table->string('email')->unique();
             $table->timestamps();
 
             $table->unsignedBigInteger('unidade_id');
