@@ -9,6 +9,7 @@ use App\Models\Bibliotecario;
 use App\Models\Dissertacao;
 use App\Models\FichaCatalografica;
 use App\Models\Monografia;
+use App\Models\NadaConsta;
 use App\Models\PalavraChave;
 use App\Models\Perfil;
 use App\Models\ProgramaEducacional;
@@ -45,17 +46,25 @@ class BibliotecarioController extends Controller
         $idUser = Auth::user()->id;
         $bibliotecario = Bibliotecario::where('user_id', $idUser)->first();
         $unidadeBibliotecario = $bibliotecario->biblioteca->unidade_id;
-        $fichas = [];
+        $documentosFichaCatalografica = [];
+        $documentosNadaConsta = [];
         $requisicoesFichas = [];
         foreach ($requisicaos as $requisicao) {
             $perfil = $requisicao->aluno->perfil->first();
-            if ($requisicao->ficha_catalografica_id != null && $unidadeBibliotecario == $perfil->unidade_id) {
+            if ($requisicao->ficha_catalografica_id != null || $requisicao->nada_consta_id != null && $unidadeBibliotecario == $perfil->unidade_id) {
                 $requisicoesFichas[] = $requisicao;
-                $fichas[] = FichaCatalografica::find($requisicao->ficha_catalografica_id);
+
+               if($requisicao->ficha_catalografica_id != null){
+
+                   $documentosFichaCatalografica[] = FichaCatalografica::find($requisicao->ficha_catalografica_id);
+               }elseif($requisicao->nada_consta_id != null){
+
+                   $documentosNadaConsta[] = NadaConsta::find($requisicao->nada_consta_id);
+               }
             }
         }
 
-        return view('telas_bibliotecario.listar_documentos_solicitados', compact('requisicoesFichas', 'fichas', 'idUser'));
+        return view('telas_bibliotecario.listar_documentos_solicitados', compact('requisicoesFichas', 'documentosFichaCatalografica', 'documentosNadaConsta', 'idUser'));
     }
 
     public function visualizarFicha($requisicaoId)
@@ -114,6 +123,39 @@ class BibliotecarioController extends Controller
         else
             $documento = Dissertacao::where('ficha_catalografica_id', $fichaCatalografica->id)->first();
         return view('telas_bibliotecario.editar_ficha', compact('documento', 'aluno', 'palavrasChave', 'fichaCatalografica', 'tipo_documento', 'requisicao', 'bibliotecario'));
+    }
+
+    public function avaliarNadaConsta($requisicaoId){
+
+        $requisicao = Requisicao_documento::where('id', $requisicaoId)->first();
+        $aluno = Aluno::where('id', $requisicao->aluno_id)->first();
+        $nadaConsta = NadaConsta::find($requisicao->nada_consta_id);
+        $bibliotecario = Bibliotecario::find($requisicao->bibliotecario_id);
+        $bibli = Bibliotecario::where('user_id', Auth::user()->id)->first();
+
+        $data_bibi = date_create_from_format('Y-m-d H:i:s', $requisicao->updated_at);
+        $data_agora = date_create_from_format('Y-m-d H:i:s', date('Y-m-d H:i:s'));
+        if ($requisicao->bibliotecario_id == null || (date_diff($data_bibi, $data_agora)->h >= 2 && $requisicao->status == 'Em andamento')) {
+            $requisicao->bibliotecario_id = $bibli->id;
+            $requisicao->save();
+        }
+        if ($bibliotecario != null && ($requisicao->status == 'Concluido' || $requisicao->status == 'Rejeitado')) {
+            return redirect(route('listar-fichas'))->with('error', 'Esta requisição foi concluida ou rejeitada pelo bibliotecario: ' . $bibliotecario->user->name);
+        } elseif ($bibliotecario != null && $requisicao->status == 'Em andamento' && $bibliotecario->id != $bibli->id) {
+            return redirect(route('listar-fichas'))->with('error', 'Esta requisição está sendo analisada pelo bibliotecario: ' . $bibliotecario->user->name);
+        }
+
+        return view('telas_bibliotecario.avaliar_nada_consta', compact('nadaConsta', 'aluno', 'requisicao', 'bibliotecario'));
+    }
+
+    public function visualizarNadaConsta($requisicaoId)
+    {
+        $requisicao = Requisicao_documento::where('id', $requisicaoId)->first();
+        $aluno = Aluno::where('id', $requisicao->aluno_id)->first();
+        $nadaConsta = NadaConsta::where('id', $requisicao->nada_consta_id)->first();
+        $bibliotecario = Bibliotecario::find($requisicao->bibliotecario_id);
+
+        return view('telas_bibliotecario.visualizar_nada_consta', compact( 'aluno','nadaConsta', 'requisicao', 'bibliotecario'));
     }
 
     public function atualizarFicha(Request $request)
@@ -393,6 +435,55 @@ class BibliotecarioController extends Controller
         $requsicao = Requisicao_documento::find($requisicaoId);
         $ficha = FichaCatalografica::find($requsicao->ficha_catalografica_id);
         return Storage::download('fichas/' . $ficha->anexo);
+    }
+
+
+    ## Nada Consta
+    public function deferirNadaConsta(Request $request)
+    {
+
+        $userId = Auth::user()->id;
+        $bibliotecario = Bibliotecario::where('user_id',$userId)->first();
+
+
+        $documentosRequisitados = Requisicao_documento::where('nada_consta_id', $request->nada_consta_id)->first();
+        $documentosRequisitados->status = 'Concluido';
+        $documentosRequisitados->updated_at = time();
+        $documentosRequisitados->bibliotecario_id = $bibliotecario->id;
+        $documentosRequisitados->update();
+        $alunoUser = User::find(Aluno::find($documentosRequisitados->aluno_id)->user_id);
+
+        #\Illuminate\Support\Facades\Mail::send(new AlertaFichaGerada($alunoUser, $documentosRequisitados));
+        return redirect(Route('listar-fichas'))->with('success', 'Ficha Atualizada com Sucesso!');
+    }
+
+    public function indeferirNadaConsta($requisicaoId)
+    {
+        $requisicao = Requisicao_documento::find($requisicaoId);
+        $nadaConsta = NadaConsta::find($requisicao->nada_consta_id);
+        $aluno = Aluno::find($requisicao->aluno_id);
+        $usuario = User::find($aluno->user_id);
+
+        return view('telas_bibliotecario.indeferir_nada_consta', compact('nadaConsta', 'usuario', 'requisicao', 'aluno'));
+    }
+
+
+    public function baixarAnexoComprovante($requisicaoId)
+    {
+
+        $requsicao = Requisicao_documento::find($requisicaoId);
+        $nadaConsta = NadaConsta::find($requsicao->nada_consta_id);
+        return Storage::download('nadaConsta/' . $nadaConsta->anexo_comprovante_deposito);
+
+
+    }
+
+    public function baixarAnexoTermoAceitacao($requisicaoId)
+    {
+
+        $requsicao = Requisicao_documento::find($requisicaoId);
+        $nadaConsta = NadaConsta::find($requsicao->nada_consta_id);
+        return Storage::download('nadaConsta/' . $nadaConsta->anexo_termo_aceitacao);
     }
 
     public function createBibliotecario()

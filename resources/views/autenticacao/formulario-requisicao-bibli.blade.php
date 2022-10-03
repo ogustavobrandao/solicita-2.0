@@ -39,7 +39,7 @@
                             </select>
                         </div>
                         <div class="py-3 ">
-                            <label class="textoFicha">Tipo de Documento:</label>
+                            <label class="textoFicha">Ficha catalográfica:</label>
                             @foreach($tipos_documentos as $tipo)
                                 <div>
                                     <input type="radio" name="documento" value="{{$tipo->id}}"
@@ -56,6 +56,15 @@
                         </div>
                         <div>
                             <a href="https://www.gov.br/governodigital/pt-br/assinatura-eletronica" target="_blank">{{('Assinatura digital gov.br')}}</a>
+                        </div>
+
+                        <div class="pt-1 pb-3">
+                            <label class="textoFicha">Outros documentos:</label>
+                            <div>
+                                <input type="radio" name="documento" value="comprovante" id="ComprovanteNadaConsta">
+                                    Comprovante Nada Consta
+                                </input>
+                            </div>
                         </div>
 
                         <!-- BOTOES -->

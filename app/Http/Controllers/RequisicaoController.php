@@ -8,6 +8,7 @@ use App\Models\Bibliotecario;
 use App\Models\Dissertacao;
 use App\Models\FichaCatalografica;
 use App\Models\Monografia;
+use App\Models\NadaConsta;
 use App\Models\PalavraChave;
 use App\Models\ProgramaEducacional;
 use App\Models\Tcc;
@@ -153,7 +154,7 @@ class RequisicaoController extends Controller
         return view('autenticacao.formulario-requisicao', compact('usuarios', 'unidades', 'perfis', 'alunos'));
     }
 
-    public function preparaNovaRequisicaoBibli(Request $request)
+    public function preparaNovaRequisicaoBibli()
     {
         $unidades = Unidade::All();
         $usuarios = User::All();
@@ -165,8 +166,18 @@ class RequisicaoController extends Controller
 
     public function cadastrarDocumento(Request $request)
     {
+        $usuario = Auth::user();
+        $aluno = $usuario->aluno;
+        $curso = $usuario->aluno->perfil->curso;
+        $perfil_id = $usuario->aluno->perfil->id;
+
         $tipo_documento = $request->documento;
         $id_perfil = $request->default;
+
+        if ($tipo_documento == 'comprovante') {
+            return view('telas_aluno.cadastrar_solicitacao_nada_consta', compact('usuario', 'aluno', 'curso', 'perfil_id'));
+        }
+
         return view('telas_aluno.cadastrar_documento', ['tipo_documento' => $tipo_documento, 'id_perfil' => $id_perfil]);
     }
 
@@ -194,7 +205,7 @@ class RequisicaoController extends Controller
         if (($request->hasFile('anexo') && $request->file('anexo')->isValid())) {
 
             $anexo = $request->anexo->extension();
-            $nomeAnexo = "documento_".$aluno->cpf.date('Ymd').date('His').'.'.$anexo;
+            $nomeAnexo = "documento_" . $aluno->cpf . date('Ymd') . date('His') . '.' . $anexo;
             $ficha->anexo = $nomeAnexo;
             $request->anexo->storeAs('fichas/', $nomeAnexo);
             $request->anexo = $nomeAnexo;
@@ -243,7 +254,7 @@ class RequisicaoController extends Controller
             $dissertacao->programa = $request->programa;
             $dissertacao->ficha_catalografica_id = $ficha->id;
             $dissertacao->save();
-        }else {
+        } else {
             dd($request);
         }
 
@@ -297,14 +308,68 @@ class RequisicaoController extends Controller
         foreach ($bibliotecarios as $bibliotecario) {
             $bibliotecaBibliotecario = Biblioteca::find($bibliotecario->biblioteca_id);
             $userBibliotecario = User::find($bibliotecario->user_id);
-            if($unidadeId == $bibliotecaBibliotecario->unidade_id) {
+            /*if ($unidadeId == $bibliotecaBibliotecario->unidade_id) {
                 \Illuminate\Support\Facades\Mail::send(new AlertaFichaMail($userBibliotecario, Auth::user()));
-            }
+            }*/
         }
 
 
-
         return redirect(Route('home-aluno'))->with('success', 'Ficha Catalografica Cadastrada Com Sucesso!');
+    }
+
+    public function criarNadaConsta(Request $request)
+    {
+
+        $nadaConsta = new NadaConsta();
+
+        if (($request->hasFile('anexo_comprovante_deposito') && $request->file('anexo_comprovante_deposito')->isValid())) {
+
+            $anexo = $request->anexo_comprovante_deposito->extension();
+            $nomeAnexo = "comprovante_deposito_" . date('Ymd') . date('His') . '.' . $anexo;
+            $nadaConsta->anexo_comprovante_deposito = $nomeAnexo;
+            $request->anexo_comprovante_deposito->storeAs('nadaConsta/', $nomeAnexo);
+            $nadaConsta->anexo_comprovante_deposito = $nomeAnexo;
+        }
+
+        if (($request->hasFile('anexo_termo_aceitacao') && $request->file('anexo_termo_aceitacao')->isValid())) {
+
+            $anexo = $request->anexo_termo_aceitacao->extension();
+            $nomeAnexo = "termo_aceitacao_" . date('Ymd') . date('His') . '.' . $anexo;
+            $nadaConsta->anexo_termo_aceitacao = $nomeAnexo;
+            $request->anexo_termo_aceitacao->storeAs('nadaConsta/', $nomeAnexo);
+            $nadaConsta->anexo_termo_aceitacao = $nomeAnexo;
+        }
+        $nadaConsta->save();
+
+        $requisicao = new Requisicao();
+        $perfil = Perfil::where('id', $request->perfil_id)->first();
+        $requisicao->data_pedido = date('Y-m-d');
+        $requisicao->hora_pedido = date('H:i');
+        $requisicao->perfil_id = $perfil->id;
+        $requisicao->aluno_id = $perfil->aluno->id; //necessária adequação com o código de autenticação do usuário do perfil aluno
+        $requisicao->save();
+
+
+        $documentosRequisitados = new Requisicao_documento();
+        $documentosRequisitados->status_data = date('Y-m-d');
+        $documentosRequisitados->requisicao_id = $requisicao->id;
+        $documentosRequisitados->aluno_id = $perfil->aluno_id;
+        $documentosRequisitados->status = 'Em andamento';
+        $documentosRequisitados->nada_consta_id = $nadaConsta->id;
+
+        $bibliotecarios = Bibliotecario::all();
+        $unidadeId = $perfil->unidade_id;
+        foreach ($bibliotecarios as $bibliotecario) {
+            $bibliotecaBibliotecario = Biblioteca::find($bibliotecario->biblioteca_id);
+            $userBibliotecario = User::find($bibliotecario->user_id);
+            /*if ($unidadeId == $bibliotecaBibliotecario->unidade_id) {
+                \Illuminate\Support\Facades\Mail::send(new AlertaFichaMail($userBibliotecario, Auth::user()));
+            }*/
+        }
+        $documentosRequisitados->save();
+
+        return redirect(Route('home-aluno'))->with('success', 'Comprovante Nada Consta Cadastrada Com Sucesso!');
+
     }
 
     public function novaRequisicao(Request $request)

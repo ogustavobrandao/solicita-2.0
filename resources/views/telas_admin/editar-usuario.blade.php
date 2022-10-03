@@ -10,8 +10,13 @@
         <div class="card-body">
 
           <div class="row justify-content-center">
-            <h2 style="margin-bottom: 10%;">Editar Usuário</h2>
+            <h2>Editando Usuário</h2>
           </div>
+          @if ($usuario->tipo == "aluno")
+            <div class="row justify-content-center">
+                <h5>(perfil padrão do discente)</h5>
+            </div>
+          @endif
           <form action="{{  route('atualizar-usuario')  }}" method="POST">
             @csrf
             <div class="row justify-content-center">
@@ -49,23 +54,6 @@
                   </div>
               </div>
               <br>
-              <div class="row justify-content-center">
-                  <div class="col-sm-12">
-                      <label for="password" class="field a-field a-field_a3 page__field ">
-                          <input id="password" type="text" class="form-control @error('password') is-invalid @enderror field__input a-field__input"
-                                 name="password" value="*******" autocomplete="senha" placeholder="Senha">
-                          <span class="a-field__label-wrap">
-                              <span class="a-field__label">Alterar senha</span>
-                          </span>
-                      </label>
-                      @error('password')
-                      <span class="invalid-feedback" role="alert" style="overflow: visible; display:block">
-                         <strong>{{ $message }}</strong>
-                      </span>
-                      @enderror
-                  </div>
-              </div>
-              <br>
               @if($usuario->tipo == 'aluno')
                  <div class="row justify-content-center">
                       <div class="col-sm-12">
@@ -74,7 +62,7 @@
                                      name="cpf" value="{{ $usuarioEspecifico->cpf }}" required autocomplete="cpf" placeholder="CPF">
 
                               <span class="a-field__label-wrap">
-                        <span class="a-field__label">CPF</span>
+                        <span class="a-field__label"><strong>CPF</strong></span>
                     </span>
                           </label>
                           @error('cpf')
@@ -85,31 +73,38 @@
                       </div>
                   </div><br>
                   <div class="row justify-content-center">
-                      <div class="col-sm-12">
+                        <div class="col-sm-12">
                           <label for="email" class="field a-field a-field_a3 page__field ">
-                              <input id="cpf" type="cpf" class="form-control @error('cpf') is-invalid @enderror field__input a-field__input"
-                                     name="cpf" value="{{ $perfil->default }}" required autocomplete="cpf" placeholder="CPF" disabled>
-
-                              <span class="a-field__label-wrap">
-                        <span class="a-field__label">Curso principal</span>
-                    </span>
-                          </label>
-                          @error('cpf')
-                          <span class="invalid-feedback" role="alert" style="overflow: visible; display:block">
-                    <strong>{{ $message }}</strong>
-                    </span>
+                            <span class="a-field__label-wrap">
+                                <span class="a-field__label"><strong>Curso</strong></span>
+                            </span>
+                            </label>
+                            <select name="curso" id="curso" class="a-field__input browser-default custom-select px-3 @error('curso') is-invalid @enderror field__input a-field__input" required>
+                                @foreach($cursos as $curso)
+                                    <option value="{{$curso->id}}" @if ($perfil->curso_id== $curso->id) selected @endif>{{$curso->nome}}</option>
+                                @endforeach
+                            </select>
+                            <span class="linha mt-1"></span>
+                          @error('curso')
+                            <span class="invalid-feedback" role="alert" style="overflow: visible; display:block">
+                                <strong>{{ $message }}</strong>
+                            </span>
                           @enderror
                       </div>
                   </div><br>
                   <div class="row justify-content-center">
                       <div class="col-sm-12">
-                          <label for="email" class="field a-field a-field_a3 page__field ">
-                              <input id="situacao" type="text" class="form-control @error('situacao') is-invalid @enderror field__input a-field__input"
-                                     name="situacao" value="{{ $perfil->situacao }}" required autocomplete="Situação" placeholder="Situação" disabled>
+                          <label for="situacao" class="field a-field a-field_a3 page__field ">
                               <span class="a-field__label-wrap">
-                                <span class="a-field__label">Situação</span>
+                                <span class="a-field__label"><strong>Situação</strong></span>
                              </span>
                           </label>
+                          <select name="situacao" id="situacao" class="a-field__input browser-default custom-select px-3 @error('situacao') is-invalid @enderror" required>
+                            @foreach($situacoes as $situacao)
+                                <option value="{{$situacao}}" @if ($perfil->situacao == $situacao) selected @endif>{{$situacao}}</option>
+                            @endforeach
+                          </select>
+                          <span class="linha mt-1"></span>
                           @error('situacao')
                           <span class="invalid-feedback" role="alert" style="overflow: visible; display:block">
                             <strong>{{ $message }}</strong>
@@ -120,12 +115,16 @@
                   <div class="row justify-content-center">
                       <div class="col-sm-12">
                           <label for="unidade" class="field a-field a-field_a3 page__field ">
-                              <input id="unidade" type="text" class="form-control @error('unidade') is-invalid @enderror field__input a-field__input"
-                                     name="unidade" value="{{ $unidadeEspecifica->nome }}" required autocomplete="Unidade" placeholder="Unidade" disabled>
                               <span class="a-field__label-wrap">
-                                <span class="a-field__label">Unidade</span>
+                                <span class="a-field__label"><strong>Unidade</strong></span>
                              </span>
                           </label>
+                          <select name="unidade" id="unidade" class="a-field__input browser-default custom-select px-3 @error('unidade') is-invalid @enderror" required>
+                                @foreach($unidades as $unidade)
+                                    <option value="{{$unidade->id}}" @if ($unidadeEspecifica->nome == $unidade->nome) selected @endif>{{$unidade->nome}}</option>
+                                @endforeach
+                          </select>
+                          <span class="linha mt-1"></span>
                           @error('unidade')
                           <span class="invalid-feedback" role="alert" style="overflow: visible; display:block">
                             <strong>{{ $message }}</strong>
@@ -193,6 +192,8 @@
     </div>
   </div>
 </div>
-
+<script>
+    $('#cpf').mask('000.000.000-00');
+</script>
 
 @endsection

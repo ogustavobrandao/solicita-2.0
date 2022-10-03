@@ -18,8 +18,8 @@ class UsuarioSeeder extends Seeder
         DB::table('users')->insert([
 
           'name'=>'Administrador',
-          'email'=>'admin@ufrpe.br',
-          'password'=>Hash::make('123456'),
+          'email'=>'admin@admin.com',
+          'password'=>Hash::make('12345678'),
           'tipo'=>'administrador',
           'email_verified_at'=>'2020-01-01'
         ]);
@@ -28,8 +28,8 @@ class UsuarioSeeder extends Seeder
         DB::table('users')->insert([
 
           'name'=>'aluno',
-          'email'=>'aluno@gmail',
-          'password'=>Hash::make('123456'),
+          'email'=>'aluno@aluno.com',
+          'password'=>Hash::make('12345678'),
           'tipo'=>'aluno',
             'email_verified_at'=>'2020-01-01'
         ]);
@@ -37,25 +37,25 @@ class UsuarioSeeder extends Seeder
         DB::table('users')->insert([
 
             'name'=>'servidor',
-            'email'=>'servidor@ufrpe.br',
-            'password'=>Hash::make('123456'),
+            'email'=>'servidor@servidor.com',
+            'password'=>Hash::make('12345678'),
             'tipo'=>'servidor',
             'email_verified_at'=>'2020-01-01'
         ]);
 
         DB::table('users')->insert([
 
-          'name'=>'bibliotecario_ufape',
-          'email'=>'bibliotecario@ufape.br',
-          'password'=>Hash::make('123456'),
+          'name'=>'bibliotecario UFAPE',
+          'email'=>'bibliotecario@bibliotecario.com',
+          'password'=>Hash::make('12345678'),
           'tipo'=>'bibliotecario',
           'email_verified_at'=>'2020-01-01'
         ]);
 
         DB::table('users')->insert([
 
-          'name'=>'bibliotecario_upe',
-          'email'=>'bibliotecario@upe.br',
+          'name'=>'bibliotecario UPE',
+          'email'=>'bibliotecarioupe@bibliotecarioupe.com',
           'password'=>Hash::make('123456'),
           'tipo'=>'bibliotecario',
           'email_verified_at'=>'2020-01-01'

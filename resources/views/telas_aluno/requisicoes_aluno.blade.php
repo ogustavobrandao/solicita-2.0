@@ -90,8 +90,14 @@
                                                     </li>
                                                 @endif
                                             @endforeach
+
+                                                <li>
+                                                    @if($rd->nada_consta_id != null) Comprovante Nada Consta
+                                                    @endif
+                                                </li>
+
                                         @endif
-                                    @endforeach
+                                @endforeach
                                 </ul class="list-group-item">
                             </td>
 
