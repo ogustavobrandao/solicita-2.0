@@ -671,25 +671,23 @@ class RequisicaoController extends Controller
     {
         $deposito = new Deposito();
 
-        /*if (($request->hasFile('anexo_comprovante_deposito') && $request->file('anexo_comprovante_deposito')->isValid())) {
-
-            $anexo = $request->anexo_comprovante_deposito->extension();
-            $nomeAnexo = "comprovante_deposito_" . date('Ymd') . date('His') . '.' . $anexo;
-            $nadaConsta->anexo_comprovante_deposito = $nomeAnexo;
-            $request->anexo_comprovante_deposito->storeAs('nadaConsta/', $nomeAnexo);
-            $nadaConsta->anexo_comprovante_deposito = $nomeAnexo;
+        if (($request->hasFile('anexo_tcc') && $request->file('anexo_tcc')->isValid())) {
+            $anexo = $request->anexo_tcc->extension();
+            $nomeAnexo = "anexo_tcc_" . date('Ymd') . date('His') . '.' . $anexo;
+            $deposito->anexo_tcc = $nomeAnexo;
+            $request->anexo_tcc->storeAs('deposito/', $nomeAnexo);
+            $deposito->anexo_tcc = $nomeAnexo;
         }
 
-        if (($request->hasFile('anexo_termo_aceitacao') && $request->file('anexo_termo_aceitacao')->isValid())) {
-
-            $anexo = $request->anexo_termo_aceitacao->extension();
-            $nomeAnexo = "termo_aceitacao_" . date('Ymd') . date('His') . '.' . $anexo;
-            $nadaConsta->anexo_termo_aceitacao = $nomeAnexo;
-            $request->anexo_termo_aceitacao->storeAs('nadaConsta/', $nomeAnexo);
-            $nadaConsta->anexo_termo_aceitacao = $nomeAnexo;
-        }*/
+        if (($request->hasFile('anexo_comprovante_autorizacao') && $request->file('anexo_comprovante_autorizacao')->isValid())) {
+            $anexo = $request->anexo_comprovante_autorizacao->extension();
+            $nomeAnexo = "anexo_comprovante_autorizacao_" . date('Ymd') . date('His') . '.' . $anexo;
+            $deposito->anexo_comprovante_autorizacao = $nomeAnexo;
+            $request->anexo_comprovante_autorizacao->storeAs('deposito/', $nomeAnexo);
+            $deposito->anexo_comprovante_autorizacao = $nomeAnexo;
+        }
         $deposito->save();
-        
+
         $requisicao = new Requisicao();
         $perfil = Perfil::where('id', $request->perfil_id)->first();
         $requisicao->data_pedido = date('Y-m-d');
@@ -705,7 +703,7 @@ class RequisicaoController extends Controller
         $documentosRequisitados->aluno_id = $perfil->aluno_id;
         $documentosRequisitados->status = 'Em andamento';
         $documentosRequisitados->deposito_id = $deposito->id;
-        
+
         $bibliotecarios = Bibliotecario::all();
         $unidadeId = $perfil->unidade_id;
         foreach ($bibliotecarios as $bibliotecario) {
@@ -717,7 +715,7 @@ class RequisicaoController extends Controller
         }
         $documentosRequisitados->save();
 
-        return redirect(Route('home-aluno'))->with('success', 'Solicitação de Deposito realizada com Sucesso!');
+        return redirect(Route('home-aluno'))->with('success', 'Solicitação de Depósito realizada com Sucesso!');
 
     }
 

@@ -17,7 +17,8 @@ class Deposito extends Migration
             $table->id();
             $table->timestamps();
             $table->string('anexo_comprovante_deposito')->nullable();
-            $table->string('anexo_comprovante_nada_consta')->nullable();
+            $table->string('anexo_tcc')->nullable();
+            $table->string('anexo_comprovante_autorizacao')->nullable();
         });
     }
 
@@ -28,6 +29,6 @@ class Deposito extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('depositos');
     }
 }

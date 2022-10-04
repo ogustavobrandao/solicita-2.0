@@ -50,9 +50,9 @@
                                            placeholder="Digite o Título do Trabalho" value="" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="anexo1">Comprovante de depósito: <span
+                                    <label for="anexo1">Trabalho de Conclusão de Curso (TCC): <span
                                         style="color: red">*</span></label><br>
-                                    <input type="file" id="anexo1" accept="application/pdf, .docx" name="anexo_comprovante_deposito"
+                                    <input type="file" id="anexo1" accept="application/pdf, .docx, .doc" name="anexo_tcc"
                                            style="margin-bottom: 0px" >
                                     <br>
                                     <span id="tipoAnexo"
@@ -63,7 +63,7 @@
                                     <label for="anexo2">Termo de autorização: <span
                                             style="color: red">*</span>
                                     </label><br>
-                                    <input type="file" id="anexo2" accept="application/pdf, .docx" name="anexo_termo_aceitacao"
+                                    <input type="file" id="anexo2" accept="application/pdf, .docx, .doc" name="anexo_comprovante_autorizacao"
                                            style="margin-bottom: 0px" required>
                                     <br>
                                     <span id="tipoAnexo"
