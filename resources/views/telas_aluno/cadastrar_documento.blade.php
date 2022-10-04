@@ -420,19 +420,24 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row justify-content-between mt-5">
-                        <div class="col-md-4">
-                            <a type="button" class="btn btn-block"
-                               style="background-color: var(--padrao); border-radius: 0.5rem; color: white;"
-                               href="{{ route('prepara-requisicao-bibli') }}">Voltar</a>
-                        </div>
-                        <div class="col-md-4 text-right">
-                            <button type="submit" class="btn btn-block"
-                                    style="background-color: var(--confirmar); border-radius: 0.5rem; color: white;"
-                                    href="#">
-                                Enviar
-                            </button>
-                        </div>
+                </div>
+                <div>
+                    <input type="checkbox" id="checkBoxConfirma" name="checkBoxConfirma" onchange="verificaCheckBoxConfirma()">
+                    <label for="other"> Eu autorizo que o Sistema Integrado de Bibliotecas da UFAPE faça uso dos dados acima informados para o atendimento de minha solicitação. E também confirmo que as informações enviadas por mim, neste documento, são verdadeiras. </label>
+                </div>
+                <div class="row justify-content-between mt-5">
+                    <div class="col-md-4">
+                        <a type="button" class="btn btn-block"
+                           style="background-color: var(--padrao); border-radius: 0.5rem; color: white;"
+                           href="{{ route('prepara-requisicao-bibli') }}">Voltar</a>
+                    </div>
+                    <div class="col-md-4 text-right">
+                        <button type="submit" class="btn btn-block"
+                                id="botaoEnviar"
+                                style="background-color: var(--confirmar); border-radius: 0.5rem; color: white;"
+                                href="#">
+                            Enviar
+                        </button>
                     </div>
                 </form>
             </div>
@@ -478,14 +483,51 @@
                 alert('Os elementos pré-textuais devem ter um tamanho maximo de 10MB Corrija!')
                 e.preventDefault();
             }
-        });
+        } else {
+            alert("This browser does not support HTML5.");
+        }
 
-        var sel = $('#produto');
-        var selected = sel.val(); // cache selected value, before reordering
-        var opts_list = sel.find('option');
-        opts_list.sort(function(a, b) { return $(a).text() > $(b).text() ? 1 : -1; });
-        sel.html('').append(opts_list);
-        sel.val(selected); // set cached selected value
-    </script>
+        myFile = $('#anexo').val();
+        var extension = myFile.split('.').pop();
+        if (extension == 'pdf' || extension == 'docx' || extension == 'doc') {
+            $('#tipoAnexo').css('color', 'green');
+        } else {
+            $('#tipoAnexo').css('color', 'red');
+            alert('O Anexo deve ser de um dos seguites tipos: .pdf, .docx ou .doc.')
+        }
+    });
 
+    $('#formRequisicao').submit(function (e) {
+        myFile = $('#anexo').val();
+        var extension = myFile.split('.').pop();
+        if (extension == 'pdf' || extension == 'docx' || extension == 'doc') {
+            //$('#formRequisicao').submit();
+        } else {
+            alert('Os elementos pré-textuais devem ser de um dos tipos aceitos: .pdf, .docx ou .doc. Corrija!')
+            e.preventDefault();
+        }
+        if (size > 10000) {
+            alert('Os elementos pré-textuais devem ter um tamanho maximo de 10MB Corrija!')
+            e.preventDefault();
+        }
+    });
+
+    var sel = $('#produto');
+    var selected = sel.val(); // cache selected value, before reordering
+    var opts_list = sel.find('option');
+    opts_list.sort(function(a, b) { return $(a).text() > $(b).text() ? 1 : -1; });
+    sel.html('').append(opts_list);
+    sel.val(selected); // set cached selected value
+    
+    function verificaCheckBoxConfirma() {
+        var checkBoxConfirma = document.getElementById("checkBoxConfirma");
+        var botaoEnviar = document.getElementById("botaoEnviar");
+        if (checkBoxConfirma.checked == true){
+            botaoEnviar.disabled = false;
+        } else {
+            botaoEnviar.disabled = true;
+        }
+    }
+    verificaCheckBoxConfirma()
+</script>
 @endsection
