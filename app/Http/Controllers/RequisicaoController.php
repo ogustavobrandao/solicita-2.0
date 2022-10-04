@@ -303,16 +303,13 @@ class RequisicaoController extends Controller
         $documentosRequisitados->save();
 
 
-        $bibliotecarios = Bibliotecario::all();
+        $bibliotecas = Biblioteca::all();
         $unidadeId = $perfil->unidade_id;
-        foreach ($bibliotecarios as $bibliotecario) {
-            $bibliotecaBibliotecario = Biblioteca::find($bibliotecario->biblioteca_id);
-            $userBibliotecario = User::find($bibliotecario->user_id);
-            /*if ($unidadeId == $bibliotecaBibliotecario->unidade_id) {
-                \Illuminate\Support\Facades\Mail::send(new AlertaFichaMail($userBibliotecario, Auth::user()));
-            }*/
+        foreach ($bibliotecas as $biblioteca) {
+            if($unidadeId == $biblioteca->unidade_id) {
+                \Illuminate\Support\Facades\Mail::send(new AlertaFichaMail($biblioteca, Auth::user(), $unidade));
+            }
         }
-
 
         return redirect(Route('home-aluno'))->with('success', 'Ficha Catalografica Cadastrada Com Sucesso!');
     }
@@ -484,10 +481,12 @@ class RequisicaoController extends Controller
         return view('/autenticacao.home-aluno');
     }
 
-    public function listarRequisicoesAluno()
+    public function listarRequisicoesAluno($id)
     {
-        $requisicao = Requisicao::paginate(10);
-        return view('/home-aluno')->with($requisicao);
+        $aluno = Aluno::find($id);
+        $requisicoes = $aluno->requisicoes()->orderBy('created_at', 'DESC')->paginate(10);
+        $perfis = Perfil::where('aluno_id', $aluno->id)->get();
+        return view('telas_servidor.requisicoes_aluno_servidor', compact('requisicoes', 'aluno', 'perfis'));
     }
 
     public function indeferirRequisicao(Request $request)
@@ -636,7 +635,8 @@ class RequisicaoController extends Controller
 
     public function exibirPesquisa()
     {
-        return view('telas_servidor.pesquisa_servidor');
+        $alunos = Aluno::all();
+        return view('telas_servidor.pesquisa_servidor', compact('alunos'));
     }
 
     public function pesquisarAluno(Request $request)

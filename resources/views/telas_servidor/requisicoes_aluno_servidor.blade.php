@@ -1,20 +1,11 @@
 @extends('layouts.app')
 
 @section('conteudo')
-<div class="container-fluid" style="min-height:100vh">
 
-  {{-- <div class="row jusify-content-center d-flex justify-content-center">
-    <div class="col-sm-10">
-      <div class="alert alert-danger" role="alert">
-        <h3 align="center">Atenção</h3>
-      <h4 align="center">A entrega dos documentos solicitados está condicionada a apresentação de <b>Documento Oficial com foto</b>!</h4>
-      </div>
-    </div>
-  </div>
- --}}
+<div class="container-fluid" style="min-height:100vh;">
   <div class="row justify-content-sm-center">
     <div class="col-sm-10">
-      <h2 class="tituloTabela">{{Auth::user()->name}}</h2>
+      <h2 class="tituloTabela">{{$aluno->user->name}}</h2>
     </div>
   </div>
   <div class="row justify-content-center">
@@ -45,40 +36,28 @@
 
                 <td>
                   <ol style="margin-left:-30px">
-                    @foreach($requisicoes_documentos as $rd)
-                        @if($rd->requisicao_id == $r->id)
-                            <!-- Documentos Solicitados -->
-                              @foreach($documentos as $d)
-                                  @if($d->id == $rd->documento_id)
-                                    <li>
-                                      @if($d->tipo == "Programa de Disciplina")
-                                        {{$d->tipo}}
-                                        <a data-toggle="tooltip" data-placement="left" title="Informações:{{$rd['detalhes']}} ">
-                                          {{-- Status do indeferimento com imagem do olho --}}
-                                          <span onclick="exibirAnotacoes('dlgPrograma')" class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
-                                          @component('componentes.popup', ["titulo"=>"Informações", "conteudo"=>$rd->detalhes,"id"=>"dlgPrograma"])
-                                          @endcomponent
-                                        </a>
-
-                                      @elseif($d->tipo == "Outros")
-                                        {{$d->tipo}}
-                                        <a data-toggle="tooltip" data-placement="left" title="Informações:{{$rd['detalhes']}} ">
-                                          {{-- Status do indeferimento com imagem do olho --}}
-                                          <span onclick="exibirAnotacoes('dlgOutros')" class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
-                                          @component('componentes.popup', ["titulo"=>"Informações", "conteudo"=>$rd->detalhes, "id"=>"dlgOutros"])
-                                          @endcomponent
-                                        </a>
-
-
-                                      @else
-
-                                        {{$d->tipo}}
-
-                                      @endif
-                                    </li>
-                                  @endif
-                              @endforeach
-                        @endif
+                    @foreach($r->requisicao_documento as $requisicao)
+                        <li>
+                            @if($requisicao->documento->tipo == "Programa de Disciplina")
+                                {{$requisicao->documento->tipo}}
+                                <a data-toggle="tooltip" data-placement="left" title="Informações:{{$requisicao['detalhes']}} ">
+                                    {{-- Status do indeferimento com imagem do olho --}}
+                                    <span onclick="exibirAnotacoes('dlgPrograma')" class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                                    @component('componentes.popup', ["titulo"=>"Informações", "conteudo"=>$requisicao->detalhes,"id"=>"dlgPrograma"])
+                                    @endcomponent
+                                </a>
+                            @elseif($requisicao->documento->tipo == "Outros")
+                                {{$requisicao->documento->tipo}}
+                                <a data-toggle="tooltip" data-placement="left" title="Informações:{{$requisicao['detalhes']}} ">
+                                    {{-- Status do indeferimento com imagem do olho --}}
+                                    <span onclick="exibirAnotacoes('dlgOutros')" class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                                    @component('componentes.popup', ["titulo"=>"Informações", "conteudo"=>$requisicao->detalhes, "id"=>"dlgOutros"])
+                                    @endcomponent
+                                </a>
+                            @else
+                                {{$requisicao->documento->tipo}}
+                            @endif
+                        </li>
                     @endforeach
                   </ol>
                 </td>
@@ -87,51 +66,47 @@
                   @php
                     $tudoAndamento = true
                   @endphp
-
                   <ol>
-                  @foreach($requisicoes_documentos as $rd)
-                    @if($rd->requisicao_id == $r->id)
+                    @foreach($r->requisicao_documento as $rd)
                         <!-- Documentos Solicitados -->
                         @if($rd->status=="Em andamento")
-                        <li style="color:#db6700">
-                          {{$rd->status}}
-                          <span class="glyphicon glyphicon-time" style="overflow: hidden; color:#db6700"
-                          data-toggle="tooltip" data-placement="top"
-                          title="Sua solicitação está em processamento.">
-                          </span>
-                        </li>
+                            <li style="color:#db6700">
+                            {{$rd->status}}
+                            <span class="glyphicon glyphicon-time" style="overflow: hidden; color:#db6700"
+                            data-toggle="tooltip" data-placement="top"
+                            title="Sua solicitação está em processamento.">
+                            </span>
+                            </li>
                         @endif
                         @if($rd->status=="Concluído - Disponível para retirada")
-                        @php
-                          $tudoAndamento = false
-                        @endphp
-                        <li style="color:green">
-                          {{$rd->status}}
-                          <span class="glyphicon glyphicon-ok-sign" style="overflow: hidden; color:green"
-                          data-toggle="tooltip" data-placement="top"
-                          title="Seu documento está disponível para a retirada.">
-                          </span>
-                        </li>
+                            @php
+                                $tudoAndamento = false
+                            @endphp
+                            <li style="color:green">
+                                {{$rd->status}}
+                                <span class="glyphicon glyphicon-ok-sign" style="overflow: hidden; color:green"
+                                    data-toggle="tooltip" data-placement="top"
+                                    title="Seu documento está disponível para a retirada.">
+                                </span>
+                            </li>
                         @endif
                         {{-- Status do indeferimento com imagem do olho --}}
                         @if($rd->status=="Indeferido")
-                          @php
+                            @php
                             $tudoAndamento = false
-                          @endphp
+                            @endphp
                             <li style="color:red">
-                              {{$rd->status}}
-                              <a data-toggle="tooltip" data-placement="left" title="Seu pedido foi Indeferido pelo(s) seguinte(s) motivo: {{$rd->anotacoes}}">
-                                  <span onclick="exibirAnotacoes({{$rd->id}})" class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
-                                  @component('componentes.popup', ["titulo"=>"Seu pedido foi Indeferido pelo(s) seguinte(s) motivo:" ,"conteudo" => $rd->anotacoes, "id"=>$rd->id ])
-                                  @endcomponent
-                              </a>
+                                {{$rd->status}}
+                                <a data-toggle="tooltip" data-placement="left" title="Seu pedido foi Indeferido pelo(s) seguinte(s) motivo: {{$rd->anotacoes}}">
+                                    <span onclick="exibirAnotacoes({{$rd->id}})" class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                                    @component('componentes.popup', ["titulo"=>"Seu pedido foi Indeferido pelo(s) seguinte(s) motivo:" ,"conteudo" => $rd->anotacoes, "id"=>$rd->id ])
+                                    @endcomponent
+                                </a>
                             </li>
                         @endif
-                      @endif
-                  @endforeach
+                    @endforeach
                   </ol>
                 </td>
-
             </tr>
           @endforeach
           </tbody>
@@ -152,8 +127,6 @@
   </div>
 
 </div>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
     <script>
       function confirmarExclusao(){

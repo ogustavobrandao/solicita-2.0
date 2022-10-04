@@ -15,7 +15,7 @@
                 <div class="row justify-content-center">
                     <div class="col-md-11 pt-4">
                         <div class="tituloHome">
-                            O que é o “Solicita”?
+                            O que é a plataforma Solicita?
                         </div>
                         <div class="py-2 textoHome">
                         O Solicita teve sua primeira versão desenvolvida pela Unidade Acadêmica de Garanhuns da Universidade Federal Rural de Pernambuco, sendo posteriormente continuada e mantida pela Universidade Federal do Agreste de Pernambuco – UFAPE para atender demandas do setor da Escolaridade (atual DRCA). Em 2022, por meio de cooperação técnica com a Universidade de Pernambuco – UPE, fora implantado módulo de solicitação de fichas catalográficas para atender demandas de ambas as IES.
@@ -49,6 +49,7 @@
                         <div class="py-2">
                             <span class="px-1 textoHome">Solicitação de ficha catalográfica.</span>
                             <div>
+
                                 <span class="px-1 textoHome">Solicitação de documentos ao DRCA.</span>
                             </div>
                         </div>
@@ -143,6 +144,4 @@
             </div>
         </div>
     </div>
-
-
 @endsection
