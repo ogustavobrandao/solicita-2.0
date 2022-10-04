@@ -26,6 +26,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use App\Mail\AlertaFichaGerada;
+use App\Models\Deposito;
 
 class BibliotecarioController extends Controller
 {
@@ -48,23 +49,28 @@ class BibliotecarioController extends Controller
         $unidadeBibliotecario = $bibliotecario->biblioteca->unidade_id;
         $documentosFichaCatalografica = [];
         $documentosNadaConsta = [];
+        $documentosDeposito = [];
         $requisicoesFichas = [];
         foreach ($requisicaos as $requisicao) {
             $perfil = $requisicao->aluno->perfil->first();
-            if ($requisicao->ficha_catalografica_id != null || $requisicao->nada_consta_id != null && $unidadeBibliotecario == $perfil->unidade_id) {
+            if ($requisicao->ficha_catalografica_id != null || $requisicao->nada_consta_id != null || $requisicao->deposito_id != null && $unidadeBibliotecario == $perfil->unidade_id) {
                 $requisicoesFichas[] = $requisicao;
 
                if($requisicao->ficha_catalografica_id != null){
 
                    $documentosFichaCatalografica[] = FichaCatalografica::find($requisicao->ficha_catalografica_id);
-               }elseif($requisicao->nada_consta_id != null){
+               }
+               if($requisicao->deposito_id != null){
+
+                $documentosDeposito[] = Deposito::find($requisicao->deposito_id);
+            }elseif($requisicao->nada_consta_id != null){
 
                    $documentosNadaConsta[] = NadaConsta::find($requisicao->nada_consta_id);
                }
             }
         }
 
-        return view('telas_bibliotecario.listar_documentos_solicitados', compact('requisicoesFichas', 'documentosFichaCatalografica', 'documentosNadaConsta', 'idUser'));
+        return view('telas_bibliotecario.listar_documentos_solicitados', compact('requisicoesFichas', 'documentosFichaCatalografica', 'documentosNadaConsta', 'documentosDeposito','idUser'));
     }
 
     public function visualizarFicha($requisicaoId)
