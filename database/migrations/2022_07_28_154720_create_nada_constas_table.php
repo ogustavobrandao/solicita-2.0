@@ -17,7 +17,7 @@ class CreateNadaConstasTable extends Migration
             $table->id();
             $table->timestamps();
             $table->string('anexo_comprovante_deposito')->nullable();
-            $table->string('anexo_termo_aceitacao');
+            $table->string('anexo_termo_aceitacao')->nullable();
         });
     }
 

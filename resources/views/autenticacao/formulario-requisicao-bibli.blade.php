@@ -64,7 +64,7 @@
                             </div>
                             <div>
                                 <input type="radio" name="documento" value="ComprovanteDepositoTrabalhoConclusao" id="ComprovanteDepositoTrabalhoConclusao">
-                                    Comprovante de Deposito
+                                    Comprovante de Depósito
                                 </input>
                             </div>
                         </div>

@@ -10,7 +10,7 @@
             <div class="col-md-7">
 
                 <form method="POST" enctype="multipart/form-data" id="formRequisicao"
-                      action="{{ route('criarNadaConsta') }}">
+                      action="{{ route('criarDeposito') }}">
 
                     @csrf
                     <input type="hidden" name="tipo_documento" value="Comprovante de Deposito">
@@ -22,7 +22,7 @@
 
                         <div class="row">
                             <div class="col-md-12 cabecalho py-2">
-                                <span class="tituloCabecalho">Solicitação Comprovante de Deposito</span>
+                                <span class="tituloCabecalho">Solicitação de Comprovante de Depósito</span>
                             </div>
                         </div>
 
@@ -45,12 +45,12 @@
                                            placeholder="Digite o Curso do Autor" disabled value="{{$curso->nome}}" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="titulo_trabalho">Titulo do trabalho: <span style="color: red">*</span></label>
+                                    <label for="titulo_trabalho">Título do trabalho: <span style="color: red">*</span></label>
                                     <input type="text" class="form-control" id="titulo_trabalho" name="titulo_trabalho"
-                                           placeholder="Digite o Titulo do Trabalho" value="" required>
+                                           placeholder="Digite o Título do Trabalho" value="" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="anexo1">Comprovante de deposito: <span
+                                    <label for="anexo1">Comprovante de depósito: <span
                                         style="color: red">*</span></label><br>
                                     <input type="file" id="anexo1" accept="application/pdf, .docx" name="anexo_comprovante_deposito"
                                            style="margin-bottom: 0px" >
@@ -60,7 +60,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="anexo2">Termo de Autorização: <span
+                                    <label for="anexo2">Termo de autorização: <span
                                             style="color: red">*</span>
                                     </label><br>
                                     <input type="file" id="anexo2" accept="application/pdf, .docx" name="anexo_termo_aceitacao"
@@ -74,7 +74,15 @@
                         </div>
                     </div>
 
-
+                    <div style="display: flex; text-align: justify; text-justify: inter-word;">
+                        <div>
+                            <input type="checkbox" id="checkBoxConfirma" name="checkBoxConfirma" onchange="verificaCheckBoxConfirma()">
+                        </div>
+                        &nbsp
+                        <div>
+                            <label for="other"> Eu autorizo que o Sistema Integrado de Bibliotecas da UFAPE faça uso dos dados acima informados para o atendimento de minha solicitação. E também confirmo que as informações enviadas por mim, neste documento, são verdadeiras. </label>
+                        </div>
+                    </div>
 
                     <div class="row justify-content-between mt-5">
                         <div class="col-md-4">
@@ -84,6 +92,7 @@
                         </div>
                         <div class="col-md-4 text-right">
                             <button type="submit" class="btn btn-block"
+                                    id="botaoEnviar"
                                     style="background-color: var(--confirmar); border-radius: 0.5rem; color: white;"
                                     href="#">
                                 Enviar
@@ -142,6 +151,17 @@
         opts_list.sort(function(a, b) { return $(a).text() > $(b).text() ? 1 : -1; });
         sel.html('').append(opts_list);
         sel.val(selected); // set cached selected value
+
+        function verificaCheckBoxConfirma() {
+            var checkBoxConfirma = document.getElementById("checkBoxConfirma");
+            var botaoEnviar = document.getElementById("botaoEnviar");
+            if (checkBoxConfirma.checked == true){
+                botaoEnviar.disabled = false;
+            } else {
+                botaoEnviar.disabled = true;
+            }
+        }
+        verificaCheckBoxConfirma();
     </script>
 
 @endsection
