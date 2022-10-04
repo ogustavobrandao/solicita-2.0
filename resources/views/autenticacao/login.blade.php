@@ -44,7 +44,9 @@
                             Tutoriais
                         </div>
                         <div class="py-2">
-                            <span class="px-1 textoHome">Solicitação de ficha catalográfica.</span>
+                            <a href="pdfs/tutorial_fichas.pdf">
+                                <span class="px-1 textoHome">Solicitação de ficha catalográfica.</span>
+                            </a>
                             <div>
                                 <span class="px-1 textoHome">Solicitação de documentos ao DRCA.</span>
                             </div>
