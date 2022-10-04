@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateNadaConstasTable extends Migration
+class ChangeColumnNullableInNadaConstas extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,8 @@ class CreateNadaConstasTable extends Migration
      */
     public function up()
     {
-        Schema::create('nada_constas', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-            $table->string('anexo_comprovante_deposito')->nullable();
-            $table->string('anexo_termo_aceitacao');
+        Schema::table('nada_constas', function (Blueprint $table) {
+            $table->string('anexo_termo_aceitacao')->nullable()->change();
         });
     }
 
@@ -28,6 +25,7 @@ class CreateNadaConstasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('nada_constas');
+        Schema::table('nada_constas', function (Blueprint $table) {
+        });
     }
 }
