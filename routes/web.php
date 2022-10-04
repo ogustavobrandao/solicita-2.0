@@ -21,6 +21,8 @@ Auth::routes(['verify' => true]);
 // ---------------------------------------------ALUNO-------------------------------------------------------------------
 Route::get('/cadastro',[\App\Http\Controllers\AlunoController::class,'createAluno'])->name('cadastro');
 Route::post('/cadastro',[\App\Http\Controllers\AlunoController::class,'storeAluno'])->name('cadastro');
+Route::get('/load-cursos/{id}',[\App\Http\Controllers\AlunoController::class, 'loadCursos'])->name('loadCursos');
+
 
 //----------------------------------------------ADMINISTRADOR-----------------------------------------------------------
 Route::group(['middleware'=> ['CheckAdministrador', 'verified']], function(){
@@ -29,18 +31,28 @@ Route::group(['middleware'=> ['CheckAdministrador', 'verified']], function(){
     Route::post('/confirmacao-servidor',[\App\Http\Controllers\ServidorController::class, 'storeServidor'])->name('confirmacao-servidor')->middleware('CheckAdministrador');
     Route::get('/cancela-cadastro',[\App\Http\Controllers\ServidorController::class, 'cancel'])->name('cancela-cadastro')->middleware('CheckAdministrador');
     Route::get('/cadastro-biblioteca',[\App\Http\Controllers\BibliotecaController::class,'createBiblioteca'])->name('cadastro-biblioteca');
-    Route::post('/criar-biblioteca',[\App\Http\Controllers\BibliotecaController::class,'storeBiblioteca'])->name('criar-biblioteca');
+    Route::post('/cadastro-biblioteca',[\App\Http\Controllers\BibliotecaController::class,'storeBiblioteca'])->name('criar-biblioteca');
     Route::get('/cadastro-bibliotecario',[\App\Http\Controllers\BibliotecarioController::class,'createBibliotecario'])->name('cadastro-bibliotecario');
     Route::post('/criar-bibliotecario',[\App\Http\Controllers\BibliotecarioController::class,'storeBibliotecario'])->name('criar-bibliotecario');
     Route::get('/editar-biblioteca',[\App\Http\Controllers\BibliotecaController::class,'editarBiblioteca'])->name('editar-biblioteca');
     Route::post('/editar-biblioteca',[\App\Http\Controllers\BibliotecaController::class,'atualizarBiblioteca'])->name('atualizar-biblioteca');
-    Route::get('/listar-biblioteca',[\App\Http\Controllers\BibliotecaController::class,'listarBiblioteca'])->name('listar-biblioteca');
+    Route::get('/listar-bibliotecas',[\App\Http\Controllers\BibliotecaController::class,'listarBiblioteca'])->name('listar-bibliotecas');
     Route::get('/listar-usuario',[\App\Http\Controllers\UsuarioController::class,'listarUsuario'])->name('listar-usuario');
 });
 
 Route::group(['middleware'=> ['CheckAdministradorServidor', 'verified']], function(){
     Route::get('/editar-usuario',[\App\Http\Controllers\UsuarioController::class,'editarUsuario'])->name('editar-usuario');
     Route::post('/editar-usuario',[\App\Http\Controllers\UsuarioController::class,'atualizarUsuario'])->name('atualizar-usuario');
+    Route::get('/cadastro-campus',[\App\Http\Controllers\UnidadeController::class,'createCampus'])->name('cadastro-campus');
+    Route::post('/cadastro-campus',[\App\Http\Controllers\UnidadeController::class,'storeCampus'])->name('criar-campus');
+    Route::get('/gerenciar-campi',[\App\Http\Controllers\UnidadeController::class, 'gerenciarCampi'])->name('gerenciar-campi');
+    Route::get('/cadastro-curso',[\App\Http\Controllers\CursoController::class,'createCurso'])->name('cadastro-curso');
+    Route::post('/cadastro-curso',[\App\Http\Controllers\CursoController::class,'storeCurso'])->name('criar-curso');
+    Route::get('/listar-cursos',[\App\Http\Controllers\CursoController::class,'listarCursos'])->name('listar-cursos');
+    Route::get('/editar-cursos',[\App\Http\Controllers\CursoController::class,'editarCurso'])->name('editar-curso');
+    Route::post('/editar-cursos',[\App\Http\Controllers\CursoController::class,'atualizarCurso'])->name('atualizar-curso');
+
+
 });
 
 //----------------------------------------------SERVIDOR----------------------------------------------------------------
@@ -51,7 +63,7 @@ Route::group(['middleware'=> ['CheckServidor', 'verified']], function(){
     Route::post('/indefere-requisicoes/{requisicao_id?}', [\App\Http\Controllers\RequisicaoController::class, 'indeferirRequisicao'])->name('indefere-requisicoes-post')->middleware('CheckServidor');
     Route::get('/listar-requisicoes', [\App\Http\Controllers\RequisicaoController::class, 'getRequisicoes'])->name('listar-requisicoes')->middleware('CheckServidor');
     Route::get('/relatorio-requisicoes',[\App\Http\Controllers\RequisicaoController::class, 'exibirBusca'])->name('relatorio-requisicoes')->middleware('CheckServidor');
-    Route::get('/listar-requisicoes-aluno-servidor/{id}',[\App\Http\Controllers\RequisicaoController::class, 'listarRequisicoes'])->name('listar-requisicoes-servidor')->middleware('CheckServidor');
+    Route::get('/listar-requisicoes-aluno-servidor/{id}',[\App\Http\Controllers\RequisicaoController::class, 'listarRequisicoesAluno'])->name('listar-requisicoes-servidor')->middleware('CheckServidor');
     Route::post('/relatorio-requisicoes',[\App\Http\Controllers\RequisicaoController::class, 'gerarRelatorio'])->name('listar-relatorio-post')->middleware('CheckServidor');
     Route::get('/pesquisar-aluno',[\App\Http\Controllers\RequisicaoController::class, 'exibirPesquisa'])->name('pesquisar-aluno')->middleware('CheckServidor');
     Route::post('/pesquisar-aluno',[\App\Http\Controllers\RequisicaoController::class, 'pesquisarAluno'])->name('pesquisar-aluno-post')->middleware('CheckServidor');
@@ -100,7 +112,6 @@ Route::group(['middleware'=> 'CheckAluno'], function(){
     Route::get('/formulario-requisicao',[\App\Http\Controllers\RequisicaoController::class, 'index'])->name('formulario-requisicao')->middleware('CheckAluno');
     Route::post('/formulario-requisicao',[\App\Http\Controllers\RequisicaoController::class, 'storeRequisicao'])->name('formulario-requisicao-post')->middleware('CheckAluno');
     Route::get('aluno/{requisicao_id}/gerar-ficha',[\App\Http\Controllers\BibliotecarioController::class, 'gerarFicha'])->name('gerar-ficha-aluno')->middleware('CheckFichaAluno');
-
 });
 
 //----------------------------------------------BIBLIOTECARIO---------------------------------------------------

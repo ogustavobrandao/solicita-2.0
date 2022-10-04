@@ -136,13 +136,18 @@ class UsuarioController extends Controller
     {
         $usuario = User::where('id', $request->id_usuario)->first();
 
+        $cursos = Curso::orderBy('nome')->get();
+        $unidades = Unidade::orderBy('nome')->get();
+        $situacoes = Perfil::SITUACAO_ENUM;
+        // dd($unidades->first());
+
         switch ($usuario->tipo) {
             case "aluno":
                 $usuarioEspecifico = Aluno::where('user_id', $usuario->id)->first();
-                $perfil = Perfil::where('aluno_id', $usuarioEspecifico->id)->first();
+                $perfil = Perfil::where([['aluno_id', $usuarioEspecifico->id], ['valor', true]])->first();
                 $unidadeEspecifica = Unidade::where('id', $perfil->unidade_id)->first();
                 $cursoEspecifico = Curso::where('id', $perfil->curso_id)->first();
-                return view('telas_admin.editar-usuario', compact('usuario', 'usuarioEspecifico', 'perfil', 'cursoEspecifico', 'unidadeEspecifica'));
+                return view('telas_admin.editar-usuario', compact('usuario', 'usuarioEspecifico', 'perfil', 'cursoEspecifico', 'unidadeEspecifica', 'unidades', 'cursos', 'situacoes'));
 
             case "bibliotecario":
                 $usuarioEspecifico = Bibliotecario::where('user_id', $usuario->id)->first();
@@ -165,13 +170,35 @@ class UsuarioController extends Controller
     {
 
         $usuario = User::find($request->id_usuario);
-        $request->validate(['name' => ['required'], 'email' => ['required']]);
+
+        $validated = $request->validate([
+            'name' => 'required|string|max:300',
+            'email' => 'required|string|email|max:255',
+            'cpf' => 'required|string|cpf',
+        ]);
+
+        if ($request->email != $usuario->email) {
+            $userCheckEmail = User::where('email', 'ilike',$request->email)->first();
+            if ($userCheckEmail != null) {
+                return redirect()->back()->withErrors(['email' => 'Esse email já está sendo utilizado.'])->withInput($validated);
+            }
+        }
+
         $usuario->name = $request->name;
         $usuario->email = $request->email;
-        if ($request->password != null && $request->password != '*******') {
-            $usuario->password = Hash::make($request->password);
-        }
         $usuario->update();
+
+        if ($usuario->aluno) {
+            $aluno = $usuario->aluno;
+            if ($request->cpf) {
+                $aluno->cpf = $request->cpf;
+                $aluno->update();
+            }
+            $unidade = Unidade::find($request->unidade);
+            $curso = Curso::find($request->curso);
+            $perfil = Perfil::where([['aluno_id', $aluno->id], ['valor', true]])->first();
+            $perfil->update(['unidade_id' => $unidade->id, 'curso_id' => $curso->id, 'default' => $curso->nome, 'situacao' => $request->situacao]);
+        }
 
         $user = Auth::user();
 

@@ -420,6 +420,10 @@
                         </div>
                     </div>
                 </div>
+                <div>
+                    <input type="checkbox" id="checkBoxConfirma" name="checkBoxConfirma" onchange="verificaCheckBoxConfirma()">
+                    <label for="other"> Eu autorizo que o Sistema Integrado de Bibliotecas da UFAPE faça uso dos dados acima informados para o atendimento de minha solicitação. E também confirmo que as informações enviadas por mim, neste documento, são verdadeiras. </label>
+                </div>
                 <div class="row justify-content-between mt-5">
                     <div class="col-md-4">
                         <a type="button" class="btn btn-block"
@@ -486,7 +490,7 @@
     opts_list.sort(function(a, b) { return $(a).text() > $(b).text() ? 1 : -1; });
     sel.html('').append(opts_list);
     sel.val(selected); // set cached selected value
-    
+
 </script>
 
 @endsection

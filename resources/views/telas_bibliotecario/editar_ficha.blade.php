@@ -8,7 +8,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-7">
-            <div class="row mt-5 tituloFicha">
+            <div class="row tituloFicha">
                 <div class="col-md-12">
                     Ficha Catalográfica -
                     @if($tipo_documento == 2)Monografia
@@ -46,7 +46,8 @@
                     </div>
                 </div>
 
-                <! -- Dados para o bibliotecario -- !>
+                <!-- Dados para o bibliotecario -->
+
                 <div class="col-md-12 corpoFicha shadow my-4">
                     <div class="row">
                         <div class="col-md-12 cabecalho py-2">
@@ -68,15 +69,14 @@
                             </div>
                             <div class="form-group">
                                 <a href="https://www.tabelacutter.com/" target="_blank" class="btn btn-block"
-                                   style="background-color: #a0c94d; border-radius: 0.5rem; color: black;"><i class="fa-solid fa-arrow-up-right-from-square"></i> Tabela Cutter</a>
+                                   style="background-color: var(--biblioteca); border-radius: 0.5rem; color: white;"><i
+                                        class="fa-solid fa-arrow-up-right-from-square"></i> Tabela Cutter</a>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <hr>
-
-                <! –– Dados do Trabalho ––>
+                <!--DADOS DO TRABALHO-->
 
                 <div class="col-md-12 corpoFicha shadow my-4">
 
@@ -158,10 +158,15 @@
                             <div class="row justify-content-between">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="inclui_anexo">Inclui Anexo ? <span style="color: red">*</span></label>
+                                        <label for="inclui_anexo">Inclui Anexo ? <span
+                                                style="color: red">*</span></label>
                                         <select class="form-control" id="inclui_anexo" name="inclui_anexo">
-                                            <option @if($fichaCatalografica->inclui_anexo == 0) selected @endif value="0">Não</option>
-                                            <option @if($fichaCatalografica->inclui_anexo == 1) selected @endif value="1">Sim</option>
+                                            <option @if($fichaCatalografica->inclui_anexo == 0) selected
+                                                    @endif value="0">Não
+                                            </option>
+                                            <option @if($fichaCatalografica->inclui_anexo == 1) selected
+                                                    @endif value="1">Sim
+                                            </option>
                                         </select>
                                     </div>
                                 </div>
@@ -170,8 +175,12 @@
                                     <div class="form-group">
                                         <label for="inclui_apendice">Inclui Apêndice ? <span style="color: red">*</span></label>
                                         <select class="form-control" id="inclui_apendice" name="inclui_apendice">
-                                            <option @if($fichaCatalografica->inclui_apendice == 0) selected @endif value="0">Não</option>
-                                            <option @if($fichaCatalografica->inclui_apendice == 1) selected @endif value="1">Sim</option>
+                                            <option @if($fichaCatalografica->inclui_apendice == 0) selected
+                                                    @endif value="0">Não
+                                            </option>
+                                            <option @if($fichaCatalografica->inclui_apendice == 1) selected
+                                                    @endif value="1">Sim
+                                            </option>
                                         </select>
                                     </div>
                                 </div>
@@ -179,7 +188,8 @@
 
                             <div class="form-group">
                                 <div class="forma-group">
-                                    <label for="anexoArquivo">Visualizar os elementos pré-textuais: <span style="color: red">*</span>
+                                    <label for="anexoArquivo">Visualizar os elementos pré-textuais: <span
+                                            style="color: red">*</span>
                                     </label><br>
                                     <a class="btn btn-primary" href="{{ route('baixar-anexo', $requisicao->id) }}"
                                        style="margin-bottom: 10px">Visualizar</a>
@@ -389,27 +399,70 @@
                                             style="color: red">*</span></label>
                                     <select class="form-control" aria-label="Selecione o tipo do produto"
                                             name="produto" id="produto">
-                                        <option @if($documento->produto == 'produto_bibliografico') selected @endif value="produto_bibliografico">Produto Bibliográfico</option>
-                                        <option @if($documento->produto == 'ativos_propriedade') selected @endif value="ativos_propriedade">Ativos de Propriedade (Ex: Patente, Marca e etc.)</option>
-                                        <option @if($documento->produto == 'tecnologia_social') selected @endif value="tecnologia_social">Tecnologia Social</option>
-                                        <option @if($documento->produto == 'curso_formacao') selected @endif value="curso_formacao">Curso para Formação</option>
-                                        <option @if($documento->produto == 'produto_editoracao') selected @endif value="produto_editoracao">Produto de Editoração</option>
-                                        <option @if($documento->produto == 'material_didatico') selected @endif value="material_didatico">Material Didático</option>
-                                        <option @if($documento->produto == 'software') selected @endif value="software">Software/Aplicativo (Programa de computador)</option>
-                                        <option @if($documento->produto == 'evento') selected @endif value="evento">Evento Organizado</option>
-                                        <option @if($documento->produto == 'norma') selected @endif value="norma">Norma ou Marco Regulatório</option>
-                                        <option @if($documento->produto == 'relatorio') selected @endif value="relatorio">Relatório técnico conclusivo</option>
-                                        <option @if($documento->produto == 'manual') selected @endif value="manual">Manual/Protocolo</option>
-                                        <option @if($documento->produto == 'traducao') selected @endif value="traducao">Tradução</option>
-                                        <option @if($documento->produto == 'acervo') selected @endif value="acervo">Acervo</option>
-                                        <option @if($documento->produto == 'base_dados') selected @endif value="base_dados">Base de dados técnico-científica</option>
-                                        <option @if($documento->produto == 'cultivar') selected @endif value="cultivar">Cultivar</option>
-                                        <option @if($documento->produto == 'produto_comunicacao') selected @endif value="produto_comunicacao">Produto de Comunicação</option>
-                                        <option @if($documento->produto == 'carta') selected @endif value="carta">Carta, mapa ou simila</option>
-                                        <option @if($documento->produto == 'produto_sigilo') selected @endif value="produto_sigilo">Produtos/Processos em Sigilo</option>
-                                        <option @if($documento->produto == 'taxonomia') selected @endif value="taxonomia">Taxonomias, Ontologias e Tesauros</option>
-                                        <option @if($documento->produto == 'empresa_social') selected @endif value="empresa_social">Empresa ou Organização Social Inovadora</option>
-                                        <option @if($documento->produto == 'processo') selected @endif value="processo">Processo / Tecnologia e Produto / Material não patenteáveis</option>
+                                        <option @if($documento->produto == 'produto_bibliografico') selected
+                                                @endif value="produto_bibliografico">Produto Bibliográfico
+                                        </option>
+                                        <option @if($documento->produto == 'ativos_propriedade') selected
+                                                @endif value="ativos_propriedade">Ativos de Propriedade (Ex: Patente,
+                                            Marca e etc.)
+                                        </option>
+                                        <option @if($documento->produto == 'tecnologia_social') selected
+                                                @endif value="tecnologia_social">Tecnologia Social
+                                        </option>
+                                        <option @if($documento->produto == 'curso_formacao') selected
+                                                @endif value="curso_formacao">Curso para Formação
+                                        </option>
+                                        <option @if($documento->produto == 'produto_editoracao') selected
+                                                @endif value="produto_editoracao">Produto de Editoração
+                                        </option>
+                                        <option @if($documento->produto == 'material_didatico') selected
+                                                @endif value="material_didatico">Material Didático
+                                        </option>
+                                        <option @if($documento->produto == 'software') selected @endif value="software">
+                                            Software/Aplicativo (Programa de computador)
+                                        </option>
+                                        <option @if($documento->produto == 'evento') selected @endif value="evento">
+                                            Evento Organizado
+                                        </option>
+                                        <option @if($documento->produto == 'norma') selected @endif value="norma">Norma
+                                            ou Marco Regulatório
+                                        </option>
+                                        <option @if($documento->produto == 'relatorio') selected
+                                                @endif value="relatorio">Relatório técnico conclusivo
+                                        </option>
+                                        <option @if($documento->produto == 'manual') selected @endif value="manual">
+                                            Manual/Protocolo
+                                        </option>
+                                        <option @if($documento->produto == 'traducao') selected @endif value="traducao">
+                                            Tradução
+                                        </option>
+                                        <option @if($documento->produto == 'acervo') selected @endif value="acervo">
+                                            Acervo
+                                        </option>
+                                        <option @if($documento->produto == 'base_dados') selected
+                                                @endif value="base_dados">Base de dados técnico-científica
+                                        </option>
+                                        <option @if($documento->produto == 'cultivar') selected @endif value="cultivar">
+                                            Cultivar
+                                        </option>
+                                        <option @if($documento->produto == 'produto_comunicacao') selected
+                                                @endif value="produto_comunicacao">Produto de Comunicação
+                                        </option>
+                                        <option @if($documento->produto == 'carta') selected @endif value="carta">Carta,
+                                            mapa ou simila
+                                        </option>
+                                        <option @if($documento->produto == 'produto_sigilo') selected
+                                                @endif value="produto_sigilo">Produtos/Processos em Sigilo
+                                        </option>
+                                        <option @if($documento->produto == 'taxonomia') selected
+                                                @endif value="taxonomia">Taxonomias, Ontologias e Tesauros
+                                        </option>
+                                        <option @if($documento->produto == 'empresa_social') selected
+                                                @endif value="empresa_social">Empresa ou Organização Social Inovadora
+                                        </option>
+                                        <option @if($documento->produto == 'processo') selected @endif value="processo">
+                                            Processo / Tecnologia e Produto / Material não patenteáveis
+                                        </option>
                                     </select>
                                 </div>
                             </div>
@@ -508,9 +561,9 @@
                             </div>
                         </div>
                     </div>
-                @endif
+            @endif
 
-                <! -- PALAVRAS CHAVE -- !>
+            <!-- PALAVRAS CHAVE -->
                 <div class="col-md-12 corpoFicha shadow my-4">
                     <div class="row">
                         <div class="col-md-12 cabecalho py-2">
@@ -565,14 +618,15 @@
                         </div>
 
                         <div class="col-md-3">
-                            <a type="button" class="btn btn-danger btn-block"
+                            <a type="button" class="btn btn-block"
+                               style="background-color: var(--destaque); border-radius: 0.5rem; color: white;"
                                href="{{ route('rejeitar-ficha',$requisicao->id) }}">Indeferir Ficha</a>
                         </div>
 
                         <div class="col-md-3">
                             <button type="submit" class="btn btn-block" id="btn_gerar_ficha"
-                               style="background-color: #1A2876; border-radius: 0.5rem; color: white;"
-                               href="#">Visualizar Ficha
+                                    style="background-color: #1A2876; border-radius: 0.5rem; color: white;"
+                                    href="#">Visualizar Ficha
                             </button>
                         </div>
 
@@ -592,7 +646,8 @@
 
                         <div class="col-md-4">
                             <a type="button" class="btn btn-block" id="btn_gerar_ficha"
-                               style="background-color: #1A2876; border-radius: 0.5rem; color: white;">Gerar Ficha</a>
+                               style="background-color: var(--textcolor); border-radius: 0.5rem; color: white;">Gerar
+                                Ficha</a>
                         </div>
 
                         <div class="col-md-4">

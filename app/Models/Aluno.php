@@ -21,4 +21,8 @@ class Aluno extends Model
         return $this->hasMany('App\Models\Requisicao_documento');
     }
 
+    public function requisicoes(){
+        return $this->hasMany(Requisicao::class);
+    }
+
 }

@@ -6,28 +6,29 @@
         <div class="row justify-content-sm-center">
             <div class="col-md-11">
                 <h2 class="tituloListagem">Requisições de Documentos</h2>
-
             </div>
         </div>
         <div class="row justify-content-center">
             <div class="col-md-11">
-                <table class="table table-borderless shadow table-hover mb-2" style="border-radius: 1rem; background-color: white; border: none" id="table">
+                <table class="table table-borderless shadow table-hover mb-2"
+                       style="border-radius: 1rem; background-color: white; border: none" id="table">
                     <thead>
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col" class="titleColumn" style="cursor:pointer">Autor</th>
                         <th scope="col" class="titleColumn text-center"
-                            style="cursor:pointer">Tipo do Documento</th>
-                        <th scope="col"  class="titleColumn text-center"
-                            style="cursor:pointer">Data da Requisição</th>
+                            style="cursor:pointer">Tipo do Documento
+                        </th>
+                        <th scope="col" class="titleColumn text-center"
+                            style="cursor:pointer">Data da Requisição
+                        </th>
                         <th scope="col" class="text-center">Status</th>
                         <th scope="col" class="text-center">Ação</th>
                         <th scope="col" class="text-center">Data de análise</th>
                     </tr>
                     </thead>
-                    <tbody class="align-middle">
+                    <tbody class="">
                     @foreach($requisicoesFichas as $requisicao)
-
                             @if($requisicao->ficha_catalografica_id != null)
 
                                 @foreach($documentosFichaCatalografica as $documento)
