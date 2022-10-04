@@ -58,14 +58,13 @@
                             <a href="https://www.gov.br/governodigital/pt-br/assinatura-eletronica" target="_blank">{{('Assinatura digital gov.br')}}</a>
                         </div>
 
-                        <div class="pt-1 pb-3">
+                        {{-- <div class="pt-1 pb-3">
                             <label class="textoFicha">Outros documentos:</label>
                             <div>
                                 <input type="radio" name="documento" value="comprovante" id="ComprovanteNadaConsta">
-                                    Comprovante Nada Consta
-                                </input>
+                                <label for="ComprovanteNadaConsta">Comprovante Nada Consta</label>
                             </div>
-                        </div>
+                        </div> --}}
 
                         <!-- BOTOES -->
                         <div class="row justify-content-between my-3">
