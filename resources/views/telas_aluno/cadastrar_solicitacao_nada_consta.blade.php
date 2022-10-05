@@ -75,7 +75,7 @@
                         </div>
                         &nbsp
                         <div>
-                            <label for="other"> Eu autorizo que o Sistema Integrado de Bibliotecas da UFAPE faça uso dos dados acima informados para o atendimento de minha solicitação. E também confirmo que as informações enviadas por mim, neste documento, são verdadeiras. </label>
+                            <label for="checkBoxConfirma"> Eu autorizo que o Sistema Integrado de Bibliotecas da UFAPE faça uso dos dados acima informados para o atendimento de minha solicitação. E também confirmo que as informações enviadas por mim, neste documento, são verdadeiras. </label>
                         </div>
                     </div>
                     <div class="row justify-content-between mt-5">
