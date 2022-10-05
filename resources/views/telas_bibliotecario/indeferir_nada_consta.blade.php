@@ -37,7 +37,7 @@
                 <div class="card card-cadastro card-cadastro-servidor">
                     <div class="card-body">
                         <div class="row justify-content-center">
-                            <h2>Rejeitar documento</h2>
+                            <h2>Indeferir solicitação</h2>
                         </div>
                         <form method="POST" enctype="multipart/form-data" id="formRequisicao"
                               action="{{ route('atualizar-rejeicao',$requisicao->id) }}">
@@ -99,7 +99,7 @@
                                     <div class="form-group">
                                         <label for="exampleFormControlInput1">Explicação<span style="color: red">*</span>:</label>
                                         <input type="text" class="form-control" id="mensagem" name="mensagem"
-                                               placeholder="Motivo da rejeição da ficha" value="" required>
+                                               placeholder="Motivo do indeferimento da solicitação" value="" required>
                                     </div>
                                 </div>
                             </div>

@@ -91,14 +91,14 @@
 
                             <div class="col-lg-5 col-md-6 col-sm-6">
                                 <a type="button" class="btn btn-danger btn-block"
-                                   href="{{ route('indeferir-nada-consta',$requisicao->id) }}">Indeferir Comprovante</a>
+                                   href="{{ route('indeferir-nada-consta',$requisicao->id) }}">Indeferir solicitação</a>
                             </div>
 
                             <div class="col-lg-4 col-md-6 col-sm-6">
                                 <button type="submit" class="btn btn-block" id="btn_enviar_ficha"
                                         style="background-color: var(--confirmar); border-radius: 0.5rem; color: white;"
                                         href="#">
-                                    Deferir Comprovante
+                                    Deferir solicitação
                                 </button>
                             </div>
                         @else
