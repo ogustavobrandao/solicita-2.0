@@ -77,21 +77,12 @@
                                             @if(isset($nadaConsta->anexo_comprovante_deposito))
                                                 <div class="form-group">
                                                     <div class="forma-group">
-                                                        <label class="pt-2 textoFicha" for="anexoArquivo">Comprovante de deposito:</label><br>
+                                                        <label class="pt-2 textoFicha" for="anexoArquivo">Comprovante de depósito:</label><br>
                                                         <a class="btn btn-primary" href="{{ route('baixa-anexo-comprovante', $requisicao->id) }}"
                                                            style="margin-bottom: 10px">Visualizar</a>
                                                     </div>
                                                 </div>
                                             @endif
-
-                                            <div class="form-group">
-                                                <div class="forma-group">
-                                                    <label class="pt-2 textoFicha" for="anexoArquivo">Termo de aceitação<span
-                                                            style="color: red">*</span>:</label><br>
-                                                    <a class="btn btn-primary" href="{{ route('baixar-anexo-termo-aceitacao', $requisicao->id) }}"
-                                                       style="margin-bottom: 10px">Visualizar</a>
-                                                </div>
-                                            </div>
 
                                         </div>
                                     </div>

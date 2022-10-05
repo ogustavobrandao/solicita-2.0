@@ -263,7 +263,7 @@
                                                 {{$requisicao->aluno->user->name}}
                                             </td>
                                             <td class="align-middle text-center">
-                                                Comprovante Deposito
+                                                Comprovante Depósito
                                             </td>
                                             <td class="align-middle text-center">
                                                 {{ date('d/m/Y H:i:s', strtotime($documento->created_at)) }}
