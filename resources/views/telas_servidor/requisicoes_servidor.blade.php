@@ -275,6 +275,17 @@
     @endforeach
     <!-- Modal -->
 
+    <div class="col-md-6 d-none" id="selectCursos">
+        <form action="{{ route('listar-requisicoes') }}" method="GET">
+            <input type="hidden" name="titulo_id" value="{{$titulo_id}}">
+            <select onchange="this.form.submit()" name="curso_id" id="cursos" class="browser-default custom-select custom-select col-md-12 my-2" style="background-color: white;border-radius: 0.5rem;">
+                @foreach($cursos as $curso)
+                    <option id="optionComOValor" value="{{$curso->id}}">{{$curso->nome}}</option>
+                @endforeach
+            </select>
+        </form>
+    </div>
+
     <script>
 
         $('#table').DataTable({
@@ -307,9 +318,10 @@
         $('.here').find('input').addClass('search-input');
         $('.here').find('input').addClass('align-middle');
         $('.here').find('label').contents().unwrap();
-        $('.here').find('input').wrap('<div class="col-md-12 my-3 py-1" style="background-color: #C2C2C2; border-radius: 1rem;"> <div class="col-md-7 my-2"> <div class="col-md-12 p-1 img-search" style="background-color: white; border-radius: 0.5rem;"> </div> </div> </div>');
+        $('.here').find('input').wrap('<div id="filterDiv" class="row my-3 py-1" style="background-color: #C2C2C2; border-radius: 1rem;"> <div class="col-md-6 my-2"> <div class="col-md-12 p-1 img-search" style="background-color: white; border-radius: 0.5rem;"> </div> </div> </div>');
         $('.img-search').prepend('<img src="{{asset('images/search.png')}}" width="25px">');
-
+        $("#filterDiv").prepend($("#selectCursos"));
+        $('#selectCursos').toggleClass('d-none');
     </script>
 
     <script>

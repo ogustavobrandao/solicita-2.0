@@ -129,13 +129,18 @@ class RequisicaoController extends Controller
 
         // return view('telas_servidor.requisicoes_servidor', compact('titulo','listaRequisicao_documentos', 'quantidades'));
 
+        $titulo_id = $request->titulo_id;
+
         return view('telas_servidor.requisicoes_servidor',
-            compact('titulo',
+            compact(
+                'titulo',
+                'titulo_id',
                 'listaRequisicao_documentos',
                 'cursos',
                 'cursoSelecionado',
                 'documentoSelecionado',
-                'documentos'));
+                'documentos'
+            ));
 
     }
 
