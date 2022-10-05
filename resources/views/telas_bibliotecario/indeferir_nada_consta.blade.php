@@ -57,21 +57,20 @@
                                                     style="color: red">*</span>:</label>
                                             <input type="text" class="form-control" id="nome" name="nome"
                                                    placeholder="Nome"
-                                                   value="{{\App\Models\User::where('id', $aluno->user_id)->first()->name}}"
+                                                   value="{{$aluno->user->name}}"
                                                    disabled>
-
                                             <label class="pt-2 textoFicha" for="exampleFormControlInput1">CPF<span
                                                     style="color: red">*</span>:</label>
                                             <input type="text" class="form-control" id="nome" name="nome"
                                                    placeholder="Nome"
-                                                   value="{{\App\Models\User::where('id', $aluno->user_id)->first()->cpf}}"
+                                                   value="{{$aluno->cpf}}"
                                                    disabled>
 
                                             <label class="pt-2 textoFicha" for="exampleFormControlInput1">Curso<span
                                                     style="color: red">*</span>:</label>
                                             <input type="text" class="form-control" id="nome" name="nome"
                                                    placeholder="Nome"
-                                                   value="{{\App\Models\Curso::where('id', $aluno->perfil->curso_id)->first()->nome}}"
+                                                   value="{{$aluno->perfil->curso->nome}}"
                                                    disabled>
 
                                             @if(isset($nadaConsta->anexo_comprovante_deposito))
