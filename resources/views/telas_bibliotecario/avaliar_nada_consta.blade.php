@@ -50,26 +50,7 @@
                                            placeholder="Nome"
                                            value="{{$requisicao->perfil->curso->nome}}"
                                            disabled>
-
-                                    @if(isset($nadaConsta->anexo_comprovante_deposito))
-                                        <div class="form-group">
-                                            <div class="forma-group">
-                                                <label class="pt-2 textoFicha" for="anexoArquivo">Comprovante de depósito:</label><br>
-                                                <a class="btn btn-primary" href="{{ route('baixa-anexo-comprovante', $requisicao->id) }}"
-                                                   style="margin-bottom: 10px">Visualizar</a>
-                                            </div>
-                                        </div>
-                                    @endif
-
-                                    <div class="form-group">
-                                        <div class="forma-group">
-                                            <label class="pt-2 textoFicha" for="anexoArquivo">Termo de aceitação<span
-                                                    style="color: red">*</span>:</label><br>
-                                            <a class="btn btn-primary" href="{{ route('baixar-anexo-termo-aceitacao', $requisicao->id) }}"
-                                               style="margin-bottom: 10px">Visualizar</a>
-                                        </div>
-                                    </div>
-                                    <div>
+                                    <div class="mt-3">
                                         <a href="https://assinador.iti.br/assinatura/index.xhtml" target="_blank">{{('Assinatura digital gov.br')}}</a>
                                     </div>
                                 </div>
