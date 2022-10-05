@@ -176,15 +176,9 @@
                                                     <a class="btn" href="{{ route('avaliar-nada-consta', $requisicao->id) }}">
                                                         <img src="images/botao_editar_proibido.svg" height="30px" title="Botão de Editar - Alguém já está editando">
                                                     </a>
-                                                    <a class="btn rounded-0" href="{{ route('visualizar-nada-consta', $requisicao->id) }}">
-                                                        <img src="images/botao_visualizar.svg" height="30px" title="Botão de Visualizar Ficha">
-                                                    </a>
                                                 @else
                                                     <a class="btn" href="{{ route('avaliar-nada-consta', $requisicao->id) }}">
                                                         <img src="images/botao_editar.svg" height="30px" title="Botão de Editar - Edição permitida">
-                                                    </a>
-                                                    <a class="btn" href="{{ route('visualizar-nada-consta', $requisicao->id) }}">
-                                                        <img src="images/botao_visualizar.svg" height="30px" title="Botão de Visualizar Ficha">
                                                     </a>
                                                 @endif
                                             @endif
