@@ -11,6 +11,22 @@
 
         <div class="row justify-content-center">
             <div class="col-md-11">
+                <div class="col-md-12 my-3" id="selectCursos">
+                    <form action="{{ route('listar-requisicoes') }}" method="GET" class="row px-1 justify-content-around">
+                        <select onchange="this.form.submit()" name="curso_id" id="cursos" class="browser-default custom-select custom-select col-md-6 my-2" style="background-color: white;border-radius: 0.5rem;">
+                            @foreach($cursos as $curso)
+                                <option id="optionComOValor" value="{{$curso->id}}">{{$curso->nome}}</option>
+                            @endforeach
+                        </select>
+                        <select name="titulo_id" onchange="this.form.submit()" class="browser-default custom-select custom-select col-md-6 my-2" style="background-color: white;border-radius: 0.5rem;">
+                            <option @if($titulo_id == 1) selected @endif value="1">Declaração de Vínculo</option>
+                            <option @if($titulo_id == 2) selected @endif value="2">Comprovante de Matrícula</option>
+                            <option @if($titulo_id == 3) selected @endif value="3">Histórico</option>
+                            <option @if($titulo_id == 4) selected @endif value="4">Programa de Disciplina</option>
+                            <option @if($titulo_id == 5) selected @endif value="5">Outros</option>
+                        </select>
+                    </form>
+                </div>
                 <table class="table table-borderless shadow table-hover mb-2"
                        style="border-radius: 1rem; background-color: white; border: none" id="table">
                     <thead class="lmts-primary table-borderless" style="border-color:#1B2E4F;">
@@ -75,12 +91,12 @@
                             {{-- <td>{{$requisicao_documento['status_data']}}</td>
                             <td>{{$requisicao_documento['status_hora']}}</td> --}}
 
-                            @if($titulo=="Outros" | $titulo=="Programa de Disciplina")
+                            @if($titulo=="Outros" || $titulo=="Programa de Disciplina")
                                 <td class="td-align">
                                     <a data-toggle="tooltip" data-placement="left"
                                        title="Informações:{{$requisicao_documento['detalhes']}} ">
                                 <span onclick="exibirAnotacoes({{$requisicao_documento['id']}})"
-                                      class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                                      class="fa fa-eye" aria-hidden="true"></span>
                                         @component('componentes.popup', ["titulo"=>"Informações:", "conteudo"=>$requisicao_documento['detalhes'], "id"=>$requisicao_documento['id']])
                                         @endcomponent
                                     </a>
@@ -108,18 +124,17 @@
                                             <a data-toggle="tooltip" data-placement="left"
                                                title="Informações:{{$requisicao_documento['requisicoes_documentos']['detalhes']}} ">
                                         <span onclick="exibirAnotacoes({{$requisicao_documento['id']}})"
-                                              class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                                              class="fa fa-eye" aria-hidden="true"></span>
                                                 @component('componentes.popup', ["titulo"=>"Informações:", "conteudo"=>$requisicao_documento['requisicoes_documentos']['detalhes'], "id"=>$requisicao_documento['requisicoes_documentos']['id']])
                                                 @endcomponent
                                             </a>
                                         @endif
-
                                         @if($requisicao_documento['requisicoes_documentos']['documento_id'] == 5)
                                             Outros
                                             <a data-toggle="tooltip" data-placement="left"
                                                title="Informações:{{$requisicao_documento['requisicoes_documentos']['detalhes']}} ">
                                         <span onclick="exibirAnotacoes({{$requisicao_documento['id']}})"
-                                              class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                                              class="fa fa-eye" aria-hidden="true"></span>
                                                 @component('componentes.popup', ["titulo"=>"Informações:", "conteudo"=>$requisicao_documento['requisicoes_documentos']['detalhes'], "id"=>$requisicao_documento['requisicoes_documentos']['id']])
                                                 @endcomponent
                                             </a>
@@ -135,7 +150,7 @@
                                            title="Motivo(s):{{$requisicao_documento['requisicoes_documentos']['anotacoes']}} ">
                                     <span
                                         onclick="exibirAnotacoes({{$requisicao_documento['requisicoes_documentos']['id']+1}})"
-                                        class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                                        class="fa fa-eye" aria-hidden="true"></span>
                                             @component('componentes.popup', ["titulo"=>"Motivo(s):", "conteudo"=>$requisicao_documento['requisicoes_documentos']['anotacoes'], "id"=>$requisicao_documento['requisicoes_documentos']['id']+1])
                                             @endcomponent
                                         </a>
@@ -160,7 +175,7 @@
                                             <a data-toggle="tooltip" data-placement="left"
                                                title="Informações:{{$requisicao_documento['requisicoes_documentos']['detalhes']}} ">
                                         <span onclick="exibirAnotacoes({{$requisicao_documento['id']}})"
-                                              class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                                              class="fa fa-eye" aria-hidden="true"></span>
                                                 @component('componentes.popup', ["titulo"=>"Informações:", "conteudo"=>$requisicao_documento['requisicoes_documentos']['detalhes'], "id"=>$requisicao_documento['requisicoes_documentos']['id']])
                                                 @endcomponent
                                             </a>
@@ -171,7 +186,7 @@
                                             <a data-toggle="tooltip" data-placement="left"
                                                title="Informações:{{$requisicao_documento['requisicoes_documentos']['detalhes']}} ">
                                         <span onclick="exibirAnotacoes({{$requisicao_documento['id']}})"
-                                              class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                                              class="fa fa-eye" aria-hidden="true"></span>
                                                 @component('componentes.popup', ["titulo"=>"Informações:", "conteudo"=>$requisicao_documento['requisicoes_documentos']['detalhes'], "id"=>$requisicao_documento['requisicoes_documentos']['id']])
                                                 @endcomponent
                                             </a>
@@ -310,7 +325,6 @@
         $('.here').find('label').contents().unwrap();
         $('.here').find('input').wrap('<div class="col-md-12 my-3 py-1" style="background-color: #C2C2C2; border-radius: 1rem;"> <div class="col-md-7 my-2"> <div class="col-md-12 p-1 img-search" style="background-color: white; border-radius: 0.5rem;"> </div> </div> </div>');
         $('.img-search').prepend('<img src="{{asset('images/search.png')}}" width="25px">');
-
     </script>
 
     <script>
