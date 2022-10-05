@@ -75,12 +75,12 @@
                             {{-- <td>{{$requisicao_documento['status_data']}}</td>
                             <td>{{$requisicao_documento['status_hora']}}</td> --}}
 
-                            @if($titulo=="Outros" | $titulo=="Programa de Disciplina")
+                            @if($titulo=="Outros" || $titulo=="Programa de Disciplina")
                                 <td class="td-align">
                                     <a data-toggle="tooltip" data-placement="left"
                                        title="Informações:{{$requisicao_documento['detalhes']}} ">
                                 <span onclick="exibirAnotacoes({{$requisicao_documento['id']}})"
-                                      class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                                      class="fa fa-eye" aria-hidden="true"></span>
                                         @component('componentes.popup', ["titulo"=>"Informações:", "conteudo"=>$requisicao_documento['detalhes'], "id"=>$requisicao_documento['id']])
                                         @endcomponent
                                     </a>
@@ -108,18 +108,17 @@
                                             <a data-toggle="tooltip" data-placement="left"
                                                title="Informações:{{$requisicao_documento['requisicoes_documentos']['detalhes']}} ">
                                         <span onclick="exibirAnotacoes({{$requisicao_documento['id']}})"
-                                              class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                                              class="fa fa-eye" aria-hidden="true"></span>
                                                 @component('componentes.popup', ["titulo"=>"Informações:", "conteudo"=>$requisicao_documento['requisicoes_documentos']['detalhes'], "id"=>$requisicao_documento['requisicoes_documentos']['id']])
                                                 @endcomponent
                                             </a>
                                         @endif
-
                                         @if($requisicao_documento['requisicoes_documentos']['documento_id'] == 5)
                                             Outros
                                             <a data-toggle="tooltip" data-placement="left"
                                                title="Informações:{{$requisicao_documento['requisicoes_documentos']['detalhes']}} ">
                                         <span onclick="exibirAnotacoes({{$requisicao_documento['id']}})"
-                                              class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                                              class="fa fa-eye" aria-hidden="true"></span>
                                                 @component('componentes.popup', ["titulo"=>"Informações:", "conteudo"=>$requisicao_documento['requisicoes_documentos']['detalhes'], "id"=>$requisicao_documento['requisicoes_documentos']['id']])
                                                 @endcomponent
                                             </a>
@@ -135,7 +134,7 @@
                                            title="Motivo(s):{{$requisicao_documento['requisicoes_documentos']['anotacoes']}} ">
                                     <span
                                         onclick="exibirAnotacoes({{$requisicao_documento['requisicoes_documentos']['id']+1}})"
-                                        class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                                        class="fa fa-eye" aria-hidden="true"></span>
                                             @component('componentes.popup', ["titulo"=>"Motivo(s):", "conteudo"=>$requisicao_documento['requisicoes_documentos']['anotacoes'], "id"=>$requisicao_documento['requisicoes_documentos']['id']+1])
                                             @endcomponent
                                         </a>
@@ -160,7 +159,7 @@
                                             <a data-toggle="tooltip" data-placement="left"
                                                title="Informações:{{$requisicao_documento['requisicoes_documentos']['detalhes']}} ">
                                         <span onclick="exibirAnotacoes({{$requisicao_documento['id']}})"
-                                              class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                                              class="fa fa-eye" aria-hidden="true"></span>
                                                 @component('componentes.popup', ["titulo"=>"Informações:", "conteudo"=>$requisicao_documento['requisicoes_documentos']['detalhes'], "id"=>$requisicao_documento['requisicoes_documentos']['id']])
                                                 @endcomponent
                                             </a>
@@ -171,7 +170,7 @@
                                             <a data-toggle="tooltip" data-placement="left"
                                                title="Informações:{{$requisicao_documento['requisicoes_documentos']['detalhes']}} ">
                                         <span onclick="exibirAnotacoes({{$requisicao_documento['id']}})"
-                                              class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                                              class="fa fa-eye" aria-hidden="true"></span>
                                                 @component('componentes.popup', ["titulo"=>"Informações:", "conteudo"=>$requisicao_documento['requisicoes_documentos']['detalhes'], "id"=>$requisicao_documento['requisicoes_documentos']['id']])
                                                 @endcomponent
                                             </a>
