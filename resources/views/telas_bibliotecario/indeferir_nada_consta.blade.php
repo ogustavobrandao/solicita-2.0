@@ -70,7 +70,7 @@
                                                     style="color: red">*</span>:</label>
                                             <input type="text" class="form-control" id="nome" name="nome"
                                                    placeholder="Nome"
-                                                   value="{{$aluno->perfil->curso->nome}}"
+                                                   value="{{$requisicao->perfil->curso->nome}}"
                                                    disabled>
 
                                             @if(isset($nadaConsta->anexo_comprovante_deposito))

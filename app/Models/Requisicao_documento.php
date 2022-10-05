@@ -18,6 +18,16 @@ class Requisicao_documento extends Model
     public function documento(){
         return $this->belongsTo(Documento::class);
     }
+
+    public function nadaConsta(){
+        return $this->belongsTo(NadaConsta::class);
+    }
+
+    public function bibliotecario()
+    {
+        return $this->belongsTo(Bibliotecario::class);
+    }
+
     public function aluno(){
         return $this->belongsTo('App\Models\Aluno','aluno_id');
     }

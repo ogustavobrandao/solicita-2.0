@@ -133,19 +133,20 @@ class BibliotecarioController extends Controller
 
     public function avaliarNadaConsta($requisicaoId){
 
-        $requisicao = Requisicao_documento::where('id', $requisicaoId)->first();
-        $aluno = Aluno::where('id', $requisicao->aluno_id)->first();
-        $nadaConsta = NadaConsta::find($requisicao->nada_consta_id);
-        $bibliotecario = Bibliotecario::find($requisicao->bibliotecario_id);
+        $requisicao_documento = Requisicao_documento::find($requisicaoId);
+        $requisicao = $requisicao_documento->requisicao;
+        $aluno = $requisicao->perfil->aluno;
+        $nadaConsta = $requisicao_documento->nadaConsta;
+        $bibliotecario = $requisicao_documento->bibliotecario;
         $bibli = Bibliotecario::where('user_id', Auth::user()->id)->first();
 
         $data_bibi = date_create_from_format('Y-m-d H:i:s', $requisicao->updated_at);
         $data_agora = date_create_from_format('Y-m-d H:i:s', date('Y-m-d H:i:s'));
-        if ($requisicao->bibliotecario_id == null || (date_diff($data_bibi, $data_agora)->h >= 2 && $requisicao->status == 'Em andamento')) {
-            $requisicao->bibliotecario_id = $bibli->id;
-            $requisicao->save();
+        if ($requisicao_documento->bibliotecario_id == null || (date_diff($data_bibi, $data_agora)->h >= 2 && $requisicao_documento->status == 'Em andamento')) {
+            $requisicao_documento->bibliotecario_id = $bibli->id;
+            $requisicao_documento->save();
         }
-        if ($bibliotecario != null && ($requisicao->status == 'Concluido' || $requisicao->status == 'Rejeitado')) {
+        if ($bibliotecario != null && ($requisicao->status == 'Concluido' || $requisicao_documento->status == 'Rejeitado')) {
             return redirect(route('listar-fichas'))->with('error', 'Esta requisição foi concluida ou rejeitada pelo bibliotecario: ' . $bibliotecario->user->name);
         } elseif ($bibliotecario != null && $requisicao->status == 'Em andamento' && $bibliotecario->id != $bibli->id) {
             return redirect(route('listar-fichas'))->with('error', 'Esta requisição está sendo analisada pelo bibliotecario: ' . $bibliotecario->user->name);
