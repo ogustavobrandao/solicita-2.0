@@ -55,7 +55,7 @@
                             @endforeach
                         </div>
 
-                        {{-- <div class="pt-1 pb-3">
+                        <div class="pt-1 pb-3">
                             <label class="textoFicha">Outros documentos:</label>
                             <div>
                                 <input type="radio" name="documento" value="comprovante" id="ComprovanteNadaConsta">
@@ -63,10 +63,9 @@
                             </div>
                             <div>
                                 <input type="radio" name="documento" value="ComprovanteDepositoTrabalhoConclusao" id="ComprovanteDepositoTrabalhoConclusao">
-                                    Comprovante de Depósito
-                                </input>
+                                <label for="ComprovanteDepositoTrabalhoConclusao">Comprovante de Depósito</label>
                             </div>
-                        </div> --}}
+                        </div>
 
                         <!-- BOTOES -->
                         <div class="row justify-content-between my-3">
