@@ -173,18 +173,18 @@ class RequisicaoController extends Controller
     public function cadastrarDocumento(Request $request)
     {
         $usuario = Auth::user();
+        $id_perfil = $request->default;
+        $perfil = Perfil::find($id_perfil);
         $aluno = $usuario->aluno;
-        $curso = $usuario->aluno->perfil->curso;
-        $perfil_id = $usuario->aluno->perfil->id;
+        $curso = $perfil->curso;
 
         $tipo_documento = $request->documento;
-        $id_perfil = $request->default;
 
         if ($tipo_documento == 'comprovante') {
-            return view('telas_aluno.cadastrar_solicitacao_nada_consta', compact('usuario', 'aluno', 'curso', 'perfil_id'));
+            return view('telas_aluno.cadastrar_solicitacao_nada_consta', compact('usuario', 'aluno', 'curso', 'perfil'));
         }
         if ($tipo_documento == 'ComprovanteDepositoTrabalhoConclusao') {
-            return view('telas_aluno.cadastrar_solicitacao_deposito_trabalho', compact('usuario', 'aluno', 'curso', 'perfil_id'));
+            return view('telas_aluno.cadastrar_solicitacao_deposito_trabalho', compact('usuario', 'aluno', 'curso', 'perfil'));
         }
 
         return view('telas_aluno.cadastrar_documento', ['tipo_documento' => $tipo_documento, 'id_perfil' => $id_perfil]);

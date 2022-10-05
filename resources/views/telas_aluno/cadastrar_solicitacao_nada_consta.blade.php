@@ -14,7 +14,7 @@
 
                     @csrf
                     <input type="hidden" name="tipo_documento" value="Comprovante Nada Consta">
-                    <input type="hidden" name="perfil_id" value="{{$perfil_id}}">
+                    <input type="hidden" name="perfil_id" value="{{$perfil->id}}">
 
                     <! –– Solicitacao Nada Consta ––>
 
