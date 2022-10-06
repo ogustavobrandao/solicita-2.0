@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use App\Notifications\ResetPassword;
 use App\Notifications\VerifyApiEmail;
 
 use Tymon\JWTAuth\Contracts\JWTSubject;
@@ -23,10 +22,6 @@ class User extends Authenticatable implements MustVerifyEmail, JWTSubject
     // {
     //     // $this->notify(new App\Notifications\CustomVerifyEmail);
     // }
-    public function sendPasswordResetNotification($token)
-    {
-        $this->notify(new ResetPassword($token));
-    }
     /**
      * The attributes that are mass assignable.
      *
