@@ -27,6 +27,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use App\Mail\AlertaFichaGerada;
 use App\Models\Deposito;
+use App\Notifications\AlertaDeposito;
+use App\Notifications\AlertaNadaConsta;
 
 class BibliotecarioController extends Controller
 {
@@ -152,17 +154,133 @@ class BibliotecarioController extends Controller
             return redirect(route('listar-fichas'))->with('error', 'Esta requisição está sendo analisada pelo bibliotecario: ' . $bibliotecario->user->name);
         }
 
-        return view('telas_bibliotecario.avaliar_nada_consta', compact('nadaConsta', 'aluno', 'requisicao', 'bibliotecario'));
+        return view('telas_bibliotecario.avaliar_nada_consta', compact('nadaConsta', 'aluno', 'requisicao', 'requisicao_documento', 'bibliotecario'));
+    }
+
+    public function avaliarDeposito($requisicaoId){
+
+        $requisicao_documento = Requisicao_documento::find($requisicaoId);
+        $requisicao = $requisicao_documento->requisicao;
+        $aluno = $requisicao->perfil->aluno;
+        $deposito = $requisicao_documento->deposito;
+        $bibliotecario = $requisicao_documento->bibliotecario;
+        $bibli = Bibliotecario::where('user_id', Auth::user()->id)->first();
+
+        $data_bibi = date_create_from_format('Y-m-d H:i:s', $requisicao->updated_at);
+        $data_agora = date_create_from_format('Y-m-d H:i:s', date('Y-m-d H:i:s'));
+        if ($requisicao_documento->bibliotecario_id == null || (date_diff($data_bibi, $data_agora)->h >= 2 && $requisicao_documento->status == 'Em andamento')) {
+            $requisicao_documento->bibliotecario_id = $bibli->id;
+            $requisicao_documento->save();
+        }
+        if ($bibliotecario != null && ($requisicao->status == 'Concluido' || $requisicao_documento->status == 'Rejeitado')) {
+            return redirect(route('listar-fichas'))->with('error', 'Esta requisição foi concluida ou rejeitada pelo bibliotecario: ' . $bibliotecario->user->name);
+        } elseif ($bibliotecario != null && $requisicao->status == 'Em andamento' && $bibliotecario->id != $bibli->id) {
+            return redirect(route('listar-fichas'))->with('error', 'Esta requisição está sendo analisada pelo bibliotecario: ' . $bibliotecario->user->name);
+        }
+
+        return view('telas_bibliotecario.avaliar_deposito', compact('deposito', 'aluno', 'requisicao', 'requisicao_documento', 'bibliotecario'));
+    }
+
+    public function visualizarDeposito($requisicaoId)
+    {
+        $requisicao_documento = Requisicao_documento::where('id', $requisicaoId)->first();
+        $requisicao = $requisicao_documento->requisicao;
+        $aluno = $requisicao_documento->aluno;
+        $deposito = $requisicao_documento->deposito;
+        $bibliotecario = $requisicao_documento->bibliotecario;
+
+        return view('telas_bibliotecario.visualizar_deposito', compact( 'aluno', 'deposito', 'requisicao_documento', 'requisicao', 'bibliotecario'));
+    }
+
+    public function baixarAnexoTccDeposito(Requisicao_documento $requisicao)
+    {
+        if ($requisicao->deposito_id != null && $requisicao->deposito->anexo_tcc && Storage::exists($requisicao->deposito->anexo_tcc)) {
+            return Storage::download($requisicao->deposito->anexo_tcc);
+        }
+        abort(404);
+    }
+
+    public function baixarAnexoAutorizacaoDeposito(Requisicao_documento $requisicao)
+    {
+        if ($requisicao->deposito_id != null && $requisicao->deposito->anexo_tcc && Storage::exists($requisicao->deposito->anexo_tcc)) {
+            return Storage::download($requisicao->deposito->anexo_tcc);
+        }
+        abort(404);
+    }
+
+    public function baixarAnexoComprovanteDeposito(Requisicao_documento $requisicao)
+    {
+        if ($requisicao->deposito_id != null && $requisicao->deposito->anexo_comprovante_deposito && Storage::exists($requisicao->deposito->anexo_comprovante_deposito)) {
+            return Storage::download($requisicao->deposito->anexo_comprovante_deposito);
+        }
+        abort(404);
+    }
+
+    public function deferirDeposito(Request $request)
+    {
+        $documentoRequisitado = Requisicao_documento::find($request->requisicao_documento_id);
+        $status = 'Concluido';
+        $this->atualizarStatusRequisicaoDeposito($documentoRequisitado, $status);
+        $deposito = $documentoRequisitado->deposito;
+        $deposito->anexo_comprovante_deposito = $request->file('comprovante')->store('deposito');
+        $deposito->save();
+        return redirect(route('listar-fichas'))->with('success', 'Solicitação atualizada com sucesso!');
+    }
+
+    public function indeferirDeposito(Request $request)
+    {
+        $documentoRequisitado = Requisicao_documento::find($request->requisicao_documento_id);
+        $status = 'Rejeitado';
+        $documentoRequisitado->anotacoes = 'Consta(m) pendência(s) com a biblioteca em seu nome. Por favor, entre em contato com o setor.';
+        $this->atualizarStatusRequisicaoDeposito($documentoRequisitado, $status);
+        return redirect(route('listar-fichas'))->with('success', 'Solicitação atualizada com sucesso!');
+    }
+
+    public function gerarDeposito(Requisicao_documento $requisicao_documento)
+    {
+        $requisicao = $requisicao_documento->requisicao;
+        $discente = $requisicao->aluno->user->name;
+        $curso = $requisicao->perfil->curso->nome;
+        $cpf = $requisicao->aluno->cpf;
+        $bibliotecario = $requisicao_documento->bibliotecario->user->name;
+        $tcc = $requisicao_documento->deposito->titulo_tcc;
+        $pdf = Pdf::loadView('telas_bibliotecario.gerar_deposito', compact('discente', 'cpf', 'curso', 'bibliotecario', 'tcc'));
+        $filename = 'deposito_' . preg_replace("/[^A-Za-z]+/", "", $discente) .'.pdf';
+        return $pdf->download($filename);
+    }
+
+    private function atualizarStatusRequisicaoDeposito($documentoRequisitado, $status)
+    {
+        $loggedUserId = Auth::user()->id;
+        $bibliotecario = Bibliotecario::where('user_id',$loggedUserId)->first();
+        $documentoRequisitado->bibliotecario_id = $bibliotecario->id;
+        $documentoRequisitado->status = $status;
+        $documentoRequisitado->save();
+        $alunoUser = $documentoRequisitado->aluno->user;
+        $alunoUser->notify(new AlertaDeposito($documentoRequisitado));
     }
 
     public function visualizarNadaConsta($requisicaoId)
     {
-        $requisicao = Requisicao_documento::where('id', $requisicaoId)->first();
-        $aluno = Aluno::where('id', $requisicao->aluno_id)->first();
-        $nadaConsta = NadaConsta::where('id', $requisicao->nada_consta_id)->first();
-        $bibliotecario = Bibliotecario::find($requisicao->bibliotecario_id);
+        $requisicao_documento = Requisicao_documento::where('id', $requisicaoId)->first();
+        $requisicao = $requisicao_documento->requisicao;
+        $aluno = $requisicao_documento->aluno;
+        $nadaConsta = $requisicao_documento->nadaConsta;
+        $bibliotecario = $requisicao_documento->bibliotecario;
 
-        return view('telas_bibliotecario.visualizar_nada_consta', compact( 'aluno','nadaConsta', 'requisicao', 'bibliotecario'));
+        return view('telas_bibliotecario.visualizar_nada_consta', compact( 'aluno', 'nadaConsta', 'requisicao_documento', 'requisicao', 'bibliotecario'));
+    }
+
+    public function gerarNadaConsta(Requisicao_documento $requisicao_documento)
+    {
+        $requisicao = $requisicao_documento->requisicao;
+        $discente = $requisicao->aluno->user->name;
+        $curso = $requisicao->perfil->curso->nome;
+        $cpf = $requisicao->aluno->cpf;
+        $bibliotecario = $requisicao_documento->bibliotecario->user->name;
+        $pdf = Pdf::loadView('telas_bibliotecario.gerar_nada_consta', compact('discente', 'cpf', 'curso', 'bibliotecario'));
+        $filename = 'nada_consta_' . preg_replace("/[^A-Za-z]+/", "", $discente) .'.pdf';
+        return $pdf->download($filename);
     }
 
     public function atualizarFicha(Request $request)
@@ -444,34 +562,51 @@ class BibliotecarioController extends Controller
         return Storage::download('fichas/' . $ficha->anexo);
     }
 
-
-    ## Nada Consta
     public function deferirNadaConsta(Request $request)
     {
-
-        $userId = Auth::user()->id;
-        $bibliotecario = Bibliotecario::where('user_id',$userId)->first();
-
-
-        $documentosRequisitados = Requisicao_documento::where('nada_consta_id', $request->nada_consta_id)->first();
-        $documentosRequisitados->status = 'Concluido';
-        $documentosRequisitados->updated_at = time();
-        $documentosRequisitados->bibliotecario_id = $bibliotecario->id;
-        $documentosRequisitados->update();
-        $alunoUser = User::find(Aluno::find($documentosRequisitados->aluno_id)->user_id);
-
-        #\Illuminate\Support\Facades\Mail::send(new AlertaFichaGerada($alunoUser, $documentosRequisitados));
-        return redirect(Route('listar-fichas'))->with('success', 'Ficha Atualizada com Sucesso!');
+        $documentoRequisitado = Requisicao_documento::find($request->requisicao_documento_id);
+        $status = 'Concluido';
+        $this->atualizarStatusRequisicaoNadaConsta($documentoRequisitado, $status);
+        $nadaConsta = $documentoRequisitado->nadaConsta;
+        $nadaConsta->anexo_comprovante_deposito = $request->file('comprovante')->store('nada_consta');
+        $nadaConsta->save();
+        return redirect(route('listar-fichas'))->with('success', 'Solicitação atualizada com sucesso!');
     }
 
-    public function indeferirNadaConsta($requisicaoId)
+    public function indeferirNadaConsta(Request $request)
     {
-        $requisicao = Requisicao_documento::find($requisicaoId);
-        $nadaConsta = NadaConsta::find($requisicao->nada_consta_id);
-        $aluno = Aluno::find($requisicao->aluno_id);
-        $usuario = User::find($aluno->user_id);
+        $documentoRequisitado = Requisicao_documento::find($request->requisicao_documento_id);
+        $status = 'Rejeitado';
+        $documentoRequisitado->anotacoes = 'Consta(m) pendência(s) com a biblioteca em seu nome. Por favor, entre em contato com o setor.';
+        $this->atualizarStatusRequisicaoNadaConsta($documentoRequisitado, $status);
+        return redirect(route('listar-fichas'))->with('success', 'Solicitação atualizada com sucesso!');
+    }
 
-        return view('telas_bibliotecario.indeferir_nada_consta', compact('nadaConsta', 'usuario', 'requisicao', 'aluno'));
+    private function atualizarStatusRequisicaoNadaConsta($documentoRequisitado, $status)
+    {
+        $loggedUserId = Auth::user()->id;
+        $bibliotecario = Bibliotecario::where('user_id',$loggedUserId)->first();
+        $documentoRequisitado->bibliotecario_id = $bibliotecario->id;
+        $documentoRequisitado->status = $status;
+        $documentoRequisitado->save();
+        $alunoUser = $documentoRequisitado->aluno->user;
+        $alunoUser->notify(new AlertaNadaConsta($documentoRequisitado));
+    }
+
+    public function baixarNadaConsta(Requisicao_documento $requisicao_documento)
+    {
+        if ($requisicao_documento->nada_consta_id != null && $requisicao_documento->nadaConsta->anexo_comprovante_deposito && Storage::exists($requisicao_documento->nadaConsta->anexo_comprovante_deposito)) {
+            return Storage::download($requisicao_documento->nadaConsta->anexo_comprovante_deposito);
+        }
+        abort(404);
+    }
+
+    public function baixarDeposito(Requisicao_documento $requisicao_documento)
+    {
+        if ($requisicao_documento->deposito_id != null && $requisicao_documento->deposito->anexo_comprovante_deposito && Storage::exists($requisicao_documento->deposito->anexo_comprovante_deposito)) {
+            return Storage::download($requisicao_documento->deposito->anexo_comprovante_deposito);
+        }
+        abort(404);
     }
 
 
@@ -480,7 +615,7 @@ class BibliotecarioController extends Controller
 
         $requsicao = Requisicao_documento::find($requisicaoId);
         $nadaConsta = NadaConsta::find($requsicao->nada_consta_id);
-        return Storage::download('nadaConsta/' . $nadaConsta->anexo_comprovante_deposito);
+        return Storage::download($nadaConsta->anexo_comprovante_deposito);
 
 
     }

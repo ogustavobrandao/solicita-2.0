@@ -40,7 +40,7 @@
                             <h2>Indeferir solicitação</h2>
                         </div>
                         <form method="POST" enctype="multipart/form-data" id="formRequisicao"
-                              action="{{ route('atualizar-rejeicao',$requisicao->id) }}">
+                              action="{{ route('atualizar-rejeicao',$requisicao_documento->id) }}">
                             @csrf
                             <! -- Dados do documento -- !>
                             <div class="col-md-12 corpoFicha shadow my-4">
@@ -104,7 +104,7 @@
                             </div>
                             <hr>
                             <div class="col text-center" style="padding-top: 0px">
-                                <a type="button" class="btn btn-secondary" style="margin-right: 30px" href="{{ route('avaliar-nada-consta', $requisicao->id) }}">Voltar</a>
+                                <a type="button" class="btn btn-secondary" style="margin-right: 30px" href="{{ route('avaliar-nada-consta', $requisicao_documento->id) }}">Voltar</a>
                                 <button class="btn btn-danger">Rejeitar</button>
                             </div>
                         </form>

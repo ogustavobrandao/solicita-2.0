@@ -18,13 +18,13 @@
             <div class="col-md-7">
                 <div class="row mt-5 tituloFicha">
                     <div class="col-md-12">
-                        Comprovante Nada Consta
+                        Comprovante deposito
                     </div>
                 </div>
                 <form method="POST" enctype="multipart/form-data" id="formRequisicao"
                       action="{{route('preview')}}">
                     @csrf
-                    <input type="hidden" readonly name="tipo_documento" value="{{$nadaConsta}}">
+                    <input type="hidden" readonly name="tipo_documento" value="{{$deposito}}">
 
                     <! –– Dados Pessoais ––>
 
@@ -58,12 +58,36 @@
                                            placeholder="Nome"
                                            value="{{$requisicao->perfil->curso->nome}}"
                                            disabled>
+                                    <label class="pt-2 textoFicha" for="exampleFormControlInput1">Título do trabalho<span
+                                            style="color: red">*</span>:</label>
+                                    <input type="text" class="form-control" id="nome" name="nome"
+                                        placeholder="Nome"
+                                        value="{{$requisicao_documento->deposito->titulo_tcc}}"
+                                        disabled>
 
-                                    @if(isset($nadaConsta->anexo_comprovante_deposito))
+                                    <div class="form-group">
+                                        <div class="forma-group">
+                                            <label class="pt-2 textoFicha" for="anexoArquivo">Trabalho de Conclusão de Curso (TCC):<span
+                                                    style="color: red">*</span>:</label><br>
+                                            <a class="btn btn-primary" href="{{ route('baixar-anexo-tcc-deposito', $requisicao_documento->id) }}">
+                                                Visualizar
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="forma-group">
+                                            <label class="pt-2 textoFicha" for="anexoArquivo">Termo de autorização:<span
+                                                    style="color: red">*</span>:</label><br>
+                                            <a class="btn btn-primary" href="{{ route('baixar-anexo-autorizacao-deposito', $requisicao_documento->id) }}">
+                                                Visualizar
+                                            </a>
+                                        </div>
+                                    </div>
+                                    @if(isset($deposito->anexo_comprovante_deposito))
                                         <div class="form-group">
                                             <div class="forma-group">
-                                                <label class="pt-2 textoFicha" for="anexoArquivo">Comprovante de nada consta:</label><br>
-                                                <a class="btn btn-primary" href="{{ route('baixa-anexo-comprovante', $requisicao_documento->id) }}"
+                                                <label class="pt-2 textoFicha" for="anexoArquivo">Comprovante de deposito:</label><br>
+                                                <a class="btn btn-primary" href="{{ route('baixar-anexo-comprovante-deposito', $requisicao_documento->id) }}"
                                                    style="margin-bottom: 10px">Visualizar</a>
                                             </div>
                                         </div>

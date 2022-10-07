@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 
 /*
 |--------------------------------------------------------------------------
@@ -112,6 +113,9 @@ Route::group(['middleware'=> 'CheckAluno'], function(){
     Route::get('/formulario-requisicao',[\App\Http\Controllers\RequisicaoController::class, 'index'])->name('formulario-requisicao')->middleware('CheckAluno');
     Route::post('/formulario-requisicao',[\App\Http\Controllers\RequisicaoController::class, 'storeRequisicao'])->name('formulario-requisicao-post')->middleware('CheckAluno');
     Route::get('aluno/{requisicao_id}/gerar-ficha',[\App\Http\Controllers\BibliotecarioController::class, 'gerarFicha'])->name('gerar-ficha-aluno')->middleware('CheckFichaAluno');
+
+    Route::get('/baixar-nada-consta/{requisicao_documento}', [\App\Http\Controllers\BibliotecarioController::class, 'baixarNadaConsta'])->name('baixar-nada-consta-aluno');
+    Route::get('/baixar-deposito/{requisicao_documento}', [\App\Http\Controllers\BibliotecarioController::class, 'baixarDeposito'])->name('baixar-deposito-aluno');
 });
 
 //----------------------------------------------BIBLIOTECARIO---------------------------------------------------
@@ -138,9 +142,18 @@ Route::group(['middleware'=> 'CheckBibliotecario'], function(){
     Route::get('/avaliar-nada-consta/{requisicao_id}/baixarAnexoComprovante',[\App\Http\Controllers\BibliotecarioController::class, 'baixarAnexoComprovante'])->name('baixa-anexo-comprovante');
     Route::get('/avaliar-nada-consta/{requisicao_id}/baixarAnexoTermoAceitacao',[\App\Http\Controllers\BibliotecarioController::class, 'baixarAnexoTermoAceitacao'])->name('baixar-anexo-termo-aceitacao');
     Route::post('/deferir-nada-consta',[\App\Http\Controllers\BibliotecarioController::class, 'deferirNadaConsta'])->name('deferir-nada-consta')->middleware('CheckBibliotecario');
+    Route::post('/indeferir-nada-consta',[\App\Http\Controllers\BibliotecarioController::class, 'indeferirNadaConsta'])->name('indeferir-nada-consta')->middleware('CheckBibliotecario');
     Route::get('/visualizar-nada-consta/{requisicao_id}',[\App\Http\Controllers\BibliotecarioController::class, 'visualizarNadaConsta'])->name('visualizar-nada-consta')->middleware('CheckBibliotecario');
-    Route::get('/editar-ficha/{requisicao_id}/indeferir-nada-consta',[\App\Http\Controllers\BibliotecarioController::class, 'indeferirNadaConsta'])->name('indeferir-nada-consta')->middleware('CheckBibliotecario');
+    Route::post('/gerar-nada-consta/{requisicao_documento}',[\App\Http\Controllers\BibliotecarioController::class, 'gerarNadaConsta'])->name('gerar-nada-consta')->middleware('CheckBibliotecario');
 
+    Route::get('/avaliar-deposito/{requisicao_id}',[\App\Http\Controllers\BibliotecarioController::class, 'avaliarDeposito'])->name('avaliar-deposito');
+    Route::get('/visualizar-deposito/{requisicao_id}',[\App\Http\Controllers\BibliotecarioController::class, 'visualizarDeposito'])->name('visualizar-deposito');
+    Route::get('/visualizar-deposito/{requisicao}/baixar-comprovante',[\App\Http\Controllers\BibliotecarioController::class, 'baixarAnexoComprovanteDeposito'])->name('baixar-anexo-comprovante-deposito');
+    Route::get('/baixar-anexo-tcc-deposito/{requisicao}',[\App\Http\Controllers\BibliotecarioController::class, 'baixarAnexoTccDeposito'])->name('baixar-anexo-tcc-deposito');
+    Route::get('/baixar-anexo-autorizacao-deposito/{requisicao}',[\App\Http\Controllers\BibliotecarioController::class, 'baixarAnexoAutorizacaoDeposito'])->name('baixar-anexo-autorizacao-deposito');
+    Route::post('/deferir-deposito',[\App\Http\Controllers\BibliotecarioController::class, 'deferirDeposito'])->name('deferir-deposito');
+    Route::post('/indeferir-deposito',[\App\Http\Controllers\BibliotecarioController::class, 'indeferirDeposito'])->name('indeferir-deposito');
+    Route::post('/gerar-deposito/{requisicao_documento}',[\App\Http\Controllers\BibliotecarioController::class, 'gerarDeposito'])->name('gerar-deposito');
 });
 
 // ---------------------------------------REQUISICAO------------------------------------------------------------------
