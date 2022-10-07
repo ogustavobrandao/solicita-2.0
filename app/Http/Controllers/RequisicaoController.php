@@ -676,20 +676,13 @@ class RequisicaoController extends Controller
     {
         $deposito = new Deposito();
 
+        $deposito->titulo_tcc = $request->titulo_trabalho;
         if (($request->hasFile('anexo_tcc') && $request->file('anexo_tcc')->isValid())) {
-            $anexo = $request->anexo_tcc->extension();
-            $nomeAnexo = "anexo_tcc_" . date('Ymd') . date('His') . '.' . $anexo;
-            $deposito->anexo_tcc = $nomeAnexo;
-            $request->anexo_tcc->storeAs('deposito/', $nomeAnexo);
-            $deposito->anexo_tcc = $nomeAnexo;
+            $deposito->anexo_tcc = $request->file('anexo_tcc')->store('deposito');
         }
 
         if (($request->hasFile('anexo_comprovante_autorizacao') && $request->file('anexo_comprovante_autorizacao')->isValid())) {
-            $anexo = $request->anexo_comprovante_autorizacao->extension();
-            $nomeAnexo = "anexo_comprovante_autorizacao_" . date('Ymd') . date('His') . '.' . $anexo;
-            $deposito->anexo_comprovante_autorizacao = $nomeAnexo;
-            $request->anexo_comprovante_autorizacao->storeAs('deposito/', $nomeAnexo);
-            $deposito->anexo_comprovante_autorizacao = $nomeAnexo;
+            $deposito->anexo_comprovante_autorizacao = $request->file('anexo_comprovante_autorizacao')->store('deposito');
         }
         $deposito->save();
 
