@@ -16,6 +16,11 @@ class Requisicao extends Model
         return $this->belongsTo('App\Models\Perfil');
     }
 
+    public function aluno()
+    {
+        return $this->belongsTo(Aluno::class);
+    }
+
     public function servidor(){
         return $this->belongsTo('App\Models\Servidor');
     }

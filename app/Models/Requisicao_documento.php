@@ -23,6 +23,11 @@ class Requisicao_documento extends Model
         return $this->belongsTo(NadaConsta::class);
     }
 
+    public function deposito()
+    {
+        return $this->belongsTo(Deposito::class);
+    }
+
     public function bibliotecario()
     {
         return $this->belongsTo(Bibliotecario::class);
