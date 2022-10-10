@@ -116,14 +116,32 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <form id="deferirDepositoForm" action="{{route('deferir-deposito')}}" method="POST" enctype="multipart/form-data">
-                                            @csrf
-                                            <input type="hidden" name="requisicao_documento_id" value="{{$requisicao_documento->id}}">
-                                            <div class="custom-file">
-                                                <input type="file" class="custom-file-input" id="comprovante" name="comprovante">
-                                                <label class="custom-file-label" for="comprovante">Selecione o arquivo do comprovante</label>
-                                            </div>
-                                        </form>
+                                        <div class="col-md-12">
+                                            <label for="btnGerarDocumento">1ª etapa</label>
+                                            <form action="{{route('gerar-deposito', $requisicao_documento->id)}}" method="POST">
+                                                @csrf
+                                                <button id="btnGerarDocumento" type="submit" class="btn btn-default btn-block" style="background-color: var(--biblioteca); border-radius: 0.5rem; color: white;">Gerar documento</button>
+                                            </form>
+                                        </div>
+                                        <div class="col-md-12 mt-2">
+                                            <label for="btnAssinaturaGov">2ª etapa</label>
+                                            <a id="btnAssinaturaGov" href="https://assinador.iti.br/assinatura/index.xhtml" target="_blank" class="btn btn-block"
+                                                style="background-color: var(--biblioteca); border-radius: 0.5rem; color: white;">
+                                                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                                Assinatura digital gov.br
+                                            </a>
+                                        </div>
+                                        <div class="col-md-12 mt-2">
+                                            <label for="comprovante">3ª etapa</label>
+                                            <form id="deferirDepositoForm" action="{{route('deferir-deposito')}}" method="POST" enctype="multipart/form-data">
+                                                @csrf
+                                                <input type="hidden" name="requisicao_documento_id" value="{{$requisicao_documento->id}}">
+                                                <div class="custom-file">
+                                                    <input type="file" class="custom-file-input" id="comprovante" name="comprovante">
+                                                    <label class="custom-file-label" for="comprovante">Selecione o arquivo assinado</label>
+                                                </div>
+                                            </form>
+                                        </div>
                                     </div>
                                     <div class="modal-footer px-0 justify-content-center">
                                         <div class="row justify-content-between w-100">
@@ -132,12 +150,6 @@
                                                     style="background-color: var(--padrao); border-radius: 0.5rem; color: white;">
                                                     Voltar
                                                 </button>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <form action="{{route('gerar-deposito', $requisicao_documento->id)}}" method="POST">
-                                                    @csrf
-                                                    <button type="submit" class="btn btn-block" style="background-color: #1A2876; border-radius: 0.5rem; color: white;">Gerar Ficha</button>
-                                                </form>
                                             </div>
                                             <div class="col-md-5">
                                                 <button type="submit" form="deferirDepositoForm" class="btn btn-block"
@@ -195,7 +207,7 @@
                         <div class="col-md-4">
                             <form action="{{route('gerar-deposito', $requisicao_documento->id)}}" method="POST">
                                 @csrf
-                                <button type="submit" class="btn btn-block" style="background-color: #1A2876; border-radius: 0.5rem; color: white;">Gerar Ficha</button>
+                                <button type="submit" class="btn btn-block" style="background-color: #1A2876; border-radius: 0.5rem; color: white;">Gerar documento</button>
                             </form>
                         </div>
 
