@@ -61,7 +61,7 @@
         <div>DECLARAÇÃO DE NADA CONSTA</div>
     </div>
     <div class="corpo"> Prezados,<br><br> Declaro, para os devidos fins, que o(a) discente: <strong>{{$discente}}</strong>, portador(a) do CPF: <strong>{{$cpf}}</strong>, do
-        curso: <strong>{{$curso}}</strong>, não possui débitos para com essa biblioteca.<br><br> Ficamos à disposição para eventuais dúvidas. <br>
+        curso: <strong>{{$curso}}</strong>, não possui débitos para com essa biblioteca.<br><br> Ficamos à disposição para eventuais dúvidas. <br> <br>
         Atenciosamente, <br></div>
     <div class="assinatura">
         <div id="linha"></div>

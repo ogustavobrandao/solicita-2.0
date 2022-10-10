@@ -73,7 +73,7 @@
         CPF: <strong>{{$cpf}}</strong>, do curso: <strong>{{$curso}}</strong>, realizou o depósito de seu trabalho de
         conclusão de curso, cujo título é: <strong>{{$tcc}}</strong> bem como o Termo de Autorização para o depósito no
         Repositório Institucional, cumprindo todos os requisitos. Portanto, não constando pendências com a(s)
-        biblioteca(s) da UFAPE.<br><br> Ficamos à disposição para eventuais dúvidas. <br> Atenciosamente, <br></div>
+        biblioteca(s) da UFAPE.<br><br> Ficamos à disposição para eventuais dúvidas. <br> <br> Atenciosamente, <br></div>
     <div class="assinatura">
         <div id="linha"></div>
         <div>{{$bibliotecario}}</div>
