@@ -37,10 +37,10 @@
                 <div class="card card-cadastro card-cadastro-servidor">
                     <div class="card-body">
                         <div class="row justify-content-center">
-                            <h2>Rejeitar documento</h2>
+                            <h2>Indeferir solicitação</h2>
                         </div>
                         <form method="POST" enctype="multipart/form-data" id="formRequisicao"
-                              action="{{ route('atualizar-rejeicao',$requisicao->id) }}">
+                              action="{{ route('atualizar-rejeicao',$requisicao_documento->id) }}">
                             @csrf
                             <! -- Dados do documento -- !>
                             <div class="col-md-12 corpoFicha shadow my-4">
@@ -57,41 +57,31 @@
                                                     style="color: red">*</span>:</label>
                                             <input type="text" class="form-control" id="nome" name="nome"
                                                    placeholder="Nome"
-                                                   value="{{\App\Models\User::where('id', $aluno->user_id)->first()->name}}"
+                                                   value="{{$aluno->user->name}}"
                                                    disabled>
-
                                             <label class="pt-2 textoFicha" for="exampleFormControlInput1">CPF<span
                                                     style="color: red">*</span>:</label>
                                             <input type="text" class="form-control" id="nome" name="nome"
                                                    placeholder="Nome"
-                                                   value="{{\App\Models\User::where('id', $aluno->user_id)->first()->cpf}}"
+                                                   value="{{$aluno->cpf}}"
                                                    disabled>
 
                                             <label class="pt-2 textoFicha" for="exampleFormControlInput1">Curso<span
                                                     style="color: red">*</span>:</label>
                                             <input type="text" class="form-control" id="nome" name="nome"
                                                    placeholder="Nome"
-                                                   value="{{\App\Models\Curso::where('id', $aluno->perfil->curso_id)->first()->nome}}"
+                                                   value="{{$requisicao->perfil->curso->nome}}"
                                                    disabled>
 
                                             @if(isset($nadaConsta->anexo_comprovante_deposito))
                                                 <div class="form-group">
                                                     <div class="forma-group">
-                                                        <label class="pt-2 textoFicha" for="anexoArquivo">Comprovante de deposito:</label><br>
+                                                        <label class="pt-2 textoFicha" for="anexoArquivo">Comprovante de depósito:</label><br>
                                                         <a class="btn btn-primary" href="{{ route('baixa-anexo-comprovante', $requisicao->id) }}"
                                                            style="margin-bottom: 10px">Visualizar</a>
                                                     </div>
                                                 </div>
                                             @endif
-
-                                            <div class="form-group">
-                                                <div class="forma-group">
-                                                    <label class="pt-2 textoFicha" for="anexoArquivo">Termo de aceitação<span
-                                                            style="color: red">*</span>:</label><br>
-                                                    <a class="btn btn-primary" href="{{ route('baixar-anexo-termo-aceitacao', $requisicao->id) }}"
-                                                       style="margin-bottom: 10px">Visualizar</a>
-                                                </div>
-                                            </div>
 
                                         </div>
                                     </div>
@@ -108,13 +98,13 @@
                                     <div class="form-group">
                                         <label for="exampleFormControlInput1">Explicação<span style="color: red">*</span>:</label>
                                         <input type="text" class="form-control" id="mensagem" name="mensagem"
-                                               placeholder="Motivo da rejeição da ficha" value="" required>
+                                               placeholder="Motivo do indeferimento da solicitação" value="" required>
                                     </div>
                                 </div>
                             </div>
                             <hr>
                             <div class="col text-center" style="padding-top: 0px">
-                                <a type="button" class="btn btn-secondary" style="margin-right: 30px" href="{{ route('avaliar-nada-consta', $requisicao->id) }}">Voltar</a>
+                                <a type="button" class="btn btn-secondary" style="margin-right: 30px" href="{{ route('avaliar-nada-consta', $requisicao_documento->id) }}">Voltar</a>
                                 <button class="btn btn-danger">Rejeitar</button>
                             </div>
                         </form>

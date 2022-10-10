@@ -90,10 +90,14 @@
                                                 @endif
                                             @endforeach
 
-                                                <li>
-                                                    @if($rd->nada_consta_id != null) Comprovante Nada Consta
-                                                    @endif
-                                                </li>
+                                            <li>
+                                                @if($rd->nada_consta_id != null) Comprovante Nada Consta
+                                                @endif
+                                            </li>
+                                            <li>
+                                                @if($rd->deposito_id != null) Comprovante de Depósito
+                                                @endif
+                                            </li>
 
                                         @endif
                                 @endforeach
@@ -184,12 +188,22 @@
                                     </form>
                                     <div class="align-middle">
                                         @if(\App\Models\Requisicao_documento::where('requisicao_id',$r->id)->first()->status == 'Concluido')
-                                            <a type="button"
-                                               href={{ route('gerar-ficha-aluno',\App\Models\Requisicao_documento::where('requisicao_id',$r->id)->first()->id) }}>
-                                                <button class="btn" style="background-color: transparent">
-                                                    <img src="images/botao_dowload_aquivo.svg" height="30px" title="Baixar Ficha">
-                                                </button>
-                                            </a>
+                                            @if ($r->requisicao_documento->first()->nada_consta_id != null)
+                                                <a class="btn" href="{{route('baixar-nada-consta-aluno', $r->requisicao_documento->first()->id)}}">
+                                                    <img src="images/botao_dowload_aquivo.svg" height="30px" title="Baixar comprovante">
+                                                </a>
+                                            @elseif ($r->requisicao_documento->first()->deposito_id != null)
+                                                <a class="btn" href="{{route('baixar-deposito-aluno', $r->requisicao_documento->first()->id)}}">
+                                                    <img src="images/botao_dowload_aquivo.svg" height="30px" title="Baixar comprovante">
+                                                </a>
+                                            @else
+                                                <a type="button"
+                                                href={{ route('gerar-ficha-aluno',\App\Models\Requisicao_documento::where('requisicao_id',$r->id)->first()->id) }}>
+                                                    <button class="btn" style="background-color: transparent">
+                                                        <img src="images/botao_dowload_aquivo.svg" height="30px" title="Baixar Ficha">
+                                                    </button>
+                                                </a>
+                                            @endif
                                         @endif
                                     </div>
                                 </div>

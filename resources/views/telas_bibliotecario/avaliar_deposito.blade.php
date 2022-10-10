@@ -10,7 +10,7 @@
             <div class="col-md-7">
                 <div class="row mt-5 tituloFicha">
                     <div class="col-md-12">
-                        Comprovante Nada Consta
+                        Comprovante de depósito
                     </div>
                 </div>
                 <! –– Dados Pessoais ––>
@@ -45,6 +45,32 @@
                                     placeholder="Nome"
                                     value="{{$requisicao->perfil->curso->nome}}"
                                     disabled>
+
+                                <label class="pt-2 textoFicha" for="exampleFormControlInput1">Trabalho de Conclusão de Curso (TCC)<span
+                                        style="color: red">*</span>:</label>
+                                <input type="text" class="form-control" id="nome" name="nome"
+                                    placeholder="Nome"
+                                    value="{{$requisicao_documento->deposito->titulo_tcc}}"
+                                    disabled>
+
+                                <div class="form-group">
+                                    <div class="forma-group">
+                                        <label class="pt-2 textoFicha" for="anexoArquivo">Trabalho de Conclusão de Curso (TCC):<span
+                                                style="color: red">*</span>:</label><br>
+                                        <a class="btn btn-primary" href="{{ route('baixar-anexo-tcc-deposito', $requisicao_documento->id) }}">
+                                            Visualizar
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="forma-group">
+                                        <label class="pt-2 textoFicha" for="anexoArquivo">Termo de autorização:<span
+                                                style="color: red">*</span>:</label><br>
+                                        <a class="btn btn-primary" href="{{ route('baixar-anexo-autorizacao-deposito', $requisicao_documento->id) }}">
+                                            Visualizar
+                                        </a>
+                                    </div>
+                                </div>
                                 <div class="mt-3">
                                     <a href="https://assinador.iti.br/assinatura/index.xhtml" target="_blank">{{('Assinatura digital gov.br')}}</a>
                                 </div>
@@ -92,9 +118,9 @@
                                     <div class="modal-body">
                                         <div class="col-md-12">
                                             <label for="btnGerarDocumento">1ª etapa</label>
-                                            <form action="{{route('gerar-nada-consta', $requisicao_documento->id)}}" method="POST">
+                                            <form action="{{route('gerar-deposito', $requisicao_documento->id)}}" method="POST">
                                                 @csrf
-                                                <button id="btnGerarDocumento" type="submit" class="btn btn-block" style="background-color: var(--biblioteca); border-radius: 0.5rem; color: white;">Gerar documento</button>
+                                                <button id="btnGerarDocumento" type="submit" class="btn btn-default btn-block" style="background-color: var(--biblioteca); border-radius: 0.5rem; color: white;">Gerar documento</button>
                                             </form>
                                         </div>
                                         <div class="col-md-12 mt-2">
@@ -107,7 +133,7 @@
                                         </div>
                                         <div class="col-md-12 mt-2">
                                             <label for="comprovante">3ª etapa</label>
-                                            <form id="deferirNadaConstaForm" action="{{route('deferir-nada-consta')}}" method="POST" enctype="multipart/form-data">
+                                            <form id="deferirDepositoForm" action="{{route('deferir-deposito')}}" method="POST" enctype="multipart/form-data">
                                                 @csrf
                                                 <input type="hidden" name="requisicao_documento_id" value="{{$requisicao_documento->id}}">
                                                 <div class="custom-file">
@@ -126,7 +152,7 @@
                                                 </button>
                                             </div>
                                             <div class="col-md-5">
-                                                <button type="submit" form="deferirNadaConstaForm" class="btn btn-block"
+                                                <button type="submit" form="deferirDepositoForm" class="btn btn-block"
                                                     style="background-color: var(--confirmar); border-radius: 0.5rem; color: white;">
                                                     Enviar
                                                 </button>
@@ -157,7 +183,7 @@
                                                 </button>
                                             </div>
                                             <div class="col-md-5">
-                                                <form action="{{route('indeferir-nada-consta')}}" method="POST">
+                                                <form action="{{route('indeferir-deposito')}}" method="POST">
                                                     @csrf
                                                     <input type="hidden" name="requisicao_documento_id" value="{{$requisicao_documento->id}}">
                                                     <button type="submit" class="btn btn-block"
@@ -179,7 +205,7 @@
                         </div>
 
                         <div class="col-md-4">
-                            <form action="{{route('gerar-nada-consta', $requisicao_documento->id)}}" method="POST">
+                            <form action="{{route('gerar-deposito', $requisicao_documento->id)}}" method="POST">
                                 @csrf
                                 <button type="submit" class="btn btn-block" style="background-color: #1A2876; border-radius: 0.5rem; color: white;">Gerar documento</button>
                             </form>
@@ -187,10 +213,10 @@
 
                         <div class="col-md-4">
                             <form method="POST" enctype="multipart/form-data" id="formRequisicao"
-                                action="{{route('deferir-nada-consta')}}">
+                                action="{{route('deferir-deposito')}}">
                                 @csrf
-                                <input type="hidden" name="nada_consta" value="{{$nadaConsta}}">
-                                <input type="hidden" name="nada_consta_id" value="{{$nadaConsta->id}}">
+                                <input type="hidden" name="deposito" value="{{$deposito}}">
+                                <input type="hidden" name="deposito_id" value="{{$deposito->id}}">
                                 <input type="hidden" name="aluno_id" value="{{$aluno->id}}">
 
                                 <button type="submit" class="btn btn-block"

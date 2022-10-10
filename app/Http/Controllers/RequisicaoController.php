@@ -33,6 +33,7 @@ use Carbon\Carbon;
 use App\Models\Servidor;
 use App\Models\Unidade;
 use App\Jobs\SendEmail;
+use App\Models\Deposito;
 
 class RequisicaoController extends Controller
 {
@@ -172,15 +173,18 @@ class RequisicaoController extends Controller
     public function cadastrarDocumento(Request $request)
     {
         $usuario = Auth::user();
+        $id_perfil = $request->default;
+        $perfil = Perfil::find($id_perfil);
         $aluno = $usuario->aluno;
-        $curso = $usuario->aluno->perfil->curso;
-        $perfil_id = $usuario->aluno->perfil->id;
+        $curso = $perfil->curso;
 
         $tipo_documento = $request->documento;
-        $id_perfil = $request->default;
 
         if ($tipo_documento == 'comprovante') {
-            return view('telas_aluno.cadastrar_solicitacao_nada_consta', compact('usuario', 'aluno', 'curso', 'perfil_id'));
+            return view('telas_aluno.cadastrar_solicitacao_nada_consta', compact('usuario', 'aluno', 'curso', 'perfil'));
+        }
+        if ($tipo_documento == 'ComprovanteDepositoTrabalhoConclusao') {
+            return view('telas_aluno.cadastrar_solicitacao_deposito_trabalho', compact('usuario', 'aluno', 'curso', 'perfil'));
         }
 
         return view('telas_aluno.cadastrar_documento', ['tipo_documento' => $tipo_documento, 'id_perfil' => $id_perfil]);
@@ -324,7 +328,7 @@ class RequisicaoController extends Controller
 
         $nadaConsta = new NadaConsta();
 
-        if (($request->hasFile('anexo_comprovante_deposito') && $request->file('anexo_comprovante_deposito')->isValid())) {
+        /*if (($request->hasFile('anexo_comprovante_deposito') && $request->file('anexo_comprovante_deposito')->isValid())) {
 
             $anexo = $request->anexo_comprovante_deposito->extension();
             $nomeAnexo = "comprovante_deposito_" . date('Ymd') . date('His') . '.' . $anexo;
@@ -340,7 +344,7 @@ class RequisicaoController extends Controller
             $nadaConsta->anexo_termo_aceitacao = $nomeAnexo;
             $request->anexo_termo_aceitacao->storeAs('nadaConsta/', $nomeAnexo);
             $nadaConsta->anexo_termo_aceitacao = $nomeAnexo;
-        }
+        }*/
         $nadaConsta->save();
 
         $requisicao = new Requisicao();
@@ -666,6 +670,50 @@ class RequisicaoController extends Controller
 
 
         return view('telas_servidor.pesquisa_servidor', compact('alunos'));
+
+    }
+    public function criarDeposito(Request $request)
+    {
+        $deposito = new Deposito();
+
+        $deposito->titulo_tcc = $request->titulo_trabalho;
+        if (($request->hasFile('anexo_tcc') && $request->file('anexo_tcc')->isValid())) {
+            $deposito->anexo_tcc = $request->file('anexo_tcc')->store('deposito');
+        }
+
+        if (($request->hasFile('anexo_comprovante_autorizacao') && $request->file('anexo_comprovante_autorizacao')->isValid())) {
+            $deposito->anexo_comprovante_autorizacao = $request->file('anexo_comprovante_autorizacao')->store('deposito');
+        }
+        $deposito->save();
+
+        $requisicao = new Requisicao();
+        $perfil = Perfil::where('id', $request->perfil_id)->first();
+        $requisicao->data_pedido = date('Y-m-d');
+        $requisicao->hora_pedido = date('H:i');
+        $requisicao->perfil_id = $perfil->id;
+        $requisicao->aluno_id = $perfil->aluno->id; //necessária adequação com o código de autenticação do usuário do perfil aluno
+        $requisicao->save();
+
+
+        $documentosRequisitados = new Requisicao_documento();
+        $documentosRequisitados->status_data = date('Y-m-d');
+        $documentosRequisitados->requisicao_id = $requisicao->id;
+        $documentosRequisitados->aluno_id = $perfil->aluno_id;
+        $documentosRequisitados->status = 'Em andamento';
+        $documentosRequisitados->deposito_id = $deposito->id;
+
+        $bibliotecarios = Bibliotecario::all();
+        $unidadeId = $perfil->unidade_id;
+        foreach ($bibliotecarios as $bibliotecario) {
+            $bibliotecaBibliotecario = Biblioteca::find($bibliotecario->biblioteca_id);
+            $userBibliotecario = User::find($bibliotecario->user_id);
+            /*if ($unidadeId == $bibliotecaBibliotecario->unidade_id) {
+                \Illuminate\Support\Facades\Mail::send(new AlertaFichaMail($userBibliotecario, Auth::user()));
+            }*/
+        }
+        $documentosRequisitados->save();
+
+        return redirect(Route('home-aluno'))->with('success', 'Solicitação de Depósito realizada com Sucesso!');
 
     }
 

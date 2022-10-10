@@ -10,19 +10,19 @@
             <div class="col-md-7">
 
                 <form method="POST" enctype="multipart/form-data" id="formRequisicao"
-                      action="{{ route('criarNadaConsta') }}">
+                      action="{{ route('criarDeposito') }}">
 
                     @csrf
-                    <input type="hidden" name="tipo_documento" value="Comprovante Nada Consta">
+                    <input type="hidden" name="tipo_documento" value="Comprovante de Deposito">
                     <input type="hidden" name="perfil_id" value="{{$perfil->id}}">
 
-                    <! –– Solicitacao Nada Consta ––>
+                    <! –– Solicitacao Comprovante de Deposito ––>
 
                     <div class="col-md-12 corpoFicha shadow my-4">
 
                         <div class="row">
                             <div class="col-md-12 cabecalho py-2">
-                                <span class="tituloCabecalho">Solicitação Nada Consta</span>
+                                <span class="tituloCabecalho">Solicitação de Comprovante de Depósito</span>
                             </div>
                         </div>
 
@@ -44,9 +44,15 @@
                                     <input type="text" class="form-control" id="autor_curso" name="autor_curso"
                                            placeholder="Digite o Curso do Autor" disabled value="{{$curso->nome}}" required>
                                 </div>
-                                <!--<div class="form-group">
-                                    <label for="anexo1">Comprovante de deposito:</label><br>
-                                    <input type="file" id="anexo1" accept="application/pdf, .docx" name="anexo_comprovante_deposito"
+                                <div class="form-group">
+                                    <label for="titulo_trabalho">Título do trabalho: <span style="color: red">*</span></label>
+                                    <input type="text" class="form-control" id="titulo_trabalho" name="titulo_trabalho"
+                                           placeholder="Digite o Título do Trabalho" value="" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="anexo1">Trabalho de Conclusão de Curso (TCC): <span
+                                        style="color: red">*</span></label><br>
+                                    <input type="file" id="anexo1" accept="application/pdf, .docx, .doc" name="anexo_tcc"
                                            style="margin-bottom: 0px" >
                                     <br>
                                     <span id="tipoAnexo"
@@ -54,20 +60,19 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="anexo2">Termo de Aceitação: <span
+                                    <label for="anexo2">Termo de autorização: <span
                                             style="color: red">*</span>
                                     </label><br>
-                                    <input type="file" id="anexo2" accept="application/pdf, .docx" name="anexo_termo_aceitacao"
+                                    <input type="file" id="anexo2" accept="application/pdf, .docx, .doc" name="anexo_comprovante_autorizacao"
                                            style="margin-bottom: 0px" required>
                                     <br>
                                     <span id="tipoAnexo"
                                           style="font-size: small; color: gray; margin-top: 0px; margin-bottom: 10px">Tipos permitidos: PDF, DOCX e DOC. </span>
-                                </div>-->
+                                </div>
 
                             </div>
                         </div>
                     </div>
-
 
                     <div style="display: flex; text-align: justify; text-justify: inter-word;">
                         <div>
@@ -78,6 +83,7 @@
                             <label for="checkBoxConfirma"> Eu autorizo que o Sistema Integrado de Bibliotecas da UFAPE faça uso dos dados acima informados para o atendimento de minha solicitação. E também confirmo que as informações enviadas por mim, neste documento, são verdadeiras. </label>
                         </div>
                     </div>
+
                     <div class="row justify-content-between mt-5">
                         <div class="col-md-4">
                             <a type="button" class="btn btn-block"
