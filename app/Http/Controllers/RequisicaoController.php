@@ -323,7 +323,7 @@ class RequisicaoController extends Controller
             }
         }
 
-        return redirect(Route('home-aluno'))->with('success', 'Ficha Catalografica Cadastrada Com Sucesso!');
+        return redirect(Route('home-aluno'))->with('success', 'Solicitação realizada com sucesso!');
     }
 
     public function criarNadaConsta(Request $request)
@@ -354,7 +354,7 @@ class RequisicaoController extends Controller
 
         $documentosRequisitados->save();
 
-        return redirect(Route('home-aluno'))->with('success', 'Comprovante Nada Consta Cadastrada Com Sucesso!');
+        return redirect(Route('home-aluno'))->with('success', 'Solicitação de comprovante de nada consta realizada com sucesso!');
 
     }
 
@@ -688,7 +688,7 @@ class RequisicaoController extends Controller
 
         $documentosRequisitados->save();
 
-        return redirect(Route('home-aluno'))->with('success', 'Solicitação de Depósito realizada com Sucesso!');
+        return redirect(Route('home-aluno'))->with('success', 'Solicitação de comprovante de depósito realizada com sucesso!');
 
     }
 
