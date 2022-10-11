@@ -28,13 +28,16 @@
                     </tr>
                     </thead>
                     <tbody class="">
+                        @php
+                            $count = 1;
+                        @endphp
                     @foreach($requisicoesFichas as $requisicao)
                         @if($requisicao->ficha_catalografica_id != null)
                             @foreach($documentosFichaCatalografica as $documento)
                                 @if($documento->id == $requisicao->ficha_catalografica_id)
                                     <tr>
                                         <td class="align-middle text-center" scope="row">
-                                            {{$requisicao->id}}
+                                            {{$count++}}
                                         </td>
                                         <td class="align-middle text-center">
                                             {{$documento->autor_nome}}
@@ -146,7 +149,7 @@
                                 @if($requisicao->nada_consta_id == $documento->id)
                                     <tr>
                                         <td class="align-middle text-center" scope="row">
-                                            {{$requisicao->id}}
+                                            {{$count++}}
                                         </td>
                                         <td class="align-middle text-center">
                                             {{$requisicao->aluno->user->name}}
@@ -247,7 +250,7 @@
                                 @if($requisicao->deposito_id == $documento->id)
                                     <tr>
                                         <td class="align-middle text-center" scope="row">
-                                            {{$requisicao->id}}
+                                            {{$count++}}
                                         </td>
                                         <td class="align-middle text-center">
                                             {{$requisicao->aluno->user->name}}
