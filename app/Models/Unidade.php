@@ -22,7 +22,7 @@ class Unidade extends Model
         return $this->hasMany('App\Models\Curso');
     }
 
-    public function biblioteca(){
+    public function bibliotecas(){
         return $this->hasMany('App\Models\Biblioteca');
     }
 }
