@@ -34,6 +34,9 @@ use App\Models\Servidor;
 use App\Models\Unidade;
 use App\Jobs\SendEmail;
 use App\Models\Deposito;
+use App\Notifications\DepositoSolicitado;
+use App\Notifications\NadaConstaSolicitado;
+use Illuminate\Support\Facades\Notification;
 
 class RequisicaoController extends Controller
 {
@@ -345,12 +348,10 @@ class RequisicaoController extends Controller
         $documentosRequisitados->status = 'Em andamento';
         $documentosRequisitados->nada_consta_id = $nadaConsta->id;
 
-        $bibliotecarios = Bibliotecario::all();
-        $unidadeId = $perfil->unidade_id;
-        foreach ($bibliotecarios as $bibliotecario) {
-            $bibliotecaBibliotecario = Biblioteca::find($bibliotecario->biblioteca_id);
-            $userBibliotecario = User::find($bibliotecario->user_id);
-        }
+        $unidade = $perfil->unidade;
+        $bibliotecas = $unidade->bibliotecas;
+        Notification::send($bibliotecas, new NadaConstaSolicitado($perfil->aluno->user, $unidade));
+
         $documentosRequisitados->save();
 
         return redirect(Route('home-aluno'))->with('success', 'Comprovante Nada Consta Cadastrada Com Sucesso!');
@@ -681,12 +682,10 @@ class RequisicaoController extends Controller
         $documentosRequisitados->status = 'Em andamento';
         $documentosRequisitados->deposito_id = $deposito->id;
 
-        $bibliotecarios = Bibliotecario::all();
-        $unidadeId = $perfil->unidade_id;
-        foreach ($bibliotecarios as $bibliotecario) {
-            $bibliotecaBibliotecario = Biblioteca::find($bibliotecario->biblioteca_id);
-            $userBibliotecario = User::find($bibliotecario->user_id);
-        }
+        $unidade = $perfil->unidade;
+        $bibliotecas = $unidade->bibliotecas;
+        Notification::send($bibliotecas, new DepositoSolicitado($perfil->aluno->user, $unidade));
+
         $documentosRequisitados->save();
 
         return redirect(Route('home-aluno'))->with('success', 'Solicitação de Depósito realizada com Sucesso!');
