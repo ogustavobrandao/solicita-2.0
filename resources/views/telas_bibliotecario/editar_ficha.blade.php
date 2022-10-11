@@ -64,8 +64,8 @@
 
                             <div class="form-group">
                                 <label for="classificacao">Classificação: <span style="color: red">*</span></label>
-                                <input type="number" class="form-control" id="classificacao" name="classificacao"
-                                       value="" placeholder="Digite a classificação" step="0.01" required>
+                                <input type="text" class="form-control" id="classificacao" name="classificacao"
+                                       value="" placeholder="Digite a classificação" required>
                             </div>
                             <div class="form-group">
                                 <a href="https://www.tabelacutter.com/" target="_blank" class="btn btn-block"
