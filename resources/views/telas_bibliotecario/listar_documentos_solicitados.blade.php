@@ -174,18 +174,18 @@
                                             @if($requisicao->status == 'Em andamento')
                                                 @if($requisicao->bibliotecario_id != null && (date_diff($data_bibi, $data_agora)->h < 2))
                                                     <a class="btn" href="{{ route('avaliar-nada-consta', $requisicao->id) }}">
-                                                        <img src="images/botao_editar_proibido.svg" height="30px" title="Botão de Editar - Alguém já está editando">
+                                                        <img src="images/botao_editar_proibido.svg" height="30px" title="Avaliar solicitação - Alguém já está avaliando">
                                                     </a>
                                                 @else
                                                     <a class="btn" href="{{ route('avaliar-nada-consta', $requisicao->id) }}">
-                                                        <img src="images/botao_editar.svg" height="30px" title="Botão de Editar - Edição permitida">
+                                                        <img src="images/botao_editar.svg" height="30px" title="Avaliar solicitação">
                                                     </a>
                                                 @endif
                                             @endif
 
                                             @if($requisicao->status == 'Concluido')
                                                 <a class="btn" href="{{ route('visualizar-nada-consta', $requisicao->id) }}">
-                                                    <img src="images/botao_visualizar.svg" height="30px" title="Botão de Visualizar Ficha">
+                                                    <img src="images/botao_visualizar.svg" height="30px" title="Visualizar solicitação">
                                                 </a>
                                             @endif
                                             @if($requisicao->status == 'Rejeitado')
@@ -275,23 +275,23 @@
                                             @if($requisicao->status == 'Em andamento')
                                                 @if($requisicao->bibliotecario_id != null && (date_diff($data_bibi, $data_agora)->h < 2))
                                                     <a class="btn" href="{{ route('avaliar-deposito', $requisicao->id) }}">
-                                                        <img src="images/botao_editar_proibido.svg" height="30px" title="Botão de Editar - Alguém já está editando">
+                                                        <img src="images/botao_editar_proibido.svg" height="30px" title="Avaliar solicitação - Alguém já está avaliando">
                                                     </a>
                                                     <a class="btn rounded-0" href="{{ route('visualizar-deposito', $requisicao->id) }}">
-                                                        <img src="images/botao_visualizar.svg" height="30px" title="Botão de Visualizar Ficha">
+                                                        <img src="images/botao_visualizar.svg" height="30px" title="Visualizar solicitação">
                                                     </a>
                                                 @else
                                                     <a class="btn" href="{{ route('avaliar-deposito', $requisicao->id) }}">
-                                                        <img src="images/botao_editar.svg" height="30px" title="Botão de Editar - Edição permitida">
+                                                        <img src="images/botao_editar.svg" height="30px" title="Avaliar solicitação">
                                                     </a>
                                                     <a class="btn" href="{{ route('visualizar-deposito', $requisicao->id) }}">
-                                                        <img src="images/botao_visualizar.svg" height="30px" title="Botão de Visualizar Ficha">
+                                                        <img src="images/botao_visualizar.svg" height="30px" title="Visualizar solicitação">
                                                     </a>
                                                 @endif
                                             @endif
                                             @if($requisicao->status == 'Concluido')
                                                 <a class="btn" href="{{ route('visualizar-deposito', $requisicao->id) }}">
-                                                    <img src="images/botao_visualizar.svg" height="30px" title="Botão de Visualizar Ficha">
+                                                    <img src="images/botao_visualizar.svg" height="30px" title="Visualizar solicitação">
                                                 </a>
                                             @endif
                                             @if($requisicao->status == 'Rejeitado')
