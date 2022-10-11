@@ -80,7 +80,7 @@
                         </div>
                         &nbsp
                         <div>
-                            <label for="checkBoxConfirma"> Eu autorizo que o Sistema Integrado de Bibliotecas da UFAPE faça uso dos dados acima informados para o atendimento de minha solicitação. E também confirmo que as informações enviadas por mim, neste documento, são verdadeiras. </label>
+                            <label for="checkBoxConfirma"> {{ __('messages.autorizo')}} <span style="color: red">*</span> </label>
                         </div>
                     </div>
 
