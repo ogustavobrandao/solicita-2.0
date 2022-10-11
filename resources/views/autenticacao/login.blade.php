@@ -21,8 +21,18 @@
                             Quais documentos eu posso solicitar?
                         </div>
                         <div class="py-2">
-                            <img src="images/tag.svg" width="30px">
-                            <span class="px-1 textoHome">Comprovante de matrícula.</span>
+                            <div>
+                                <img src="images/tag.svg" width="30px">
+                                <span class="px-1 textoHome">Comprovante de depósito.</span>
+                            </div>
+                            <div>
+                                <img src="images/tag.svg" width="30px">
+                                <span class="px-1 textoHome">Comprovante de matrícula.</span>
+                            </div>
+                            <div>
+                                <img src="images/tag.svg" width="30px">
+                                <span class="px-1 textoHome">Comprovante de nada consta.</span>
+                            </div>
                             <div>
                                 <img src="images/tag.svg" width="30px">
                                 <span class="px-1 textoHome">Declaração de vínculo.</span>
