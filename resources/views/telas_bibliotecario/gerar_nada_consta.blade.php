@@ -56,16 +56,16 @@
 
 <body>
     <div class="header">
-        <img class="logo-ufape" src="{{asset('images/ufape_fundo_azul.png')}}" alt="">
-        <img class="logo-sib" src="{{asset('images/sib.jpg')}}" alt="">
+        <img class="logo-ufape" src="{{public_path('images/ufape_fundo_azul.png')}}" alt="">
+        <img class="logo-sib" src="{{public_path('images/sib.jpg')}}" alt="">
         <div>DECLARAÇÃO DE NADA CONSTA</div>
     </div>
     <div class="corpo"> Prezados,<br><br> Declaro, para os devidos fins, que o(a) discente: <strong>{{$discente}}</strong>, portador(a) do CPF: <strong>{{$cpf}}</strong>, do
-        curso: <strong>{{$curso}}</strong>, não possui débitos para com essa biblioteca.<br><br> Ficamos à disposição para eventuais dúvidas. <br> <br>
+        curso: <strong>{{$curso}}</strong>, não possui débitos para com essa biblioteca.<br><br> Ficamos à disposição para eventuais dúvidas. <br> <br>OBS: Esta declaração não comprova que o(a) aluno(a) realizou o depósito do TCC, apenas que não tem outras pendências na biblioteca. <br> <br>
         Atenciosamente, <br></div>
     <div class="assinatura">
         <div id="linha"></div>
-        <div>{{$bibliotecario}}</div>
+        <div>{{$bibliotecario->user->name}} <br>Bibliotecário(a) - Documentalista <br>SIAPE: {{$bibliotecario->matricula}}</div>
     </div>
 </body>
 
