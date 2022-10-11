@@ -327,24 +327,6 @@ class RequisicaoController extends Controller
     {
 
         $nadaConsta = new NadaConsta();
-
-        /*if (($request->hasFile('anexo_comprovante_deposito') && $request->file('anexo_comprovante_deposito')->isValid())) {
-
-            $anexo = $request->anexo_comprovante_deposito->extension();
-            $nomeAnexo = "comprovante_deposito_" . date('Ymd') . date('His') . '.' . $anexo;
-            $nadaConsta->anexo_comprovante_deposito = $nomeAnexo;
-            $request->anexo_comprovante_deposito->storeAs('nadaConsta/', $nomeAnexo);
-            $nadaConsta->anexo_comprovante_deposito = $nomeAnexo;
-        }
-
-        if (($request->hasFile('anexo_termo_aceitacao') && $request->file('anexo_termo_aceitacao')->isValid())) {
-
-            $anexo = $request->anexo_termo_aceitacao->extension();
-            $nomeAnexo = "termo_aceitacao_" . date('Ymd') . date('His') . '.' . $anexo;
-            $nadaConsta->anexo_termo_aceitacao = $nomeAnexo;
-            $request->anexo_termo_aceitacao->storeAs('nadaConsta/', $nomeAnexo);
-            $nadaConsta->anexo_termo_aceitacao = $nomeAnexo;
-        }*/
         $nadaConsta->save();
 
         $requisicao = new Requisicao();
@@ -352,7 +334,7 @@ class RequisicaoController extends Controller
         $requisicao->data_pedido = date('Y-m-d');
         $requisicao->hora_pedido = date('H:i');
         $requisicao->perfil_id = $perfil->id;
-        $requisicao->aluno_id = $perfil->aluno->id; //necessária adequação com o código de autenticação do usuário do perfil aluno
+        $requisicao->aluno_id = $perfil->aluno->id;
         $requisicao->save();
 
 
@@ -368,9 +350,6 @@ class RequisicaoController extends Controller
         foreach ($bibliotecarios as $bibliotecario) {
             $bibliotecaBibliotecario = Biblioteca::find($bibliotecario->biblioteca_id);
             $userBibliotecario = User::find($bibliotecario->user_id);
-            /*if ($unidadeId == $bibliotecaBibliotecario->unidade_id) {
-                \Illuminate\Support\Facades\Mail::send(new AlertaFichaMail($userBibliotecario, Auth::user()));
-            }*/
         }
         $documentosRequisitados->save();
 
@@ -691,7 +670,7 @@ class RequisicaoController extends Controller
         $requisicao->data_pedido = date('Y-m-d');
         $requisicao->hora_pedido = date('H:i');
         $requisicao->perfil_id = $perfil->id;
-        $requisicao->aluno_id = $perfil->aluno->id; //necessária adequação com o código de autenticação do usuário do perfil aluno
+        $requisicao->aluno_id = $perfil->aluno->id;
         $requisicao->save();
 
 
@@ -707,9 +686,6 @@ class RequisicaoController extends Controller
         foreach ($bibliotecarios as $bibliotecario) {
             $bibliotecaBibliotecario = Biblioteca::find($bibliotecario->biblioteca_id);
             $userBibliotecario = User::find($bibliotecario->user_id);
-            /*if ($unidadeId == $bibliotecaBibliotecario->unidade_id) {
-                \Illuminate\Support\Facades\Mail::send(new AlertaFichaMail($userBibliotecario, Auth::user()));
-            }*/
         }
         $documentosRequisitados->save();
 
