@@ -76,7 +76,7 @@
         biblioteca(s) da UFAPE.<br><br> Ficamos à disposição para eventuais dúvidas. <br> <br> Atenciosamente, <br></div>
     <div class="assinatura">
         <div id="linha"></div>
-        <div>{{$bibliotecario}}</div>
+        <div>{{$bibliotecario->user->name}} <br>Bibliotecário(a) - Documentalista <br>SIAPE: {{$bibliotecario->matricula}}</div>
     </div>
 </body>
 
