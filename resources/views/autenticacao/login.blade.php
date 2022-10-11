@@ -54,9 +54,12 @@
                             Tutoriais
                         </div>
                         <div class="py-2">
-                            <a href="pdfs/tutorial_fichas.pdf">
-                                <span class="px-1 textoHome">Solicitação de ficha catalográfica.</span>
-                            </a>
+                            <div>
+                                <img src="images/tag.svg" width="30px">
+                                <a href="pdfs/tutorial_fichas.pdf">
+                                    <span class="px-1 textoHome">Solicitação de ficha catalográfica.</span>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
