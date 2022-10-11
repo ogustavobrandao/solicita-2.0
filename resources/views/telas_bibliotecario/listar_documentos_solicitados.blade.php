@@ -40,7 +40,7 @@
                                             {{$documento->autor_nome}}
                                         </td>
                                         <td class="align-middle text-center">
-                                            Ficha Catalografica -
+                                            Ficha Catalográfica -
                                             @if ($documento->tipo_documento_id == 2)Monografia
                                             @elseif ($documento->tipo_documento_id == 4)Tese
                                             @elseif ($documento->tipo_documento_id == 3)Produto Educacional
@@ -51,7 +51,7 @@
                                             {{ date('d/m/Y H:i:s', strtotime($documento->created_at)) }}
                                         </td>
                                         <td class="align-middle text-center">
-                                            @if($requisicao->status == 'Concluido')<p style="color: #1d643b; "><strong>Concluido</strong>
+                                            @if($requisicao->status == 'Concluido')<p style="color: #1d643b; "><strong>Concluído</strong>
                                             </p>
                                             @elseif($requisicao->status == 'Em andamento')<p style="color: #857b26"><strong>Em
                                                     andamento</strong></p>
@@ -159,7 +159,7 @@
                                         </td>
                                         <td class="align-middle text-center">
                                             @if($requisicao->status == 'Concluido')
-                                                <p style="color: #1d643b; "><strong>Concluido</strong></p>
+                                                <p style="color: #1d643b; "><strong>Concluído</strong></p>
                                             @elseif($requisicao->status == 'Em andamento')
                                                 <p style="color: #857b26"><strong>Em andamento</strong></p>
                                             @elseif($requisicao->status == 'Rejeitado')
@@ -260,7 +260,7 @@
                                         </td>
                                         <td class="align-middle text-center">
                                             @if($requisicao->status == 'Concluido')
-                                                <p style="color: #1d643b; "><strong>Concluido</strong></p>
+                                                <p style="color: #1d643b; "><strong>Concluído</strong></p>
                                             @elseif($requisicao->status == 'Em andamento')
                                                 <p style="color: #857b26"><strong>Em andamento</strong></p>
                                             @elseif($requisicao->status == 'Rejeitado')

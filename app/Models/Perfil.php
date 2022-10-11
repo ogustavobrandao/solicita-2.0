@@ -35,4 +35,9 @@ class Perfil extends Model
         return $this->belongsTo('App\Models\Curso');
     }
 
+    public function unidade()
+    {
+        return $this->belongsTo(Unidade::class);
+    }
+
 }
