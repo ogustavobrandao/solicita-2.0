@@ -213,6 +213,11 @@
         sel.html('').append(opts_list);
         sel.val(selected); // set cached selected value
 
+        document.querySelector('.custom-file-input').addEventListener('change',function(e){
+            var fileName = document.getElementById("comprovante").files[0].name;
+            var nextSibling = e.target.nextElementSibling
+            nextSibling.innerText = fileName
+        })
     </script>
 
 @endsection

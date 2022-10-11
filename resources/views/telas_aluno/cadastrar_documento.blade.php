@@ -420,9 +420,14 @@
                         </div>
                     </div>
                 </div>
-                <div>
-                    <input type="checkbox" id="checkBoxConfirma" name="checkBoxConfirma" onchange="verificaCheckBoxConfirma()">
-                    <label for="other"> Eu autorizo que o Sistema Integrado de Bibliotecas da UFAPE faça uso dos dados acima informados para o atendimento de minha solicitação. E também confirmo que as informações enviadas por mim, neste documento, são verdadeiras. </label>
+                <div style="display: flex; text-align: justify; text-justify: inter-word;">
+                    <div>
+                        <input type="checkbox" id="checkBoxConfirma" name="checkBoxConfirma" onchange="verificaCheckBoxConfirma()">
+                    </div>
+                    &nbsp
+                    <div>
+                        <label for="checkBoxConfirma"> {{ __('messages.autorizo')}} <span style="color: red">*</span> </label>
+                    </div>
                 </div>
                 <div class="row justify-content-between mt-5">
                     <div class="col-md-4">
@@ -431,7 +436,7 @@
                            href="{{ route('prepara-requisicao-bibli') }}">Voltar</a>
                     </div>
                     <div class="col-md-4 text-right">
-                        <button type="submit" class="btn btn-block"
+                        <button type="submit" class="btn btn-block" id="botaoEnviar"
                                 style="background-color: var(--confirmar); border-radius: 0.5rem; color: white;"
                                 href="#">
                             Enviar
@@ -445,6 +450,17 @@
 </div>
 
 <script>
+    function verificaCheckBoxConfirma() {
+        var checkBoxConfirma = document.getElementById("checkBoxConfirma");
+        var botaoEnviar = document.getElementById("botaoEnviar");
+        if (checkBoxConfirma.checked == true){
+            botaoEnviar.disabled = false;
+        } else {
+            botaoEnviar.disabled = true;
+        }
+    }
+    verificaCheckBoxConfirma();
+
     var myFile = "";
     var size = 0;
     $('#anexo').on('change', function () {
