@@ -72,7 +72,7 @@
 
                             <div class="form-group">
                                 <label for="classificacao">Classificação: <span style="color: red">*</span></label>
-                                <input type="number" class="form-control" id="classificacao" readonly name="classificacao"
+                                <input type="text" class="form-control" id="classificacao" readonly name="classificacao"
                                        placeholder="Digite a classificação" value="{{ $fichaCatalografica->classificacao  }}" readonly>
                             </div>
                         </div>
