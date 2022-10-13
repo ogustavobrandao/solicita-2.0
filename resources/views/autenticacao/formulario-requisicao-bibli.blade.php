@@ -59,11 +59,11 @@
                             <label class="textoFicha">Outros documentos:</label>
                             <div>
                                 <input type="radio" name="documento" value="comprovante" id="ComprovanteNadaConsta">
-                                <label for="ComprovanteNadaConsta">Comprovante Nada Consta</label>
+                                <label for="ComprovanteNadaConsta">Alunos não Concluintes - Comprovante de Nada Consta</label>
                             </div>
                             <div>
                                 <input type="radio" name="documento" value="ComprovanteDepositoTrabalhoConclusao" id="ComprovanteDepositoTrabalhoConclusao">
-                                <label for="ComprovanteDepositoTrabalhoConclusao">Comprovante de Depósito</label>
+                                <label for="ComprovanteDepositoTrabalhoConclusao">Alunos Concluintes - Comprovante de Depósito do TCC e Nada Consta na Biblioteca</label>
                             </div>
                         </div>
 
