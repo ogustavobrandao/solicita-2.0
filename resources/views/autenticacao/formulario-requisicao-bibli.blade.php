@@ -44,13 +44,17 @@
                                 <div>
                                     <input type="radio" name="documento" value="{{$tipo->id}}"
                                            id="{{$tipo->tipo}}" @if($tipo->tipo == 'Dissertacao') checked @endif>
-                                    @if($tipo->tipo == 'Monografia')Monografia
-                                    @elseif($tipo->tipo == 'Tese')Tese
-                                    @elseif($tipo->tipo == 'TCC')Trabalho de Conclusão de Curso
-                                    @elseif($tipo->tipo == 'ProgramaEduc')Produto Educacional
-                                    @elseif($tipo->tipo == 'Dissertacao')Dissertação
-                                    @else {{$tipo->tipo}}
-                                    @endif</input>
+                                    @if($tipo->tipo == 'Monografia')
+                                        <label for="{{$tipo->tipo}}">Monografia</label>
+                                    @elseif($tipo->tipo == 'Tese')
+                                        <label for="{{$tipo->tipo}}">Tese</label>
+                                    @elseif($tipo->tipo == 'TCC')
+                                        <label for="{{$tipo->tipo}}">Trabalho de Conclusão de Curso</label>
+                                    @elseif($tipo->tipo == 'ProgramaEduc')
+                                        <label for="{{$tipo->tipo}}">Produto Educacional</label>
+                                    @elseif($tipo->tipo == 'Dissertacao')
+                                        <label for="{{$tipo->tipo}}">Dissertação</label>
+                                    @endif
                                 </div>
                             @endforeach
                         </div>
@@ -59,11 +63,11 @@
                             <label class="textoFicha">Outros documentos:</label>
                             <div>
                                 <input type="radio" name="documento" value="comprovante" id="ComprovanteNadaConsta">
-                                <label for="ComprovanteNadaConsta">Comprovante Nada Consta</label>
+                                <label for="ComprovanteNadaConsta">Alunos não Concluintes - Comprovante de Nada Consta</label>
                             </div>
                             <div>
                                 <input type="radio" name="documento" value="ComprovanteDepositoTrabalhoConclusao" id="ComprovanteDepositoTrabalhoConclusao">
-                                <label for="ComprovanteDepositoTrabalhoConclusao">Comprovante de Depósito</label>
+                                <label for="ComprovanteDepositoTrabalhoConclusao">Alunos Concluintes - Comprovante de Depósito do TCC e Nada Consta na Biblioteca</label>
                             </div>
                         </div>
 

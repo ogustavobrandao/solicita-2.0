@@ -54,87 +54,89 @@
                                             {{ date('d/m/Y H:i:s', strtotime($documento->created_at)) }}
                                         </td>
                                         <td class="align-middle text-center">
-                                            @if($requisicao->status == 'Concluido')<p style="color: #1d643b; "><strong>Concluído</strong>
-                                            </p>
-                                            @elseif($requisicao->status == 'Em andamento')<p style="color: #857b26"><strong>Em
-                                                    andamento</strong></p>
-                                            @elseif($requisicao->status == 'Rejeitado')<p style="color: #4c110f"><strong>Rejeitado</strong>
-                                            </p>
+                                            @if($requisicao->status == 'Concluido')
+                                                <p class="mb-0" style="color: #1d643b; "><strong>Concluído</strong></p>
+                                            @elseif($requisicao->status == 'Em andamento')
+                                                <p class="mb-0" style="color: #857b26"><strong>Emandamento</strong></p>
+                                            @elseif($requisicao->status == 'Rejeitado')
+                                                <p class="mb-0" style="color: #4c110f"><strong>Rejeitado</strong></p>
                                             @endif
                                         </td>
-                                        <td class="align-middle text-center btn-group">
-                                            <?php
-                                            $data_bibi = date_create_from_format('Y-m-d H:i:s', $requisicao->updated_at);
-                                            $data_agora = date_create_from_format('Y-m-d H:i:s', date('Y-m-d H:i:s'));
-                                            ?>
-                                            @if($requisicao->status == 'Em andamento')
-                                                @if($requisicao->bibliotecario_id != null && (date_diff($data_bibi, $data_agora)->h < 2))
-                                                    <a class="btn" href="{{ route('editar-ficha', $requisicao->id) }}">
-                                                        <img src="images/botao_editar_proibido.svg" height="30px" title="Botão de Editar - Alguém já está editando">
-                                                    </a>
-                                                    <a class="btn rounded-0" href="{{ route('visualizar-ficha', $requisicao->id) }}">
-                                                        <img src="images/botao_visualizar.svg" height="30px" title="Botão de Visualizar Ficha">
-                                                    </a>
-                                                @else
-                                                    <a class="btn" href="{{ route('editar-ficha', $requisicao->id) }}">
-                                                        <img src="images/botao_editar.svg" height="30px" title="Botão de Editar - Edição permitida">
-                                                    </a>
+                                        <td class="align-middle">
+                                            <div class="btn-group">
+                                                <?php
+                                                $data_bibi = date_create_from_format('Y-m-d H:i:s', $requisicao->updated_at);
+                                                $data_agora = date_create_from_format('Y-m-d H:i:s', date('Y-m-d H:i:s'));
+                                                ?>
+                                                @if($requisicao->status == 'Em andamento')
+                                                    @if($requisicao->bibliotecario_id != null && (date_diff($data_bibi, $data_agora)->h < 2))
+                                                        <a class="btn" href="{{ route('editar-ficha', $requisicao->id) }}">
+                                                            <img src="images/botao_editar_proibido.svg" height="30px" title="Botão de Editar - Alguém já está editando">
+                                                        </a>
+                                                        <a class="btn rounded-0" href="{{ route('visualizar-ficha', $requisicao->id) }}">
+                                                            <img src="images/botao_visualizar.svg" height="30px" title="Botão de Visualizar Ficha">
+                                                        </a>
+                                                    @else
+                                                        <a class="btn" href="{{ route('editar-ficha', $requisicao->id) }}">
+                                                            <img src="images/botao_editar.svg" height="30px" title="Botão de Editar - Edição permitida">
+                                                        </a>
+                                                        <a class="btn" href="{{ route('visualizar-ficha', $requisicao->id) }}">
+                                                            <img src="images/botao_visualizar.svg" height="30px" title="Botão de Visualizar Ficha">
+                                                        </a>
+                                                    @endif
+                                                @endif
+                                                @if($requisicao->status == 'Concluido')
                                                     <a class="btn" href="{{ route('visualizar-ficha', $requisicao->id) }}">
                                                         <img src="images/botao_visualizar.svg" height="30px" title="Botão de Visualizar Ficha">
                                                     </a>
                                                 @endif
-                                            @endif
-                                            @if($requisicao->status == 'Concluido')
-                                                <a class="btn" href="{{ route('visualizar-ficha', $requisicao->id) }}">
-                                                    <img src="images/botao_visualizar.svg" height="30px" title="Botão de Visualizar Ficha">
-                                                </a>
-                                            @endif
-                                            @if($requisicao->status == 'Rejeitado')
-                                                <a class="btn" data-toggle="modal"
-                                                    data-target="#exampleModal{{$requisicao->id}}">
-                                                    <img src="images/botao_info.svg" height="30px" title="Botão de Informação">
-                                                </a>
-                                                <!-- Modal -->
-                                                <div class="modal fade" id="exampleModal{{$requisicao->id}}"
-                                                        role="dialog" aria-labelledby="exampleModalLabel"
-                                                        aria-hidden="true">
-                                                    <div class="modal-dialog" role="document">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLabel">
-                                                                    Status da Análise
-                                                                </h5>
-                                                                <button type="button" class="close" data-dismiss="modal"
-                                                                        aria-label="Close">
-                                                                    <span aria-hidden="true">&times;</span>
-                                                                </button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                @if($requisicao->status == 'Concluido')
-                                                                    <p style="margin-left: 3px">Requisição analisada e
-                                                                        aprovada por:
-                                                                        <Strong>{{\App\Models\User::where('id',\App\Models\Bibliotecario::where('id',$requisicao->bibliotecario_id)->first()->user_id)->first()->name}}</Strong>
-                                                                    </p>
-                                                                @elseif($requisicao->status == 'Rejeitado' && $requisicao->bibliotecario_id != null)
-                                                                    <p style="margin: 1rem">Requisição analisada e
-                                                                        rejeitada por:
-                                                                        <Strong>{{\App\Models\User::where('id',\App\Models\Bibliotecario::where('id',$requisicao->bibliotecario_id)->first()->user_id)->first()->name}}</Strong>
-                                                                        <br>
-                                                                    </p>
-                                                                    <p style="margin-left: 1rem">Motivo: <strong
-                                                                            style="color: #4c110f">{{ $requisicao->anotacoes }}</strong>
-                                                                    </p>
-                                                                @endif
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary"
-                                                                        data-dismiss="modal">Close
-                                                                </button>
+                                                @if($requisicao->status == 'Rejeitado')
+                                                    <a class="btn" data-toggle="modal"
+                                                        data-target="#exampleModal{{$requisicao->id}}">
+                                                        <img src="images/botao_info.svg" height="30px" title="Botão de Informação">
+                                                    </a>
+                                                    <!-- Modal -->
+                                                    <div class="modal fade" id="exampleModal{{$requisicao->id}}"
+                                                            role="dialog" aria-labelledby="exampleModalLabel"
+                                                            aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLabel">
+                                                                        Status da Análise
+                                                                    </h5>
+                                                                    <button type="button" class="close" data-dismiss="modal"
+                                                                            aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    @if($requisicao->status == 'Concluido')
+                                                                        <p style="margin-left: 3px">Requisição analisada e
+                                                                            aprovada por:
+                                                                            <Strong>{{\App\Models\User::where('id',\App\Models\Bibliotecario::where('id',$requisicao->bibliotecario_id)->first()->user_id)->first()->name}}</Strong>
+                                                                        </p>
+                                                                    @elseif($requisicao->status == 'Rejeitado' && $requisicao->bibliotecario_id != null)
+                                                                        <p style="margin: 1rem">Requisição analisada e
+                                                                            rejeitada por:
+                                                                            <Strong>{{\App\Models\User::where('id',\App\Models\Bibliotecario::where('id',$requisicao->bibliotecario_id)->first()->user_id)->first()->name}}</Strong>
+                                                                            <br>
+                                                                        </p>
+                                                                        <p style="margin-left: 1rem">Motivo: <strong
+                                                                                style="color: #4c110f">{{ $requisicao->anotacoes }}</strong>
+                                                                        </p>
+                                                                    @endif
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary"
+                                                                            data-dismiss="modal">Fechar
+                                                                    </button>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            @endif
+                                                @endif
+                                            </div>
                                         </td>
                                         <td class="align-middle text-center">
                                             @if($requisicao->status != 'Em andamento')
@@ -162,80 +164,81 @@
                                         </td>
                                         <td class="align-middle text-center">
                                             @if($requisicao->status == 'Concluido')
-                                                <p style="color: #1d643b; "><strong>Concluído</strong></p>
+                                                <p class="mb-0" style="color: #1d643b; "><strong>Concluído</strong></p>
                                             @elseif($requisicao->status == 'Em andamento')
-                                                <p style="color: #857b26"><strong>Em andamento</strong></p>
+                                                <p class="mb-0" style="color: #857b26"><strong>Em andamento</strong></p>
                                             @elseif($requisicao->status == 'Rejeitado')
-                                                <p style="color: #4c110f"><strong>Rejeitado</strong></p>
+                                                <p class="mb-0" style="color: #4c110f"><strong>Rejeitado</strong></p>
                                             @endif
                                         </td>
-                                        <td class="align-middle text-center btn-group">
-                                            <?php
-                                            $data_bibi = date_create_from_format('Y-m-d H:i:s', $requisicao->updated_at);
-                                            $data_agora = date_create_from_format('Y-m-d H:i:s', date('Y-m-d H:i:s'));
-                                            ?>
-                                            @if($requisicao->status == 'Em andamento')
-                                                @if($requisicao->bibliotecario_id != null && (date_diff($data_bibi, $data_agora)->h < 2))
-                                                    <a class="btn" href="{{ route('avaliar-nada-consta', $requisicao->id) }}">
-                                                        <img src="images/botao_editar_proibido.svg" height="30px" title="Avaliar solicitação - Alguém já está avaliando">
-                                                    </a>
-                                                @else
-                                                    <a class="btn" href="{{ route('avaliar-nada-consta', $requisicao->id) }}">
-                                                        <img src="images/botao_editar.svg" height="30px" title="Avaliar solicitação">
+                                        <td class="align-middle">
+                                            <div class="btn-group">
+                                                <?php
+                                                $data_bibi = date_create_from_format('Y-m-d H:i:s', $requisicao->updated_at);
+                                                $data_agora = date_create_from_format('Y-m-d H:i:s', date('Y-m-d H:i:s'));
+                                                ?>
+                                                @if($requisicao->status == 'Em andamento')
+                                                    @if($requisicao->bibliotecario_id != null && (date_diff($data_bibi, $data_agora)->h < 2))
+                                                        <a class="btn" href="{{ route('avaliar-nada-consta', $requisicao->id) }}">
+                                                            <img src="images/botao_editar_proibido.svg" height="30px" title="Avaliar solicitação - Alguém já está avaliando">
+                                                        </a>
+                                                    @else
+                                                        <a class="btn" href="{{ route('avaliar-nada-consta', $requisicao->id) }}">
+                                                            <img src="images/botao_editar.svg" height="30px" title="Avaliar solicitação">
+                                                        </a>
+                                                    @endif
+                                                @endif
+
+                                                @if($requisicao->status == 'Concluido')
+                                                    <a class="btn" href="{{ route('visualizar-nada-consta', $requisicao->id) }}">
+                                                        <img src="images/botao_visualizar.svg" height="30px" title="Visualizar solicitação">
                                                     </a>
                                                 @endif
-                                            @endif
-
-                                            @if($requisicao->status == 'Concluido')
-                                                <a class="btn" href="{{ route('visualizar-nada-consta', $requisicao->id) }}">
-                                                    <img src="images/botao_visualizar.svg" height="30px" title="Visualizar solicitação">
-                                                </a>
-                                            @endif
-                                            @if($requisicao->status == 'Rejeitado')
-                                                <a class="btn" data-toggle="modal"
-                                                    data-target="#exampleModal{{$requisicao->id}}">
-                                                    <img src="images/botao_info.svg" height="30px" title="Botão de Informação">
-                                                </a>
-                                                <!-- Modal -->
-                                                <div class="modal fade" id="exampleModal{{$requisicao->id}}"
-                                                        role="dialog" aria-labelledby="exampleModalLabel"
-                                                        aria-hidden="true">
-                                                    <div class="modal-dialog" role="document">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLabel">Status da
-                                                                    Analise</h5>
-                                                                <button type="button" class="close" data-dismiss="modal"
-                                                                        aria-label="Close">
-                                                                    <span aria-hidden="true">&times;</span>
-                                                                </button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                @if($requisicao->status == 'Concluido')
-                                                                    <p style="margin-left: 3px">Requisição analisada e
-                                                                        aprovada por:
-                                                                        <Strong>{{\App\Models\User::where('id',\App\Models\Bibliotecario::where('id',$requisicao->bibliotecario_id)->first()->user_id)->first()->name}}</Strong>
-                                                                    </p>
-                                                                @elseif($requisicao->status == 'Rejeitado' && $requisicao->bibliotecario_id != null)
-                                                                    <p style="margin: 1rem">Requisição analisada e
-                                                                        rejeitada por:
-                                                                        <Strong>{{\App\Models\User::where('id',\App\Models\Bibliotecario::where('id',$requisicao->bibliotecario_id)->first()->user_id)->first()->name}}</Strong>
-                                                                        <br>
-                                                                    </p>
-                                                                    <p style="margin-left: 1rem">Motivo: <strong
-                                                                            style="color: #4c110f">{{ $requisicao->anotacoes }}</strong>
-                                                                    </p>
-                                                                @endif
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary"
-                                                                        data-dismiss="modal">Close
-                                                                </button>
+                                                @if($requisicao->status == 'Rejeitado')
+                                                    <a class="btn" data-toggle="modal"
+                                                        data-target="#exampleModal{{$requisicao->id}}">
+                                                        <img src="images/botao_info.svg" height="30px" title="Botão de Informação">
+                                                    </a>
+                                                    <!-- Modal -->
+                                                    <div class="modal fade" id="exampleModal{{$requisicao->id}}"
+                                                            role="dialog" aria-labelledby="exampleModalLabel"
+                                                            aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLabel">Status da Análise</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal"
+                                                                            aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    @if($requisicao->status == 'Concluido')
+                                                                        <p style="margin-left: 3px">Requisição analisada e
+                                                                            aprovada por:
+                                                                            <Strong>{{\App\Models\User::where('id',\App\Models\Bibliotecario::where('id',$requisicao->bibliotecario_id)->first()->user_id)->first()->name}}</Strong>
+                                                                        </p>
+                                                                    @elseif($requisicao->status == 'Rejeitado' && $requisicao->bibliotecario_id != null)
+                                                                        <p style="margin: 1rem">Requisição analisada e
+                                                                            rejeitada por:
+                                                                            <Strong>{{\App\Models\User::where('id',\App\Models\Bibliotecario::where('id',$requisicao->bibliotecario_id)->first()->user_id)->first()->name}}</Strong>
+                                                                            <br>
+                                                                        </p>
+                                                                        <p style="margin-left: 1rem">Motivo: <strong
+                                                                                style="color: #4c110f">{{ $requisicao->anotacoes }}</strong>
+                                                                        </p>
+                                                                    @endif
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary"
+                                                                            data-dismiss="modal">Fechar
+                                                                    </button>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            @endif
+                                                @endif
+                                            </div>
                                         </td>
                                         <td class="align-middle text-center">
                                             @if($requisicao->status != 'Em andamento')
@@ -263,85 +266,86 @@
                                         </td>
                                         <td class="align-middle text-center">
                                             @if($requisicao->status == 'Concluido')
-                                                <p style="color: #1d643b; "><strong>Concluído</strong></p>
+                                                <p class="mb-0" style="color: #1d643b; "><strong>Concluído</strong></p>
                                             @elseif($requisicao->status == 'Em andamento')
-                                                <p style="color: #857b26"><strong>Em andamento</strong></p>
+                                                <p class="mb-0" style="color: #857b26"><strong>Em andamento</strong></p>
                                             @elseif($requisicao->status == 'Rejeitado')
-                                                <p style="color: #4c110f"><strong>Rejeitado</strong></p>
+                                                <p class="mb-0" style="color: #4c110f"><strong>Rejeitado</strong></p>
                                             @endif
                                         </td>
-                                        <td class="align-middle text-center btn-group">
-                                            <?php
-                                            $data_bibi = date_create_from_format('Y-m-d H:i:s', $requisicao->updated_at);
-                                            $data_agora = date_create_from_format('Y-m-d H:i:s', date('Y-m-d H:i:s'));
-                                            ?>
-                                            @if($requisicao->status == 'Em andamento')
-                                                @if($requisicao->bibliotecario_id != null && (date_diff($data_bibi, $data_agora)->h < 2))
-                                                    <a class="btn" href="{{ route('avaliar-deposito', $requisicao->id) }}">
-                                                        <img src="images/botao_editar_proibido.svg" height="30px" title="Avaliar solicitação - Alguém já está avaliando">
-                                                    </a>
-                                                    <a class="btn rounded-0" href="{{ route('visualizar-deposito', $requisicao->id) }}">
-                                                        <img src="images/botao_visualizar.svg" height="30px" title="Visualizar solicitação">
-                                                    </a>
-                                                @else
-                                                    <a class="btn" href="{{ route('avaliar-deposito', $requisicao->id) }}">
-                                                        <img src="images/botao_editar.svg" height="30px" title="Avaliar solicitação">
-                                                    </a>
+                                        <td class="align-middle">
+                                            <div class="btn-group">
+                                                <?php
+                                                $data_bibi = date_create_from_format('Y-m-d H:i:s', $requisicao->updated_at);
+                                                $data_agora = date_create_from_format('Y-m-d H:i:s', date('Y-m-d H:i:s'));
+                                                ?>
+                                                @if($requisicao->status == 'Em andamento')
+                                                    @if($requisicao->bibliotecario_id != null && (date_diff($data_bibi, $data_agora)->h < 2))
+                                                        <a class="btn" href="{{ route('avaliar-deposito', $requisicao->id) }}">
+                                                            <img src="images/botao_editar_proibido.svg" height="30px" title="Avaliar solicitação - Alguém já está avaliando">
+                                                        </a>
+                                                        <a class="btn rounded-0" href="{{ route('visualizar-deposito', $requisicao->id) }}">
+                                                            <img src="images/botao_visualizar.svg" height="30px" title="Visualizar solicitação">
+                                                        </a>
+                                                    @else
+                                                        <a class="btn" href="{{ route('avaliar-deposito', $requisicao->id) }}">
+                                                            <img src="images/botao_editar.svg" height="30px" title="Avaliar solicitação">
+                                                        </a>
+                                                        <a class="btn" href="{{ route('visualizar-deposito', $requisicao->id) }}">
+                                                            <img src="images/botao_visualizar.svg" height="30px" title="Visualizar solicitação">
+                                                        </a>
+                                                    @endif
+                                                @endif
+                                                @if($requisicao->status == 'Concluido')
                                                     <a class="btn" href="{{ route('visualizar-deposito', $requisicao->id) }}">
                                                         <img src="images/botao_visualizar.svg" height="30px" title="Visualizar solicitação">
                                                     </a>
                                                 @endif
-                                            @endif
-                                            @if($requisicao->status == 'Concluido')
-                                                <a class="btn" href="{{ route('visualizar-deposito', $requisicao->id) }}">
-                                                    <img src="images/botao_visualizar.svg" height="30px" title="Visualizar solicitação">
-                                                </a>
-                                            @endif
-                                            @if($requisicao->status == 'Rejeitado')
-                                                <a class="btn" data-toggle="modal"
-                                                data-target="#exampleModal{{$requisicao->id}}">
-                                                    <img src="images/botao_info.svg" height="30px" title="Botão de Informação">
-                                                </a>
-                                                <!-- Modal -->
-                                                <div class="modal fade" id="exampleModal{{$requisicao->id}}"
-                                                    role="dialog" aria-labelledby="exampleModalLabel"
-                                                    aria-hidden="true">
-                                                    <div class="modal-dialog" role="document">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLabel">Status da
-                                                                    Analise</h5>
-                                                                <button type="button" class="close" data-dismiss="modal"
-                                                                        aria-label="Close">
-                                                                    <span aria-hidden="true">&times;</span>
-                                                                </button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                @if($requisicao->status == 'Concluido')
-                                                                    <p style="margin-left: 3px">Requisição analisada e
-                                                                        aprovada por:
-                                                                        <Strong>{{\App\Models\User::where('id',\App\Models\Bibliotecario::where('id',$requisicao->bibliotecario_id)->first()->user_id)->first()->name}}</Strong>
-                                                                    </p>
-                                                                @elseif($requisicao->status == 'Rejeitado' && $requisicao->bibliotecario_id != null)
-                                                                    <p style="margin: 1rem">Requisição analisada e
-                                                                        rejeitada por:
-                                                                        <Strong>{{\App\Models\User::where('id',\App\Models\Bibliotecario::where('id',$requisicao->bibliotecario_id)->first()->user_id)->first()->name}}</Strong>
-                                                                        <br>
-                                                                    </p>
-                                                                    <p style="margin-left: 1rem">Motivo: <strong
-                                                                            style="color: #4c110f">{{ $requisicao->anotacoes }}</strong>
-                                                                    </p>
-                                                                @endif
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary"
-                                                                        data-dismiss="modal">Close
-                                                                </button>
+                                                @if($requisicao->status == 'Rejeitado')
+                                                    <a class="btn" data-toggle="modal"
+                                                    data-target="#exampleModal{{$requisicao->id}}">
+                                                        <img src="images/botao_info.svg" height="30px" title="Botão de Informação">
+                                                    </a>
+                                                    <!-- Modal -->
+                                                    <div class="modal fade" id="exampleModal{{$requisicao->id}}"
+                                                        role="dialog" aria-labelledby="exampleModalLabel"
+                                                        aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLabel">Status da Análise</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal"
+                                                                            aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    @if($requisicao->status == 'Concluido')
+                                                                        <p style="margin-left: 3px">Requisição analisada e
+                                                                            aprovada por:
+                                                                            <Strong>{{\App\Models\User::where('id',\App\Models\Bibliotecario::where('id',$requisicao->bibliotecario_id)->first()->user_id)->first()->name}}</Strong>
+                                                                        </p>
+                                                                    @elseif($requisicao->status == 'Rejeitado' && $requisicao->bibliotecario_id != null)
+                                                                        <p style="margin: 1rem">Requisição analisada e
+                                                                            rejeitada por:
+                                                                            <Strong>{{\App\Models\User::where('id',\App\Models\Bibliotecario::where('id',$requisicao->bibliotecario_id)->first()->user_id)->first()->name}}</Strong>
+                                                                            <br>
+                                                                        </p>
+                                                                        <p style="margin-left: 1rem">Motivo: <strong
+                                                                                style="color: #4c110f">{{ $requisicao->anotacoes }}</strong>
+                                                                        </p>
+                                                                    @endif
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary"
+                                                                            data-dismiss="modal">Fechar
+                                                                    </button>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            @endif
+                                                @endif
+                                            </div>
                                         </td>
                                         <td class="align-middle text-center">
                                             @if($requisicao->status != 'Em andamento')
