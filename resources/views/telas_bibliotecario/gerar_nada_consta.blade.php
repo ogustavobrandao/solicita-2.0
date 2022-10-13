@@ -61,7 +61,7 @@
         <div>DECLARAÇÃO DE NADA CONSTA</div>
     </div>
     <div class="corpo"> Prezados,<br><br> Declaro, para os devidos fins, que o(a) discente: <strong>{{$discente}}</strong>, portador(a) do CPF: <strong>{{$cpf}}</strong>, do
-        curso: <strong>{{$curso}}</strong>, não possui débitos para com essa biblioteca.<br><br> Ficamos à disposição para eventuais dúvidas. <br> <br>OBS: Esta declaração não comprova que o(a) aluno(a) realizou o depósito do TCC, apenas que não tem outras pendências na biblioteca. <br> <br>
+        curso: <strong>{{$curso}}</strong>, não possui débitos para com essa biblioteca.<br><br> Ficamos à disposição para eventuais dúvidas. <br> <br> <strong>Obs</strong>: Esta declaração não comprova que o(a) aluno(a) realizou o depósito do TCC, apenas que não tem outras pendências na biblioteca. <br> <br>
         Atenciosamente, <br></div>
     <div class="assinatura">
         <div id="linha"></div>
