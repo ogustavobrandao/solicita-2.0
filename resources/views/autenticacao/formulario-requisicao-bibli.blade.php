@@ -67,7 +67,7 @@
                             </div>
                             <div>
                                 <input type="radio" name="documento" value="ComprovanteDepositoTrabalhoConclusao" id="ComprovanteDepositoTrabalhoConclusao">
-                                <label for="ComprovanteDepositoTrabalhoConclusao">Alunos Concluintes - Comprovante de Depósito do TCC e Nada Consta na Biblioteca</label>
+                                <label for="ComprovanteDepositoTrabalhoConclusao">Alunos Concluintes - Depósito do TCC e Nada Consta na Biblioteca</label>
                             </div>
                         </div>
 
