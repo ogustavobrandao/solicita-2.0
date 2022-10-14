@@ -231,7 +231,7 @@ class BibliotecarioController extends Controller
     {
         $documentoRequisitado = Requisicao_documento::find($request->requisicao_documento_id);
         $status = 'Rejeitado';
-        $documentoRequisitado->anotacoes = 'Consta(m) pendência(s) com a biblioteca em seu nome. Por favor, entre em contato com o setor.';
+        $documentoRequisitado->anotacoes = $request->justificativa;
         $this->atualizarStatusRequisicaoDeposito($documentoRequisitado, $status);
         return redirect(route('listar-fichas'))->with('success', 'Solicitação atualizada com sucesso!');
     }
@@ -577,7 +577,7 @@ class BibliotecarioController extends Controller
     {
         $documentoRequisitado = Requisicao_documento::find($request->requisicao_documento_id);
         $status = 'Rejeitado';
-        $documentoRequisitado->anotacoes = 'Consta(m) pendência(s) com a biblioteca em seu nome. Por favor, entre em contato com o setor.';
+        $documentoRequisitado->anotacoes = $request->justificativa;
         $this->atualizarStatusRequisicaoNadaConsta($documentoRequisitado, $status);
         return redirect(route('listar-fichas'))->with('success', 'Solicitação atualizada com sucesso!');
     }

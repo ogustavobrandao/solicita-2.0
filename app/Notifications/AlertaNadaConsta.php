@@ -44,7 +44,7 @@ class AlertaNadaConsta extends Notification
     {
         return (new MailMessage)
             ->subject('Declaração de nada consta')
-            ->markdown('mails.alerta_nada_consta', ['status' => $this->documento->status, 'discente' => $notifiable->name]);
+            ->markdown('mails.alerta_nada_consta', ['status' => $this->documento->status, 'discente' => $notifiable->name, 'justificativa' => $this->documento->anotacoes]);
     }
 
     /**

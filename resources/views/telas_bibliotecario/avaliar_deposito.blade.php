@@ -173,6 +173,14 @@
                                     </div>
                                     <div class="modal-body">
                                         <p>Tem certeza que deseja indeferir a solicitação do discente {{$aluno->user->name}}?</p>
+                                        <form id="formIndeferir" action="{{route('indeferir-deposito')}}" method="POST">
+                                            @csrf
+                                            <input type="hidden" name="requisicao_documento_id" value="{{$requisicao_documento->id}}">
+                                            <div class="form-group">
+                                                <label for="justificativa">Justificativa:</label>
+                                                <textarea class="form-control" name="justificativa" id="justificativa" rows="3" required>Consta(m) pendência(s) com a biblioteca em seu nome. Por favor, entre em contato com o setor.</textarea>
+                                            </div>
+                                        </form>
                                     </div>
                                     <div class="modal-footer px-0 justify-content-center">
                                         <div class="row justify-content-between w-100">
@@ -183,14 +191,10 @@
                                                 </button>
                                             </div>
                                             <div class="col-md-5">
-                                                <form action="{{route('indeferir-deposito')}}" method="POST">
-                                                    @csrf
-                                                    <input type="hidden" name="requisicao_documento_id" value="{{$requisicao_documento->id}}">
-                                                    <button type="submit" class="btn btn-block"
-                                                        style="background-color: var(--confirmar); border-radius: 0.5rem; color: white;">
-                                                        Confirmar
-                                                    </button>
-                                                </form>
+                                                <button type="submit" class="btn btn-block" form="formIndeferir"
+                                                    style="background-color: var(--confirmar); border-radius: 0.5rem; color: white;">
+                                                    Confirmar
+                                                </button>
                                             </div>
                                         </div>
                                     </div>

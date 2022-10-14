@@ -44,7 +44,7 @@ class AlertaDeposito extends Notification
     {
         return (new MailMessage)
             ->subject('Declaração de depósito')
-            ->markdown('mails.alerta_deposito', ['status' => $this->documento->status, 'discente' => $notifiable->name]);
+            ->markdown('mails.alerta_deposito', ['status' => $this->documento->status, 'discente' => $notifiable->name, 'justificativa' => $this->documento->anotacoes]);
     }
 
     /**
