@@ -65,8 +65,8 @@
 
 <body>
     <div class="header">
-        <img class="logo-ufape" src="{{asset('images/ufape_fundo_azul.png')}}" alt="">
-        <img class="logo-sib" src="{{asset('images/sib.jpg')}}" alt="">
+        <img class="logo-ufape" src="{{public_path('images/ufape_fundo_azul.png')}}" alt="">
+        <img class="logo-sib" src="{{public_path('images/sib.jpg')}}" alt="">
         <div>CONFIRMAÇÃO DE DEPÓSITO DO TRABALHO ACADÊMICO E NADA CONSTA NA BIBLIOTECA</div>
     </div>
     <div class="corpo"> Prezados,<br><br> Informamos que o(a) discente: <strong>{{$discente}}</strong>, portador(a) do
