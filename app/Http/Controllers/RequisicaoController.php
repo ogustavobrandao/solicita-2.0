@@ -169,7 +169,7 @@ class RequisicaoController extends Controller
         $usuarios = User::All();
         $alunos = Aluno::All();
         $perfis = Perfil::where('aluno_id', Auth::user()->aluno->id)->get();
-        $tipos_documentos = TipoDocumento::all();
+        $tipos_documentos = TipoDocumento::whereIn('tipo', ['Dissertacao', 'Monografia'])->get();
         return view('autenticacao.formulario-requisicao-bibli', compact('usuarios', 'unidades', 'perfis', 'alunos', 'tipos_documentos'));
     }
 
