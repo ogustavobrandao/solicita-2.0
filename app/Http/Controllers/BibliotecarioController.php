@@ -202,8 +202,8 @@ class BibliotecarioController extends Controller
 
     public function baixarAnexoAutorizacaoDeposito(Requisicao_documento $requisicao)
     {
-        if ($requisicao->deposito_id != null && $requisicao->deposito->anexo_tcc && Storage::exists($requisicao->deposito->anexo_tcc)) {
-            return Storage::download($requisicao->deposito->anexo_tcc);
+        if ($requisicao->deposito_id != null && $requisicao->deposito->anexo_comprovante_autorizacao && Storage::exists($requisicao->deposito->anexo_comprovante_autorizacao)) {
+            return Storage::download($requisicao->deposito->anexo_comprovante_autorizacao);
         }
         abort(404);
     }
