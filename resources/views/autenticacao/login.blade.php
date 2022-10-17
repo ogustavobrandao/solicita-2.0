@@ -56,8 +56,14 @@
                         <div class="py-2">
                             <div>
                                 <img src="images/tag.svg" width="30px">
-                                <a href="pdfs/tutorial_fichas.pdf">
+                                <a href="pdfs/tutorial_fichas.pdf" target="_blank">
                                     <span class="px-1 textoHome">Solicitação de ficha catalográfica.</span>
+                                </a>
+                            </div>
+                            <div>
+                                <img src="images/tag.svg" width="30px">
+                                <a href="pdfs/assinatura-gov-br.pdf" target="_blank">
+                                    <span class="px-1 textoHome">Orientação para assinatura eletrônica no gov.br.</span>
                                 </a>
                             </div>
                         </div>
