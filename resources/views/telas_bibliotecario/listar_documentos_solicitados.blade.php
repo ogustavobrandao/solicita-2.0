@@ -57,7 +57,7 @@
                                             @if($requisicao->status == 'Concluido')
                                                 <p class="mb-0" style="color: #1d643b; "><strong>Concluído</strong></p>
                                             @elseif($requisicao->status == 'Em andamento')
-                                                <p class="mb-0" style="color: #857b26"><strong>Emandamento</strong></p>
+                                                <p class="mb-0" style="color: #857b26"><strong>Em andamento</strong></p>
                                             @elseif($requisicao->status == 'Rejeitado')
                                                 <p class="mb-0" style="color: #4c110f"><strong>Rejeitado</strong></p>
                                             @endif
