@@ -27,6 +27,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use App\Mail\AlertaFichaGerada;
 use App\Models\Deposito;
+use App\Models\Retificacao;
 use App\Notifications\AlertaDeposito;
 use App\Notifications\AlertaNadaConsta;
 
@@ -208,6 +209,14 @@ class BibliotecarioController extends Controller
         abort(404);
     }
 
+    public function baixarAnexoRetificacao(Retificacao $retificacao)
+    {
+        if ($retificacao->anexo && Storage::exists($retificacao->anexo)) {
+            return Storage::download($retificacao->anexo);
+        }
+        abort(404);
+    }
+
     public function baixarAnexoComprovanteDeposito(Requisicao_documento $requisicao)
     {
         if ($requisicao->deposito_id != null && $requisicao->deposito->anexo_comprovante_deposito && Storage::exists($requisicao->deposito->anexo_comprovante_deposito)) {
@@ -260,6 +269,21 @@ class BibliotecarioController extends Controller
         $alunoUser->notify(new AlertaDeposito($documentoRequisitado->status, $documentoRequisitado->anotacoes));
     }
 
+    public function retificarRequisicaoDocumento(Request $request)
+    {
+        $requisicao_documento = Requisicao_documento::find($request->requisicao_documento_id);
+        $retificacao = new Retificacao();
+        if ($request->hasFile('anexo')) {
+            $retificacao->anexo = Storage::put('retificacoes/', $request->file('anexo'));
+        }
+        $requisicao_documento->retificacoes()->save($retificacao);
+        $justificativa = 'A sua solicitação foi retificada, por favor acesse o sistema para baixar a versão atualizada.';
+        if ($requisicao_documento->nadaConsta()->exists()) {
+            $requisicao_documento->requisicao->aluno->user->notify(new AlertaNadaConsta('retificado', $justificativa));
+        } elseif ($requisicao_documento->deposito()->exists()) {
+            $requisicao_documento->requisicao->aluno->user->notify(new AlertaDeposito('retificado', $justificativa));
+        }
+        return redirect()->back()->with('success', 'Solicitação retificada com sucesso!');
     }
 
     public function visualizarNadaConsta($requisicaoId)
@@ -607,6 +631,14 @@ class BibliotecarioController extends Controller
     {
         if ($requisicao_documento->deposito_id != null && $requisicao_documento->deposito->anexo_comprovante_deposito && Storage::exists($requisicao_documento->deposito->anexo_comprovante_deposito)) {
             return Storage::download($requisicao_documento->deposito->anexo_comprovante_deposito);
+        }
+        abort(404);
+    }
+
+    public function baixarRetificacao(Retificacao $retificacao)
+    {
+        if ($retificacao->anexo && Storage::exists($retificacao->anexo)) {
+            return Storage::download($retificacao->anexo);
         }
         abort(404);
     }

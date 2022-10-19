@@ -188,7 +188,11 @@
                                     </form>
                                     <div class="align-middle">
                                         @if(\App\Models\Requisicao_documento::where('requisicao_id',$r->id)->first()->status == 'Concluido')
-                                            @if ($r->requisicao_documento->first()->nada_consta_id != null)
+                                            @if ($r->requisicao_documento->first()->retificacoes()->exists())
+                                                <a class="btn" href="{{route('baixar-retificacao-aluno', $r->requisicao_documento->first()->retificacoes->last()->id)}}">
+                                                    <img src="images/botao_dowload_aquivo.svg" height="30px" title="Baixar comprovante">
+                                                </a>
+                                            @elseif ($r->requisicao_documento->first()->nada_consta_id != null)
                                                 <a class="btn" href="{{route('baixar-nada-consta-aluno', $r->requisicao_documento->first()->id)}}">
                                                     <img src="images/botao_dowload_aquivo.svg" height="30px" title="Baixar comprovante">
                                                 </a>

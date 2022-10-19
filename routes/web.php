@@ -116,6 +116,7 @@ Route::group(['middleware'=> 'CheckAluno'], function(){
 
     Route::get('/baixar-nada-consta/{requisicao_documento}', [\App\Http\Controllers\BibliotecarioController::class, 'baixarNadaConsta'])->name('baixar-nada-consta-aluno');
     Route::get('/baixar-deposito/{requisicao_documento}', [\App\Http\Controllers\BibliotecarioController::class, 'baixarDeposito'])->name('baixar-deposito-aluno');
+    Route::get('/baixar-retificacao/{retificacao}', [\App\Http\Controllers\BibliotecarioController::class, 'baixarRetificacao'])->name('baixar-retificacao-aluno');
 });
 
 //----------------------------------------------BIBLIOTECARIO---------------------------------------------------
@@ -141,8 +142,10 @@ Route::group(['middleware'=> 'CheckBibliotecario'], function(){
     Route::get('/avaliar-nada-consta/{requisicao_id}',[\App\Http\Controllers\BibliotecarioController::class, 'avaliarNadaConsta'])->name('avaliar-nada-consta')->middleware('CheckBibliotecario');
     Route::get('/avaliar-nada-consta/{requisicao_id}/baixarAnexoComprovante',[\App\Http\Controllers\BibliotecarioController::class, 'baixarAnexoComprovante'])->name('baixa-anexo-comprovante');
     Route::get('/avaliar-nada-consta/{requisicao_id}/baixarAnexoTermoAceitacao',[\App\Http\Controllers\BibliotecarioController::class, 'baixarAnexoTermoAceitacao'])->name('baixar-anexo-termo-aceitacao');
+    Route::get('/visualizar-nada-consta/{retificacao}/baixarAnexoRetificacao',[\App\Http\Controllers\BibliotecarioController::class, 'baixarAnexoRetificacao'])->name('baixar-anexo-retificacao');
     Route::post('/deferir-nada-consta',[\App\Http\Controllers\BibliotecarioController::class, 'deferirNadaConsta'])->name('deferir-nada-consta')->middleware('CheckBibliotecario');
     Route::post('/indeferir-nada-consta',[\App\Http\Controllers\BibliotecarioController::class, 'indeferirNadaConsta'])->name('indeferir-nada-consta')->middleware('CheckBibliotecario');
+    Route::post('/retificar-requisicao-documento',[\App\Http\Controllers\BibliotecarioController::class, 'retificarRequisicaoDocumento'])->name('retificar-requisicao-documento')->middleware('CheckBibliotecario');
     Route::get('/visualizar-nada-consta/{requisicao_id}',[\App\Http\Controllers\BibliotecarioController::class, 'visualizarNadaConsta'])->name('visualizar-nada-consta')->middleware('CheckBibliotecario');
     Route::post('/gerar-nada-consta/{requisicao_documento}',[\App\Http\Controllers\BibliotecarioController::class, 'gerarNadaConsta'])->name('gerar-nada-consta')->middleware('CheckBibliotecario');
 
