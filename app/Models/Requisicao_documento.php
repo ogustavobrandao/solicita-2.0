@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 class Requisicao_documento extends Model
 {
@@ -26,6 +27,16 @@ class Requisicao_documento extends Model
     public function deposito()
     {
         return $this->belongsTo(Deposito::class);
+    }
+
+    /**
+     * Get all of the retificacoes for the Requisicao_documento
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function retificacoes(): HasMany
+    {
+        return $this->hasMany(Retificacao::class);
     }
 
     public function bibliotecario()
