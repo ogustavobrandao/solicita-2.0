@@ -11,16 +11,19 @@ class AlertaDeposito extends Notification
 {
     use Queueable;
 
-    public $documentoRequisitado;
+    protected $status;
+
+    protected $anotacoes;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($documento)
+    public function __construct($status, $anotacoes)
     {
-        $this->documento = $documento;
+        $this->status = $status;
+        $this->anotacoes = $anotacoes;
     }
 
     /**
@@ -44,7 +47,7 @@ class AlertaDeposito extends Notification
     {
         return (new MailMessage)
             ->subject('Declaração de depósito')
-            ->markdown('mails.alerta_deposito', ['status' => $this->documento->status, 'discente' => $notifiable->name, 'justificativa' => $this->documento->anotacoes]);
+            ->markdown('mails.alerta_deposito', ['status' => $this->status, 'discente' => $notifiable->name, 'justificativa' => $this->anotacoes]);
     }
 
     /**

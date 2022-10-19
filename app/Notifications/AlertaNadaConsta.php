@@ -11,16 +11,19 @@ class AlertaNadaConsta extends Notification
 {
     use Queueable;
 
-    public $documento;
+    protected $status;
+
+    protected $anotacoes;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($documento)
+    public function __construct($status, $anotacoes)
     {
-        $this->documento = $documento;
+        $this->status = $status;
+        $this->anotacoes = $anotacoes;
     }
 
     /**
@@ -44,7 +47,7 @@ class AlertaNadaConsta extends Notification
     {
         return (new MailMessage)
             ->subject('Declaração de nada consta')
-            ->markdown('mails.alerta_nada_consta', ['status' => $this->documento->status, 'discente' => $notifiable->name, 'justificativa' => $this->documento->anotacoes]);
+            ->markdown('mails.alerta_nada_consta', ['status' => $this->status, 'discente' => $notifiable->name, 'justificativa' => $this->anotacoes]);
     }
 
     /**

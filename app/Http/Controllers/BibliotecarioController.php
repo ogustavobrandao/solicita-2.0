@@ -257,7 +257,9 @@ class BibliotecarioController extends Controller
         $documentoRequisitado->status = $status;
         $documentoRequisitado->save();
         $alunoUser = $documentoRequisitado->aluno->user;
-        $alunoUser->notify(new AlertaDeposito($documentoRequisitado));
+        $alunoUser->notify(new AlertaDeposito($documentoRequisitado->status, $documentoRequisitado->anotacoes));
+    }
+
     }
 
     public function visualizarNadaConsta($requisicaoId)
@@ -590,7 +592,7 @@ class BibliotecarioController extends Controller
         $documentoRequisitado->status = $status;
         $documentoRequisitado->save();
         $alunoUser = $documentoRequisitado->aluno->user;
-        $alunoUser->notify(new AlertaNadaConsta($documentoRequisitado));
+        $alunoUser->notify(new AlertaNadaConsta($documentoRequisitado->status, $documentoRequisitado->anotacoes));
     }
 
     public function baixarNadaConsta(Requisicao_documento $requisicao_documento)
