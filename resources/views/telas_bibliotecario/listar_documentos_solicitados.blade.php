@@ -14,17 +14,17 @@
                        style="border-radius: 1rem; background-color: white; border: none" id="table">
                     <thead>
                     <tr>
-                        <th scope="col">#</th>
-                        <th scope="col" class="titleColumn" style="cursor:pointer">Autor</th>
-                        <th scope="col" class="titleColumn text-center"
+                        <th scope="col" class="border-bottom-0 py-3">#</th>
+                        <th scope="col" class="titleColumn border-bottom-0 py-3" style="cursor:pointer">Autor</th>
+                        <th scope="col" class="titleColumn text-center border-bottom-0 py-3"
                             style="cursor:pointer">Tipo do Documento
                         </th>
-                        <th scope="col" class="titleColumn text-center"
+                        <th scope="col" class="titleColumn text-center border-bottom-0 py-3"
                             style="cursor:pointer">Data da Requisição
                         </th>
-                        <th scope="col" class="text-center">Status</th>
-                        <th scope="col" class="text-center">Ação</th>
-                        <th scope="col" class="text-center">Data de análise</th>
+                        <th scope="col" class="text-center border-bottom-0 py-3">Status</th>
+                        <th scope="col" class="text-center border-bottom-0 py-3">Ação</th>
+                        <th scope="col" class="text-center border-bottom-0 py-3">Data de análise</th>
                     </tr>
                     </thead>
                     <tbody class="">
@@ -365,6 +365,18 @@
 
     <script>
 
+        $.fn.dataTable.ext.type.order['andamento-processo'] = function (d) {
+            switch (d) {
+                case 'Em andamento':
+                    return 3;
+                case 'Rejeitado':
+                    return 2;
+                case 'Concluído':
+                    return 1;
+            }
+            return 0;
+        };
+
         $('#table').DataTable({
             searching: true,
 
@@ -380,18 +392,23 @@
                 }
             },
             "dom": '<"top"f>rt<"bottom"p><"clear">',
-            "order": [],
-            "columnDefs": [{
-                "targets": [5],
-                "orderable": false
-            }]
+            "order": [[4, 'desc']],
+            "columnDefs": [
+                {
+                    "targets": [5],
+                    "orderable": false
+                },
+                {
+                    "targets": [4],
+                    "type": "andamento-processo"
+                }
+            ]
         });
 
         $('.dataTables_filter').addClass('here');
         $('.dataTables_filter').addClass('');
         $('.here').addClass('center');
         $('.here').removeClass('dataTables_filter');
-        $('.table-hover').removeClass('dataTable');
         $('.here').find('input').addClass('search-input');
         $('.here').find('input').addClass('align-middle');
         $('.here').find('label').contents().unwrap();
