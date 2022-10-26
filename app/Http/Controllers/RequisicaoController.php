@@ -664,6 +664,9 @@ class RequisicaoController extends Controller
         if (($request->hasFile('anexo_comprovante_autorizacao') && $request->file('anexo_comprovante_autorizacao')->isValid())) {
             $deposito->anexo_comprovante_autorizacao = $request->file('anexo_comprovante_autorizacao')->store('deposito');
         }
+        if (($request->hasFile('anexo_publicacao_parcial') && $request->file('anexo_publicacao_parcial')->isValid())) {
+            $deposito->anexo_publicacao_parcial = $request->file('anexo_publicacao_parcial')->store('deposito');
+        }
         $deposito->save();
 
         $requisicao = new Requisicao();

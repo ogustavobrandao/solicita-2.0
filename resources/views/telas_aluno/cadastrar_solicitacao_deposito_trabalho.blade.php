@@ -68,6 +68,18 @@
                                     <br>
                                     <span id="tipoAnexo"
                                           style="font-size: small; color: gray; margin-top: 0px; margin-bottom: 10px">Tipos permitidos: PDF, DOCX e DOC. </span>
+                                    <br>
+                                    <input type="file" accept="application/pdf, .docx, .doc" name="anexo_publicacao_parcial"
+                                           style="margin-bottom: 0px">
+                                    <br>
+                                    <span id="tipoAnexo"
+                                          style="font-size: small; color: gray; margin-top: 0px; margin-bottom: 10px">
+                                          <strong>OBS</strong>: Em caso de Publicação Parcial será necessária uma declaração justificando a necessidade, que deve estar assinada pelo aluno e orientador.
+                                    </span>
+                                </div>
+
+                                <div class="form-group">
+
                                 </div>
 
                             </div>

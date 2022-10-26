@@ -69,6 +69,11 @@
                                         <a class="btn btn-primary" href="{{ route('baixar-anexo-autorizacao-deposito', $requisicao_documento->id) }}">
                                             Visualizar
                                         </a>
+                                        @if ($deposito->anexo_publicacao_parcial != null)
+                                            <a class="btn btn-primary" href="{{ route('baixar-anexo_publicacao_parcial', $requisicao_documento->id) }}">
+                                                Visualizar
+                                            </a>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="mt-3">

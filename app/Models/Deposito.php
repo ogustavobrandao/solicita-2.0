@@ -7,6 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Deposito extends Model
 {
+    use HasFactory;
+
+    protected $fillable = [
+        'anexo_comprovante_deposito',
+        'anexo_tcc',
+        'anexo_comprovante_autorizacao',
+        'titulo_tcc',
+        'anexo_publicacao_parcial'
+    ];
+
     public function requisicao_documento(){
         return $this->belongsTo('App\Models\Requisicao_documento');
     }
@@ -21,5 +31,4 @@ class Deposito extends Model
         return array_key_exists($anexo_comprovante_nada_consta, $this->anexo_comprovante_nada_consta);
     }
 
-    use HasFactory;
 }

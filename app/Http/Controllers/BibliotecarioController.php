@@ -209,6 +209,14 @@ class BibliotecarioController extends Controller
         abort(404);
     }
 
+    public function baixarAnexoPublicacaoParcial(Requisicao_documento $requisicao)
+    {
+        if ($requisicao->deposito_id != null && $requisicao->deposito->anexo_publicacao_parcial && Storage::exists($requisicao->deposito->anexo_publicacao_parcial)) {
+            return Storage::download($requisicao->deposito->anexo_publicacao_parcial);
+        }
+        abort(404);
+    }
+
     public function baixarAnexoRetificacao(Retificacao $retificacao)
     {
         if ($retificacao->anexo && Storage::exists($retificacao->anexo)) {

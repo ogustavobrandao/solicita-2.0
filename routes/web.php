@@ -154,6 +154,7 @@ Route::group(['middleware'=> 'CheckBibliotecario'], function(){
     Route::get('/visualizar-deposito/{requisicao}/baixar-comprovante',[\App\Http\Controllers\BibliotecarioController::class, 'baixarAnexoComprovanteDeposito'])->name('baixar-anexo-comprovante-deposito');
     Route::get('/baixar-anexo-tcc-deposito/{requisicao}',[\App\Http\Controllers\BibliotecarioController::class, 'baixarAnexoTccDeposito'])->name('baixar-anexo-tcc-deposito');
     Route::get('/baixar-anexo-autorizacao-deposito/{requisicao}',[\App\Http\Controllers\BibliotecarioController::class, 'baixarAnexoAutorizacaoDeposito'])->name('baixar-anexo-autorizacao-deposito');
+    Route::get('/baixar-anexo_publicacao_parcial/{requisicao}',[\App\Http\Controllers\BibliotecarioController::class, 'baixarAnexoPublicacaoParcial'])->name('baixar-anexo_publicacao_parcial');
     Route::post('/deferir-deposito',[\App\Http\Controllers\BibliotecarioController::class, 'deferirDeposito'])->name('deferir-deposito');
     Route::post('/indeferir-deposito',[\App\Http\Controllers\BibliotecarioController::class, 'indeferirDeposito'])->name('indeferir-deposito');
     Route::post('/gerar-deposito/{requisicao_documento}',[\App\Http\Controllers\BibliotecarioController::class, 'gerarDeposito'])->name('gerar-deposito');
