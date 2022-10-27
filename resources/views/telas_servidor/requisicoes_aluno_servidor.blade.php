@@ -38,7 +38,7 @@
                   <ol style="margin-left:-30px">
                     @foreach($r->requisicao_documento as $requisicao)
                         <li>
-                            @if($requisicao->documento->tipo == "Programa de Disciplina")
+                            @if($requisicao->documento != null && $requisicao->documento->tipo == "Programa de Disciplina")
                                 {{$requisicao->documento->tipo}}
                                 <a data-toggle="tooltip" data-placement="left" title="Informações:{{$requisicao['detalhes']}} ">
                                     {{-- Status do indeferimento com imagem do olho --}}
@@ -46,7 +46,7 @@
                                     @component('componentes.popup', ["titulo"=>"Informações", "conteudo"=>$requisicao->detalhes,"id"=>"dlgPrograma"])
                                     @endcomponent
                                 </a>
-                            @elseif($requisicao->documento->tipo == "Outros")
+                            @elseif($requisicao->documento != null && $requisicao->documento->tipo == "Outros")
                                 {{$requisicao->documento->tipo}}
                                 <a data-toggle="tooltip" data-placement="left" title="Informações:{{$requisicao['detalhes']}} ">
                                     {{-- Status do indeferimento com imagem do olho --}}
@@ -54,7 +54,7 @@
                                     @component('componentes.popup', ["titulo"=>"Informações", "conteudo"=>$requisicao->detalhes, "id"=>"dlgOutros"])
                                     @endcomponent
                                 </a>
-                            @else
+                            @elseif ($requisicao->documento)
                                 {{$requisicao->documento->tipo}}
                             @endif
                         </li>
