@@ -535,7 +535,7 @@
                                         <div class="form-group">
                                             <label for="curso">Curso: <span style="color: red">*</span></label>
                                             <input type="text" class="form-control" id="curso" name="curso"
-                                                   placeholder="Digite o Nome do Curso" value="{{$documento->curso}}"
+                                                   placeholder="Digite o Nome do Curso" value="{{$documento->fichaCatalografica->requisicaoDocumento->requisicao->perfil->curso->nome}}"
                                                    required
                                                    disabled>
                                             <input type="hidden" class="form-control" id="curso" name="curso"

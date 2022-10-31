@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class FichaCatalografica extends Model
 {
@@ -27,5 +28,15 @@ class FichaCatalografica extends Model
 
     public function monografia(){
         return $this->hasOne('App\Models\Monografia');
+    }
+
+    /**
+     * Get the requisicaoDocumento associated with the FichaCatalografica
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function requisicaoDocumento(): HasOne
+    {
+        return $this->hasOne(Requisicao_documento::class);
     }
 }
