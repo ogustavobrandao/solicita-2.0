@@ -472,6 +472,8 @@ class BibliotecarioController extends Controller
         $documento = null;
 
         if ($request->tipo_documento == 2) {
+            $original = FichaCatalografica::find($request->ficha_catalografica_id);
+            $perfil = $original->requisicaoDocumento->requisicao->perfil;
             $documento = new Monografia();
             $documento->nome_orientador = $request->nome_orientador;
             $documento->sobrenome_orientador = $request->sobrenome_orientador;
