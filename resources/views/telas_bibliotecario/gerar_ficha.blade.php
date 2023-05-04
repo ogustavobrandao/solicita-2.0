@@ -178,7 +178,7 @@
                         <tr>
                             <td class="recuo"><span class="recuo">{{substr($ficha->autor_sobrenome, 0, 3)}}</span>Monografia @if($documento->tipo_curso == 'especializacao')
                                     (Especialização) @elseif($documento->tipo_curso == 'graduacao')
-                                    (Graduação) @elseif($documento->tipo_curso == 'mba') (MBA) @endif -
+                                    (Graduação) @elseif($documento->tipo_curso == 'mestrado') (Mestrado) @endif -
                                 @if($unidade->nome == 'UPE - Campus Garanhuns')<p>Universidade de Pernambuco</p>, @else
                                     <p>Universidade Federal do Agreste de Pernambuco</p>,@endif
                                 {{ str_replace('(Mestrado) ', '', str_replace('(Graduação) ', '', $documento->curso)) }},
