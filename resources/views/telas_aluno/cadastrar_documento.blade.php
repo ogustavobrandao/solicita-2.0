@@ -197,7 +197,7 @@
                                                 name="tipo_curso" id="tipo_curso">
                                             <option value="especializacao">Especialização</option>
                                             <option value="graduacao">Graduação</option>
-                                            <option value="mba">MBA</option>
+                                            <option value="mestrado">Mestrado</option>
                                         </select>
                                     </div>
                                 </div>

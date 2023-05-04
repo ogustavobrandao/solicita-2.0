@@ -256,8 +256,8 @@
                                             <option value="graduacao"
                                                     @if($documento->tipo_curso == 'graduacao') selected @endif>Graduação
                                             </option>
-                                            <option value="mba" @if($documento->tipo_curso == 'mba') selected @endif>
-                                                MBA
+                                            <option value="mestrado" @if($documento->tipo_curso == 'mestrado') selected @endif>
+                                                Mestrado
                                             </option>
                                         </select>
                                     </div>
