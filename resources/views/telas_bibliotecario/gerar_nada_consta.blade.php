@@ -8,28 +8,34 @@
     <title>Document</title>
     <style>
         @page {
-            margin-left: 3cm;
-            margin-top: 2cm;
-            margin-right: 2cm;
-            margin-bottom: 2cm;
+            margin-left: 2.29cm;
+            margin-top: 0.50cm;
+            margin-right: 2.03cm;
+            margin-bottom: 0.49cm;
         }
         body {
-            font-family: "Arial", sans-serif;
-            font-size: 12px;
+            font-family: "Times New Roman", Times, serif;
+            font-size: 15px;
+            line-height: 20px;
         }
         .header {
             text-align: center;
             font-weight: bold;
         }
-        .header div {
+        .header p {
             text-align: center;
-            margin-top: 1cm;
+            font-size: 15px;
+            margin: 0;
+            padding: 0;
+        }
+        .header .doc {
+            margin-top: 100px;
+            text-decoration: underline;
+            font-size: 18px;
         }
         .logo-ufape {
-            margin-top: 5px;
-            float: left;
-            width: 1.51cm;
-            height: 1.98cm;
+            height: 1.27in;
+            margin-bottom: 5px;
         }
         .logo-sib {
             float: right;
@@ -39,33 +45,50 @@
         .corpo {
             text-align: justify;
             margin-top: 5rem;
+            text-indent: 50px;
         }
         .assinatura {
-            margin-top: 2cm;
+            margin-top: 8cm;
             width: 100%;
             display: flex;
             text-align: center;
+            font-weight: bold;
         }
         #linha {
             border-bottom: 1px solid black;
-            width: 40%;
+            width: 60%;
             margin: auto;
+        }
+        .bg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0.2;
+            width: 11.95cm;
         }
     </style>
 </head>
 
 <body>
+    <img src="{{public_path('images/sib.png')}}" alt="" class="bg">
     <div class="header">
-        <img class="logo-ufape" src="{{public_path('images/ufape_fundo_azul.png')}}" alt="">
-        <img class="logo-sib" src="{{public_path('images/sib.jpg')}}" alt="">
-        <div>DECLARAÇÃO DE NADA CONSTA</div>
+        <img class="logo-ufape" src="{{public_path('images/a) Proposta de Brasão_0.png')}}" alt="">
+        <p>UNIVERSIDADE FEDERAL DO AGRESTE DE PERNAMBUCO</p>
+        <p>REITORIA DA UFAPE</p>
+        <p>SISTEMA INTEGRADO DE BIBLIOTECAS</p>
+        <p>COORDENADORIA DE SERVIÇOS DIGITAIS</p>
+        <p class="doc">DECLARAÇÃO DE NADA CONSTA</p>
     </div>
-    <div class="corpo"> Prezados,<br><br> Declaro, para os devidos fins, que o(a) discente: <strong>{{$discente}}</strong>, portador(a) do CPF: <strong>{{$cpf}}</strong>, do
-        curso: <strong>{{$curso}}</strong>, não possui débitos para com essa biblioteca.<br><br> Ficamos à disposição para eventuais dúvidas. <br> <br> <strong>Obs</strong>: Esta declaração não comprova que o(a) aluno(a) realizou o depósito do TCC, apenas que não tem outras pendências na biblioteca. <br> <br>
-        Atenciosamente, <br></div>
+    <div class="corpo">
+        Declaramos que o(a) Discente <strong>{{$discente}}</strong>, portador(a) do CPF <strong>{{$cpf}}</strong>, regularmente matriculado(a) no curso de <strong>{{$curso}}</strong> da <b>Universidade Federal do Agreste de Pernambuco - UFAPE</b> não possui débitos para com o Sistema Integrado de Bibliotecas.
+        <br> <br> <strong>Obs</strong>: Esta declaração não comprova que o(a) aluno(a) realizou o depósito do TCC, apenas que não tem outras pendências na biblioteca. <br> <br>
     <div class="assinatura">
         <div id="linha"></div>
-        <div>{{$bibliotecario->user->name}} <br>Bibliotecário(a) - Documentalista <br>SIAPE: {{$bibliotecario->matricula}}</div>
+        <div style="text-align: center;">
+            Coordenadoria de Serviços Digitais<br>
+            SIB/UFAPE
+        </div>
     </div>
 </body>
 
