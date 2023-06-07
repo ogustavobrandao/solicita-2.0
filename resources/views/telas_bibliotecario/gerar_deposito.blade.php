@@ -55,11 +55,6 @@
             justify-content: center;
             font-weight: bold;
         }
-        #linha {
-            border-bottom: 1px solid black;
-            width: 60%;
-            margin: auto;
-        }
         .bg {
             position: absolute;
             top: 50%;
@@ -78,13 +73,13 @@
         <p>UNIVERSIDADE FEDERAL DO AGRESTE DE PERNAMBUCO</p>
         <p>REITORIA DA UFAPE</p>
         <p>SISTEMA INTEGRADO DE BIBLIOTECAS</p>
-        <p class="doc">DECLARAÇÃO DE DEPÓSITO DO TRABALHO ACADÊMICO E NADA CONSTA</p>
+        <p class="doc">DECLARAÇÃO DE DEPÓSITO DO TRABALHO <br> ACADÊMICO E NADA CONSTA</p>
     </div>
     <div class="corpo">
-        Declaramos que o(a) Discente <strong>{{$discente}}</strong>, portador(a) do CPF <strong>{{$cpf}}</strong>, regularmente matriculado(a) no curso de <strong>{{$curso}}</strong> da <b>Universidade Federal do Agreste de Pernambuco - UFAPE</b> realizou  o depósito do seu trabalho de conclusão de curso, cujo título é: "<b>{{$tcc}}</b>", bem como a entrega do Termo de Autorização para o depósito no Repositório Institucional, cumprindo todos os requisitos necessários. Portanto, não constando pendências com este setor <br> <br>
+        Declaramos que o(a) Discente <strong>{{$discente}}</strong>, portador(a) do CPF <strong>{{$cpf}}</strong>, regularmente matriculado(a) no curso de <strong>{{$curso}}</strong> da <b>Universidade Federal do Agreste de Pernambuco - UFAPE</b> realizou  o depósito do seu trabalho de conclusão de curso, cujo título é: "<b>{{$tcc}}</b>", bem como a entrega do Termo de Autorização para o depósito no Repositório Institucional, cumprindo todos os requisitos necessários. Portanto, não constando pendências com este setor. <br> <br>
     <div class="assinatura">
-        <div id="linha"></div>
-        <div>Direção SIB/UFAPE</div>
+        <div id="linha">_________________________________________________________________</div>
+        <div style="text-align: center;">Direção SIB/UFAPE</div>
     </div>
 </body>
 
