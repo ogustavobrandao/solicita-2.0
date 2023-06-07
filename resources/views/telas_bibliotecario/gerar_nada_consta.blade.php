@@ -7,11 +7,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <style>
+
         @page {
-            margin-left: 2.29cm;
-            margin-top: 0.50cm;
-            margin-right: 2.03cm;
-            margin-bottom: 0.49cm;
+            margin: 0;
         }
         body {
             font-family: "Times New Roman", Times, serif;
@@ -19,6 +17,7 @@
             line-height: 20px;
         }
         .header {
+            margin-top: 1rem;
             text-align: center;
             font-weight: bold;
         }
@@ -43,21 +42,25 @@
             height: 2.13cm;
         }
         .corpo {
+            margin-left: 2.29cm;
+            margin-top: 0.50cm;
+            margin-right: 2.03cm;
+            margin-bottom: 0.49cm;
             text-align: justify;
-            margin-top: 5rem;
             text-indent: 50px;
         }
         .assinatura {
             margin-top: 8cm;
-            width: 100%;
             display: flex;
             text-align: center;
             font-weight: bold;
         }
         #linha {
-            border-bottom: 1px solid black;
-            width: 60%;
-            margin: auto;
+            margin: 0 15%;
+            justify-content: center;
+            display: flex;
+            border-bottom: 1px black solid;
+            margin-bottom: 3px;
         }
         .bg {
             position: absolute;
@@ -66,6 +69,10 @@
             transform: translate(-50%, -50%);
             opacity: 0.2;
             width: 11.95cm;
+        }
+        #cargo {
+            margin: 0;
+            padding: 0;
         }
     </style>
 </head>
@@ -85,10 +92,10 @@
         <br> <br> <strong>Obs</strong>: Esta declaração não comprova que o(a) aluno(a) realizou o depósito do TCC, apenas que não tem outras pendências na biblioteca. <br> <br>
     <div class="assinatura">
         <div id="linha"></div>
-        <div style="text-align: center;">
+        <span id="cargo">
             Coordenadoria de Serviços Digitais<br>
             SIB/UFAPE
-        </div>
+        </span>
     </div>
 </body>
 
