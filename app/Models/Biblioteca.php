@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Notifications\NadaConstaSolicitado;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
@@ -20,9 +21,8 @@ class Biblioteca extends Model
      */
     public function routeNotificationForMail($notification)
     {
-        // Return email address only...
         $emails = [$this->email];
-        if ($this->email_nada_consta != null) {
+        if ($notification instanceof NadaConstaSolicitado && $this->email_nada_consta != null) {
             $emails[] = $this->email_nada_consta;
         }
         return $emails;
