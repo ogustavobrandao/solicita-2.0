@@ -23,12 +23,12 @@
         }
         .header p {
             text-align: center;
-            font-size: 15px;
+            font-size: 14px;
             margin: 0;
             padding: 0;
         }
         .header .doc {
-            margin-top: 100px;
+            margin-top: 3.5cm;
             text-decoration: underline;
             font-size: 18px;
         }
@@ -43,20 +43,24 @@
         }
         .corpo {
             margin-left: 2.29cm;
-            margin-top: 0.50cm;
+            margin-top: 2.5cm;
             margin-right: 2.03cm;
             margin-bottom: 0.49cm;
             text-align: justify;
             text-indent: 50px;
         }
         .assinatura {
-            margin-top: 8cm;
+            margin-top: 5.5cm;
             display: flex;
             text-align: center;
             font-weight: bold;
         }
+        .obs {
+            text-indent: 0px;
+            margin-top: 1cm;
+        }
         #linha {
-            margin: 0 15%;
+            margin: 0 25%;
             justify-content: center;
             display: flex;
             border-bottom: 1px black solid;
@@ -89,7 +93,8 @@
     </div>
     <div class="corpo">
         Declaramos que o(a) Discente <strong>{{$discente}}</strong>, portador(a) do CPF <strong>{{$cpf}}</strong>, regularmente matriculado(a) no curso de <strong>{{$curso}}</strong> da <b>Universidade Federal do Agreste de Pernambuco - UFAPE</b> não possui débitos para com o Sistema Integrado de Bibliotecas.
-        <br> <br> <strong>Obs</strong>: Esta declaração não comprova que o(a) aluno(a) realizou o depósito do TCC, apenas que não tem outras pendências na biblioteca. <br> <br>
+        <div class="obs"><strong>Obs</strong>: Esta declaração não comprova que o(a) aluno(a) realizou o depósito do TCC, apenas que não tem outras pendências na biblioteca.</div>
+    </div>
     <div class="assinatura">
         <div id="linha"></div>
         <span id="cargo">
