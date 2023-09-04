@@ -113,40 +113,20 @@
 
       var aux, i;
       tamanho = array.length;
-      // document.reload();
-      var vinculo = 0, matricula = 0, historico = 0 , programa = 0, outros = 0,indeferidos = 0 ,concluidos = 0;
-
-      for(i = 0; i < tamanho; i++){
-        //console.log(array[i].perfils[0].id)
-
-        if(array[i].status == "Em andamento" && array[i].documento_id == 1 &&  array[i].curso == selecionado){
-          vinculo++;
-        }
-        if(array[i].status == "Em andamento" && array[i].documento_id == 2 && array[i].curso == selecionado){
-          matricula++;
-        }
-        if(array[i].status == "Em andamento" && array[i].documento_id == 3 && array[i].curso == selecionado){
-          historico++;
-        }
-        if(array[i].status == "Em andamento" && array[i].documento_id == 4 && array[i].curso == selecionado){
-          programa++;
-        }
-        if(array[i].status == "Em andamento" && array[i].documento_id == 5 && array[i].curso == selecionado){
-          outros++;
-        }
-        if(array[i].status == "Concluído - Disponível para retirada" &&  array[i].curso == selecionado){
-          concluidos++;
-        }
-        if(array[i].status == "Indeferido" &&  array[i].curso == selecionado){
-          indeferidos++;
-        }
-
+      var contagens = [0, 0, 0, 0, 0];
+      console.log(array);
+      let docsCurso = array.filter((item) => item.curso_id == curso);
+      if (docsCurso) {
+        docsCurso.forEach(element => {
+            contagens[element['documento_id'] - 1] = element['total']
+        });
       }
-      document.getElementById('quantidades1').innerHTML = 'Nº de Requisições: ' + vinculo;
-      document.getElementById('quantidades2').innerHTML = 'Nº de Requisições: ' + matricula;
-      document.getElementById('quantidades3').innerHTML = 'Nº de Requisições: ' + historico;
-      document.getElementById('quantidades4').innerHTML = 'Nº de Requisições: ' + programa;
-      document.getElementById('quantidades5').innerHTML = 'Nº de Requisições: ' + outros;
+
+      document.getElementById('quantidades1').innerHTML = 'Nº de Requisições: ' + contagens[0];
+      document.getElementById('quantidades2').innerHTML = 'Nº de Requisições: ' + contagens[1];
+      document.getElementById('quantidades3').innerHTML = 'Nº de Requisições: ' + contagens[2];
+      document.getElementById('quantidades4').innerHTML = 'Nº de Requisições: ' + contagens[3];
+      document.getElementById('quantidades5').innerHTML = 'Nº de Requisições: ' + contagens[4];
     }
 
     quantidades(document.getElementById('optionComOValor').value);
