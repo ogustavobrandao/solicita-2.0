@@ -315,12 +315,9 @@ class RequisicaoController extends Controller
         $documentosRequisitados->save();
 
 
-        $bibliotecas = Biblioteca::all();
-        $unidadeId = $perfil->unidade_id;
+        $bibliotecas = Biblioteca::where('unidade_id', $perfil->unidade_id)->get();
         foreach ($bibliotecas as $biblioteca) {
-            if($unidadeId == $biblioteca->unidade_id) {
-                \Illuminate\Support\Facades\Mail::send(new AlertaFichaMail($biblioteca, Auth::user(), $unidade));
-            }
+            \Illuminate\Support\Facades\Mail::send(new AlertaFichaMail($biblioteca, $request->user(), $unidade));
         }
 
         return redirect(Route('home-aluno'))->with('success', 'Solicitação realizada com sucesso!');

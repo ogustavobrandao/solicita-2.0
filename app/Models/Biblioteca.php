@@ -27,4 +27,9 @@ class Biblioteca extends Model
         }
         return $emails;
     }
+
+    public function emails()
+    {
+        return $this->hasMany(Email::class);
+    }
 }

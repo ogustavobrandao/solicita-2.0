@@ -39,11 +39,15 @@ class AlertaFichaMail extends Mailable
      */
     public function build()
     {
+        //pegando todos os emails relacionados à biblioteca.
         $biblioteca = $this->biblioteca;
+        $bibliotecaEmails = $biblioteca->emails->pluck('email')->toArray();
+        array_push($bibliotecaEmails, $biblioteca->email);
+
         $usuarioSolicitante = $this->usuarioSolicitante;
         $unidade = $this->unidade;
         $this->subject("Alerta ficha catalográfica");
-        $this->to($biblioteca->email, $biblioteca->nome);
+        $this->to($bibliotecaEmails, $biblioteca->nome);
         return $this->markdown('mails.alerta_ficha', compact("usuarioSolicitante","biblioteca", 'unidade'));
     }
 }
