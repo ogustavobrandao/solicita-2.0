@@ -21,13 +21,20 @@ class Biblioteca extends Model
      */
     public function routeNotificationForMail($notification)
     {
-        $bibliotecaEmails = $this->emails->pluck('email')->toArray();
-        array_push($bibliotecaEmails, $this->email);
+        $emails = $this->emailsArray();
 
         if ($notification instanceof NadaConstaSolicitado && $this->email_nada_consta != null) {
             $emails[] = $this->email_nada_consta;
         }
-        
+
+        return $emails;
+    }
+
+    public function emailsArray()
+    {
+        $emails = $this->emails->pluck('email')->toArray();
+        array_push($emails, $this->email);
+
         return $emails;
     }
 
