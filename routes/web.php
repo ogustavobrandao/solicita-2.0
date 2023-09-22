@@ -80,7 +80,7 @@ Route::group(['middleware'=> ['CheckServidor', 'verified']], function(){
 });
 //----------------------------------------------ALUNO---------------------------------------------------
 // Route::group(['middleware'=> 'verified'], function(){
-Route::group(['middleware'=> 'CheckAluno'], function(){
+Route::group(['middleware' => 'CheckAluno'], function(){
     Route::get('/home-aluno', [\App\Http\Controllers\AlunoController::class, 'index'])->name('home-aluno')->middleware('CheckAluno');
     Route::get('/home-aluno',[\App\Http\Controllers\AlunoController::class, 'homeAluno'])->name('home-aluno')->middleware('CheckAluno');
     Route::get('/listar-requisicoes-aluno',[\App\Http\Controllers\AlunoController::class, 'listarRequisicoes'])->name('listar-requisicoes-aluno')->middleware('CheckAluno');
@@ -121,7 +121,7 @@ Route::group(['middleware'=> 'CheckAluno'], function(){
 
 //----------------------------------------------BIBLIOTECARIO---------------------------------------------------
 // Route::group(['middleware'=> 'verified'], function(){
-Route::group(['middleware'=> 'CheckBibliotecario'], function(){
+Route::group(['middleware'=> ['CheckBibliotecario', 'banned']], function(){
     Route::get('/home-bibliotecario', [\App\Http\Controllers\BibliotecarioController::class, 'index'])->name('home-bibliotecario')->middleware('CheckBibliotecario');
     Route::get('/perfil-bibliotecario',[\App\Http\Controllers\BibliotecarioController::class, 'perfil'])->name('perfil-bibliotecario')->middleware('CheckBibliotecario');
     Route::get('/editar-bibliotecario',[\App\Http\Controllers\BibliotecarioController::class, 'editarBibliotecario'])->name('editar-bibliotecario')->middleware('CheckBibliotecario');
