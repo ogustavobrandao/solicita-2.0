@@ -369,7 +369,7 @@
     </table>
 </div>
 
-<div class="text-center" style="font-family: 'Times New Roman', Times, serif; font-size: 10px; margin-top: 10px"><span>Elaborado por {{ $userBibliotecario->name }} ({{ $bibliotecario->crb }})</span>
+<div class="text-center" style="font-family: 'Times New Roman', Times, serif; font-size: 10px; margin-top: 10px"><span>Elaborado pelo(a) bibliotecário(a) {{ $userBibliotecario->name }} ({{ $bibliotecario->crb }})</span>
 </div>
 
 </body>

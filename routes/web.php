@@ -137,7 +137,7 @@ Route::group(['middleware'=> 'CheckBibliotecario'], function(){
     Route::post('/editar-ficha/{requisicao_id}/rejeitar-ficha',[\App\Http\Controllers\BibliotecarioController::class, 'atualizarRejeicao'])->name('atualizar-rejeicao')->middleware('CheckBibliotecario');
     Route::get('/editar-ficha/{requisicao_id}/gerar-ficha',[\App\Http\Controllers\BibliotecarioController::class, 'gerarFicha'])->name('gerar-ficha');
     Route::get('/editar-ficha/{requisicao_id}/baixarAnexo',[\App\Http\Controllers\BibliotecarioController::class, 'baixarAnexo'])->name('baixar-anexo');
-    Route::post('/preview', [\App\Http\Controllers\BibliotecarioController::class, 'previewFicha'])->name('preview');
+    Route::post('/preview/{requisicao_id}', [\App\Http\Controllers\BibliotecarioController::class, 'previewFicha'])->name('preview');
 
     Route::get('/avaliar-nada-consta/{requisicao_id}',[\App\Http\Controllers\BibliotecarioController::class, 'avaliarNadaConsta'])->name('avaliar-nada-consta')->middleware('CheckBibliotecario');
     Route::get('/avaliar-nada-consta/{requisicao_id}/baixarAnexoComprovante',[\App\Http\Controllers\BibliotecarioController::class, 'baixarAnexoComprovante'])->name('baixa-anexo-comprovante');

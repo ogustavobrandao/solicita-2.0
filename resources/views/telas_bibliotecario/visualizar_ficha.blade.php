@@ -27,7 +27,7 @@
                 </div>
             </div>
             <form method="POST" enctype="multipart/form-data" id="formRequisicao"
-                  action="{{route('preview')}}">
+                  action="{{route('preview', ['requisicao_id' => $requisicao] )}}">
                 @csrf
                 <input type="hidden" readonly name="tipo_documento" value="{{$tipo_documento}}">
 
@@ -54,11 +54,11 @@
                     </div>
                 </div>
 
-                <! -- Dados para o bibliotecario -- !>
+                <! -- Dados para o bibliotecário -- !>
                 <div class="col-md-12 corpoFicha shadow my-4">
                     <div class="row">
                         <div class="col-md-12 cabecalho py-2">
-                            <span class="tituloCabecalho">Dados para o Biliotecario(a)</span>
+                            <span class="tituloCabecalho">Dados para o Bibliotecário(a)</span>
                         </div>
                     </div>
                     <div class="row">
@@ -165,7 +165,7 @@
                             <div class="row justify-content-between">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="inclui_anexo">Inclui Anexo ? <span style="color: red">*</span></label>
+                                        <label for="inclui_anexo">Incluir Anexo? <span style="color: red">*</span></label>
                                         <select class="form-control" id="inclui_anexo" name="inclui_anexo" readonly="readonly">
                                             <option @if($fichaCatalografica->inclui_anexo == 0) selected @endif value="0">Não</option>
                                             <option @if($fichaCatalografica->inclui_anexo == 1) selected @endif value="1">Sim</option>
@@ -175,7 +175,7 @@
 
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="inclui_apendice">Inclui Apêndice ? <span style="color: red">*</span></label>
+                                        <label for="inclui_apendice">Incluir Apêndice? <span style="color: red">*</span></label>
                                         <select class="form-control" id="inclui_apendice" name="inclui_apendice" readonly="readonly">
                                             <option @if($fichaCatalografica->inclui_apendice == 0) selected @endif value="0">Não</option>
                                             <option @if($fichaCatalografica->inclui_apendice == 1) selected @endif value="1">Sim</option>

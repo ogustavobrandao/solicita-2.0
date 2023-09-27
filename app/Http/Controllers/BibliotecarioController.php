@@ -446,10 +446,10 @@ class BibliotecarioController extends Controller
         return redirect(Route('listar-fichas'));
     }
 
-    public function previewFicha(Request $request)
+    public function previewFicha(Request $request, $requisicao_id)
     {
-        $user_id = Auth::user()->id;
-        $bibliotecario = Bibliotecario::where('user_id', $user_id)->first();
+        $requisicao = Requisicao_documento::find($requisicao_id);
+        $bibliotecario = Bibliotecario::find($requisicao->bibliotecario_id);
         $unidade = Unidade::find($bibliotecario->biblioteca->unidade_id);
         $perfil = Perfil::where('aluno_id', $request->aluno_id)->first();
 
