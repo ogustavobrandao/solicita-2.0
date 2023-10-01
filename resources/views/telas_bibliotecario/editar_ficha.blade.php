@@ -673,7 +673,7 @@
 
 <script>
     $("#btn_gerar_ficha").on("click",function () {
-        $('#formRequisicao').attr("action", "{{route('preview')}}");
+        $('#formRequisicao').attr("action", "{{route('preview', ['requisicao_id' => $requisicao] )}}");
     });
 
     $("#btn_enviar_ficha").click(function () {

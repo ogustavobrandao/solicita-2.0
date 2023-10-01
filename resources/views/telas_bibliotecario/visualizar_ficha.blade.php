@@ -165,7 +165,7 @@
                             <div class="row justify-content-between">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="inclui_anexo">Incluir Anexo? <span style="color: red">*</span></label>
+                                        <label for="inclui_anexo">Inclui Anexo? <span style="color: red">*</span></label>
                                         <select class="form-control" id="inclui_anexo" name="inclui_anexo" readonly="readonly">
                                             <option @if($fichaCatalografica->inclui_anexo == 0) selected @endif value="0">Não</option>
                                             <option @if($fichaCatalografica->inclui_anexo == 1) selected @endif value="1">Sim</option>
@@ -175,7 +175,7 @@
 
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="inclui_apendice">Incluir Apêndice? <span style="color: red">*</span></label>
+                                        <label for="inclui_apendice">Inclui Apêndice? <span style="color: red">*</span></label>
                                         <select class="form-control" id="inclui_apendice" name="inclui_apendice" readonly="readonly">
                                             <option @if($fichaCatalografica->inclui_apendice == 0) selected @endif value="0">Não</option>
                                             <option @if($fichaCatalografica->inclui_apendice == 1) selected @endif value="1">Sim</option>

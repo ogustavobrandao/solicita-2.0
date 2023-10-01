@@ -73,7 +73,7 @@ class BibliotecarioController extends Controller
             }
         }
 
-        return view('telas_bibliotecario.listar_documentos_solicitados', compact('requisicoesFichas', 'documentosFichaCatalografica', 'documentosNadaConsta', 'documentosDeposito','idUser'));
+        return view('telas_bibliotecario.listar_documentos_solicitados', compact('requisicoesFichas', 'documentosFichaCatalografica', 'documentosNadaConsta', 'documentosDeposito','idUser', 'bibliotecario'));
     }
 
     public function visualizarFicha($requisicaoId)
@@ -115,11 +115,13 @@ class BibliotecarioController extends Controller
         if ($requisicao->bibliotecario_id == null || (date_diff($data_bibi, $data_agora)->h >= 2 && $requisicao->status == 'Em andamento')) {
             $requisicao->bibliotecario_id = $bibli->id;
             $requisicao->save();
+        } 
+        if ($bibliotecario != null && $requisicao->status == 'Em andamento' && $bibliotecario->id != $bibli->id) {
+            $requisicao->bibliotecario_id = $bibli->id;
+            $requisicao->update();
         }
         if ($bibliotecario != null && ($requisicao->status == 'Concluido' || $requisicao->status == 'Rejeitado')) {
             return redirect(route('listar-fichas'))->with('error', 'Esta requisição foi concluida ou rejeitada pelo bibliotecario: ' . $bibliotecario->user->name);
-        } elseif ($bibliotecario != null && $requisicao->status == 'Em andamento' && $bibliotecario->id != $bibli->id) {
-            return redirect(route('listar-fichas'))->with('error', 'Esta requisição está sendo analisada pelo bibliotecario: ' . $bibliotecario->user->name);
         }
         if ($documentoEspecificoNome == 'Monografia')
             $documento = Monografia::where('ficha_catalografica_id', $fichaCatalografica->id)->first();
