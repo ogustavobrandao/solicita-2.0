@@ -22,7 +22,7 @@
                     </div>
                 </div>
                 <form method="POST" enctype="multipart/form-data" id="formRequisicao"
-                      action="{{route('preview')}}">
+                      action="{{route('preview', ['requisicao_id' => $requisicao])}}">
                     @csrf
                     <input type="hidden" readonly name="tipo_documento" value="{{$deposito}}">
 
@@ -60,11 +60,7 @@
                                            disabled>
                                     <label class="pt-2 textoFicha" for="exampleFormControlInput1">Título do trabalho<span
                                             style="color: red">*</span>:</label>
-                                    <input type="text" class="form-control" id="nome" name="nome"
-                                        placeholder="Nome"
-                                        value="{{$requisicao_documento->deposito->titulo_tcc}}"
-                                        disabled>
-
+                                    <div class="disabled">{!! $requisicao_documento->deposito->titulo_tcc !!}</div>
                                     <div class="form-group">
                                         <div class="forma-group">
                                             <label class="pt-2 textoFicha" for="anexoArquivo">Trabalho de Conclusão de Curso (TCC):<span

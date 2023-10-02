@@ -107,15 +107,14 @@
                             </div>
                             <div class="form-group">
                                 <label for="titulo">Título: <span style="color: red">*</span></label>
-                                <input type="text" class="form-control" id="titulo" readonly name="titulo"
-                                       placeholder="Digite o Título" value="{{$fichaCatalografica->titulo}}" required>
+                                <div class="disabled">{!! $fichaCatalografica->titulo !!}</div>
+                                <input type="hidden" name="titulo" value="{{ $fichaCatalografica->titulo }}">
                             </div>
                             <div class="form-group">
                                 <label for="subtitulo">Subtítulo: <span style="color: red">@if($tipo_documento != 1 && $tipo_documento != 5)
                                             * @endif</span> </label>
-                                <input type="text" class="form-control" id="subtitulo" readonly name="subtitulo"
-                                       placeholder="Digite o Subtítulo" value="{{$fichaCatalografica->subtitulo}}"
-                                       @if($tipo_documento != 1 && $tipo_documento != 5) required @endif>
+                                <div class="disabled">{!! $fichaCatalografica->subtitulo !!}</div>
+                                <input type="hidden" name="subtitulo" value="{{ $fichaCatalografica->subtitulo }}">
                             </div>
                             <div class="form-group">
                                 <label for="local">Local: <span style="color: red">*</span></label>

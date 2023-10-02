@@ -173,6 +173,25 @@ body.modal-open[style] {
 }
 
 .modal::-webkit-scrollbar {
-    width: 0 !important; /removes the scrollbar but still scrollable/
-    /* reference: http://stackoverflow.com/a/26500272/2259400 */
+    width: 0 !important;
+}
+
+.disabled {
+    background-color: #e9ecef;
+    opacity: 1;
+	display: block;
+	width: 100%;
+	padding: .375rem .75rem;
+	font-size: .9rem;
+	line-height: 1.6;
+    font-weight: 400;
+	color: rgb(73, 80, 87);
+	background-clip: padding-box;
+	border: 1px solid #ced4da;
+	border-radius: .25rem;
+	transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.disabled p {
+    margin-bottom: 0;
 }
