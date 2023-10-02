@@ -310,7 +310,5 @@
 <script defer="defer" src="//barra.brasil.gov.br/barra.js" type="text/javascript"></script>
 
 <script src="{{ asset('js/ckeditor/ckeditor.js') }}"></script>
-<script src="{{ asset('js/tinymce/tinymce.min.js') }}" referrerpolicy="origin"></script>
 <script src="{{ asset('js/ckeditor.js') }}"></script>
-<script src="{{ asset('js/tinymce.js') }}"></script>
 </html>
