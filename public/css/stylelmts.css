@@ -195,3 +195,17 @@ body.modal-open[style] {
 .disabled p {
     margin-bottom: 0;
 }
+
+#table_wrapper .bottom {
+    display: flex;
+    justify-content: space-between;
+}
+
+#table_wrapper .bottom * {
+    display: flex
+}
+
+#table_wrapper .tops {
+    background-color: #C2C2C2;
+    border-radius: 1rem;
+}
