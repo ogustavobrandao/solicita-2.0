@@ -325,8 +325,8 @@ class RequisicaoController extends Controller
 
     public function criarNadaConsta(Request $request)
     {
-
         $nadaConsta = new NadaConsta();
+        $nadaConsta->autor_nome = $request->autor_nome;
         $nadaConsta->save();
 
         $requisicao = new Requisicao();
@@ -352,7 +352,6 @@ class RequisicaoController extends Controller
         $documentosRequisitados->save();
 
         return redirect(Route('home-aluno'))->with('success', 'Solicitação de comprovante de nada consta realizada com sucesso!');
-
     }
 
     public function novaRequisicao(Request $request)
@@ -652,8 +651,9 @@ class RequisicaoController extends Controller
     public function criarDeposito(Request $request)
     {
         $deposito = new Deposito();
-
+        $deposito->autor_nome = $request->autor_nome;
         $deposito->titulo_tcc = $request->titulo_trabalho;
+
         if (($request->hasFile('anexo_tcc') && $request->file('anexo_tcc')->isValid())) {
             $deposito->anexo_tcc = $request->file('anexo_tcc')->store('deposito');
         }
