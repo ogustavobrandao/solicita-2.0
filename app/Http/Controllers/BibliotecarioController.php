@@ -258,7 +258,7 @@ class BibliotecarioController extends Controller
     public function gerarDeposito(Requisicao_documento $requisicao_documento)
     {
         $requisicao = $requisicao_documento->requisicao;
-        $discente = $requisicao_documento->deposito->autor_nome != null ? $requisicao_documento->deposito->autor_nome : $requisicao->aluno->user->name;
+        $discente = $requisicao_documento->deposito->autor_nome ?? $requisicao->aluno->user->name;
         $curso = $requisicao->perfil->curso->nome;
         $cpf = $requisicao->aluno->cpf;
         $bibliotecario = $requisicao_documento->bibliotecario;
@@ -310,7 +310,7 @@ class BibliotecarioController extends Controller
     public function gerarNadaConsta(Requisicao_documento $requisicao_documento)
     {
         $requisicao = $requisicao_documento->requisicao;
-        $discente = $requisicao_documento->nadaConsta->autor_nome != null ? $requisicao_documento->nadaConsta->autor_nome : $requisicao->aluno->user->name;
+        $discente = $requisicao_documento->nadaConsta->autor_nome ?? $requisicao->aluno->user->name;
         $curso = $requisicao->perfil->curso->nome;
         $cpf = $requisicao->aluno->cpf;
         $bibliotecario = $requisicao_documento->bibliotecario;

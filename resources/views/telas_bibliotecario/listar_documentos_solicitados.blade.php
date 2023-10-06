@@ -174,11 +174,7 @@
                                                 {{$count++}}
                                             </td>
                                             <td class="align-middle text-center">
-                                                @if($documento->autor_nome != null)
-                                                    {{$documento->autor_nome}}
-                                                @else
-                                                    {{$requisicao->aluno->user->name}}
-                                                @endif
+                                                {{$documento->autor_nome ?? $requisicao->aluno->user->name}}
                                             </td>
                                             <td class="align-middle text-center">
                                                 Comprovante Nada Consta
@@ -280,11 +276,7 @@
                                                 {{$count++}}
                                             </td>
                                             <td class="align-middle text-center">
-                                                @if($documento->autor_nome != null)
-                                                    {{$documento->autor_nome}}
-                                                @else
-                                                    {{$requisicao->aluno->user->name}}
-                                                @endif
+                                                {{$documento->autor_nome ?? $requisicao->aluno->user->name}}
                                             </td>
                                             <td class="align-middle text-center">
                                                 Comprovante Depósito
