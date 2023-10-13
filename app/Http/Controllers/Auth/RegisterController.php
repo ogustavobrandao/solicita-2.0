@@ -85,7 +85,7 @@ class RegisterController extends Controller
 
         $aluno = Aluno::create([
                               'user_id'=>$user->id,
-                              'cpf' => $data['cpf'],
+                              'cpf' => str_replace(['.','-'], '', $data['cpf']),
                               ]);
         $id = Curso::where('id', $data['cursos'])->first();
         $curso = $id->nome;
