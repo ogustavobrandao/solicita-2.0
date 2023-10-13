@@ -46,8 +46,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="titulo_trabalho">Título do trabalho: <span style="color: red">*</span></label>
-                                    <input type="text" class="form-control" id="titulo_trabalho" name="titulo_trabalho"
-                                           placeholder="Digite o Título do Trabalho" value="" required>
+                                    <textarea class="editor-ckeditor1" id="titulo_trabalho" name="titulo_trabalho"></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="anexo1">Trabalho de Conclusão de Curso (TCC): <span

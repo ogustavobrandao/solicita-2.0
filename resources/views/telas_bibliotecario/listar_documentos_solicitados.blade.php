@@ -72,7 +72,7 @@
                                                         @if($requisicao->bibliotecario_id != null && $requisicao->bibliotecario_id != $bibliotecario->id)
                                                             <a class="btn btn-modal" href="#" data-toggle="modal" data-target="#modalEditarFicha">
                                                                 <img src="images/botao_editar_proibido.svg" height="30px" title="Botão de Editar - Alguém já está editando">
-                                                            </a>                                                    
+                                                            </a>
                                                             <a class="btn rounded-0" href="{{ route('visualizar-ficha', $requisicao->id) }}">
                                                                 <img src="images/botao_visualizar.svg" height="30px" title="Botão de Visualizar Ficha">
                                                             </a>
@@ -375,20 +375,14 @@
                                         </tr>
                                     @endif
                                 @endforeach
-                            @endif                     
+                            @endif
                         @endforeach
                     </tbody>
                 </table>
             </div>
         </div>
-        
-
-    
     </div>
-
-
     <script>
-
         $.fn.dataTable.ext.type.order['andamento-processo'] = function (d) {
             switch (d) {
                 case 'Em andamento':
@@ -403,7 +397,28 @@
 
         $('#table').DataTable({
             searching: true,
-
+            initComplete: function () {
+                this.api()
+                    .column(4)
+                    .every(function () {
+                        let column = this;
+                        // Create select element
+                        let select = document.createElement('select');
+                        select.add(new Option('Sem filtragem', ''));
+                        select.className = 'form-control col-2 mr-2'
+                        // Apply listener for user change in value
+                        select.addEventListener('change', function () {
+                            var val = DataTable.util.escapeRegex(select.value);
+                            column
+                                .search(val)
+                                .draw();
+                        });
+                        ['Em andamento', 'Concluído', 'Rejeitado'].forEach(function (value, index) {
+                            select.add(new Option(value, value));
+                        });
+                        $('.tops').append(select);
+                    });
+            },
             "language": {
                 "lengthMenu": "Mostrar _MENU_ registros por página",
                 "info": "Exibindo página _PAGE_ de _PAGES_",
@@ -415,7 +430,7 @@
                     "next": "Próximo",
                 }
             },
-            "dom": '<"top"f>rt<"bottom"p><"clear">',
+            "dom": '<"tops d-flex justify-content-between align-items-center mb-2"f>rt<"bottom"ip>',
             "order": [[4, 'desc']],
             "columnDefs": [
                 {
@@ -429,14 +444,14 @@
             ]
         });
 
-        $('.dataTables_filter').addClass('here');
+        $('.dataTables_filter').addClass('here col-md-7');
         $('.dataTables_filter').addClass('');
         $('.here').addClass('center');
         $('.here').removeClass('dataTables_filter');
         $('.here').find('input').addClass('search-input');
         $('.here').find('input').addClass('align-middle');
         $('.here').find('label').contents().unwrap();
-        $('.here').find('input').wrap('<div class="col-md-12 my-3 py-1" style="background-color: #C2C2C2; border-radius: 1rem;"> <div class="col-md-7 my-2"> <div class="col-md-12 p-1 img-search" style="background-color: white; border-radius: 0.5rem;"> </div> </div> </div>');
+        $('.here').find('input').wrap('<div class="my-2 py-1" id="filtraTop" style="background-color: #C2C2C2; border-radius: 1rem;"> <div class="p-1 img-search" style="background-color: white; border-radius: 0.5rem;"> </div> </div>');
         $('.img-search').prepend('<img src="{{asset('images/search.png')}}" width="25px">');
 
     </script>

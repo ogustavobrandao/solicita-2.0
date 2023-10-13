@@ -48,10 +48,7 @@
 
                                 <label class="pt-2 textoFicha" for="exampleFormControlInput1">Trabalho de Conclusão de Curso (TCC)<span
                                         style="color: red">*</span>:</label>
-                                <input type="text" class="form-control" id="nome" name="nome"
-                                    placeholder="Nome"
-                                    value="{{$requisicao_documento->deposito->titulo_tcc}}"
-                                    disabled>
+                                <div class="disabled">{!! $requisicao_documento->deposito->titulo_tcc !!}</div>
 
                                 <div class="form-group">
                                     <div class="forma-group">

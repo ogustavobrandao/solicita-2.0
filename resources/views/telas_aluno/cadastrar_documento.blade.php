@@ -57,7 +57,7 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-md-12 py-2 textoFicha">
+                        <div class="col-md-12 py-2">
                             <div class="form-group">
                                 <label for="autor_nome">Nome: <span style="color: red">*</span></label>
                                 <input type="text" class="form-control" id="autor_nome" name="autor_nome"
@@ -68,15 +68,17 @@
                                 <input type="text" class="form-control" id="autor_sobrenome" name="autor_sobrenome"
                                        placeholder="Digite o sobrenome do Autor" value="" required>
                             </div>
-                            <div class="form-group">
+                            <div class="">
                                 <label for="titulo">Título: <span style="color: red">*</span></label>
-                                <input type="text" class="form-control" id="titulo" name="titulo"
-                                       placeholder="Digite o Título" value="" required>
+                                <div class="mb-2">
+                                    <textarea class="editor-ckeditor1" id="titulo" name="titulo"></textarea>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="subtitulo">Subtítulo:</label>
-                                <input type="text" class="form-control" id="subtitulo" name="subtitulo"
-                                       placeholder="Digite o Subtítulo" value="">
+                                <div class="mb-2">
+                                    <textarea class="editor-ckeditor2" id="subtitulo" name="subtitulo"></textarea>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="local">Local: <span style="color: red">*</span></label>

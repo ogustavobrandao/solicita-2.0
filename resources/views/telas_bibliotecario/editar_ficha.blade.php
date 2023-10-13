@@ -55,7 +55,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12 py-2 textoFicha">
+                        <div class="col-md-12 py-2 ">
                             <div class="form-group">
                                 <label for="cutter">Cutter: <span style="color: red">*</span></label>
                                 <input type="text" class="form-control" id="cutter" name="cutter"
@@ -87,7 +87,7 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-md-12 py-2 textoFicha">
+                        <div class="col-md-12 py-2">
                             <div class="form-group">
                                 <label for="autor_nome">Nome: <span style="color: red">*</span></label>
                                 <input type="text" class="form-control" id="autor_nome" name="autor_nome"
@@ -102,13 +102,11 @@
                             </div>
                             <div class="form-group">
                                 <label for="titulo">Título: <span style="color: red">*</span></label>
-                                <input type="text" class="form-control" id="titulo" name="titulo"
-                                       placeholder="Digite o Título" value="{{$fichaCatalografica->titulo}}" required>
+                                <textarea class="editor-ckeditor1" id="titulo" name="titulo">{{$fichaCatalografica->titulo}}</textarea>
                             </div>
                             <div class="form-group">
                                 <label for="subtitulo">Subtítulo: </label>
-                                <input type="text" class="form-control" id="subtitulo" name="subtitulo"
-                                       placeholder="Digite o Subtítulo" value="{{$fichaCatalografica->subtitulo}}">
+                                <textarea class="editor-ckeditor2" class="form-control" id="subtitulo" name="subtitulo">{{$fichaCatalografica->subtitulo}}</textarea>
                             </div>
                             <div class="form-group">
                                 <label for="local">Local: <span style="color: red">*</span></label>
@@ -209,7 +207,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12 py-2 textoFicha">
+                        <div class="col-md-12 py-2">
                             <div class="form-group">
                                 <label for="nome_orientador">Nome do Orientador: <span
                                         style="color: red">*</span></label>
@@ -301,7 +299,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12 py-2 textoFicha">
+                        <div class="col-md-12 py-2">
                             <div class="form-group">
                                 <label for="nome_orientador">Nome do Orientador: <span
                                         style="color: red">*</span></label>
@@ -351,7 +349,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-12 py-2 textoFicha">
+                            <div class="col-md-12 py-2">
                                 <div class="form-group">
                                     <label for="nome_orientador">Nome do Orientador: <span
                                             style="color: red">*</span></label>
@@ -492,7 +490,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-12 py-2 textoFicha">
+                            <div class="col-md-12 py-2">
                                 <div class="form-group">
                                     <label for="nome_orientador">Nome do Orientador: <span
                                             style="color: red">*</span></label>
@@ -571,7 +569,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12 py-2 textoFicha">
+                        <div class="col-md-12 py-2">
                             <div class="form-group">
                                 <label for="primeira">Primeira Palavra:<span style="color: red">*</span></label>
                                 <input type="text" class="form-control" id="primeira" name="primeira_chave"

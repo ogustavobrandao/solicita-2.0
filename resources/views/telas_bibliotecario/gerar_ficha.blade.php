@@ -151,11 +151,8 @@
                     <tr>
                         @php
                             $titulo = $ficha->titulo;
-                            if (strlen($ficha->titulo) > 160 && strpos($ficha->titulo, ' ', 160) != false) {
-                                $titulo = substr($ficha->titulo, 0, strpos($ficha->titulo, ' ', 160)).'...';
-                            }
                         @endphp
-                        <td class="recuo"><span class="recuo">{{substr($ficha->autor_sobrenome, 0, 3)}}</span>{{$titulo}}@if($ficha->subtitulo != null): {{ $ficha->subtitulo }}@endif
+                        <td class="recuo"><span class="recuo">{{substr($ficha->autor_sobrenome, 0, 3)}}</span>{!! $titulo !!}@if($ficha->subtitulo != null): {!! $ficha->subtitulo !!}@endif
                             / {{ $ficha->autor_nome . ' ' . $ficha->autor_sobrenome . '.'}} – {{ $ficha->local }},
                              {{ $ficha->ano }}.
                         </td>

@@ -22,7 +22,7 @@
                     </div>
                 </div>
                 <form method="POST" enctype="multipart/form-data" id="formRequisicao"
-                      action="{{route('preview')}}">
+                      action="{{route('preview', ['requisicao_id' => $requisicao])}}">
                     @csrf
                     <input type="hidden" readonly name="tipo_documento" value="{{$nadaConsta}}">
 

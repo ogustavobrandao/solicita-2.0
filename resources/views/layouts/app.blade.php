@@ -20,7 +20,6 @@
 
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
     <style type="text/css">
 
 
@@ -310,4 +309,6 @@
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script defer="defer" src="//barra.brasil.gov.br/barra.js" type="text/javascript"></script>
 
+<script src="{{ asset('js/ckeditor/ckeditor.js') }}"></script>
+<script src="{{ asset('js/ckeditor.js') }}"></script>
 </html>

@@ -73,6 +73,9 @@
             margin: 0;
             padding: 0;
         }
+        .corpo p {
+            display: inline;
+        }
     </style>
 </head>
 
@@ -86,7 +89,7 @@
         <p class="doc">DECLARAÇÃO DE DEPÓSITO DO TRABALHO <br> ACADÊMICO E NADA CONSTA</p>
     </div>
     <div class="corpo">
-        Declaramos que o(a) Discente <strong>{{$discente}}</strong>, portador(a) do CPF <strong>{{$cpf}}</strong>, regularmente matriculado(a) no curso de <strong>{{$curso}}</strong> da <b>Universidade Federal do Agreste de Pernambuco - UFAPE</b> realizou  o depósito do seu trabalho de conclusão de curso, cujo título é: "<b>{{$tcc}}</b>", bem como a entrega do Termo de Autorização para o depósito no Repositório Institucional, cumprindo todos os requisitos necessários. Portanto, não constando pendências com este setor. <br> <br>
+        Declaramos que o(a) Discente <strong>{{$discente}}</strong>, portador(a) do CPF <strong>{{$cpf}}</strong>, regularmente matriculado(a) no curso de <strong>{{$curso}}</strong> da <b>Universidade Federal do Agreste de Pernambuco - UFAPE</b> realizou  o depósito do seu trabalho de conclusão de curso, cujo título é: "<b>{!! $tcc !!}</b>", bem como a entrega do Termo de Autorização para o depósito no Repositório Institucional, cumprindo todos os requisitos necessários. Portanto, não constando pendências com este setor. <br> <br>
     <div class="assinatura">
         <div id="linha"></div>
         <span id="cargo">
