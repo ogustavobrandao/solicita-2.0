@@ -31,7 +31,7 @@
                                 <div class="form-group">
                                     <label for="autor_nome">Nome: <span style="color: red">*</span></label>
                                     <input type="text" class="form-control" id="autor_nome" name="autor_nome"
-                                           placeholder="Digite o nome do Autor" disabled value="{{$usuario->name}}" required>
+                                           placeholder="Digite o nome do Autor" value="{{$usuario->name}}" required>
 
                                 </div>
                                 <div class="form-group">
