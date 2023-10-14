@@ -139,8 +139,9 @@ Route::group(['middleware'=> ['CheckBibliotecario', 'banned']], function(){
     Route::get('/editar-ficha/{requisicao_id}/baixarAnexo',[\App\Http\Controllers\BibliotecarioController::class, 'baixarAnexo'])->name('baixar-anexo');
     Route::post('/preview/{requisicao_id}', [\App\Http\Controllers\BibliotecarioController::class, 'previewFicha'])->name('preview');
 
-    Route::post('/atualizar-nome-nada-consta/{nadaConstaId}',[\App\Http\Controllers\RequisicaoController::class, 'EditarNomeAutorNadaConsta'])->name('editar-nome-nada-consta');
+    Route::post('/atualizar-nome-nada-consta/{nadaConstaId}',[\App\Http\Controllers\RequisicaoController::class, 'EditarNomeAutorNadaConsta'])->name('atualizar-nome-nada-consta');
     Route::get('/avaliar-nada-consta/{requisicao_id}',[\App\Http\Controllers\BibliotecarioController::class, 'avaliarNadaConsta'])->name('avaliar-nada-consta')->middleware('CheckBibliotecario');
+    Route::get('/editar-nada-consta/{requisicao_id}',[\App\Http\Controllers\BibliotecarioController::class, 'editarNomeNadaConsta'])->name('editar-nada-consta')->middleware('CheckBibliotecario');
     Route::get('/avaliar-nada-consta/{requisicao_id}/baixarAnexoComprovante',[\App\Http\Controllers\BibliotecarioController::class, 'baixarAnexoComprovante'])->name('baixa-anexo-comprovante');
     Route::get('/avaliar-nada-consta/{requisicao_id}/baixarAnexoTermoAceitacao',[\App\Http\Controllers\BibliotecarioController::class, 'baixarAnexoTermoAceitacao'])->name('baixar-anexo-termo-aceitacao');
     Route::get('/visualizar-nada-consta/{retificacao}/baixarAnexoRetificacao',[\App\Http\Controllers\BibliotecarioController::class, 'baixarAnexoRetificacao'])->name('baixar-anexo-retificacao');

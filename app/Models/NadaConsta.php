@@ -6,7 +6,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class NadaConsta extends Model
-{
+{   
+
+    protected $fillable = [
+        'autor_nome',
+    ];
+
     public function requisicao_documento(){
         return $this->belongsTo('App\Models\Requisicao_documento');
     }

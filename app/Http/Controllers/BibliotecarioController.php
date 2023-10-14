@@ -157,7 +157,33 @@ class BibliotecarioController extends Controller
             return redirect(route('listar-fichas'))->with('error', 'Esta requisição está sendo analisada pelo bibliotecario: ' . $bibliotecario->user->name);
         }
 
+
         return view('telas_bibliotecario.avaliar_nada_consta', compact('nadaConsta', 'aluno', 'requisicao', 'requisicao_documento', 'bibliotecario'));
+    }
+
+    public function editarNomeNadaConsta($requisicaoId){
+        //view para editar apenas o nome
+
+        $requisicao_documento = Requisicao_documento::find($requisicaoId);
+        $requisicao = $requisicao_documento->requisicao;
+        $aluno = $requisicao->perfil->aluno;
+        $nadaConsta = $requisicao_documento->nadaConsta;
+        $bibliotecario = $requisicao_documento->bibliotecario;
+        $bibli = Bibliotecario::where('user_id', Auth::user()->id)->first();
+
+        $data_bibi = date_create_from_format('Y-m-d H:i:s', $requisicao->updated_at);
+        $data_agora = date_create_from_format('Y-m-d H:i:s', date('Y-m-d H:i:s'));
+        if ($requisicao_documento->bibliotecario_id == null || (date_diff($data_bibi, $data_agora)->h >= 2 && $requisicao_documento->status == 'Em andamento')) {
+            $requisicao_documento->bibliotecario_id = $bibli->id;
+            $requisicao_documento->save();
+        }
+        if ($bibliotecario != null && ($requisicao->status == 'Concluido' || $requisicao_documento->status == 'Rejeitado')) {
+            return redirect(route('listar-fichas'))->with('error', 'Esta requisição foi concluida ou rejeitada pelo bibliotecario: ' . $bibliotecario->user->name);
+        } elseif ($bibliotecario != null && $requisicao->status == 'Em andamento' && $bibliotecario->id != $bibli->id) {
+            return redirect(route('listar-fichas'))->with('error', 'Esta requisição está sendo analisada pelo bibliotecario: ' . $bibliotecario->user->name);
+        }
+
+        return view('telas_bibliotecario.editar_nada_consta',compact('nadaConsta', 'aluno', 'requisicao', 'requisicao_documento', 'bibliotecario'));
     }
 
     public function avaliarDeposito($requisicaoId){

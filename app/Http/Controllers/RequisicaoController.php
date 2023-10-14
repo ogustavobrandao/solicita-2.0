@@ -693,11 +693,12 @@ class RequisicaoController extends Controller
     }
 
     public function EditarNomeAutorNadaConsta(Request $request, $nadaConstaId)
-    {
+    {   
+
         $nadaConsta = NadaConsta::find($nadaConstaId);
         $nadaConsta->update(['autor_nome' => $request->nome]);
 
-        return redirect()->back()->with('success', 'Nome alterado com sucesso!');
+        return redirect()->route('avaliar-nada-consta',$request->parametro)->with('success', 'Nome alterado com sucesso!');
     }
 
     public function EditarNomeAutorDeposito(Request $request, $depositoId)
