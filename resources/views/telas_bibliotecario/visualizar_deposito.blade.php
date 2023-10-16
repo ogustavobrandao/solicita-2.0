@@ -42,7 +42,7 @@
                                             style="color: red">*</span>:</label>
                                     <input type="text" class="form-control" id="nome" name="nome"
                                            placeholder="Nome"
-                                           value="{{$aluno->user->name}}"
+                                           value="{{$deposito->autor_nome ?? $aluno->user->name}}"
                                            disabled>
 
                                     <label class="pt-2 textoFicha" for="exampleFormControlInput1">CPF<span

@@ -149,25 +149,28 @@ Route::group(['middleware'=> ['CheckBibliotecario', 'banned']], function(){
     Route::get('/editar-ficha/{requisicao_id}/baixarAnexo',[BibliotecarioController::class, 'baixarAnexo'])->name('baixar-anexo');
     Route::post('/preview/{requisicao_id}', [BibliotecarioController::class, 'previewFicha'])->name('preview');
 
-    Route::get('/avaliar-nada-consta/{requisicao_id}',[BibliotecarioController::class, 'avaliarNadaConsta'])->name('avaliar-nada-consta')->middleware('CheckBibliotecario');
-    Route::get('/avaliar-nada-consta/{requisicao_id}/baixarAnexoComprovante',[BibliotecarioController::class, 'baixarAnexoComprovante'])->name('baixa-anexo-comprovante');
-    Route::get('/avaliar-nada-consta/{requisicao_id}/baixarAnexoTermoAceitacao',[BibliotecarioController::class, 'baixarAnexoTermoAceitacao'])->name('baixar-anexo-termo-aceitacao');
-    Route::get('/visualizar-nada-consta/{retificacao}/baixarAnexoRetificacao',[BibliotecarioController::class, 'baixarAnexoRetificacao'])->name('baixar-anexo-retificacao');
-    Route::post('/deferir-nada-consta',[BibliotecarioController::class, 'deferirNadaConsta'])->name('deferir-nada-consta')->middleware('CheckBibliotecario');
-    Route::post('/indeferir-nada-consta',[BibliotecarioController::class, 'indeferirNadaConsta'])->name('indeferir-nada-consta')->middleware('CheckBibliotecario');
-    Route::post('/retificar-requisicao-documento',[BibliotecarioController::class, 'retificarRequisicaoDocumento'])->name('retificar-requisicao-documento')->middleware('CheckBibliotecario');
-    Route::get('/visualizar-nada-consta/{requisicao_id}',[BibliotecarioController::class, 'visualizarNadaConsta'])->name('visualizar-nada-consta')->middleware('CheckBibliotecario');
-    Route::post('/gerar-nada-consta/{requisicao_documento}',[BibliotecarioController::class, 'gerarNadaConsta'])->name('gerar-nada-consta')->middleware('CheckBibliotecario');
+    Route::post('/atualizar-nome-nada-consta/{nadaConstaId}',[\App\Http\Controllers\RequisicaoController::class, 'EditarNomeAutorNadaConsta'])->name('atualizar-nome-nada-consta');
+    Route::get('/avaliar-nada-consta/{requisicao_id}',[\App\Http\Controllers\BibliotecarioController::class, 'avaliarNadaConsta'])->name('avaliar-nada-consta')->middleware('CheckBibliotecario');
+    Route::get('/editar-nada-consta/{requisicao_id}',[\App\Http\Controllers\BibliotecarioController::class, 'editarNomeNadaConsta'])->name('editar-nada-consta')->middleware('CheckBibliotecario');
+    Route::get('/avaliar-nada-consta/{requisicao_id}/baixarAnexoComprovante',[\App\Http\Controllers\BibliotecarioController::class, 'baixarAnexoComprovante'])->name('baixa-anexo-comprovante');
+    Route::get('/avaliar-nada-consta/{requisicao_id}/baixarAnexoTermoAceitacao',[\App\Http\Controllers\BibliotecarioController::class, 'baixarAnexoTermoAceitacao'])->name('baixar-anexo-termo-aceitacao');
+    Route::get('/visualizar-nada-consta/{retificacao}/baixarAnexoRetificacao',[\App\Http\Controllers\BibliotecarioController::class, 'baixarAnexoRetificacao'])->name('baixar-anexo-retificacao');
+    Route::post('/deferir-nada-consta',[\App\Http\Controllers\BibliotecarioController::class, 'deferirNadaConsta'])->name('deferir-nada-consta')->middleware('CheckBibliotecario');
+    Route::post('/indeferir-nada-consta',[\App\Http\Controllers\BibliotecarioController::class, 'indeferirNadaConsta'])->name('indeferir-nada-consta')->middleware('CheckBibliotecario');
+    Route::post('/retificar-requisicao-documento',[\App\Http\Controllers\BibliotecarioController::class, 'retificarRequisicaoDocumento'])->name('retificar-requisicao-documento')->middleware('CheckBibliotecario');
+    Route::get('/visualizar-nada-consta/{requisicao_id}',[\App\Http\Controllers\BibliotecarioController::class, 'visualizarNadaConsta'])->name('visualizar-nada-consta')->middleware('CheckBibliotecario');
+    Route::post('/gerar-nada-consta/{requisicao_documento}',[\App\Http\Controllers\BibliotecarioController::class, 'gerarNadaConsta'])->name('gerar-nada-consta')->middleware('CheckBibliotecario');
 
-    Route::get('/avaliar-deposito/{requisicao_id}',[BibliotecarioController::class, 'avaliarDeposito'])->name('avaliar-deposito');
-    Route::get('/visualizar-deposito/{requisicao_id}',[BibliotecarioController::class, 'visualizarDeposito'])->name('visualizar-deposito');
-    Route::get('/visualizar-deposito/{requisicao}/baixar-comprovante',[BibliotecarioController::class, 'baixarAnexoComprovanteDeposito'])->name('baixar-anexo-comprovante-deposito');
-    Route::get('/baixar-anexo-tcc-deposito/{requisicao}',[BibliotecarioController::class, 'baixarAnexoTccDeposito'])->name('baixar-anexo-tcc-deposito');
-    Route::get('/baixar-anexo-autorizacao-deposito/{requisicao}',[BibliotecarioController::class, 'baixarAnexoAutorizacaoDeposito'])->name('baixar-anexo-autorizacao-deposito');
-    Route::get('/baixar-anexo_publicacao_parcial/{requisicao}',[BibliotecarioController::class, 'baixarAnexoPublicacaoParcial'])->name('baixar-anexo_publicacao_parcial');
-    Route::post('/deferir-deposito',[BibliotecarioController::class, 'deferirDeposito'])->name('deferir-deposito');
-    Route::post('/indeferir-deposito',[BibliotecarioController::class, 'indeferirDeposito'])->name('indeferir-deposito');
-    Route::post('/gerar-deposito/{requisicao_documento}',[BibliotecarioController::class, 'gerarDeposito'])->name('gerar-deposito');
+    Route::post('/atualizar-nome-deposito/{depositoId}',[\App\Http\Controllers\RequisicaoController::class, 'EditarNomeAutorDeposito'])->name('editar-nome-deposito');
+    Route::get('/avaliar-deposito/{requisicao_id}',[\App\Http\Controllers\BibliotecarioController::class, 'avaliarDeposito'])->name('avaliar-deposito');
+    Route::get('/visualizar-deposito/{requisicao_id}',[\App\Http\Controllers\BibliotecarioController::class, 'visualizarDeposito'])->name('visualizar-deposito');
+    Route::get('/visualizar-deposito/{requisicao}/baixar-comprovante',[\App\Http\Controllers\BibliotecarioController::class, 'baixarAnexoComprovanteDeposito'])->name('baixar-anexo-comprovante-deposito');
+    Route::get('/baixar-anexo-tcc-deposito/{requisicao}',[\App\Http\Controllers\BibliotecarioController::class, 'baixarAnexoTccDeposito'])->name('baixar-anexo-tcc-deposito');
+    Route::get('/baixar-anexo-autorizacao-deposito/{requisicao}',[\App\Http\Controllers\BibliotecarioController::class, 'baixarAnexoAutorizacaoDeposito'])->name('baixar-anexo-autorizacao-deposito');
+    Route::get('/baixar-anexo_publicacao_parcial/{requisicao}',[\App\Http\Controllers\BibliotecarioController::class, 'baixarAnexoPublicacaoParcial'])->name('baixar-anexo_publicacao_parcial');
+    Route::post('/deferir-deposito',[\App\Http\Controllers\BibliotecarioController::class, 'deferirDeposito'])->name('deferir-deposito');
+    Route::post('/indeferir-deposito',[\App\Http\Controllers\BibliotecarioController::class, 'indeferirDeposito'])->name('indeferir-deposito');
+    Route::post('/gerar-deposito/{requisicao_documento}',[\App\Http\Controllers\BibliotecarioController::class, 'gerarDeposito'])->name('gerar-deposito');
 });
 
 // ---------------------------------------REQUISICAO------------------------------------------------------------------

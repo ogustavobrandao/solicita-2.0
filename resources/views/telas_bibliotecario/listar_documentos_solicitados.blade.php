@@ -174,7 +174,7 @@
                                                 {{$count++}}
                                             </td>
                                             <td class="align-middle text-center">
-                                                {{$requisicao->aluno->user->name}}
+                                                {{$documento->autor_nome ?? $requisicao->aluno->user->name}}
                                             </td>
                                             <td class="align-middle text-center">
                                                 Comprovante Nada Consta
@@ -276,7 +276,7 @@
                                                 {{$count++}}
                                             </td>
                                             <td class="align-middle text-center">
-                                                {{$requisicao->aluno->user->name}}
+                                                {{$documento->autor_nome ?? $requisicao->aluno->user->name}}
                                             </td>
                                             <td class="align-middle text-center">
                                                 Comprovante Depósito
