@@ -23,7 +23,7 @@
                             </div>
                             <div class="col-md-2">
                                 <a href="http://ufape.edu.br/" target="_blank"><img
-                                        src="{{ asset('images/logo_ufape_blue.png') }}" alt="Logo" width="30px;"
+                                        src="{{ asset('images/logo_ufape_principal.png') }}" alt="Logo" width="45px;"
                                         style="float: right"></a>
                             </div>
                             <div class="col-md-4">

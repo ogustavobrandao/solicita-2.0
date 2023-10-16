@@ -55,21 +55,21 @@
     <div class="row justify-content-center" style="margin-top:100px">
       <div class="col-sm-12" align="center">
           <a target="_blank" href="http://ww3.uag.ufrpe.br/">
-              <img src="{{$message->embed(public_path() . '/images/logoUfapeAzul.png')}}" height="80px" >
+              <img src="{{$message->embed(public_path() . '/images/logo_ufape_principal.png')}}" height="80px" >
           </a>
       </div>
     </div>
       {{-- DEFERIMENTO --}}
       <p><font face="Times New Roman" font size="4" color="black">Olá, {{$usuario->name}}! </font></p>
       
-      <p><font face="Times New Roman" font size="4" color="black">O documento solicitado "{{$nome_documento}}" <strong>ESTÁ DISPONÍVEL PARA RETIRADA! </strong> </font></p>
+      <p><font face="Times New Roman" font size="4" color="black">O documento "{{$nome_documento}}" <strong>será enviado para o seu e-mail</strong>. Caso demore muito, verifique a sua caixa de <em>spam</em>. </font></p>
 
-      <p><font face="Times New Roman" font size="4" color="black">Caso necessite de outras informações, entrar em contato com a escolaridade através do e-mail: escolaridade@ufape.edu.br.</font></p>
+      <p><font face="Times New Roman" font size="4" color="black">Se não chegou, ou necessite de outras informações, entrar em contato através do e-mail: cgrad.drca@ufape.edu.br.</font></p>
       <p></p>
       <p align="center" ><font face="Times New Roman" font size="4" color="black">Atenciosamente, </font></p>
       
-      <p align="center" style=""><font face="Times New Roman" font size="4" color="black"> <strong> Universidade Federal do Agreste de Pernambuco<br>
-       Setor Escolaridade</strong></font></p>
+      <p align="center" style=""><font face="Times New Roman" font size="4" color="black"> <strong> Departamento de Registro e Controle Acadêmico<br>
+        Universidade Federal do Agreste de Pernambuco</strong></font></p>
 
   
 </div>
