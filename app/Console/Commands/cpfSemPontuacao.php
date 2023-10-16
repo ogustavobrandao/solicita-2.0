@@ -41,8 +41,9 @@ class cpfSemPontuacao extends Command
         $alunos = Aluno::all();
 
         foreach($alunos as $aluno){
-
-            $aluno->update(['cpf' => str_replace(['.','-'], '', $aluno->cpf)]);
+            if(!Aluno::where('cpf', str_replace(['.','-'], '', $aluno->cpf))->first()){
+                $aluno->update(['cpf' => str_replace(['.','-'], '', $aluno->cpf)]);
+            }
         }
     }
 }
