@@ -706,7 +706,7 @@ class RequisicaoController extends Controller
         $deposito = Deposito::find($depositoId);
         $deposito->update(['autor_nome' => $request->nome]);
 
-        return redirect()->back()->with('success', 'Nome alterado com sucesso!');
+        return redirect()->route('avaliar-deposito',$request->parametro)->with('success', 'Nome alterado com sucesso!');
     }
 }
 

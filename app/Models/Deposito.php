@@ -14,7 +14,8 @@ class Deposito extends Model
         'anexo_tcc',
         'anexo_comprovante_autorizacao',
         'titulo_tcc',
-        'anexo_publicacao_parcial'
+        'anexo_publicacao_parcial',
+        'autor_nome'
     ];
 
     public function requisicao_documento(){
