@@ -84,7 +84,7 @@
 <body>
     <img src="{{public_path('images/sib.png')}}" alt="" class="bg">
     <div class="header">
-        <img class="logo-ufape" src="{{public_path('images/a) Proposta de Brasão_0.png')}}" alt="">
+        <img class="logo-ufape" src="{{public_path('images/logo_ufape_principal.png')}}" alt="">
         <p>UNIVERSIDADE FEDERAL DO AGRESTE DE PERNAMBUCO</p>
         <p>REITORIA DA UFAPE</p>
         <p>SISTEMA INTEGRADO DE BIBLIOTECAS</p>
