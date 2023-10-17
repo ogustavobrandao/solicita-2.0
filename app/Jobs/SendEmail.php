@@ -36,7 +36,10 @@ class SendEmail implements ShouldQueue
         $to_email = $this->details['toEmail'];
         $subject = $this->details['subject'];
         $data = $this->details['data'];
-        Mail::send('mails.status', $data, function($message) use ($to_email, $subject){
+
+        $definir_email = 'escolaridade';
+        
+        Mail::mailer($definir_email)->send('mails.status', $data, function($message) use ($to_email, $subject){
               $message->to($to_email)
                       ->subject($subject);
               $message->from('naoresponder.lmts@gmail.com','Solicita - LMTS');
