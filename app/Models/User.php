@@ -81,4 +81,8 @@ class User extends Authenticatable implements MustVerifyEmail, JWTSubject
         $this->notify(new VerifyApiEmail); // my notification
     }
 
+    public function processos(){
+        return $this->hasMany(Processo::class);
+    }
+
 }

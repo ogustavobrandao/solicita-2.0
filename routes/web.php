@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProcessoController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
@@ -13,6 +14,7 @@ use App\Http\Controllers\ServidorController;
 use App\Http\Controllers\RequisicaoController;
 use App\Http\Controllers\PerfilAlunoController;
 use App\Http\Controllers\BibliotecarioController;
+use App\Models\Processo;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,7 +36,8 @@ Route::get('/cadastro',[AlunoController::class,'createAluno'])->name('cadastro')
 Route::post('/cadastro',[AlunoController::class,'storeAluno'])->name('cadastro');
 Route::get('/load-cursos/{id}',[AlunoController::class, 'loadCursos'])->name('loadCursos');
 
-
+Route::get('/tratamento', [ProcessoController::class, 'tratamento'])->name('tratamento.create');
+Route::post('/tratamento/store', [ProcessoController::class, 'SolicitarTratamentoExcepcional'])->name('tratamento.store');
 //----------------------------------------------ADMINISTRADOR-----------------------------------------------------------
 Route::group(['middleware'=> ['CheckAdministrador', 'verified']], function(){
     Route::get('/home-administrador',[AdministradorController::class, 'index'])->name('home-administrador')->middleware('CheckAdministrador');
