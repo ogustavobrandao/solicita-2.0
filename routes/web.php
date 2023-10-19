@@ -36,8 +36,8 @@ Route::get('/cadastro',[AlunoController::class,'createAluno'])->name('cadastro')
 Route::post('/cadastro',[AlunoController::class,'storeAluno'])->name('cadastro');
 Route::get('/load-cursos/{id}',[AlunoController::class, 'loadCursos'])->name('loadCursos');
 
-Route::get('/tratamento', [ProcessoController::class, 'tratamento'])->name('tratamento.create');
-Route::get('/tratamento/form', [ProcessoController::class, 'tratamentoform'])->name('formtratamento.create');
+Route::get('/tratamento', [ProcessoController::class, 'tratamento'])->name('tratamento.create')->middleware('CheckAluno');
+Route::get('/tratamento/form', [ProcessoController::class, 'tratamentoform'])->name('formtratamento.create')->middleware('CheckAluno');
 
 Route::post('/tratamento/store', [ProcessoController::class, 'SolicitarTratamentoExcepcional'])->name('tratamento.store');
 //----------------------------------------------ADMINISTRADOR-----------------------------------------------------------
