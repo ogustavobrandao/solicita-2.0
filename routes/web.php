@@ -37,6 +37,8 @@ Route::post('/cadastro',[AlunoController::class,'storeAluno'])->name('cadastro')
 Route::get('/load-cursos/{id}',[AlunoController::class, 'loadCursos'])->name('loadCursos');
 
 Route::get('/tratamento', [ProcessoController::class, 'tratamento'])->name('tratamento.create');
+Route::get('/tratamento/form', [ProcessoController::class, 'tratamentoform'])->name('formtratamento.create');
+
 Route::post('/tratamento/store', [ProcessoController::class, 'SolicitarTratamentoExcepcional'])->name('tratamento.store');
 //----------------------------------------------ADMINISTRADOR-----------------------------------------------------------
 Route::group(['middleware'=> ['CheckAdministrador', 'verified']], function(){
