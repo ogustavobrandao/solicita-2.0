@@ -12,39 +12,55 @@
 
         body{
             text-align: center;
+            font-family: Calibri, 'Trebuchet MS', sans-serif; 
            
             
         }
         .conteudo{
 
         }
+        p #footer{
+            
+
+        }
+        address{
+            display: inline;
+        }
 
     </style>
 </head>
 <body>
     <div>
+        <div>
+            <img src="'/images/Logo_gov.jpg'">
+        </div>
         <p>
             MINISTÉRIO DA EDUCAÇÃO <br>
             UNIVERSIDADE FEDERAL DO AGRESTE DE PERNAMBUCO
-            <address>Av. Bom Pastor, s/n, Bairro Boa Vista CEP 55.292- 278 Garanhuns, PE</address>
+            <address>Av. Bom Pastor, s/n, Bairro Boa Vista CEP 55.292-278 Garanhuns, PE</address>
         </p>
     </div>
     <div class="conteudo">
         <p>
-            REQUERIMENTO DE ANTECIPAÇÃO DECOLAÇÃO DE GRAU
-            À REITORIA DA UFAPE, Eu, <strong>{{$user->name}}</strong> , nº de CPF <strong>{{$aluno->cpf}}</strong>, concluinte do Curso de
-            , desta Universidade, referente ao semestre , 
-            solicito Colação de Grau Antecipada, nos termos do Artigo 148, Parágrafo2º do Regimento 
-            Geral da UFRPE, pelo motivo abaixoespecificado, conforme documentaçãocomprobatória anexada a 
-            este Requerimento, peloque assumo total responsabilidade pela suaveracidade:
-            Motivo do Requerimento: 
-            Garanhuns, 
+            
+            <h2>
+                REQUERIMENTO DE ANTECIPAÇÃO DE COLAÇÃO DE GRAU
+            </h2>
+            
+            À REITORIA DA UFAPE, Eu, <strong>{{$user->name}}</strong>, nº de CPF {{$aluno->cpf}}, concluinte do Curso de {{$perfil->curso->nome}}, 
+            desta Universidade, referente ao semestre {{$request->semestre_conclusao}}, 
+            solicito Colação de Grau Antecipada, nos termos do Artigo 148, Parágrafo 2º do Regimento Geral da UFRPE, 
+            pelo motivo abaixo especificado, conforme documentação comprobatória anexada a este Requerimento, pelo que assumo 
+            total responsabilidade pela sua veracidade:
+            Motivo do Requerimento: {{$request->motivo}}
+            Garanhuns, {{$data}}
+            
             Contatos:
-            Email: 
+            Email: {{$user->email}}
         </p>
     </div>
     <div>
-        <p>Obs.: Requerimento realizado pelo(a) discente através do Solicita <a href="www.solicita.ufape.edu.br">(www.solicita.ufape.edu.br)</a>, dispensa assinatura.</p>
+        <p id="footer">Obs.: Requerimento realizado pelo(a) discente através do Solicita <a href="www.solicita.ufape.edu.br">(www.solicita.ufape.edu.br)</a>, dispensa assinatura.</p>
     </div>
 </body>
 </html>

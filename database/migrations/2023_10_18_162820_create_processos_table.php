@@ -15,8 +15,11 @@ class CreateProcessosTable extends Migration
     {
         Schema::create('processos', function (Blueprint $table) {
             $table->id();
-            $table->string('doc_tratamento');
-            $table->enum('tipo_processo', ['alt_cadastral'. 'antecipacao', 'complementar', 'disciplina', 'educacao_fisica', 'excepcional']);
+            $table->string('doc_tratamento')->nullable();
+            $table->enum('tipo_processo', ['alt_cadastral', 'antecipacao', 'complementar', 'disciplina', 'educacao_fisica', 'excepcional']);
+            $table->date('data_requerimento')->nullable();
+            $table->string('motivo')->nullable();
+            $table->string('semestre_conclusao')->nullable();
             $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });
