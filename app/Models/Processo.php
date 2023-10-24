@@ -10,7 +10,7 @@ class Processo extends Model
     use HasFactory;
 
     protected $fillable = [
-        'doc_tratamento', 'user_id'
+        'doc_tratamento','tipo_processo', 'data_requerimento', 'motivo', 'semestre_conclusao', 'user_id'
     ];
 
     public function user(){
