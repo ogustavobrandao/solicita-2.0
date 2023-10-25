@@ -239,7 +239,7 @@
                                 <button id="btnFinalizar" onclick="event.preventDefault();confirmarRequisicao()"
                                         class="btn"
                                         style="background-color: var(--confirmar); border-radius: 0.5rem; color: white; font-size: 17px">
-                                    Concluir
+                                    {{$listaRequisicao_documentos[0]['requisicoes_documentos']->documento_id == 5 ? 'DESBLOQUEADO' : 'Concluir'}}
                                 </button>
                             @endif
                         @endif
