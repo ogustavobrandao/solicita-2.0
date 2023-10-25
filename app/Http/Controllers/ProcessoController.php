@@ -42,11 +42,12 @@ class ProcessoController extends Controller
         
         $processo = new Processo();
         $processo->user_id = 2;
-        $tipo_processo = 'antecipacao';
-        $processo->tipo_processo = 'antecipacao';
+        $tipo_processo = 'complementar';
+        $processo->tipo_processo = 'complementar';
         $aluno = Auth::user()->aluno;
         $user = Auth::user();
         $perfil = Perfil::where('aluno_id', $aluno->id)->first();
+        $perfil->curso->nome = strtoupper($perfil->curso->nome);
         $data = Carbon::now()->format('d/m/Y');
         $processo->save();
 
