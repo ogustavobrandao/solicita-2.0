@@ -26,13 +26,17 @@
         address{
             display: inline;
         }
+        img{
+            width: 50.93px; 
+            height: 55.21px;
+        }
 
     </style>
 </head>
 <body>
     <div>
         <div>
-            <img src="'/images/Logo_gov.jpg'">
+            <img src="{{public_path('images/Logo_gov.png')}}">
         </div>
         <p>
             MINISTÉRIO DA EDUCAÇÃO <br>
@@ -59,8 +63,8 @@
             Email: {{$user->email}}
         </p>
     </div>
-    <div>
+    <footer >
         <p id="footer">Obs.: Requerimento realizado pelo(a) discente através do Solicita <a href="www.solicita.ufape.edu.br">(www.solicita.ufape.edu.br)</a>, dispensa assinatura.</p>
-    </div>
+    </footer>
 </body>
 </html>
