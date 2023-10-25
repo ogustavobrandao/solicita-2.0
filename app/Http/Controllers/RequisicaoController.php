@@ -524,6 +524,9 @@ class RequisicaoController extends Controller
         if (isset($id_documentos)) {
             foreach ($id_documentos as $id_documento) {
                 $id_documento->status = "Concluído - Disponível para retirada";
+                if ($id_documento->documento_id == 5) {
+                    $id_documento->status = "Concluído - SIGA Desbloqueado";
+                }
                 $id_documento->servidor_id = $servidor->id;
                 $aluno = Aluno::where('id', $id_documento->aluno_id)->first();
                 $user = User::where('id', $aluno->user_id)->first();
