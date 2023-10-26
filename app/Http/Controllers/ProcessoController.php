@@ -14,9 +14,17 @@ use Illuminate\Support\Facades\Mail;
 class ProcessoController extends Controller
 {
 
-    public function tratamento(){
+    public function main(){//Tela de escolha dos processos
         
         return view('processos.main');
+    }
+
+    public function antecipacao(){
+        return view('processos.formularios.antecipacao_grau');
+    }
+
+    public function disciplina(){
+        return view('processos.formularios.aproveitamento_disciplina');
     }
 
     public function complementar(){
@@ -26,32 +34,31 @@ class ProcessoController extends Controller
     public function educao(){
         return view('processos.formularios.educacao');
     }
-    public function antecipacao(){
-        return view('processos.formularios.antecipacao_grau');
+
+    public function tratamento(){
+        return view('processos.formularios.formulario_tratamento');
+
     }
 
-    public function forms(){
-        $aluno = Auth::user()->aluno;
-        $user = Auth::user();
-        $perfil = Perfil::where('aluno_id', $aluno->id)->first();
-        $data = Carbon::now()->format('d/m/Y');
-        return view('processos.modelos_pdf.Atividade_complementar.complementar', compact('aluno', 'user', 'perfil', 'data'));
-    }
+  
 
-    public function SolicitarTratamentoExcepcional(Request $request){
+  
+
+    public function aberturaProcessos(Request $request){
         
         $processo = new Processo();
         $processo->user_id = 2;
-        $tipo_processo = 'complementar';
-        $processo->tipo_processo = 'complementar';
+        $tipo_processo = 'disciplina';
+        $processo->tipo_processo = 'disciplina';
         $aluno = Auth::user()->aluno;
         $user = Auth::user();
         $perfil = Perfil::where('aluno_id', $aluno->id)->first();
         $perfil->curso->nome = strtoupper($perfil->curso->nome);
         $data = Carbon::now()->format('d/m/Y');
         $processo->save();
-
         if($request->tipo_processo == 'excepcional'){
+            // $pdf = Pdf::loadView('processos.modelos_pdf.Tratamento_excepcional.excepcional', compact('aluno', 'user', 'perfil', 'data', 'request'));
+            return view('processos.modelos_pdf.Tratamento_excepcional.excepcional');
             
         }
 
@@ -76,7 +83,11 @@ class ProcessoController extends Controller
             
         }
 
-        if($request->tipo_processo == 'disciplina'){
+        if($tipo_processo == 'disciplina'){
+            
+            $pdf = Pdf::loadView('processos.modelos_pdf.Dispensa_disciplina.disciplina', compact('aluno', 'user', 'perfil', 'data', 'request'));
+            Mail::mailer('smtp')->to('lmts@ufape.edu.br')->send(new ComplementarEmail($pdf, $request->doc_tratamento));
+            return redirect(Route('tratamento.create'))->with('success','Solicitação realizada com sucesso!');
             
         }
 
