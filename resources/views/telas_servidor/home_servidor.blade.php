@@ -108,7 +108,7 @@
       var curso = document.getElementById("cursos").value;
       var array = @json($requisicoes);
 
-      var contagens = [0, 0, 0, 0, 0];
+      var contagens = [0, 0, 0, 0, 0, 0];
       let docsCurso = array.filter((item) => item.curso_id == curso);
       if (docsCurso) {
         docsCurso.forEach(element => {
