@@ -50,7 +50,7 @@
 
   
 @endif
-@if($documento->status=="Concluído - Disponível para retirada" && $documento->documento_id != 5)
+@if($documento->status=="Concluído - Disponível para retirada")
 <div class="container" style="background-color:white" >
     <div class="row justify-content-center" style="margin-top:100px">
       <div class="col-sm-12" align="center">
@@ -73,7 +73,7 @@
 
   
 </div>
-@else
+@elseif ($documento->status== "Concluído - SIGA Desbloqueado")
 <div class="container" style="background-color:white" >
     <div class="row justify-content-center" style="margin-top:100px">
       <div class="col-sm-12" align="center">

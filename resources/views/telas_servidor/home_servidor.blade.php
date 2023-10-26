@@ -74,7 +74,7 @@
                 @elseif($i==5)
                     <div class="caixaSelecao shadow text-center p-5 my-3" style="background-color: #121E5C">
                         <a id="click" href="{{ route('listar-requisicoes') }}"
-                           onclick="event.preventDefault(); document.getElementById('listar-requisicoes{{$i}}-form').submit();"
+                           onclick="event.preventDefault(); document.getElementById('listar-requisicoes{{6}}-form').submit();"
                            style="text-decoration:none; color: inherit;">
                             <div class="card-body d-flex justify-content-center">
                                 <span class="textoCaixa">{{$tipoDocumento[$i-1]}}</span>
@@ -85,7 +85,7 @@
                 @elseif($i==6)
                     <div class="caixaSelecao shadow text-center p-5 my-3" style="background-color: #121E5C">
                         <a id="click" href="{{ route('listar-requisicoes') }}"
-                           onclick="event.preventDefault(); document.getElementById('listar-requisicoes{{$i}}-form').submit();"
+                           onclick="event.preventDefault(); document.getElementById('listar-requisicoes{{5}}-form').submit();"
                            style="text-decoration:none; color: inherit;">
                             <div class="card-body d-flex justify-content-center">
                                 <span class="textoCaixa">{{$tipoDocumento[$i-1]}}</span>
@@ -120,8 +120,8 @@
       document.getElementById('quantidades2').innerHTML = 'Nº de Requisições: ' + contagens[1];
       document.getElementById('quantidades3').innerHTML = 'Nº de Requisições: ' + contagens[2];
       document.getElementById('quantidades4').innerHTML = 'Nº de Requisições: ' + contagens[3];
-      document.getElementById('quantidades5').innerHTML = 'Nº de Requisições: ' + contagens[4];
-      document.getElementById('quantidades6').innerHTML = 'Nº de Requisições: ' + contagens[5];
+      document.getElementById('quantidades5').innerHTML = 'Nº de Requisições: ' + contagens[5];
+      document.getElementById('quantidades6').innerHTML = 'Nº de Requisições: ' + contagens[4];
 
       var cursoElements = document.querySelectorAll('input[name="curso_id"]');
       cursoElements.forEach(function(element) {

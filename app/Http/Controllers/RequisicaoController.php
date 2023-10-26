@@ -416,11 +416,11 @@ class RequisicaoController extends Controller
         }
         if ($checkBoxDesbloqueioSiga) {
             $texto = "";
-            array_push($arrayDocumentos, RequisicaoController::requisitados($requisicao, 5, $perfil, $texto));
+            array_push($arrayDocumentos, RequisicaoController::requisitados($requisicao, 6, $perfil, $texto));
         }
         if ($checkBoxOutros) {
             $texto = $request->get('requisicaoOutros');
-            array_push($arrayDocumentos, RequisicaoController::requisitados($requisicao, 6, $perfil, $texto));
+            array_push($arrayDocumentos, RequisicaoController::requisitados($requisicao, 5, $perfil, $texto));
         }
         //#Documentos
         $ano = date('Y', time());
@@ -449,7 +449,7 @@ class RequisicaoController extends Controller
         if ($id === 4) {
             $documentosRequisitados->detalhes = $texto;
         }
-        if ($id === 6) {
+        if ($id === 5) {
             $documentosRequisitados->detalhes = $texto;
         }
         $documentosRequisitados->documento_id = $id;
@@ -524,7 +524,7 @@ class RequisicaoController extends Controller
         if (isset($id_documentos)) {
             foreach ($id_documentos as $id_documento) {
                 $id_documento->status = "Concluído - Disponível para retirada";
-                if ($id_documento->documento_id == 5) {
+                if ($id_documento->documento_id == 6) {
                     $id_documento->status = "Concluído - SIGA Desbloqueado";
                 }
                 $id_documento->servidor_id = $servidor->id;

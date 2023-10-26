@@ -58,7 +58,7 @@
                                 Escolar.</input></br>
                             </div>
                             <div>
-                                <input type="checkbox" name="desbloqueioSiga" value="Desbloqueio do Siga" id="desbloqueioSiga"> Desbloqueio do Siga</input></br>
+                                <input type="checkbox" name="desbloqueioSiga" value="Desbloqueio do Siga" id="desbloqueioSiga"> Desbloqueio do Siga.</input></br>
                             </div>
 
                             <div>
