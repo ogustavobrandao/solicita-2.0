@@ -20,6 +20,8 @@ class CreateProcessosTable extends Migration
             $table->date('data_requerimento')->nullable();
             $table->string('motivo')->nullable();
             $table->string('semestre_conclusao')->nullable();
+            $table->string('curso_anterior')->nullable();
+            $table->string('semetre_entrada')->nullable();
             $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });

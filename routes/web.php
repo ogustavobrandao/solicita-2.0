@@ -36,18 +36,17 @@ Route::get('/cadastro',[AlunoController::class,'createAluno'])->name('cadastro')
 Route::post('/cadastro',[AlunoController::class,'storeAluno'])->name('cadastro');
 Route::get('/load-cursos/{id}',[AlunoController::class, 'loadCursos'])->name('loadCursos');
 
-Route::get('/processos', [ProcessoController::class, 'tratamento'])->name('tratamento.create')->middleware('CheckAluno');
+Route::get('/processos', [ProcessoController::class, 'main'])->name('tratamento.create')->middleware('CheckAluno');
 
 Route::get('/complementar',[ProcessoController::class,'complementar'])->name('complementar.create')->middleware('CheckAluno');
 Route::get('/excepcional',[ProcessoController::class,''])->name('excepcional.create')->middleware('CheckAluno');
 Route::get('/antecipacao',[ProcessoController::class,'antecipacao'])->name('antecipacao_grau.create')->middleware('CheckAluno');
 Route::get('/dispensa/educao',[ProcessoController::class,'educao'])->name('educacao.create')->middleware('CheckAluno');
-Route::get('/dispensa/disciplina',[ProcessoController::class,''])->name('disciplina.create')->middleware('CheckAluno');
+Route::get('/dispensa/disciplina',[ProcessoController::class,'disciplina'])->name('disciplina.create')->middleware('CheckAluno');
 Route::get('/alteracao',[ProcessoController::class,''])->name('alteracao.create')->middleware('CheckAluno');
 
-Route::get('/tratamento/form', [ProcessoController::class, 'forms'])->name('formtratamento.create')->middleware('CheckAluno');
 
-Route::post('/tratamento/store', [ProcessoController::class, 'SolicitarTratamentoExcepcional'])->name('tratamento.store');
+Route::post('/tratamento/store', [ProcessoController::class, 'aberturaProcessos'])->name('tratamento.store');
 //----------------------------------------------ADMINISTRADOR-----------------------------------------------------------
 Route::group(['middleware'=> ['CheckAdministrador', 'verified']], function(){
     Route::get('/home-administrador',[AdministradorController::class, 'index'])->name('home-administrador')->middleware('CheckAdministrador');
