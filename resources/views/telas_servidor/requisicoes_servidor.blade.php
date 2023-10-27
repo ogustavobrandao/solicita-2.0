@@ -24,6 +24,7 @@
                             <option @if($titulo_id == 3) selected @endif value="3">Histórico</option>
                             <option @if($titulo_id == 4) selected @endif value="4">Programa de Disciplina</option>
                             <option @if($titulo_id == 5) selected @endif value="5">Outros</option>
+                            <option @if($titulo_id == 6) selected @endif value="6">Desbloqueio do SIGA</option>
                         </select>
                     </form>
                 </div>
@@ -239,7 +240,7 @@
                                 <button id="btnFinalizar" onclick="event.preventDefault();confirmarRequisicao()"
                                         class="btn"
                                         style="background-color: var(--confirmar); border-radius: 0.5rem; color: white; font-size: 17px">
-                                    Concluir
+                                    {{$listaRequisicao_documentos[0]['requisicoes_documentos']->documento_id === 6 ? 'DESBLOQUEADO' : 'Concluir'}}
                                 </button>
                             @endif
                         @endif
