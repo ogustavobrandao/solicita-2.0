@@ -42,7 +42,7 @@ class HomeController extends Controller
                              ->groupBy('perfils.curso_id', 'requisicao_documentos.documento_id')
                              ->select('perfils.curso_id', 'requisicao_documentos.documento_id', DB::raw('count(*) as total'))
                              ->get();
-            $tipoDocumento = ['Declaração de Vínculo','Comprovante de Matrícula','Histórico','Programa de Disciplina','Outros','Emitidos', 'Indeferidos'];
+            $tipoDocumento = ['Declaração de Vínculo','Comprovante de Matrícula','Histórico','Programa de Disciplina', 'Desbloqueio do Siga', 'Outros','Emitidos', 'Indeferidos'];
             return view('telas_servidor.home_servidor', compact('cursos', 'tipoDocumento', 'requisicoes'));
           }
           else if (Auth::user()->tipo == 'aluno') {
