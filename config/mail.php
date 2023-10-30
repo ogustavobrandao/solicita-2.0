@@ -34,6 +34,17 @@ return [
     */
 
     'mailers' => [
+        'escolaridade' => [
+            'transport' => 'smtp',
+            'host' => env('MAIL_ESCOLARIDADE_HOST'),
+            'port' => env('MAIL_ESCOLARIDADE_PORT', 587),
+            'encryption' => env('MAIL_ESCOLARIDADE_ENCRYPTION', 'tls'),
+            'username' => env('MAIL_ESCOLARIDADE_USERNAME'),
+            'password' => env('MAIL_ESCOLARIDADE_PASSWORD'),
+            'from' => ['address' => env('MAIL_ESCOLARIDADE_FROM_ADDRESS'), 'name' => env('MAIL_ESCOLARIDADE_FROM_NAME')],
+            'timeout' => null,
+            'auth_mode' => null,
+        ],
         'smtp' => [
             'transport' => 'smtp',
             'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
@@ -95,6 +106,8 @@ return [
         'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
         'name' => env('MAIL_FROM_NAME', 'Example'),
     ],
+    
+
 
     /*
     |--------------------------------------------------------------------------
