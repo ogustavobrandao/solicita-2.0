@@ -16,34 +16,36 @@
                 </div>
 
                 <!--CORPO-->
-
-                <form action="{{  route('register')  }}" method="POST" class="py-4" name="cadastroForm" id="cadastroForm">
+                <form action="{{  route('cadastro')  }}" method="POST" class="py-4" name="cadastroForm" id="cadastroForm">
                     @csrf
                     {{-- Nome --}}
                     <div class="row justify-content-center form-group mb-0">
                         <div class="form-group col-md-8">
-                            <label for="name" class="row px-3 textoFicha"> Nome Completo:
-                                <input id="name" type="name" class="form-control @error('name') is-invalid @enderror "
-                                       name="name" value="{{ old('name') }}" required autocomplete="name" autofocus placeholder="Nome Completo">
-                            </label>
+                            <label for="name" class="row px-3 textoFicha"> Nome Completo: </label>
+                            <input id="name" type="text" class="form-control @error('name') is-invalid @enderror "
+                                    name="name" value="{{ old('name') }}" required autocomplete="name" autofocus placeholder="Nome Completo">
+                                    
                             @error('name')
-                            <span class="invalid-feedback" role="alert" style="overflow: visible; display:block">
-                                <strong>{{ $message }}</strong>
+                                <span class="invalid-feedback" role="alert" style="overflow: visible; display:block">
+                                    <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="name" class="row px-3 textoFicha"> CPF:
-                                <input id="cpf" type="name" class="form-control @error('name') is-invalid @enderror"
-                                       name="cpf" value="{{ old('cpf') }}" required autocomplete="name" autofocus placeholder="CPF">
-                            </label>
+                            <label for="name" class="row px-3 textoFicha"> CPF: </label>
+                            <input id="cpf" type="text" class="form-control @error('cpf') is-invalid @enderror"
+                                    name="cpf" value="{{ old('cpf') }}" required autocomplete="cpf" autofocus placeholder="CPF">
+
                             @error('cpf')
-                            <span class="invalid-feedback" role="alert" style="overflow: visible; display:block">
-                                <strong>{{ $message }}</strong>
+                                <span class="invalid-feedback" role="alert" style="overflow: visible; display:block">
+                                    <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
                         </div>
+
+                        
+                       
 
                     </div>
 
@@ -60,12 +62,13 @@
                                 <option value="5">Desistente</option>
                                 <option value="6">Matrícula Trancada</option>
                                 <option value="7">Intercâmbio</option>
-                                @error('vinculo')
+                            </select>
+
+                            @error('vinculo')
                                 <span class="invalid-feedback" role="alert" style="overflow: visible; display:block">
                                     <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </select>
+                                </span>
+                            @enderror
                         </div>
 
                         <div class="form-group col-sm-4">
@@ -75,13 +78,13 @@
                                 @foreach($unidades as $unidade)
                                     <option value="{{$unidade->id}}">{{$unidade->nome}}</option>
                                 @endforeach
-
-                                @error('unidade')
+ 
+                            </select>
+                            @error('unidade')
                                 <span class="invalid-feedback" role="alert" style="overflow: visible; display:block">
                                 <strong>{{ $message }}</strong>
                                 </span>
-                                @enderror
-                            </select>
+                            @enderror
 
                         </div>
 
@@ -95,12 +98,13 @@
                                     <option value="{{$curso->id}}">{{$curso->nome}}</option>
                                 @endforeach
 
-                                @error('cursos')
+                            </select>
+
+                            @error('cursos')
                                 <span class="invalid-feedback" role="alert" style="overflow: visible; display:block">
                                     <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </select>
+                                </span>
+                            @enderror
                         </div>
 
                     </div>
@@ -109,40 +113,40 @@
                     <div class="form-group row justify-content-center">
 
                         <div class="form-group col-md-4">
-                            <label for="email" class="row px-3 textoFicha">E-mail:
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
-                                       name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="E-Mail">
-                            </label>
+                            <label for="email" class="row px-3 textoFicha">E-mail: </label>
+                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
+                                name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="E-Mail">
+
                             @error('email')
-                            <span class="invalid-feedback" role="alert" style="overflow: visible; display:block">
-                            <strong>{{ $message }}</strong>
-                            </span>
+                                <span class="invalid-feedback" role="alert" style="overflow: visible; display:block">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                             @enderror
+
                             <p id='result'></p>
                         </div>
 
                         <div class="form-group col-sm-4">
-                            <label for="password" class="row px-3 textoFicha"> Senha:
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror"
-                                       name="password" required autocomplete="current-password" placeholder="Senha">
-                            </label>
-                            <span style="color:red">*Mínimo de 8 caracteres.</span>
+                            <label for="password" class="row px-3 textoFicha"> Senha: </label>
+                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror"
+                                    name="password" required autocomplete="current-password" placeholder="Senha">
+                            
                             @error('password')
-                            <span class="invalid-feedback" role="alert" style="overflow: visible; display:block;">
-                            <strong>{{ $message }}</strong>
-                            </span>
+                                <span class="invalid-feedback" role="alert" style="overflow: visible; display:block;">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                             @enderror
                         </div>
 
                         <div class="form-group col-sm-4">
-                            <label for="password-confirm" class="row px-3 textoFicha" >Confirmar senha:
-                                <input id="password-confirm" type="password" class="form-control @error('password-confirm') is-invalid @enderror"
-                                       name="password_confirmation" required autocomplete="new-password" placeholder="Confirmar Senha">
-                            </label>
+                            <label for="password-confirm" class="row px-3 textoFicha" >Confirmar senha: </label>
+                            <input id="password-confirm" type="password" class="form-control @error('password-confirm') is-invalid @enderror"
+                                    name="password_confirmation" required autocomplete="new-password" placeholder="Confirmar Senha">
+
                             @error('password')
-                            <span class="invalid-feedback" role="alert" style="overflow: visible; display:block;">
-                            <strong>{{ $message }}</strong>
-                            </span>
+                                <span class="invalid-feedback" role="alert" style="overflow: visible; display:block;">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                             @enderror
                         </div>
                     </div>
@@ -182,35 +186,6 @@
           });
       });
   })
-
-  function validateEmail(email)
-  {
-      var re = /\S+@\S+\.\S+/;
-      return re.test(email);
-  }
-
-
-  function validate() {
-    var $result = $("#result");
-    var email = $("#email").val();
-    $result.text("");
-
-    if (validateEmail(email)) {
-      $result.text("Esse e-mail é valido");
-      $result.css("color", "green");
-      return true;
-    } else {
-      $result.text("Esse e-mail não é valido ");
-      $result.css("color", "red");
-      return false;
-    }
-
-  }
-
-  $("#validate").on("click", validate);
-
-
-
 
 
 </script>
