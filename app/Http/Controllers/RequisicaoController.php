@@ -72,7 +72,7 @@ class RequisicaoController extends Controller
         $documentos = Documento::all();
         //Verifica se o card clicado foi igual a "TODOS"
         // ->withTrashed()
-        if ($request->titulo_id == 6) {
+        if ($request->titulo_id == 7) {
             $titulo = 'Concluídos';
             //$id_documentos retorna um collection. É necessário transformar para array
             //pega todas as requisições com base no id do documento e no id do curso
@@ -83,7 +83,7 @@ class RequisicaoController extends Controller
                 ->where([['curso_id', $request->curso_id], ['status', 'Concluído - Disponível para retirada']])
                 ->get();
 
-        } else if ($request->titulo_id == 7) {
+        } else if ($request->titulo_id == 8) {
             $titulo = 'Indeferidos';
             //$id_documentos retorna um collection. É necessário transformar para array
             //pega todas as requisições com base no id do documento e no id do curso
@@ -360,6 +360,7 @@ class RequisicaoController extends Controller
         $checkBoxComprovanteMatricula = $request->comprovanteMatricula;
         $checkBoxHistorico = $request->historico;
         $checkBoxProgramaDisciplina = $request->programaDisciplina;
+        $checkBoxDesbloqueioSiga = $request->desbloqueioSiga;
         $checkBoxOutros = $request->outros;
         $mensagens = [
             'requisicaoPrograma.required' => 'Preencha este campo com as informações relativas à disciplina e a finalidade do pedido',
@@ -411,6 +412,10 @@ class RequisicaoController extends Controller
         if ($checkBoxProgramaDisciplina) {
             $texto = $request->get('requisicaoPrograma');
             array_push($arrayDocumentos, RequisicaoController::requisitados($requisicao, 4, $perfil, $texto));
+        }
+        if ($checkBoxDesbloqueioSiga) {
+            $texto = "";
+            array_push($arrayDocumentos, RequisicaoController::requisitados($requisicao, 6, $perfil, $texto));
         }
         if ($checkBoxOutros) {
             $texto = $request->get('requisicaoOutros');
@@ -518,6 +523,9 @@ class RequisicaoController extends Controller
         if (isset($id_documentos)) {
             foreach ($id_documentos as $id_documento) {
                 $id_documento->status = "Concluído - Disponível para retirada";
+                if ($id_documento->documento_id == 6) {
+                    $id_documento->status = "Concluído - SIGA Desbloqueado";
+                }
                 $id_documento->servidor_id = $servidor->id;
                 $aluno = Aluno::where('id', $id_documento->aluno_id)->first();
                 $user = User::where('id', $aluno->user_id)->first();

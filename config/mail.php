@@ -41,6 +41,7 @@ return [
             'encryption' => env('MAIL_ESCOLARIDADE_ENCRYPTION', 'tls'),
             'username' => env('MAIL_ESCOLARIDADE_USERNAME'),
             'password' => env('MAIL_ESCOLARIDADE_PASSWORD'),
+            'from' => ['address' => env('MAIL_ESCOLARIDADE_FROM_ADDRESS'), 'name' => env('MAIL_ESCOLARIDADE_FROM_NAME')],
             'timeout' => null,
             'auth_mode' => null,
         ],

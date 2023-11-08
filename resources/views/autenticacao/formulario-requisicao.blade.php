@@ -57,6 +57,9 @@
                                 <input type="checkbox" name="historico" value="Historico" id="historico"> Histórico
                                 Escolar.</input></br>
                             </div>
+                            <div>
+                                <input type="checkbox" name="desbloqueioSiga" value="Desbloqueio do Siga" id="desbloqueioSiga"> Desbloqueio do Siga.</input></br>
+                            </div>
 
                             <div>
                                 <input type="checkbox" name="programaDisciplina" value="Programa de Disciplina"
@@ -149,6 +152,7 @@ function validaCampos() {
   var checkBoxDeclaracao = document.getElementById('declaracaoVinculo');
   var checkBoxComprovante = document.getElementById('comprovanteMatricula');
   var checkBoxHistorico = document.getElementById('historico');
+  var checkBoxDesbloqueioSiga = document.getElementById('desbloqueioSiga');
   var checkBoxPrograma = document.getElementById('programaDisciplina');
   var checkBoxOutros = document.getElementById('outros');
   var textareaProgramaDisciplina = document.getElementById("textareaProgramaDisciplina");
@@ -157,7 +161,8 @@ function validaCampos() {
       && checkBoxComprovante.checked == false
       && checkBoxHistorico.checked == false
       && checkBoxPrograma.checked == false
-      && checkBoxOutros.checked == false) {
+      && checkBoxOutros.checked == false
+      && checkBoxDesbloqueioSiga.checked == false) {
       alert('Informe ao menos um dos documento que deseja solicitar.');
       return false;
   }

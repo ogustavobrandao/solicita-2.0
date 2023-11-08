@@ -73,7 +73,26 @@
 
   
 </div>
-
+@elseif ($documento->status== "Concluído - SIGA Desbloqueado")
+<div class="container" style="background-color:white" >
+    <div class="row justify-content-center" style="margin-top:100px">
+      <div class="col-sm-12" align="center">
+          <a target="_blank" href="http://ww3.uag.ufrpe.br/">
+              <img src="{{$message->embed(public_path() . '/images/logo_ufape_principal.png')}}" height="80px" >
+          </a>
+      </div>
+    </div>
+      <p><font face="Times New Roman" font size="4" color="black">Olá!<br><br>
+        Seu SIGA foi desbloqueado. Para gerar novas senhas, siga o seguinte passo a passo:<br><br>
+        1- Acesse: http://www.siga.ufape.edu.br<br>
+        2- Digite seu CPF (somente números, sem traços e pontos) no campo login e não informe senha<br>
+        3- Clique no botão "solicitar acesso" (do lado esquerda da tela)<br>
+        4- Confira o CPF e clique em continuar<br>
+        5- Leia as instruções, siga o passo-a-passo e informe os dados solicitados e, por fim, crie as senhas.<br><br>
+        --<br>
+        At.te<br>
+        Departamento de Registro e Controle Acadêmico<br>
+        Universidade Federal do Agreste de Pernambuco-UFAPE</font></p>
 @endif
 <div class="row justify-content-center" style="background-color:white" align="center">
   <div class="col-sm-12">

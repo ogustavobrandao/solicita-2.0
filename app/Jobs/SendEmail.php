@@ -42,7 +42,7 @@ class SendEmail implements ShouldQueue
         Mail::mailer($definir_email)->send('mails.status', $data, function($message) use ($to_email, $subject){
               $message->to($to_email)
                       ->subject($subject);
-              $message->from('naoresponder.lmts@gmail.com','Solicita - LMTS');
+             
             });
     }
 
