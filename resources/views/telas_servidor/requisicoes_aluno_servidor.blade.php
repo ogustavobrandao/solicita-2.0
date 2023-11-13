@@ -78,7 +78,7 @@
                             </span>
                             </li>
                         @endif
-                        @if($rd->status=="Concluído - Disponível para retirada")
+                        @if($rd->status=="Concluído")
                             @php
                                 $tudoAndamento = false
                             @endphp

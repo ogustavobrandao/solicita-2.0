@@ -10,6 +10,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\DB;
+
 // use Illuminate\Support\Facades\Mail;
 // use Illuminate\Support\Carbon;
 // use Illuminate\Support\Facades\Config;
@@ -76,6 +78,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+      DB::beginTransaction();
         $user = User::create([ //Criação de usuário, para apenas após a criação ser atribuida a nova variável
                               'name' => mb_strtoupper($data['name']),
                               'email' => $data['email'],
@@ -123,7 +126,11 @@ class RegisterController extends Controller
                             'unidade_id' => $data['unidade'],
                             ]);
 
-
+        if(!$user || !$aluno){
+          DB::rollBack();
+          return  response()->json(['error' => 'Não foi possível Criar.']);
+        }
+        DB::commit();
 
         //
         // $verifyUrl = URL::temporarySignedRoute(

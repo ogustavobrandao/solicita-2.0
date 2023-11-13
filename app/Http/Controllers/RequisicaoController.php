@@ -80,7 +80,7 @@ class RequisicaoController extends Controller
                 ->join('requisicaos', 'requisicaos.id', '=', 'requisicao_documentos.requisicao_id')
                 ->join('perfils', 'requisicaos.perfil_id', '=', 'perfils.id')
                 ->select('requisicao_documentos.id')
-                ->where([['curso_id', $request->curso_id], ['status', 'Concluído - Disponível para retirada']])
+                ->where([['curso_id', $request->curso_id], ['status', 'Concluído']])
                 ->get();
 
         } else if ($request->titulo_id == 8) {
@@ -522,7 +522,7 @@ class RequisicaoController extends Controller
         $id_documentos = Requisicao_documento::find($arrayDocumentos);//whereIn
         if (isset($id_documentos)) {
             foreach ($id_documentos as $id_documento) {
-                $id_documento->status = "Concluído - Disponível para retirada";
+                $id_documento->status = "Concluído";
                 if ($id_documento->documento_id == 6) {
                     $id_documento->status = "Concluído - SIGA Desbloqueado";
                 }

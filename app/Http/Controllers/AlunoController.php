@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreAlunoRequest;
 use App\Models\FichaCatalografica;
 use App\Models\NadaConsta;
 use Illuminate\Http\Request;
@@ -58,87 +59,62 @@ class AlunoController extends Controller
     $perfis = Perfil::all();
     return view('autenticacao.cadastro',compact('cursos','unidades','perfis')); //redireciona para view de cadastro do aluno
   }
-  public function storeAluno(Request $request){
+  public function storeAluno(StoreAlunoRequest $request){
 
-    $regras = [
-      'name' => 'required|string|max:255',
-      'cpf' => ['required','integer','size:11','unique:alunos'],
-      'email' => ['required|string|email|max:255|unique:users', 'regex:/\S+@\S+\.\S+/'],
-      'password' => 'required|string|min:8|confirmed',
-      'vinculo' => ['required'],
-      'unidade' => ['required'],
-      'cursos' => ['required'],
-    ];
-    $mensagens = [
-      'name.required' => 'Por favor, preencha este campo',
-      'email.required' => 'Por favor, preencha este campo',
-      'email.email' => 'Por favor, preencha um email válido',
-      'vinculo.required' => 'Por favor, selecione o tipo de vínculo',
-      'unidade.required' => 'Por favor, selecione a unidade acadêmica',
-      'cursos.required' => 'Por favor, selecione o seu curso',
-      'password.required' => 'Por favor, digite uma senha',
-      'passowd.min' => 'Por favor, digite uma senha com, no mínimo, 8 dígitos',
-    ];
-    //$request->validate([$regras,$mensagens]);
-    $request->validate([
-      'name' => 'required|string|max:3',
-      'cpf' => 'bail|required|cpf|unique:alunos',
-      'email' => ['bail|required|string|email|max:255|unique:users', 'regex:/\S+@\S+\.\S+/'],
-      'password' => 'bail|required|string|min:8|confirmed',
-      'vinculo' => ['required'],
-      'unidade' => ['required'],
-      'cursos' => ['required'],
-    ]);
+    DB::beginTransaction();
+    $user = User::create([ //Criação de usuário, para apenas após a criação ser atribuida a nova variável
+                          'name' => mb_strtoupper($request['name']),
+                          'email' => $request['email'],
+                          'password' => Hash::make($request['password']),
+                          'tipo' => 'aluno',
+                       ]);
 
-    $usuario = new User();
-    $aluno = new Aluno();
-    $perfil = new Perfil();
-    //USER
-    $usuario->name = $request->input('name');
-    $usuario->email = $request->input('email');
-    $usuario->password = Hash::make($request->input('password'));
-    $usuario->tipo = 'aluno';
-    $usuario->save();
-    //ALUNO
-    $aluno->cpf = $request->input('cpf');
-    $aluno->user_id = $usuario->id;
-    $aluno->save();
-    //PERFIL
+    $aluno = Aluno::create([
+                          'user_id'=>$user->id,
+                          'cpf' => str_replace(['.','-'], '', $request['cpf']),
+                          ]);
+    $id = Curso::where('id', $request['cursos'])->first();
+    $curso = $id->nome;
 
-    //Default
-    $curso = Curso::where('id',$request->cursos)->first();
-    $perfil->default = $curso->nome; //Nome do Curso
-    //Situacao
-    $vinculo = $request->vinculo;
+    $vinculo = $request['vinculo'];
         if($vinculo==="1"){
-          $perfil->situacao = "Matriculado";
+
+          $situacao = "Matriculado";
         }else if ($vinculo==="2"){
-          $perfil->situacao = "Egresso";
+
+          $situacao = "Egresso";
         }
         else if ($vinculo==="3"){
-          $perfil->situacao = "Especial";
+
+          $situacao = "Especial";
         }
         else if ($vinculo==="4"){
-          $perfil->situacao = "REMT - Regime Especial de Movimentação Temporária";
+          $situacao = "REMT - Regime Especial de Movimentação Temporária";
         }
         else if ($vinculo==="5"){
-          $perfil->situacao = "Desistente";
+          $situacao = "Desistente";
         }
         else if ($vinculo==="6"){
-          $perfil->situacao = "Trancado";
+          $situacao = "Trancado";
         }
         else if ($vinculo==="7"){
-          $perfil->situacao = "Intercâmbio";
+          $situacao = "Intercâmbio";
         }
-    $unidade = Unidade::where('id',$request->unidade)->first();
-    //aluno_id
-    $perfil->aluno_id = $aluno->id;
-    //unidade_id
-    $perfil->unidade_id = $unidade->id;
-    //curso_id
-    $perfil->curso_id = $curso->id;
-    $perfil->valor = true;
-    $perfil->save();
+    $perfil = Perfil::create([
+                        'default' => $curso,
+                        'situacao' => $situacao,
+                        'valor' =>true,
+                        'aluno_id' => $aluno->id,
+                        'curso_id' => $request['cursos'],
+                        'unidade_id' => $request['unidade'],
+                        ]);
+
+    if(!$user || !$aluno){
+      DB::rollBack();
+      return  redirect('/')->with(['error' => 'Não foi possível Criar.']);
+    }
+    DB::commit();
+
     return redirect('/')->with('success', 'Cadastrado com sucesso!');
 
   }
