@@ -126,7 +126,7 @@
                                                         </span>
                                                     </li>
                                                 @endif
-                                                @if ($rd->status == 'Concluído - Disponível para retirada' || $rd->status == 'Concluído' || $rd->status == 'Concluído - SIGA Desbloqueado')
+                                                @if ($rd->status == 'Concluído' || $rd->status == 'Concluído - SIGA Desbloqueado')
                                                     @php
                                                         $tudoAndamento = false;
                                                     @endphp

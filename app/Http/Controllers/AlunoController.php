@@ -115,13 +115,6 @@ class AlunoController extends Controller
     }
     DB::commit();
 
-
-
-
-
-
- 
-
     return redirect('/')->with('success', 'Cadastrado com sucesso!');
 
   }
