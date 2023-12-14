@@ -4,8 +4,10 @@
 @section('conteudo')
 
     <div class="color blue">
-        <form action="{{route('tratamento.store')}}" method="post" enctype="multipart/form-data">
+        <form action="{{route('processo.store')}}" method="post" enctype="multipart/form-data">
             @csrf
+            <input type="text" value="excepcional" id="tipo_processo" name="tipo_processo">
+
             <label for="">nome do professor</label>
             <input type="text" name="doc_tratamento" id="doc_tratamento">
 

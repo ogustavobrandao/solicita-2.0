@@ -6,6 +6,8 @@
     <div class="color blue">
         <form action="{{route('tratamento.store')}}" method="post" enctype="multipart/form-data">
             @csrf
+            <input type="text" value="disciplina" id="tipo_processo" name="tipo_processo">
+
             <label for="">Nome do Curso Antigo</label>
             <input type="text" id="curso_anterior" name="curso_anterior">
 

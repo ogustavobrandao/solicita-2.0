@@ -43,37 +43,49 @@ class ProcessoController extends Controller
   
 
   
-
+    
     public function aberturaProcessos(Request $request){
         
         $processo = new Processo();
-        $processo->user_id = 2;
-        $tipo_processo = 'disciplina';
-        $processo->tipo_processo = 'disciplina';
+        $processo->user_id = Auth::user()->id;
+        $processo->tipo
         $aluno = Auth::user()->aluno;
         $user = Auth::user();
         $perfil = Perfil::where('aluno_id', $aluno->id)->first();
         $perfil->curso->nome = strtoupper($perfil->curso->nome);
         $data = Carbon::now()->format('d/m/Y');
         $processo->save();
+        dd($request);
+
+
         if($request->tipo_processo == 'excepcional'){
-            // $pdf = Pdf::loadView('processos.modelos_pdf.Tratamento_excepcional.excepcional', compact('aluno', 'user', 'perfil', 'data', 'request'));
-            return view('processos.modelos_pdf.Tratamento_excepcional.excepcional');
+            $pdf = Pdf::loadView('processos.modelos_pdf.Atividade_complementar.complementar', compact('aluno', 'user', 'perfil', 'data'));
+            Mail::mailer('escolaridade')->to('lmts@ufape.edu.br')->send(new ComplementarEmail($pdf, $request->doc_tratamento));
+
+            return redirect(Route('tratamento.create'))->with('success', 'Solicitação realizada com sucesso!');;
+
+        
             
         }
-
-        if($request->tipo_processo == 'alt_cadastral'){
-            
-        }
-
-        if($tipo_processo == 'antecipacao'){
+        
+        if($request->tipo_processo == 'antecipacao'){
             
             $pdf = Pdf::loadView('processos.modelos_pdf.antecipacao_colacao_grau.antecipacao', compact('aluno', 'user', 'perfil', 'data', 'request'));
             Mail::mailer('escolaridade')->to('lmts@ufape.edu.br')->send(new ComplementarEmail($pdf, $request->doc_tratamento));
+            
             return redirect(Route('tratamento.create'))->with('success', 'Solicitação realizada com sucesso!');
         }
 
-        if($tipo_processo == 'complementar'){
+        if($request->tipo_processo == 'alt_cadastral'){
+            $pdf = Pdf::loadView('processos.modelos_pdf.Atividade_complementar.complementar', compact('aluno', 'user', 'perfil', 'data'));
+            Mail::mailer('escolaridade')->to('lmts@ufape.edu.br')->send(new ComplementarEmail($pdf, $request->doc_tratamento));
+
+            return redirect(Route('tratamento.create'))->with('success', 'Solicitação realizada com sucesso!');;
+
+        }
+
+
+        if($request->tipo_processo == 'complementar'){
             $pdf = Pdf::loadView('processos.modelos_pdf.Atividade_complementar.complementar', compact('aluno', 'user', 'perfil', 'data'));
             Mail::mailer('escolaridade')->to('lmts@ufape.edu.br')->send(new ComplementarEmail($pdf, $request->doc_tratamento));
 
@@ -83,20 +95,25 @@ class ProcessoController extends Controller
             
         }
 
-        if($tipo_processo == 'disciplina'){
+        if($request->tipo_processo == 'educacao_fisica'){
+
+            $pdf = Pdf::loadView('processos.modelos_pdf.Dispensa_educacao_fisica.educacao_fisica', compact(''));
+            Mail::mailer('escolaridade')->to('lmts@ufape.edu.br')->send(new ComplementarEmail($pdf, $request->doc_tratamento));
+
+            return redirect(Route('tratamento.create'))->with('success', 'Solicitação realizada com sucesso!');;
+
+            
+        }
+       
+        if($request->tipo_processo == 'disciplina'){
             
             $pdf = Pdf::loadView('processos.modelos_pdf.Dispensa_disciplina.disciplina', compact('aluno', 'user', 'perfil', 'data', 'request'));
             Mail::mailer('smtp')->to('lmts@ufape.edu.br')->send(new ComplementarEmail($pdf, $request->doc_tratamento));
+
             return redirect(Route('tratamento.create'))->with('success','Solicitação realizada com sucesso!');
             
         }
 
-        if($request->tipo_processo == 'educacao_fisica'){
-
-            $pdf = Pdf::loadView('processos.modelos_pdf.Dispensa_educacao_fisica.educacao_fisica', compact(''));
-            
-        }
-       
         
         
         

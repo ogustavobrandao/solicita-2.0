@@ -4,8 +4,9 @@
 @section('conteudo')
 
     <div class="color blue">
-        <form action="{{route('tratamento.store')}}" method="post" enctype="multipart/form-data">
+        <form action="{{route('processo.store')}}" method="post" enctype="multipart/form-data">
             @csrf
+            <input type="text" value="antecipacao" id="tipo_processo" name="tipo_processo">
             <label for="">Semestre de conclusão</label>
             <input type="text" id="semestre_conclusao" name="semestre_conclusao">
             <label for="">Motivo</label>
@@ -18,9 +19,7 @@
             <label for="">Submeta o pdf</label>
             <input type="file" name="doc_tratamento" id="doc_tratamento">
 
-            <div>
-                <a href="{{route('tratamento.store')}}"> <button type="submit"> Enviar</button></a>
-            </div>
+            <button type="submit">Enviar</button>
         </form>
     </div>
 @endsection
