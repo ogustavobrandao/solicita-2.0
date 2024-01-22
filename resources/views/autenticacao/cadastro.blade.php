@@ -88,7 +88,7 @@
 
                         </div>
 
-                        <div class="col-md-4">
+                        <div id="curso-div" class="col-md-4" style="display: none;">
                             <!-- Cursos-->
                             <label for="cursos" class="row px-3 textoFicha">Curso:</label>
                             <select name="cursos" id="cursos" class="browser-default custom-select">
@@ -187,7 +187,20 @@
       });
   })
 
-
 </script>
 
+<script>
+    document.getElementById('unidade').addEventListener('change', mostrarCursoDiv);
+
+    function mostrarCursoDiv() {
+        var unidade = document.getElementById('unidade');
+        var curso_div = document.getElementById('curso-div');
+
+        if (unidade.value) {
+            curso_div.style.display = 'block';
+        } else {
+            curso_div.style.display = 'none';
+        }
+    }
+</script>
 @endsection
