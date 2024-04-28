@@ -3,22 +3,22 @@
 
 @section('conteudo')
 
-    <div class="color blue">
-        <form action="{{route('tratamento.store')}}" method="post" enctype="multipart/form-data">
+    <div class="d-flex justify-content-center">
+        <form action="{{route('processo.store')}}" method="post" enctype="multipart/form-data">
             @csrf
-            <input type="text" value="disciplina" id="tipo_processo" name="tipo_processo">
+            <input type="hidden" value="disciplina" id="tipo_processo" name="tipo_processo">
 
-            <label for="">Nome do Curso Antigo</label>
-            <input type="text" id="curso_anterior" name="curso_anterior">
+            <label class="textoFicha" for="">Nome do Curso Antigo</label>
+            <input class="form-control" type="text" id="curso_anterior" name="curso_anterior">
 
-            <label for="">Semetre de Entrada da UFAPE</label>
-            <input type="text" name="semestre_entrada" id="semestre_entrada">
+            <label class="textoFicha" for="">Semetre de Entrada da UFAPE</label>
+            <input class="form-control" type="text" name="semestre_entrada" id="semestre_entrada">
 
-            <label for="">Submeta o PDF</label>
-            <input type="file" name="doc_tratamento" id="doc_tratamento">
+            <label class="textoFicha" for="">Submeta o PDF</label>
+            <input class="form-control" type="file" name="doc_tratamento" id="doc_tratamento">
 
             <div>
-                <a href="{{route('tratamento.store')}}"> <button type="submit"> Enviar</button></a>
+                <button class="btn btn-primary" type="submit">Enviar</button>
             </div>
         </form>
     </div>

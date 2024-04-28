@@ -37,87 +37,68 @@ class ProcessoController extends Controller
 
     public function tratamento(){
         return view('processos.formularios.formulario_tratamento');
-
     }
 
-  
+    public function alteracao(){
+        return view('processos.formularios.alter_cadastral');
+    }  
 
-  
-    
     public function aberturaProcessos(Request $request){
         
-        $processo = new Processo();
-        $processo->user_id = Auth::user()->id;
-        $processo->tipo
+        Processo::create([
+            'tipo_processo' => $request->tipo_processo,
+            'user_id' => Auth::user()->id,
+
+        ]);
+
         $aluno = Auth::user()->aluno;
         $user = Auth::user();
         $perfil = Perfil::where('aluno_id', $aluno->id)->first();
         $perfil->curso->nome = strtoupper($perfil->curso->nome);
-        $data = Carbon::now()->format('d/m/Y');
-        $processo->save();
-        dd($request);
+        $data = Carbon::now()->isoFormat(' DD [de] MMMM [de] YYYY.');
 
 
         if($request->tipo_processo == 'excepcional'){
             $pdf = Pdf::loadView('processos.modelos_pdf.Atividade_complementar.complementar', compact('aluno', 'user', 'perfil', 'data'));
-            Mail::mailer('escolaridade')->to('lmts@ufape.edu.br')->send(new ComplementarEmail($pdf, $request->doc_tratamento));
+            // Mail::mailer('escolaridade')->to('lmts@ufape.edu.br')->send(new ComplementarEmail($request->requerimento, $request->doc_tratamento));
 
-            return redirect(Route('tratamento.create'))->with('success', 'Solicitação realizada com sucesso!');;
-
-        
-            
+            // return redirect(Route('tratamento.create'))->with('success', 'Solicitação realizada com sucesso!');;
         }
         
-        if($request->tipo_processo == 'antecipacao'){
-            
+        if($request->tipo_processo == 'antecipacao'){   
             $pdf = Pdf::loadView('processos.modelos_pdf.antecipacao_colacao_grau.antecipacao', compact('aluno', 'user', 'perfil', 'data', 'request'));
-            Mail::mailer('escolaridade')->to('lmts@ufape.edu.br')->send(new ComplementarEmail($pdf, $request->doc_tratamento));
+            // Mail::mailer('escolaridade')->to('lmts@ufape.edu.br')->send(new ComplementarEmail($pdf, $request->doc_tratamento));
             
-            return redirect(Route('tratamento.create'))->with('success', 'Solicitação realizada com sucesso!');
+            // return redirect(Route('tratamento.create'))->with('success', 'Solicitação realizada com sucesso!');
         }
 
         if($request->tipo_processo == 'alt_cadastral'){
             $pdf = Pdf::loadView('processos.modelos_pdf.Atividade_complementar.complementar', compact('aluno', 'user', 'perfil', 'data'));
-            Mail::mailer('escolaridade')->to('lmts@ufape.edu.br')->send(new ComplementarEmail($pdf, $request->doc_tratamento));
+            // Mail::mailer('escolaridade')->to('lmts@ufape.edu.br')->send(new ComplementarEmail($pdf, $request->doc_tratamento));
 
-            return redirect(Route('tratamento.create'))->with('success', 'Solicitação realizada com sucesso!');;
-
+            // return redirect(Route('tratamento.create'))->with('success', 'Solicitação realizada com sucesso!');;
         }
-
 
         if($request->tipo_processo == 'complementar'){
             $pdf = Pdf::loadView('processos.modelos_pdf.Atividade_complementar.complementar', compact('aluno', 'user', 'perfil', 'data'));
-            Mail::mailer('escolaridade')->to('lmts@ufape.edu.br')->send(new ComplementarEmail($pdf, $request->doc_tratamento));
+            // Mail::mailer('escolaridade')->to('lmts@ufape.edu.br')->send(new ComplementarEmail($pdf, $request->doc_tratamento));
 
-            return redirect(Route('tratamento.create'))->with('success', 'Solicitação realizada com sucesso!');;
-
-            
-            
+            // return redirect(Route('tratamento.create'))->with('success', 'Solicitação realizada com sucesso!');;             
         }
 
         if($request->tipo_processo == 'educacao_fisica'){
-
-            $pdf = Pdf::loadView('processos.modelos_pdf.Dispensa_educacao_fisica.educacao_fisica', compact(''));
-            Mail::mailer('escolaridade')->to('lmts@ufape.edu.br')->send(new ComplementarEmail($pdf, $request->doc_tratamento));
-
-            return redirect(Route('tratamento.create'))->with('success', 'Solicitação realizada com sucesso!');;
-
+            $pdf = Pdf::loadView('processos.modelos_pdf.Dispensa_educacao_fisica.educacao_fisica', compact('aluno', 'user', 'perfil', 'data', 'request'));
+            // Mail::mailer('escolaridade')->to('lmts@ufape.edu.br')->send(new ComplementarEmail($pdf, $request->doc_tratamento));
             
+            // return redirect(Route('tratamento.create'))->with('success', 'Solicitação realizada com sucesso!');;  
         }
-       
-        if($request->tipo_processo == 'disciplina'){
-            
+        
+        if($request->tipo_processo == 'disciplina'){   
             $pdf = Pdf::loadView('processos.modelos_pdf.Dispensa_disciplina.disciplina', compact('aluno', 'user', 'perfil', 'data', 'request'));
-            Mail::mailer('smtp')->to('lmts@ufape.edu.br')->send(new ComplementarEmail($pdf, $request->doc_tratamento));
-
-            return redirect(Route('tratamento.create'))->with('success','Solicitação realizada com sucesso!');
+            // Mail::mailer('smtp')->to('lmts@ufape.edu.br')->send(new ComplementarEmail($pdf, $request->doc_tratamento));
             
+            // return redirect(Route('tratamento.create'))->with('success','Solicitação realizada com sucesso!');
         }
-
-        
-        
-        
-
-    }
-  
+        return $pdf->stream();
+    } 
 }

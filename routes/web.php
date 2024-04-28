@@ -136,11 +136,11 @@ Route::middleware('CheckAluno')->group(function(){
     Route::get('/processos', [ProcessoController::class, 'main'])->name('tratamento.create');
 
     Route::get('/complementar',[ProcessoController::class,'complementar'])->name('complementar.create');
-    Route::get('/excepcional',[ProcessoController::class,''])->name('excepcional.create');
+    Route::get('/excepcional',[ProcessoController::class,'tratamento'])->name('excepcional.create');
     Route::get('/antecipacao',[ProcessoController::class,'antecipacao'])->name('antecipacao_grau.create');
     Route::get('/dispensa/educao',[ProcessoController::class,'educao'])->name('educacao.create');
     Route::get('/dispensa/disciplina',[ProcessoController::class,'disciplina'])->name('disciplina.create');
-    Route::get('/alteracao',[ProcessoController::class,''])->name('alteracao.create');
+    Route::get('/alteracao',[ProcessoController::class,'alteracao'])->name('alteracao.create');
 
     Route::post('/processo/store', [ProcessoController::class, 'aberturaProcessos'])->name('processo.store');
 
