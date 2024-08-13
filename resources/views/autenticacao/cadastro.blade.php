@@ -50,12 +50,12 @@
                     </div>
 
                     <!-- Vínculo -->
-                    <div class="row justify-content-center my-0">
+                    <div class="row my-0">
                         <div class="form-group col-sm-4">
                             <label for="vinculo" class="row px-3 textoFicha">Tipo de vínculo:</label>
                             <select name="vinculo" id="vinculo" class="browser-default custom-select">
                                 <option value="" disable selected hidden>-- Selecionar Vínculo --</option>
-                                <option value="1" >Matriculado</option>
+                                <option value="1">Matriculado</option>
                                 <option value="2">Egresso</option>
                                 <option value="3">Especial</option>
                                 <option value="4">REMT - Regime Especial de Movimentação Temporária</option>
@@ -88,7 +88,7 @@
 
                         </div>
 
-                        <div class="col-md-4">
+                        <div id="curso-div" class="col-md-4" style="display: none;">
                             <!-- Cursos-->
                             <label for="cursos" class="row px-3 textoFicha">Curso:</label>
                             <select name="cursos" id="cursos" class="browser-default custom-select">
@@ -187,7 +187,20 @@
       });
   })
 
-
 </script>
 
+<script>
+    document.getElementById('unidade').addEventListener('change', mostrarCursoDiv);
+
+    function mostrarCursoDiv() {
+        var unidade = document.getElementById('unidade');
+        var curso_div = document.getElementById('curso-div');
+
+        if (unidade.value) {
+            curso_div.style.display = 'block';
+        } else {
+            curso_div.style.display = 'none';
+        }
+    }
+</script>
 @endsection

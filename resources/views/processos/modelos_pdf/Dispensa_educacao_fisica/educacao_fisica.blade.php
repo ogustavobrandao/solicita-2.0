@@ -54,19 +54,14 @@
         
             
         <h4>
-            REQUERIMENTO DE ANOTAÇÃO DE ATIVIDADE <br>
-            CURRICULAR COMPLEMENTAR
+            REQUERIMENTO DE DISPENSA DA DISCIPLINA EDUCAÇÃO FÍSICA
         </h4>
         
         <p>À COORDENAÇÃO DO CURSO DE {{$perfil->curso->nome}} DA UFAPE, </p>
         <p style="text-indent: 20px;">
             Eu <strong>{{$user->name}}</strong>, n° de CPF <strong>{{$aluno->cpf}}</strong>, aluno(a) do curso de
-            {{$perfil->curso->nome}}, solicito de V. Sa. a análise da
-            documentação apresentada em anexo, a essa
-            coordenação relativa às atividades complementares
-            para cômputo e registro de carga horária pelo
-            DRCA/UFAPE, de acordo com a resolução
-            CONSU/UFAPE no 015/2020.
+            {{$perfil->curso->nome}}, solicito dispensa da disciplina Educação Física, 
+            com base na Resolução CEPE-UFRPE Nº 155/2001, pelo seguinte motivo: <strong>{{$request->motivo}}</strong>.
         </p>
         <p>
             Garanhuns, {{$data}}
