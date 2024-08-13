@@ -90,7 +90,6 @@ class UsuarioController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:300',
             'email' => 'required|string|email|max:255',
-            'cpf' => 'required|string|cpf',
         ]);
 
         if ($request->email != $usuario->email) {
