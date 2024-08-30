@@ -23,7 +23,7 @@
                     <img class="pb-3" src="images/escolaridade-aluno.svg" height="120px">
                 </div>
                 <div class="text-center">
-                    <div class="textoCaixa">Escolaridade</div>
+                    <div class="textoCaixa">DRCA</div>
                 </div>
             </a>
         </div>

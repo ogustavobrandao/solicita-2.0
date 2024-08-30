@@ -12,7 +12,7 @@
             <!--TITULO-->
             <div class="row mx-1 p-0" style="border-bottom: var(--textcolor) 2px solid">
                 <div class="col-md-12 tituoRequisicao mt-3 p-0">
-                    Escolaridade
+                    DRCA
                 </div>
             </div>
 
