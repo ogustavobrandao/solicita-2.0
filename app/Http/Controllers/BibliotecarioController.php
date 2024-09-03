@@ -115,7 +115,7 @@ class BibliotecarioController extends Controller
         if ($requisicao->bibliotecario_id == null || (date_diff($data_bibi, $data_agora)->h >= 2 && $requisicao->status == 'Em andamento')) {
             $requisicao->bibliotecario_id = $bibli->id;
             $requisicao->save();
-        } 
+        }
         if ($bibliotecario != null && $requisicao->status == 'Em andamento' && $bibliotecario->id != $bibli->id) {
             $requisicao->bibliotecario_id = $bibli->id;
             $requisicao->update();
@@ -207,7 +207,6 @@ class BibliotecarioController extends Controller
             return redirect(route('listar-fichas'))->with('error', 'Esta requisição está sendo analisada pelo bibliotecario: ' . $bibliotecario->user->name);
         }
 
-        
 
         return view('telas_bibliotecario.avaliar_deposito', compact('deposito', 'aluno', 'requisicao', 'requisicao_documento', 'bibliotecario'));
     }
@@ -232,7 +231,7 @@ class BibliotecarioController extends Controller
         } elseif ($bibliotecario != null && $requisicao->status == 'Em andamento' && $bibliotecario->id != $bibli->id) {
             return redirect(route('listar-fichas'))->with('error', 'Esta requisição está sendo analisada pelo bibliotecario: ' . $bibliotecario->user->name);
         }
-        
+
         return view('telas_bibliotecario.editar_deposito', compact('deposito', 'aluno', 'requisicao', 'requisicao_documento', 'bibliotecario'));
     }
 
@@ -448,11 +447,22 @@ class BibliotecarioController extends Controller
             $palavra = PalavraChave::where('id', $request->palavra_chave4_id)->first();
             $palavra->palavra = $request->quarta_chave;
             $palavra->update();
+        }else{
+            $palavra = PalavraChave::where('id', $request->palavra_chave4_id)->first();
+            if($palavra){
+                $palavra->delete();
+            }
         }
+
         if ($request->quinta_chave != null) {
             $palavra = PalavraChave::where('id', $request->palavra_chave5_id)->first();
             $palavra->palavra = $request->quinta_chave;
             $palavra->update();
+        }else{
+            $palavra = PalavraChave::where('id', $request->palavra_chave5_id)->first();
+            if($palavra){
+                $palavra->delete();
+            }
         }
 
         $userId = Auth::user()->id;
