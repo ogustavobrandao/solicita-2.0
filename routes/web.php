@@ -71,7 +71,7 @@ Route::group(['middleware'=> ['CheckAdministradorServidor', 'verified']], functi
 });
 
 //----------------------------------------------SERVIDOR----------------------------------------------------------------
-Route::group(['middleware'=> ['CheckServidor', 'verified']], function(){
+Route::group(['middleware'=> ['CheckServidor', 'verified', 'banned']], function(){
 
     // Route::post('/filtrar-requisicoes/{curso_id?}', 'RequisicaoController@filtrarCurso')->name('filtrar-requisicoes-post')->middleware('CheckServidor');
 
@@ -192,7 +192,7 @@ Route::group(['middleware'=> ['CheckBibliotecario', 'banned']], function(){
 });
 
 // ---------------------------------------REQUISICAO------------------------------------------------------------------
-Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('verified');
+Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware(['verified', 'banned']);
 // Route::get('/mail-send', 'MailController@send');
 
 // Route::get('/edita-perfil','PerfilController@editaPerfil')->name('edita-perfil');
