@@ -80,7 +80,7 @@ class BibliotecarioController extends Controller
     {
         $requisicao = Requisicao_documento::where('id', $requisicaoId)->first();
         $aluno = Aluno::where('id', $requisicao->aluno_id)->first();
-        $palavrasChave = PalavraChave::where('ficha_catalografica_id', $requisicao->ficha_catalografica_id)->Get();
+        $palavrasChave = PalavraChave::where('ficha_catalografica_id', $requisicao->ficha_catalografica_id)->orderBy('id')->get();
         $fichaCatalografica = FichaCatalografica::where('id', $requisicao->ficha_catalografica_id)->first();
         $tipo_documento = $fichaCatalografica->tipo_documento_id;
         $documentoEspecificoNome = TipoDocumento::where('id', $tipo_documento)->first()->tipo;
@@ -103,7 +103,7 @@ class BibliotecarioController extends Controller
     {
         $requisicao = Requisicao_documento::where('id', $requisicaoId)->first();
         $aluno = Aluno::where('id', $requisicao->aluno_id)->first();
-        $palavrasChave = PalavraChave::where('ficha_catalografica_id', $requisicao->ficha_catalografica_id)->Get();
+        $palavrasChave = PalavraChave::where('ficha_catalografica_id', $requisicao->ficha_catalografica_id)->orderBy('id')->get();
         $fichaCatalografica = FichaCatalografica::where('id', $requisicao->ficha_catalografica_id)->first();
         $tipo_documento = $fichaCatalografica->tipo_documento_id;
         $documentoEspecificoNome = TipoDocumento::where('id', $tipo_documento)->first()->tipo;
@@ -115,7 +115,7 @@ class BibliotecarioController extends Controller
         if ($requisicao->bibliotecario_id == null || (date_diff($data_bibi, $data_agora)->h >= 2 && $requisicao->status == 'Em andamento')) {
             $requisicao->bibliotecario_id = $bibli->id;
             $requisicao->save();
-        } 
+        }
         if ($bibliotecario != null && $requisicao->status == 'Em andamento' && $bibliotecario->id != $bibli->id) {
             $requisicao->bibliotecario_id = $bibli->id;
             $requisicao->update();
@@ -207,7 +207,6 @@ class BibliotecarioController extends Controller
             return redirect(route('listar-fichas'))->with('error', 'Esta requisição está sendo analisada pelo bibliotecario: ' . $bibliotecario->user->name);
         }
 
-        
 
         return view('telas_bibliotecario.avaliar_deposito', compact('deposito', 'aluno', 'requisicao', 'requisicao_documento', 'bibliotecario'));
     }
@@ -232,7 +231,7 @@ class BibliotecarioController extends Controller
         } elseif ($bibliotecario != null && $requisicao->status == 'Em andamento' && $bibliotecario->id != $bibli->id) {
             return redirect(route('listar-fichas'))->with('error', 'Esta requisição está sendo analisada pelo bibliotecario: ' . $bibliotecario->user->name);
         }
-        
+
         return view('telas_bibliotecario.editar_deposito', compact('deposito', 'aluno', 'requisicao', 'requisicao_documento', 'bibliotecario'));
     }
 
@@ -432,27 +431,38 @@ class BibliotecarioController extends Controller
             $request;
         }
 
-        $palavra = PalavraChave::where('id', $request->palavra_chave1_id)->first();
+        $palavra = PalavraChave::find( $request->palavra_chave1_id);
         $palavra->palavra = $request->primeira_chave;
         $palavra->update();
 
-        $palavra = PalavraChave::where('id', $request->palavra_chave2_id)->first();
+        $palavra = PalavraChave::find( $request->palavra_chave2_id);
         $palavra->palavra = $request->segunda_chave;
         $palavra->update();
 
-        $palavra = PalavraChave::where('id', $request->palavra_chave3_id)->first();
+        $palavra = PalavraChave::find( $request->palavra_chave3_id);
         $palavra->palavra = $request->terceira_chave;
         $palavra->update();
 
         if ($request->quarta_chave != null) {
-            $palavra = PalavraChave::where('id', $request->palavra_chave4_id)->first();
+            $palavra = PalavraChave::find( $request->palavra_chave4_id);
             $palavra->palavra = $request->quarta_chave;
             $palavra->update();
+        }else{
+            $palavra = PalavraChave::find( $request->palavra_chave4_id);
+            if($palavra){
+                $palavra->delete();
+            }
         }
+
         if ($request->quinta_chave != null) {
             $palavra = PalavraChave::where('id', $request->palavra_chave5_id)->first();
             $palavra->palavra = $request->quinta_chave;
             $palavra->update();
+        }else{
+            $palavra = PalavraChave::where('id', $request->palavra_chave5_id)->first();
+            if($palavra){
+                $palavra->delete();
+            }
         }
 
         $userId = Auth::user()->id;
@@ -622,7 +632,7 @@ class BibliotecarioController extends Controller
             return redirect('home')->with('error', 'Ficha não concluida.');
         }
         $ficha = FichaCatalografica::find($requisicao->ficha_catalografica_id);
-        $palavras = PalavraChave::Where('ficha_catalografica_id', $ficha->id)->get();
+        $palavras = PalavraChave::where('ficha_catalografica_id', $ficha->id)->orderBy('id')->get();
         $tipo_documento = TipoDocumento::find($ficha->tipo_documento_id)->tipo;
         $bibliotecario = Bibliotecario::find($requisicao->bibliotecario_id);
         $userBibliotecario = User::find($bibliotecario->user_id);

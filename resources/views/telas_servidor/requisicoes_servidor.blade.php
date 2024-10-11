@@ -97,7 +97,7 @@
                                     <a data-toggle="tooltip" data-placement="left"
                                        title="Informações:{{$requisicao_documento['detalhes']}} ">
                                 <span onclick="exibirAnotacoes({{$requisicao_documento['id']}})"
-                                      class="fa fa-eye" aria-hidden="true"></span>
+                                      class="btn p-2 fa fa-eye" aria-hidden="true"></span>
                                         @component('componentes.popup', ["titulo"=>"Informações:", "conteudo"=>$requisicao_documento['detalhes'], "id"=>$requisicao_documento['id']])
                                         @endcomponent
                                     </a>
