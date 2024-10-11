@@ -50,7 +50,7 @@ class UsuarioController extends Controller
 
     public function editarUsuario(Request $request)
     {
-        $usuario = User::where('id', $request->id_usuario)->first();
+        $usuario = User::find($request->id_usuario);
 
         $cursos = Curso::orderBy('nome')->get();
         $unidades = Unidade::orderBy('nome')->get();
@@ -90,7 +90,7 @@ class UsuarioController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:300',
             'email' => 'required|string|email|max:255',
-            'cpf' => 'required|string|cpf',
+            'cpf' => $usuario->tipo == 'aluno' ? 'required|string|cpf' : '',
         ]);
 
         if ($request->email != $usuario->email) {
@@ -122,8 +122,22 @@ class UsuarioController extends Controller
             case "aluno":
                 break;
             case "bibliotecario":
+                if ($request->has('active')) {
+                    $usuario->active = 1;
+                } else {
+                    $usuario->active = 0;
+                }
+                $usuario->update();
+
                 break;
             case "servidor":
+                if ($request->has('active')) {
+                    $usuario->active = 1;
+                } else {
+                    $usuario->active = 0;
+                }
+                $usuario->update();
+
                 break;
         }
 

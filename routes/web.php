@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProcessoController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
@@ -13,6 +14,7 @@ use App\Http\Controllers\ServidorController;
 use App\Http\Controllers\RequisicaoController;
 use App\Http\Controllers\PerfilAlunoController;
 use App\Http\Controllers\BibliotecarioController;
+use App\Models\Processo;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +35,8 @@ Auth::routes(['verify' => true]);
 Route::get('/cadastro',[AlunoController::class,'createAluno'])->name('cadastro');
 Route::post('/cadastro',[AlunoController::class,'storeAluno'])->name('cadastro');
 Route::get('/load-cursos/{id}',[AlunoController::class, 'loadCursos'])->name('loadCursos');
+
+
 
 
 //----------------------------------------------ADMINISTRADOR-----------------------------------------------------------
@@ -67,7 +71,7 @@ Route::group(['middleware'=> ['CheckAdministradorServidor', 'verified']], functi
 });
 
 //----------------------------------------------SERVIDOR----------------------------------------------------------------
-Route::group(['middleware'=> ['CheckServidor', 'verified']], function(){
+Route::group(['middleware'=> ['CheckServidor', 'verified', 'banned']], function(){
 
     // Route::post('/filtrar-requisicoes/{curso_id?}', 'RequisicaoController@filtrarCurso')->name('filtrar-requisicoes-post')->middleware('CheckServidor');
 
@@ -90,14 +94,14 @@ Route::group(['middleware'=> ['CheckServidor', 'verified']], function(){
 });
 //----------------------------------------------ALUNO---------------------------------------------------
 // Route::group(['middleware'=> 'verified'], function(){
-Route::group(['middleware' => 'CheckAluno'], function(){
-    Route::get('/home-aluno', [AlunoController::class, 'index'])->name('home-aluno')->middleware('CheckAluno');
-    Route::get('/home-aluno',[AlunoController::class, 'homeAluno'])->name('home-aluno')->middleware('CheckAluno');
-    Route::get('/listar-requisicoes-aluno',[AlunoController::class, 'listarRequisicoes'])->name('listar-requisicoes-aluno')->middleware('CheckAluno');
-    Route::post('/confirmacao-requisicao', [RequisicaoController::class, 'novaRequisicao'])->name('confirmacao-requisicao')->middleware('CheckAluno'); //------------
-    Route::post('/finaliza-requisicao', [RequisicaoController::class, 'finalizaRequisicao'])->name('finaliza-requisicao')->middleware('CheckAluno');
-    Route::get('/cancela-requisicao', [RequisicaoController::class, 'cancelaRequisicao'])->name('cancela-requisicao')->middleware('CheckAluno');
-    Route::get('/prepara-requisicao', [RequisicaoController::class, 'preparaNovaRequisicao'])->name('prepara-requisicao')->middleware('CheckAluno');
+Route::middleware('CheckAluno')->group(function(){
+    Route::get('/home-aluno', [AlunoController::class, 'index'])->name('home-aluno');
+    Route::get('/home-aluno',[AlunoController::class, 'homeAluno'])->name('home-aluno');
+    Route::get('/listar-requisicoes-aluno',[AlunoController::class, 'listarRequisicoes'])->name('listar-requisicoes-aluno');
+    Route::post('/confirmacao-requisicao', [RequisicaoController::class, 'novaRequisicao'])->name('confirmacao-requisicao'); //------------
+    Route::post('/finaliza-requisicao', [RequisicaoController::class, 'finalizaRequisicao'])->name('finaliza-requisicao');
+    Route::get('/cancela-requisicao', [RequisicaoController::class, 'cancelaRequisicao'])->name('cancela-requisicao');
+    Route::get('/prepara-requisicao', [RequisicaoController::class, 'preparaNovaRequisicao'])->name('prepara-requisicao');
     Route::get('/prepara-requisicao-bibli', [RequisicaoController::class, 'preparaNovaRequisicaoBibli'])->name('prepara-requisicao-bibli');
     Route::post('/excluir-requisicao/{id}',[RequisicaoController::class, 'excluirRequisicao'])->name('excluir-requisicao');
 
@@ -108,25 +112,38 @@ Route::group(['middleware' => 'CheckAluno'], function(){
 
     Route::get('/confirmacao-requisicao',function(){
         return view('autenticacao.confirmacao-requisicao');
-    })->name('confirmacao-requisicao')->middleware('CheckAluno');
-    Route::get('/perfil-aluno',[PerfilAlunoController::class, 'index'])->name('perfil-aluno')->middleware('CheckAluno');
-    Route::get('/editar-perfil',[PerfilAlunoController::class, 'editarInfo'])->name('editar-info')->middleware('CheckAluno');
-    Route::get('/exibir-perfil-aluno',[PerfilAlunoController::class, 'editarInfo'])->name('exibir-perfil-aluno')->middleware('CheckAluno');
-    Route::post('/editar-perfil',[PerfilAlunoController::class, 'storeEditarInfo'])->name('editar-info')->middleware('CheckAluno');
-    Route::post('/excluir-perfil{idPerfil?}',[PerfilAlunoController::class, 'excluirPerfil'])->name('excluir-perfil')->middleware('CheckAluno');
-    Route::post('/perfil-padrao{idPerfilPadrao?}',[PerfilAlunoController::class, 'definirPerfilDefault'])->name('perfil-padrao')->middleware('CheckAluno');
-    Route::get('/adiciona-perfil', [PerfilAlunoController::class, 'adicionaPerfil'])->name('adiciona-perfil')->middleware('CheckAluno');
-    Route::post('/salva-novo-perfil-aluno', [PerfilAlunoController::class, 'salvaPerfil'])->name('salva-novo-perfil-aluno')->middleware('CheckAluno');
-    Route::post('/salva-novo-perfil-aluno', [PerfilAlunoController::class, 'salvaPerfil'])->name('salva-novo-perfil-aluno')->middleware('CheckAluno');
-    Route::get('/alterar-senha',[PerfilAlunoController::class, 'alterarSenha'])->name('alterar-senha')->middleware('CheckAluno');
-    Route::post('/alterar-senha',[PerfilAlunoController::class, 'storeAlterarSenha'])->name('alterar-senha')->middleware('CheckAluno');
-    Route::get('/formulario-requisicao',[RequisicaoController::class, 'index'])->name('formulario-requisicao')->middleware('CheckAluno');
-    Route::post('/formulario-requisicao',[RequisicaoController::class, 'storeRequisicao'])->name('formulario-requisicao-post')->middleware('CheckAluno');
+    })->name('confirmacao-requisicao');
+    Route::get('/perfil-aluno',[PerfilAlunoController::class, 'index'])->name('perfil-aluno');
+    Route::get('/editar-perfil',[PerfilAlunoController::class, 'editarInfo'])->name('editar-info');
+    Route::get('/exibir-perfil-aluno',[PerfilAlunoController::class, 'editarInfo'])->name('exibir-perfil-aluno');
+    Route::post('/editar-perfil',[PerfilAlunoController::class, 'storeEditarInfo'])->name('editar-info');
+    Route::post('/excluir-perfil{idPerfil?}',[PerfilAlunoController::class, 'excluirPerfil'])->name('excluir-perfil');
+    Route::post('/perfil-padrao{idPerfilPadrao?}',[PerfilAlunoController::class, 'definirPerfilDefault'])->name('perfil-padrao');
+    Route::get('/adiciona-perfil', [PerfilAlunoController::class, 'adicionaPerfil'])->name('adiciona-perfil');
+    Route::post('/salva-novo-perfil-aluno', [PerfilAlunoController::class, 'salvaPerfil'])->name('salva-novo-perfil-aluno');
+    Route::post('/salva-novo-perfil-aluno', [PerfilAlunoController::class, 'salvaPerfil'])->name('salva-novo-perfil-aluno');
+    Route::get('/alterar-senha',[PerfilAlunoController::class, 'alterarSenha'])->name('alterar-senha');
+    Route::post('/alterar-senha',[PerfilAlunoController::class, 'storeAlterarSenha'])->name('alterar-senha');
+    Route::get('/formulario-requisicao',[RequisicaoController::class, 'index'])->name('formulario-requisicao');
+    Route::post('/formulario-requisicao',[RequisicaoController::class, 'storeRequisicao'])->name('formulario-requisicao-post');
     Route::get('aluno/{requisicao_id}/gerar-ficha',[BibliotecarioController::class, 'gerarFicha'])->name('gerar-ficha-aluno')->middleware('CheckFichaAluno');
 
     Route::get('/baixar-nada-consta/{requisicao_documento}', [BibliotecarioController::class, 'baixarNadaConsta'])->name('baixar-nada-consta-aluno');
     Route::get('/baixar-deposito/{requisicao_documento}', [BibliotecarioController::class, 'baixarDeposito'])->name('baixar-deposito-aluno');
     Route::get('/baixar-retificacao/{retificacao}', [BibliotecarioController::class, 'baixarRetificacao'])->name('baixar-retificacao-aluno');
+
+    //Processos
+    Route::get('/processos', [ProcessoController::class, 'main'])->name('tratamento.create');
+
+    Route::get('/complementar',[ProcessoController::class,'complementar'])->name('complementar.create');
+    Route::get('/excepcional',[ProcessoController::class,'tratamento'])->name('excepcional.create');
+    Route::get('/antecipacao',[ProcessoController::class,'antecipacao'])->name('antecipacao_grau.create');
+    Route::get('/dispensa/educao',[ProcessoController::class,'educao'])->name('educacao.create');
+    Route::get('/dispensa/disciplina',[ProcessoController::class,'disciplina'])->name('disciplina.create');
+    Route::get('/alteracao',[ProcessoController::class,'alteracao'])->name('alteracao.create');
+
+    Route::post('/processo/store', [ProcessoController::class, 'aberturaProcessos'])->name('processo.store');
+
 });
 
 //----------------------------------------------BIBLIOTECARIO---------------------------------------------------
@@ -175,7 +192,7 @@ Route::group(['middleware'=> ['CheckBibliotecario', 'banned']], function(){
 });
 
 // ---------------------------------------REQUISICAO------------------------------------------------------------------
-Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('verified');
+Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware(['verified', 'banned']);
 // Route::get('/mail-send', 'MailController@send');
 
 // Route::get('/edita-perfil','PerfilController@editaPerfil')->name('edita-perfil');
