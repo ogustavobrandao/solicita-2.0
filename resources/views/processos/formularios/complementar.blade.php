@@ -6,7 +6,7 @@
     <div class="container border rounded-3 shadow-lg">
         <form class="m-5" action="{{route('processo.store')}}" method="post" enctype="multipart/form-data">
             @csrf
-            <input type="hidden" value="complementar" id="tipo_processo" name="tipo_processo" disabled>
+            <input type="hidden" value="complementar" id="tipo_processo" name="tipo_processo">
             <h1 class="pb-3">Atividade Complementar</h1>
 
             <strong>
