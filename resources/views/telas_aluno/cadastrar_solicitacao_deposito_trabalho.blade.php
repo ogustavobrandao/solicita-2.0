@@ -46,13 +46,13 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="titulo_trabalho">Título do trabalho: <span style="color: red">*</span></label>
-                                    <textarea class="editor-ckeditor1" id="titulo_trabalho" name="titulo_trabalho"></textarea>
+                                    <textarea class="editor-ckeditor1" id="titulo_trabalho" name="titulo_trabalho" required></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="anexo1">Trabalho de Conclusão de Curso (TCC): <span
                                         style="color: red">*</span></label><br>
                                     <input type="file" id="anexo1" accept="application/pdf, .docx, .doc" name="anexo_tcc"
-                                           style="margin-bottom: 0px" >
+                                           style="margin-bottom: 0px" required>
                                     <br>
                                     <span id="tipoAnexo"
                                           style="font-size: small; color: gray; margin-top: 0px; margin-bottom: 10px">Tipos permitidos: PDF, DOCX e DOC. </span>
