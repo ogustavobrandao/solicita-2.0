@@ -12,7 +12,7 @@
             font-size: 13pt;
             margin-left: 2cm;
             margin-right: 2cm;
-            
+
         }
         header{
             text-align: center;
@@ -28,12 +28,12 @@
         h4{
             text-align: center;
         }
-    
+
         address{
             display: inline;
         }
         img{
-            width: 50.93px; 
+            width: 50.93px;
             height: 55.21px;
         }
 
@@ -51,22 +51,19 @@
         </p>
     </header>
     <main>
-        
-            
+
+
         <h4>
-            REQUERIMENTO DE ANOTAÇÃO DE ATIVIDADE <br>
-            CURRICULAR COMPLEMENTAR
+            REQUERIMENTO DE APROVEITAMENTO DE DISCIPLINAS
         </h4>
-        
+
         <p>À COORDENAÇÃO DO CURSO DE {{$perfil->curso->nome}} DA UFAPE, </p>
         <p style="text-indent: 20px;">
-            Eu <strong>{{$user->name}}</strong>, n° de CPF <strong>{{$aluno->cpf}}</strong>, aluno(a) do curso de
-            {{$perfil->curso->nome}}, solicito de V. Sa. a análise da
-            documentação apresentada em anexo, a essa
-            coordenação relativa às atividades complementares
-            para cômputo e registro de carga horária pelo
-            DRCA/UFAPE, de acordo com a resolução
-            CONSU/UFAPE no 015/2020.
+            Eu <strong>{{$user->name}}</strong>, n° de CPF <strong>{{$aluno->cpf}}</strong> tendo
+            cursado disciplinas no curso de {{$request->curso_anterior}}, desta universidade, venho
+            requerer aproveitamento de disciplinas cursadas, conforme histórico escolar anexo,
+            com base na Resolução n° 67/2000-CEPE, considerando meu novo vínculo com o curso de
+            {{$perfil->curso->nome}} a partir do semestre letivo {{$request->semestre_entrada}}.
         </p>
         <p>
             Garanhuns, {{$data}}
@@ -75,7 +72,7 @@
             Contatos: <br>
             Email: {{$user->email}}
         </p>
-        
+
     </main>
     <footer>
         <p style="font-weight: italic">Obs.: Requerimento realizado pelo(a) discente através do Solicita <a href="www.solicita.ufape.edu.br">(www.solicita.ufape.edu.br)</a>, dispensa assinatura.</p>

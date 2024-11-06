@@ -133,16 +133,16 @@ Route::middleware('CheckAluno')->group(function(){
     Route::get('/baixar-retificacao/{retificacao}', [BibliotecarioController::class, 'baixarRetificacao'])->name('baixar-retificacao-aluno');
 
     //Processos
-    Route::get('/processos', [ProcessoController::class, 'main'])->name('tratamento.create');
-
-    Route::get('/complementar',[ProcessoController::class,'complementar'])->name('complementar.create');
-    Route::get('/excepcional',[ProcessoController::class,'tratamento'])->name('excepcional.create');
-    Route::get('/antecipacao',[ProcessoController::class,'antecipacao'])->name('antecipacao_grau.create');
-    Route::get('/dispensa/educao',[ProcessoController::class,'educao'])->name('educacao.create');
-    Route::get('/dispensa/disciplina',[ProcessoController::class,'disciplina'])->name('disciplina.create');
-    Route::get('/alteracao',[ProcessoController::class,'alteracao'])->name('alteracao.create');
-
-    Route::post('/processo/store', [ProcessoController::class, 'aberturaProcessos'])->name('processo.store');
+    Route::prefix('/processos')->middleware('EmDesenvolvimento')->controller(ProcessoController::class)->group(function(){
+        Route::get('/',  'menuProcessos')->name('tratamento.create');
+        Route::get('/complementar','complementar')->name('complementar.create');
+        Route::get('/excepcional','tratamento')->name('excepcional.create');
+        Route::get('/antecipacao','antecipacao')->name('antecipacao_grau.create');
+        Route::get('/dispensa/educao','educao')->name('educacao.create');
+        Route::get('/dispensa/disciplina','disciplina')->name('disciplina.create');
+        Route::get('/alteracao','alteracao')->name('alteracao.create');
+        Route::post('/processo/store', 'aberturaProcessos')->name('processo.store');
+    });
 
 });
 

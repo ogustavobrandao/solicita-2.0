@@ -46,7 +46,7 @@ class BibliotecarioController extends Controller
 
     public function listarSolicitacoes()
     {
-        $requisicaos = Requisicao_documento::all();
+        $requisicaos = Requisicao_documento::paginate(10);
         $idUser = Auth::user()->id;
         $bibliotecario = Bibliotecario::where('user_id', $idUser)->first();
         $unidadeBibliotecario = $bibliotecario->biblioteca->unidade_id;

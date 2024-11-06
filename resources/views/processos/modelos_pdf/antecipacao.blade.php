@@ -12,7 +12,7 @@
             font-size: 13pt;
             margin-left: 2cm;
             margin-right: 2cm;
-            
+
         }
         header{
             text-align: center;
@@ -28,12 +28,12 @@
         h4{
             text-align: center;
         }
-    
+
         address{
             display: inline;
         }
         img{
-            width: 50.93px; 
+            width: 50.93px;
             height: 55.21px;
         }
 
@@ -51,23 +51,22 @@
         </p>
     </header>
     <main>
-        
-            
+
+
         <h4>
-            REQUERIMENTO DE ANOTAÇÃO DE ATIVIDADE <br>
-            CURRICULAR COMPLEMENTAR
+            REQUERIMENTO DE ANTECIPAÇÃO DE <br> COLAÇÃO DE GRAU
         </h4>
-        
-        <p>À COORDENAÇÃO DO CURSO DE {{$perfil->curso->nome}} DA UFAPE, </p>
+
+        <p>À REITORIA DA UFAPE, </p>
         <p style="text-indent: 20px;">
-            Eu <strong>{{$user->name}}</strong>, n° de CPF <strong>{{$aluno->cpf}}</strong>, aluno(a) do curso de
-            {{$perfil->curso->nome}}, solicito de V. Sa. a análise da
-            documentação apresentada em anexo, a essa
-            coordenação relativa às atividades complementares
-            para cômputo e registro de carga horária pelo
-            DRCA/UFAPE, de acordo com a resolução
-            CONSU/UFAPE no 015/2020.
+            Eu, <strong>{{$user->name}}</strong>, n° de CPF <strong>{{$aluno->cpf}}</strong>, concluinte do curso de
+            {{$perfil->curso->nome}}, desta Universidade, referente ao semestre {{$request->semestre}},
+            solicito Colação de Grau Antecipada, nos termos do Artigo 148, Parágravo 2&ordm;
+            do Regimento Geral da UFAPE, pelo motivo abaixo especificado, conforme documentação
+            comprobatória anexada a este Requerimento, pelo que assumo total responsabilidade pela
+            sua veracidade:
         </p>
+        <p><strong>Motivo do Requerimento: </strong>{{$request->motivo}}</p>
         <p>
             Garanhuns, {{$data}}
         </p>
@@ -75,7 +74,7 @@
             Contatos: <br>
             Email: {{$user->email}}
         </p>
-        
+
     </main>
     <footer>
         <p style="font-weight: italic">Obs.: Requerimento realizado pelo(a) discente através do Solicita <a href="www.solicita.ufape.edu.br">(www.solicita.ufape.edu.br)</a>, dispensa assinatura.</p>

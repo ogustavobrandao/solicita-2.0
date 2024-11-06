@@ -19,7 +19,7 @@
 
         <div class="text-center p-5 shadow caixaSelecao" style="background-color: var(--escolaridade);">
             @include('autenticacao.escolaridade_modal')
-            <a class="btn" data-bs-toggle="modal" data-bs-target="#escolhaEscolaridade">
+            <a type="button" data-bs-toggle="modal" data-bs-target="#escolhaEscolaridade">
                 <div class="text-center pt-4">
                     <img class="pb-3" src="images/escolaridade-aluno.svg" height="120px">
                 </div>

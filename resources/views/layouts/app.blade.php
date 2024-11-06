@@ -9,6 +9,7 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
     <script defer="defer" src="//barra.brasil.gov.br/barra_2.0.js" type="text/javascript"></script>
     <script src="{{ asset('js/jquery-3.4.1.min.js')}}"></script>
@@ -281,27 +282,38 @@
     </style>
 </head>
 <body style="background-color: var(--background)">
-<!-- Barra Brasil -->
-<div id="barra-brasil" style="background:#7F7F7F; height: 20px; padding:0 0 0 10px;display:block;">
-    <ul id="menu-barra-temp" style="list-style:none;">
-        <li
-            style="display:inline; float:left;padding-right:10px; margin-right:10px; border-right:1px solid #EDEDED">
-            <a href="http://brasil.gov.br"
-                style="font-family:sans,sans-serif; text-decoration:none; color:white;">Portal
-                do Governo Brasileiro</a>
-        </li>
-    </ul>
-</div>
-{{-- <div id="content-wrap">
-</div> --}}
-@include('layouts.navbar2')
-<!-- barra de menu -->
-<div class="min-h-screen py-5">
-    @yield('conteudo')
-</div>
-<!-- rodape -->
-@include('layouts.footer')
-<!--x rodape x-->
+    <!-- Barra Brasil -->
+    <div id="barra-brasil" style="background:#7F7F7F; height: 20px; padding:0 0 0 10px;display:block;">
+        <ul id="menu-barra-temp" style="list-style:none;">
+            <li
+                style="display:inline; float:left;padding-right:10px; margin-right:10px; border-right:1px solid #EDEDED">
+                <a href="http://brasil.gov.br"
+                    style="font-family:sans,sans-serif; text-decoration:none; color:white;">Portal
+                    do Governo Brasileiro</a>
+            </li>
+        </ul>
+    </div>
+    {{-- <div id="content-wrap">
+    </div> --}}
+    @include('layouts.navbar2')
+
+    @if(session('success'))
+        <div class="alert alert-success text-center">
+            {{ session('success') }}
+        </div>
+    @elseif(session('fail'))
+        <div class="alert alert-danger text-center">
+            {{ session('fail') }}
+        </div>
+    @endif
+
+    <!-- barra de menu -->
+    <div class="min-h-screen py-5">
+        @yield('conteudo')
+    </div>
+    <!-- rodape -->
+    @include('layouts.footer')
+    <!--x rodape x-->
 
 </body>
 <!-- jQuery library -->
@@ -309,7 +321,6 @@
 <script src="{{asset('js/prevent-submit.js')}}"></script>
 <!-- Latest compiled JavaScript -->
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <script defer="defer" src="//barra.brasil.gov.br/barra.js" type="text/javascript"></script>
 
 

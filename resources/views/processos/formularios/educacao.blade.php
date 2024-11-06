@@ -3,10 +3,11 @@
 
 @section('conteudo')
 
-    <div class="d-flex justify-content-center">
-        <form action="{{route('processo.store')}}" method="post" enctype="multipart/form-data">
+    <div class="container border rounded-3 shadow-lg">
+        <form class="m-5" action="{{route('processo.store')}}" method="post" enctype="multipart/form-data">
             @csrf
             <input type="hidden" value="educacao_fisica" id="tipo_processo" name="tipo_processo">
+            <h1 class="pb-3">Dispensa de Educação Física</h1>
 
             <div class="form-group">
                 <label class="textoFicha" for="motivo">Motivo</label>
@@ -21,12 +22,12 @@
             </div>
 
             <div class="form-group">
-                <label class="textoFicha" for="doc_tratamento">Submeta o pdf</label>
+                <label class="textoFicha" for="doc_tratamento">Submeta o PDF</label>
                 <input class="form-control" type="file" name="doc_tratamento" id="doc_tratamento">
             </div>
 
             <div>
-                <button class="btn btn-primary" type="submit"> Enviar</button>
+                <button class="btn btn-success" type="submit">Enviar</button>
             </div>
         </form>
     </div>
