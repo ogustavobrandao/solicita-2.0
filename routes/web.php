@@ -133,7 +133,7 @@ Route::middleware('CheckAluno')->group(function(){
     Route::get('/baixar-retificacao/{retificacao}', [BibliotecarioController::class, 'baixarRetificacao'])->name('baixar-retificacao-aluno');
 
     //Processos
-    Route::prefix('/processos')->controller(ProcessoController::class)->group(function(){
+    Route::prefix('/processos')->middleware('EmDesenvolvimento')->controller(ProcessoController::class)->group(function(){
         Route::get('/',  'menuProcessos')->name('tratamento.create');
         Route::get('/complementar','complementar')->name('complementar.create');
         Route::get('/excepcional','tratamento')->name('excepcional.create');
