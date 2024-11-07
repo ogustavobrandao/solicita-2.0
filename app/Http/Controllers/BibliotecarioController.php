@@ -30,6 +30,7 @@ use App\Models\Deposito;
 use App\Models\Retificacao;
 use App\Notifications\AlertaDeposito;
 use App\Notifications\AlertaNadaConsta;
+use Carbon\Carbon;
 
 class BibliotecarioController extends Controller
 {
@@ -46,7 +47,7 @@ class BibliotecarioController extends Controller
 
     public function listarSolicitacoes()
     {
-        $requisicaos = Requisicao_documento::paginate(10);
+        $requisicaos = Requisicao_documento::where('created_at', '>=', Carbon::now()->subYears(2))->get();
         $idUser = Auth::user()->id;
         $bibliotecario = Bibliotecario::where('user_id', $idUser)->first();
         $unidadeBibliotecario = $bibliotecario->biblioteca->unidade_id;
