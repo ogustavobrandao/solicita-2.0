@@ -102,10 +102,12 @@ Route::middleware('CheckAluno')->group(function(){
     Route::post('/finaliza-requisicao', [RequisicaoController::class, 'finalizaRequisicao'])->name('finaliza-requisicao');
     Route::get('/cancela-requisicao', [RequisicaoController::class, 'cancelaRequisicao'])->name('cancela-requisicao');
     Route::get('/prepara-requisicao', [RequisicaoController::class, 'preparaNovaRequisicao'])->name('prepara-requisicao');
-    Route::get('/prepara-requisicao-bibli', [RequisicaoController::class, 'preparaNovaRequisicaoBibli'])->name('prepara-requisicao-bibli');
     Route::post('/excluir-requisicao/{id}',[RequisicaoController::class, 'excluirRequisicao'])->name('excluir-requisicao');
 
+    Route::get('/prepara-requisicao-bibli', [RequisicaoController::class, 'preparaNovaRequisicaoBibli'])->name('prepara-requisicao-bibli');
+
     Route::post('/cadastrar-documento-bibli', [RequisicaoController::class, 'cadastrarDocumento'])->name('cadastrarDocumento');
+    Route::get('/documento-bibli', [RequisicaoController::class, 'exibirDocumento'])->name('exibirDocumento');
     Route::post('/criar-doc-bibli', [RequisicaoController::class, 'criarDocumento'])->name('criarDocumentoBibli');
     Route::post('/criar-nada-consta', [RequisicaoController::class, 'criarNadaConsta'])->name('criarNadaConsta');
     Route::post('/criar-deposito', [RequisicaoController::class, 'criarDeposito'])->name('criarDeposito');

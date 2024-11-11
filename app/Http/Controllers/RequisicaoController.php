@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CriarDepositoRequest;
 use App\Mail\AlertaFichaMail;
 use App\Models\Biblioteca;
 use App\Models\Bibliotecario;
@@ -175,13 +176,29 @@ class RequisicaoController extends Controller
 
     public function cadastrarDocumento(Request $request)
     {
-        $usuario = Auth::user();
         $id_perfil = $request->default;
+
+        $tipo_documento = $request->documento;
+
+        if ($tipo_documento == 'comprovante') {
+            return redirect()->route('exibirDocumento', compact(  'tipo_documento', 'id_perfil'));
+        }
+        if ($tipo_documento == 'ComprovanteDepositoTrabalhoConclusao') {
+            return redirect()->route('exibirDocumento', compact(  'tipo_documento', 'id_perfil'));
+        }
+
+        return redirect()->route('exibirDocumento', ['tipo_documento' => $tipo_documento, 'id_perfil' => $id_perfil]);//rever logica depois
+    }
+
+    public function exibirDocumento(Request $request)
+    {
+        $usuario = Auth::user();
+        $id_perfil = $request->id_perfil;
         $perfil = Perfil::find($id_perfil);
         $aluno = $usuario->aluno;
         $curso = $perfil->curso;
 
-        $tipo_documento = $request->documento;
+        $tipo_documento = $request->tipo_documento;
 
         if ($tipo_documento == 'comprovante') {
             return view('telas_aluno.cadastrar_solicitacao_nada_consta', compact('usuario', 'aluno', 'curso', 'perfil'));
@@ -347,9 +364,9 @@ class RequisicaoController extends Controller
 
         $unidade = $perfil->unidade;
         $bibliotecas = $unidade->bibliotecas;
-        Notification::send($bibliotecas, new NadaConstaSolicitado($perfil->aluno->user, $unidade));
 
         $documentosRequisitados->save();
+        Notification::send($bibliotecas, new NadaConstaSolicitado($perfil->aluno->user, $unidade));
 
         return redirect(Route('home-aluno'))->with('success', 'Solicitação de comprovante de nada consta realizada com sucesso!');
     }
@@ -656,20 +673,15 @@ class RequisicaoController extends Controller
         return view('telas_servidor.pesquisa_servidor', compact('alunos'));
 
     }
-    public function criarDeposito(Request $request)
+    public function criarDeposito(CriarDepositoRequest $request)
     {
         $deposito = new Deposito();
         $deposito->autor_nome = $request->autor_nome;
-        $deposito->titulo_tcc = $request->titulo_trabalho;
+        $deposito->titulo_tcc = $request->titulo_tcc;
+        $deposito->anexo_tcc = $request->file('anexo_tcc')->store('deposito');
+        $deposito->anexo_comprovante_autorizacao = $request->file('anexo_comprovante_autorizacao')->store('deposito');
 
-        if (($request->hasFile('anexo_tcc') && $request->file('anexo_tcc')->isValid())) {
-            $deposito->anexo_tcc = $request->file('anexo_tcc')->store('deposito');
-        }
-
-        if (($request->hasFile('anexo_comprovante_autorizacao') && $request->file('anexo_comprovante_autorizacao')->isValid())) {
-            $deposito->anexo_comprovante_autorizacao = $request->file('anexo_comprovante_autorizacao')->store('deposito');
-        }
-        if (($request->hasFile('anexo_publicacao_parcial') && $request->file('anexo_publicacao_parcial')->isValid())) {
+        if ($request->hasFile('anexo_publicacao_parcial')) {
             $deposito->anexo_publicacao_parcial = $request->file('anexo_publicacao_parcial')->store('deposito');
         }
         $deposito->save();
@@ -692,16 +704,16 @@ class RequisicaoController extends Controller
 
         $unidade = $perfil->unidade;
         $bibliotecas = $unidade->bibliotecas;
-        Notification::send($bibliotecas, new DepositoSolicitado($perfil->aluno->user, $unidade));
 
         $documentosRequisitados->save();
+        Notification::send($bibliotecas, new DepositoSolicitado($perfil->aluno->user, $unidade));
 
         return redirect(Route('home-aluno'))->with('success', 'Solicitação de comprovante de depósito realizada com sucesso!');
 
     }
 
     public function EditarNomeAutorNadaConsta(Request $request, $nadaConstaId)
-    {   
+    {
 
         $nadaConsta = NadaConsta::find($nadaConstaId);
         $nadaConsta->update(['autor_nome' => $request->nome]);

@@ -19,7 +19,7 @@ class Deposito extends Model
     ];
 
     public function requisicao_documento(){
-        return $this->belongsTo('App\Models\Requisicao_documento');
+        return $this->belongsTo(Requisicao_documento::class);
     }
 
     public function hasAttribute($anexo_comprovante_deposito)
