@@ -10,6 +10,6 @@ class Documento extends Model
     protected $fillable = ['tipo'];
 
     public function requisicao_documento(){
-        return $this->belongsTo('App\Models\Requisicao_documento');
+        return $this->belongsTo(Requisicao_documento::class);
     }
 }

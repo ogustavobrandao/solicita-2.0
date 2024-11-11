@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 class Requisicao_documento extends Model
 {
-    //
     use SoftDeletes;
     protected $dates = ['deleted_at'];
 
@@ -27,6 +26,11 @@ class Requisicao_documento extends Model
     public function deposito()
     {
         return $this->belongsTo(Deposito::class);
+    }
+
+    public function fichaCatalografica()
+    {
+        return $this->belongsTo(FichaCatalografica::class);
     }
 
     /**
