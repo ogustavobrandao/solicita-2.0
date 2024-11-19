@@ -31,6 +31,7 @@ use App\Models\Retificacao;
 use App\Notifications\AlertaDeposito;
 use App\Notifications\AlertaNadaConsta;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class BibliotecarioController extends Controller
 {
@@ -45,36 +46,31 @@ class BibliotecarioController extends Controller
         return view('autenticacao.login');
     }
 
-    public function listarSolicitacoes()
+    public function listarSolicitacoes(Request $request)
     {
-        $requisicaos = Requisicao_documento::where('created_at', '>=', Carbon::now()->subYears(2))->get();
+        $requisicoesFichas = Requisicao_documento::leftJoin('depositos', 'requisicao_documentos.deposito_id', '=', 'depositos.id')
+        ->leftJoin('ficha_catalograficas', 'requisicao_documentos.ficha_catalografica_id', '=', 'ficha_catalograficas.id')
+        ->leftJoin('nada_constas', 'requisicao_documentos.nada_consta_id', '=', 'nada_constas.id')
+        ->where(function($query) {
+            $query->whereNotNull('requisicao_documentos.deposito_id')
+                  ->orWhereNotNull('requisicao_documentos.ficha_catalografica_id')
+                  ->orWhereNotNull('requisicao_documentos.nada_consta_id');
+        })
+        ->select(
+            'requisicao_documentos.*',
+            DB::raw('COALESCE(depositos.autor_nome, ficha_catalograficas.autor_nome, nada_constas.autor_nome) as autor_nome'),
+            DB::raw('COALESCE(depositos.created_at, ficha_catalograficas.created_at, nada_constas.created_at) as entity_created_at'),
+            DB::raw('COALESCE(depositos.updated_at, ficha_catalograficas.updated_at, nada_constas.updated_at) as entity_updated_at'),
+
+        )
+        ->orderBy($request->sort ?? 'entity_created_at', $request->direction ?? 'asc')->paginate(10);
+
         $idUser = Auth::user()->id;
         $bibliotecario = Bibliotecario::where('user_id', $idUser)->first();
         $unidadeBibliotecario = $bibliotecario->biblioteca->unidade_id;
-        $documentosFichaCatalografica = [];
-        $documentosNadaConsta = [];
-        $documentosDeposito = [];
-        $requisicoesFichas = [];
-        foreach ($requisicaos as $requisicao) {
-            $perfil = $requisicao->aluno->perfil->first();
-            if ($requisicao->ficha_catalografica_id != null || $requisicao->nada_consta_id != null || $requisicao->deposito_id != null && $unidadeBibliotecario == $perfil->unidade_id) {
-                $requisicoesFichas[] = $requisicao;
 
-               if($requisicao->ficha_catalografica_id != null){
 
-                   $documentosFichaCatalografica[] = FichaCatalografica::find($requisicao->ficha_catalografica_id);
-               }
-               if($requisicao->deposito_id != null){
-
-                $documentosDeposito[] = Deposito::find($requisicao->deposito_id);
-            }elseif($requisicao->nada_consta_id != null){
-
-                   $documentosNadaConsta[] = NadaConsta::find($requisicao->nada_consta_id);
-               }
-            }
-        }
-
-        return view('telas_bibliotecario.listar_documentos_solicitados', compact('requisicoesFichas', 'documentosFichaCatalografica', 'documentosNadaConsta', 'documentosDeposito','idUser', 'bibliotecario'));
+        return view('telas_bibliotecario.listar_documentos_solicitados', compact('requisicoesFichas','idUser', 'bibliotecario'));
     }
 
     public function visualizarFicha($requisicaoId)
