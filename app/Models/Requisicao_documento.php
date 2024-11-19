@@ -5,10 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Kyslik\ColumnSortable\Sortable;
 class Requisicao_documento extends Model
 {
     use SoftDeletes;
+
+    use Sortable;
     protected $dates = ['deleted_at'];
+
+    public $sortable = ['status', 'autor_nome', 'entity_created_at', 'entity_updated_at'];
 
     protected $fillable = ['anotacoes','status','status_data','detalhes'];
 
