@@ -63,7 +63,7 @@ class BibliotecarioController extends Controller
             DB::raw('COALESCE(depositos.updated_at, ficha_catalograficas.updated_at, nada_constas.updated_at) as entity_updated_at'),
 
         )
-        ->orderBy($request->sort ?? 'entity_created_at', $request->direction ?? 'asc')->paginate(10);
+        ->orderBy($request->sort ?? 'entity_created_at', $request->direction ?? 'desc')->paginate(10);
 
         $idUser = Auth::user()->id;
         $bibliotecario = Bibliotecario::where('user_id', $idUser)->first();
