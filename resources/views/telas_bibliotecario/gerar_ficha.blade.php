@@ -278,7 +278,7 @@
                     <!-- Palavras chave -->
                     @if($tipo_documento == 'Monografia')
                         <tr>
-                            <td class="recuo" style="padding-top: 10px"><span class="recuo">{{substr($ficha->autor_sobrenome, 0, 3)}}</span>@for ($i = 0; $i < sizeof($palavras); $i++){{ ($i + 1) }}. {{ $palavras[$i]->palavra }}
+                            <td class="recuo" style="padding-top: 10px"><span class="recuo">{{substr($ficha->autor_sobrenome, 0, 3)}}</span>@for ($i = 0; $i < sizeof($palavras); $i++){{ ($i + 1) }}. {{ $palavras[$i]->palavra }}.
                                 @endfor I. {{ $documento->sobrenome_orientador }}, {{ $documento->nome_orientador }}
                                 (orient.)
                                 @if($documento->nome_coorientador != null)
@@ -297,7 +297,7 @@
 
                     @elseif($tipo_documento == 'Tese')
                         <tr>
-                            <td class="recuo" style="padding-top: 10px"><span class="recuo">{{substr($ficha->autor_sobrenome, 0, 3)}}</span>@for ($i = 0; $i < sizeof($palavras); $i++){{ ($i + 1) }}. {{ $palavras[$i]->palavra }}
+                            <td class="recuo" style="padding-top: 10px"><span class="recuo">{{substr($ficha->autor_sobrenome, 0, 3)}}</span>@for ($i = 0; $i < sizeof($palavras); $i++){{ ($i + 1) }}. {{ $palavras[$i]->palavra }}.
                                 @endfor I. {{ $documento->sobrenome_orientador }}, {{ $documento->nome_orientador }}
                                 (orient.)
                                 @if($documento->nome_coorientador != null)
@@ -315,7 +315,7 @@
                         </tr>
                     @elseif($tipo_documento == 'ProgramaEduc')
                         <tr>
-                            <td class="recuo" style="padding-top: 10px"><span class="recuo">{{substr($ficha->autor_sobrenome, 0, 3)}}</span>@for ($i = 0; $i < sizeof($palavras); $i++){{ ($i + 1) }}. {{ $palavras[$i]->palavra }}
+                            <td class="recuo" style="padding-top: 10px"><span class="recuo">{{substr($ficha->autor_sobrenome, 0, 3)}}</span>@for ($i = 0; $i < sizeof($palavras); $i++){{ ($i + 1) }}. {{ $palavras[$i]->palavra }}.
                                 @endfor I. {{ $documento->sobrenome_orientador }}, {{ $documento->nome_orientador }}(orient.)
                                 @if($documento->nome_coorientador != null)
                                     II. {{ $documento->sobrenome_coorientador }}, {{ $documento->nome_coorientador }}(coorient.)
@@ -333,7 +333,7 @@
 
                     @else
                         <tr>
-                            <td class="recuo" style="padding-top: 10px"><span class="recuo">{{substr($ficha->autor_sobrenome, 0, 3)}}</span>@for ($i = 0; $i < sizeof($palavras); $i++){{ ($i + 1) }}. {{ $palavras[$i]->palavra }}
+                            <td class="recuo" style="padding-top: 10px"><span class="recuo">{{substr($ficha->autor_sobrenome, 0, 3)}}</span>@for ($i = 0; $i < sizeof($palavras); $i++){{ ($i + 1) }}. {{ $palavras[$i]->palavra }}.
                                 @endfor I. {{ $documento->sobrenome_orientador }}, {{ $documento->nome_orientador }}
                                 (orient.)
                                 @if($documento->nome_coorientador != null)
