@@ -8,7 +8,6 @@
     </div>
 
     <div class="container">
-        <div>@include('componentes.mensagens')</div>
         <div class="row my-3 p-1 py-3 align-middle" style="background-color: #C2C2C2; border-radius: 1rem">
             <div class="col-md-12">
                 <select name="cursos" id="cursos" autocomplete="off" onchange="quantidades()" class="browser-default custom-select custom-select col-md-12">

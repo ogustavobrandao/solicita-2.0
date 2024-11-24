@@ -41,8 +41,4 @@ crossorigin="anonymous"></script>
         </nav>
     @endif
 
-    <div>
-        @include('componentes.mensagens')
-    </div>
-
 </div>
