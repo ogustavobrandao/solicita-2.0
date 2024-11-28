@@ -299,15 +299,7 @@
     </div> --}}
     @include('layouts.navbar2')
 
-    @if(session('success'))
-        <div class="alert alert-success text-center">
-            {{ session('success') }}
-        </div>
-    @elseif(session('fail'))
-        <div class="alert alert-danger text-center">
-            {{ session('fail') }}
-        </div>
-    @endif
+    @include('componentes.mensagens')
 
     <!-- barra de menu -->
     <div class="min-h-screen py-5">
