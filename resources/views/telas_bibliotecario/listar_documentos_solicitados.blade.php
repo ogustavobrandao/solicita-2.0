@@ -381,3 +381,7 @@
         </div>
     </div>
 @endsection
+    
+@push('scripts')
+    <script src="{{ asset('js/datatables.js') }}"></script>
+@endpush
