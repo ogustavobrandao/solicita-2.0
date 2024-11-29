@@ -56,6 +56,14 @@ class BibliotecarioController extends Controller
                   ->orWhereNotNull('requisicao_documentos.ficha_catalografica_id')
                   ->orWhereNotNull('requisicao_documentos.nada_consta_id');
         })
+        ->when($request->search, function ($query, $search){
+            $query->where(function ($sub_query) use ($search){
+                $sub_query->where('depositos.autor_nome', 'ilike', "%{$search}%")
+                ->orWhere('ficha_catalograficas.autor_nome', 'ilike', "%{$search}%")
+                ->orWhere('nada_constas.autor_nome', 'ilike', "%{$search}%")
+                ->orWhere('requisicao_documentos.id', 'ilike', "%{$search}%");
+            });
+        })
         ->select(
             'requisicao_documentos.*',
             DB::raw('COALESCE(depositos.autor_nome, ficha_catalograficas.autor_nome, nada_constas.autor_nome) as autor_nome'),
