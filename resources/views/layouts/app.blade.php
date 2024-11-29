@@ -322,6 +322,7 @@
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="{{asset('js/prevent-submit.js')}}"></script>
+<script src="{{ asset('js/ckeditor.js') }}"></script>
 <!-- Latest compiled JavaScript -->
 
 <script defer="defer" src="//barra.brasil.gov.br/barra.js" type="text/javascript"></script>

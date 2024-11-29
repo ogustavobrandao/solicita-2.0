@@ -508,7 +508,5 @@
     opts_list.sort(function(a, b) { return $(a).text() > $(b).text() ? 1 : -1; });
     sel.html('').append(opts_list);
     sel.val(selected); // set cached selected value
-
 </script>
-
 @endsection
