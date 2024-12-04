@@ -1,7 +1,7 @@
 <div class="row justify-content-center">
     <div class="col-sm-12" align="center">
         <a target="_blank" href="http://ufape.edu.br/">
-            <img src="{{$message->embed(public_path() . '/images/logo_ufape_blue_email.png')}}" style="height: 80px">
+            <img src="{{asset('/images/logo_ufape_principal.png')}}" height="80px">
         </a>
     </div>
 </div>
