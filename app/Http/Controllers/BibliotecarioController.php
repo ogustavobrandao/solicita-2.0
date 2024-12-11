@@ -51,6 +51,7 @@ class BibliotecarioController extends Controller
         $requisicoesFichas = Requisicao_documento::leftJoin('depositos', 'requisicao_documentos.deposito_id', '=', 'depositos.id')
         ->leftJoin('ficha_catalograficas', 'requisicao_documentos.ficha_catalografica_id', '=', 'ficha_catalograficas.id')
         ->leftJoin('nada_constas', 'requisicao_documentos.nada_consta_id', '=', 'nada_constas.id')
+        ->where('requisicao_documentos.created_at', '>=', Carbon::now()->subYears(1))
         ->where(function($query) {
             $query->whereNotNull('requisicao_documentos.deposito_id')
                   ->orWhereNotNull('requisicao_documentos.ficha_catalografica_id')
