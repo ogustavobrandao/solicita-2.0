@@ -51,6 +51,7 @@ class BibliotecarioController extends Controller
         $requisicoesFichas = Requisicao_documento::leftJoin('depositos', 'requisicao_documentos.deposito_id', '=', 'depositos.id')
         ->leftJoin('ficha_catalograficas', 'requisicao_documentos.ficha_catalografica_id', '=', 'ficha_catalograficas.id')
         ->leftJoin('nada_constas', 'requisicao_documentos.nada_consta_id', '=', 'nada_constas.id')
+        ->where('requisicao_documentos.created_at', '>=', Carbon::now()->subYears(1))
         ->where(function($query) {
             $query->whereNotNull('requisicao_documentos.deposito_id')
                   ->orWhereNotNull('requisicao_documentos.ficha_catalografica_id')
@@ -106,10 +107,10 @@ class BibliotecarioController extends Controller
 
     public function editarFicha($requisicaoId)
     {
-        $requisicao = Requisicao_documento::where('id', $requisicaoId)->first();
-        $aluno = Aluno::where('id', $requisicao->aluno_id)->first();
+        $requisicao = Requisicao_documento::findOrFail( $requisicaoId);
+        $aluno = Aluno::findOrFail( $requisicao->aluno_id);
         $palavrasChave = PalavraChave::where('ficha_catalografica_id', $requisicao->ficha_catalografica_id)->orderBy('id')->get();
-        $fichaCatalografica = FichaCatalografica::where('id', $requisicao->ficha_catalografica_id)->first();
+        $fichaCatalografica = FichaCatalografica::findOrFail($requisicao->ficha_catalografica_id);
         $tipo_documento = $fichaCatalografica->tipo_documento_id;
         $documentoEspecificoNome = TipoDocumento::where('id', $tipo_documento)->first()->tipo;
         $bibliotecario = Bibliotecario::find($requisicao->bibliotecario_id);

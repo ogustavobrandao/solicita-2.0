@@ -21,17 +21,17 @@
                             <span class="tituloCabecalho">Dados Pessoais</span>
                         </div>
                     </div>
-                    
-              
+
+
 
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group py-2">
-                                <label class="pt-2 textoFicha" for="exampleFormControlInput1">Nome<span
+                                <label class="pt-2 textoFicha" for="nome">Nome<span
                                         style="color: red">*</span>:</label>
                                 <input type="text" class="form-control" id="nome" name="nome"
-                                    placeholder="Nome" value="{{ $deposito->autor_nome ?? $aluno->user->name }}"
-                                    disabled>
+                                    placeholder="Nome" value="{{ old('nome') ?? trim($deposito->autor_nome) ?? trim($aluno->user->name) }}"
+                                    required>
 
                                 <label class="pt-2 textoFicha" for="exampleFormControlInput1">CPF<span
                                         style="color: red">*</span>:</label>
@@ -84,7 +84,7 @@
 
 
                 <hr>
-            
+
                 <!-- Botoes -->
                 <div class="row justify-content-between mt-5">
                     @if ($requisicao_documento->status == 'Em andamento')
