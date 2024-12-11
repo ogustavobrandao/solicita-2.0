@@ -35,12 +35,12 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group py-2">
-                                <label class="textoFicha" for="exampleFormControlInput1">Nome<span
+                                <label class="textoFicha" for="nome">Nome<span
                                         style="color: red">*</span>:</label>
                                 <input type="text" class="form-control" id="nome" name="nome"
                                        placeholder="Nome"
-                                       value="{{\App\Models\User::where('id', $aluno->user_id)->first()->name}}"
-                                       disabled>
+                                       value="{{old('nome') ?? trim($aluno->user->name)}}"
+                                       required>
                             </div>
                         </div>
                     </div>
