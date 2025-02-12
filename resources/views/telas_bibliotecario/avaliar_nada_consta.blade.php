@@ -28,8 +28,8 @@
                                 <label class="pt-2 textoFicha" for="nome">Nome<span
                                         style="color: red">*</span>:</label>
                                 <input type="text" class="form-control" id="nome" name="nome"
-                                    placeholder="Nome" value="{{ old('nome') ?? trim($nadaConsta->autor_nome) ?? trim($aluno->user->name) }}"
-                                    required>
+                                    placeholder="Nome" value="{{ $nadaConsta->autor_nome ?? $aluno->user->name }}"
+                                    disabled>
 
                                 <label class="pt-2 textoFicha" for="exampleFormControlInput1">CPF<span
                                         style="color: red">*</span>:</label>

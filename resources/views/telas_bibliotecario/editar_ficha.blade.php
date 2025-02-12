@@ -39,8 +39,8 @@
                                         style="color: red">*</span>:</label>
                                 <input type="text" class="form-control" id="nome" name="nome"
                                        placeholder="Nome"
-                                       value="{{old('nome') ?? trim($aluno->user->name)}}"
-                                       required>
+                                       value="{{old('nome') ?? $aluno->user->name}}"
+                                       disabled>
                             </div>
                         </div>
                     </div>
@@ -102,7 +102,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="titulo">Título: <span style="color: red">*</span></label>
-                                <textarea class="editor-ckeditor1" id="titulo" name="titulo">{{$fichaCatalografica->titulo}}</textarea>
+                                <textarea class="editor-ckeditor1" id="titulo" name="titulo">{{old('titulo') ?? trim($fichaCatalografica->titulo)}}</textarea>
                             </div>
                             <div class="form-group">
                                 <label for="subtitulo">Subtítulo: </label>
