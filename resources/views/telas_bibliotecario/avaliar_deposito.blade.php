@@ -30,8 +30,8 @@
                                 <label class="pt-2 textoFicha" for="nome">Nome<span
                                         style="color: red">*</span>:</label>
                                 <input type="text" class="form-control" id="nome" name="nome"
-                                    placeholder="Nome" value="{{ old('nome') ?? trim($deposito->autor_nome) ?? trim($aluno->user->name) }}"
-                                    required>
+                                    placeholder="Nome" value="{{ old('nome') ?? $deposito->autor_nome ?? $aluno->user->name }}"
+                                    disabled>
 
                                 <label class="pt-2 textoFicha" for="exampleFormControlInput1">CPF<span
                                         style="color: red">*</span>:</label>
@@ -43,10 +43,10 @@
                                 <input type="text" class="form-control" id="nome" name="nome"
                                     placeholder="Nome" value="{{ $requisicao->perfil->curso->nome }}" disabled>
 
-                                <label class="pt-2 textoFicha" for="exampleFormControlInput1">Trabalho de Conclusão de
+                                <label class="pt-2 textoFicha" for="titulo_tcc">Título de Trabalho de Conclusão de
                                     Curso (TCC)<span style="color: red">*</span>:</label>
-                                <div class="disabled">{!! $requisicao_documento->deposito->titulo_tcc !!}</div>
 
+                                <textarea class="editor-ckeditor1" name="titulo_tcc" id="titulo_tcc" required>{!! old('titulo_tcc') ?? trim($requisicao_documento->deposito->titulo_tcc) !!}</textarea>
                                 <div class="form-group">
                                     <div class="forma-group">
                                         <label class="pt-2 textoFicha" for="anexoArquivo">Trabalho de Conclusão de Curso
