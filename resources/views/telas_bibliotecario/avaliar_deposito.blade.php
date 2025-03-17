@@ -26,58 +26,74 @@
 
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="form-group py-2">
-                                <label class="pt-2 textoFicha" for="nome">Nome<span
-                                        style="color: red">*</span>:</label>
-                                <input type="text" class="form-control" id="nome" name="nome"
-                                    placeholder="Nome" value="{{ old('nome') ?? $deposito->autor_nome ?? $aluno->user->name }}"
-                                    disabled>
+                            <form id="update-deposito" action="{{route('deposito.update', ['deposito_id' => $deposito->id])}}" method="post">
+                                @csrf
+                                @method('PUT')
+                                <div class="form-group py-2">
+                                    <div class="form-group">
+                                        <label class="pt-2 textoFicha" for="autor_nome">Nome<span
+                                                style="color: red">*</span>:</label>
+                                        <input type="text" class="form-control @error('autor_nome') is-invalid @enderror" id="autor_nome" name="autor_nome"
+                                            placeholder="Nome" value="{{ old('autor_nome') ?? $deposito->autor_nome ?? $aluno->user->name }}">
 
-                                <label class="pt-2 textoFicha" for="exampleFormControlInput1">CPF<span
-                                        style="color: red">*</span>:</label>
-                                <input type="text" class="form-control" id="nome" name="nome"
-                                    placeholder="Nome" value="{{ $aluno->cpf }}" disabled>
-
-                                <label class="pt-2 textoFicha" for="exampleFormControlInput1">Curso<span
-                                        style="color: red">*</span>:</label>
-                                <input type="text" class="form-control" id="nome" name="nome"
-                                    placeholder="Nome" value="{{ $requisicao->perfil->curso->nome }}" disabled>
-
-                                <label class="pt-2 textoFicha" for="titulo_tcc">Título de Trabalho de Conclusão de
-                                    Curso (TCC)<span style="color: red">*</span>:</label>
-
-                                <textarea class="editor-ckeditor1" name="titulo_tcc" id="titulo_tcc" required>{!! old('titulo_tcc') ?? trim($requisicao_documento->deposito->titulo_tcc) !!}</textarea>
-                                <div class="form-group">
-                                    <div class="forma-group">
-                                        <label class="pt-2 textoFicha" for="anexoArquivo">Trabalho de Conclusão de Curso
-                                            (TCC):<span style="color: red">*</span>:</label><br>
-                                        <a class="btn btn-primary"
-                                            href="{{ route('baixar-anexo-tcc-deposito', $requisicao_documento->id) }}">
-                                            Visualizar
-                                        </a>
+                                        @error('autor_nome')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{$message}}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="forma-group">
-                                        <label class="pt-2 textoFicha" for="anexoArquivo">Termo de autorização:<span
-                                                style="color: red">*</span>:</label><br>
-                                        <a class="btn btn-primary"
-                                            href="{{ route('baixar-anexo-autorizacao-deposito', $requisicao_documento->id) }}">
-                                            Visualizar
-                                        </a>
-                                        @if ($deposito->anexo_publicacao_parcial != null)
+                                    <label class="pt-2 textoFicha" for="exampleFormControlInput1">CPF<span
+                                            style="color: red">*</span>:</label>
+                                    <input type="text" class="form-control" id="nome" name="nome"
+                                        placeholder="Nome" value="{{ $aluno->cpf }}" disabled>
+
+                                    <label class="pt-2 textoFicha" for="exampleFormControlInput1">Curso<span
+                                            style="color: red">*</span>:</label>
+                                    <input type="text" class="form-control" id="nome" name="nome"
+                                        placeholder="Nome" value="{{ $requisicao->perfil->curso->nome }}" disabled>
+
+                                    <label class="pt-2 textoFicha" for="titulo_tcc">Título de Trabalho de Conclusão de
+                                        Curso (TCC)<span style="color: red">*</span>:</label>
+
+                                    <textarea class="editor-ckeditor1 @error('titulo_tcc') is-invalid @enderror" name="titulo_tcc" id="titulo_tcc" required>{!! old('titulo_tcc') ?? $requisicao_documento->deposito->titulo_tcc !!}</textarea>
+
+                                    @error('titulo_tcc')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{$message}}</strong>
+                                        </span>
+                                    @enderror
+                                    <div class="form-group">
+                                        <div class="forma-group">
+                                            <label class="pt-2 textoFicha" for="anexoArquivo">Trabalho de Conclusão de Curso
+                                                (TCC):<span style="color: red">*</span>:</label><br>
                                             <a class="btn btn-primary"
-                                                href="{{ route('baixar-anexo_publicacao_parcial', $requisicao_documento->id) }}">
+                                                href="{{ route('baixar-anexo-tcc-deposito', $requisicao_documento->id) }}">
                                                 Visualizar
                                             </a>
-                                        @endif
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="forma-group">
+                                            <label class="pt-2 textoFicha" for="anexoArquivo">Termo de autorização:<span
+                                                    style="color: red">*</span>:</label><br>
+                                            <a class="btn btn-primary"
+                                                href="{{ route('baixar-anexo-autorizacao-deposito', $requisicao_documento->id) }}">
+                                                Visualizar
+                                            </a>
+                                            @if ($deposito->anexo_publicacao_parcial != null)
+                                                <a class="btn btn-primary"
+                                                    href="{{ route('baixar-anexo_publicacao_parcial', $requisicao_documento->id) }}">
+                                                    Visualizar
+                                                </a>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="mt-3">
+                                        <a href="https://assinador.iti.br/assinatura/index.xhtml"
+                                            target="_blank">{{ 'Assinatura digital gov.br' }}</a>
                                     </div>
                                 </div>
-                                <div class="mt-3">
-                                    <a href="https://assinador.iti.br/assinatura/index.xhtml"
-                                        target="_blank">{{ 'Assinatura digital gov.br' }}</a>
-                                </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -95,9 +111,9 @@
                         </div>
 
                         <div class="col-lg-2 col-md-4 col-sm-6">
-                            <a type="button" class="btn btn-warning btn-block"
+                            <button type="submit" class="btn btn-warning btn-block"
                                 style="background-color: #f8b133; border-radius: 0.5rem; color: white;"
-                                href="{{route('editar-deposito',$requisicao_documento->id)}}">Editar</a>
+                                form="update-deposito">Editar</button>
                         </div>
                         <div class="col-lg-4 col-md-6 col-sm-6">
                             <button type="button" class="btn btn-danger btn-block" style="border-radius: 0.5rem"
