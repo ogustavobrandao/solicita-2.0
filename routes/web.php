@@ -180,9 +180,8 @@ Route::group(['middleware'=> ['CheckBibliotecario', 'banned']], function(){
     Route::get('/visualizar-nada-consta/{requisicao_id}',[\App\Http\Controllers\BibliotecarioController::class, 'visualizarNadaConsta'])->name('visualizar-nada-consta')->middleware('CheckBibliotecario');
     Route::post('/gerar-nada-consta/{requisicao_documento}',[\App\Http\Controllers\BibliotecarioController::class, 'gerarNadaConsta'])->name('gerar-nada-consta')->middleware('CheckBibliotecario');
 
-    Route::post('/atualizar-nome-deposito/{depositoId}',[\App\Http\Controllers\RequisicaoController::class, 'EditarNomeAutorDeposito'])->name('atualizar-nome-deposito');
+    Route::put('/depositos/{deposito_id}',[RequisicaoController::class, 'updateDeposito'])->name('deposito.update');
     Route::get('/avaliar-deposito/{requisicao_id}',[\App\Http\Controllers\BibliotecarioController::class, 'avaliarDeposito'])->name('avaliar-deposito');
-    Route::get('/editar-deposito/{requisicao_id}',[\App\Http\Controllers\BibliotecarioController::class, 'editarDeposito'])->name('editar-deposito');
     Route::get('/visualizar-deposito/{requisicao_id}',[\App\Http\Controllers\BibliotecarioController::class, 'visualizarDeposito'])->name('visualizar-deposito');
     Route::get('/visualizar-deposito/{requisicao}/baixar-comprovante',[\App\Http\Controllers\BibliotecarioController::class, 'baixarAnexoComprovanteDeposito'])->name('baixar-anexo-comprovante-deposito');
     Route::get('/baixar-anexo-tcc-deposito/{requisicao}',[\App\Http\Controllers\BibliotecarioController::class, 'baixarAnexoTccDeposito'])->name('baixar-anexo-tcc-deposito');

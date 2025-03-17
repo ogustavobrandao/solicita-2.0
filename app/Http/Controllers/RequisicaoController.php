@@ -721,12 +721,16 @@ class RequisicaoController extends Controller
         return redirect()->route('avaliar-nada-consta',$request->parametro)->with('success', 'Nome alterado com sucesso!');
     }
 
-    public function EditarNomeAutorDeposito(Request $request, $depositoId)
+    public function updateDeposito(Request $request, $deposito_id)
     {
-        $deposito = Deposito::find($depositoId);
-        $deposito->update(['autor_nome' => $request->nome]);
+        $request->validate([
+            'autor_nome' => ['required', 'string', 'max:255'],
+            'titulo_tcc' => ['required', 'string']
+        ]);
+        $deposito = Deposito::find($deposito_id);
+        $deposito->update( $request->all());
 
-        return redirect()->route('avaliar-deposito',$request->parametro)->with('success', 'Nome alterado com sucesso!');
+        return back()->with('success', 'Comprovante de deposito alterado com sucesso!');
     }
 }
 
