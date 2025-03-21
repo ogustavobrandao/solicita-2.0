@@ -295,7 +295,7 @@ class BibliotecarioController extends Controller
         $curso = $requisicao->perfil->curso->nome;
         $cpf = $requisicao->aluno->cpf;
         $bibliotecario = $requisicao_documento->bibliotecario;
-        $tcc =  trim(preg_replace('/\s+|&nbsp;/', '', $requisicao_documento->deposito->titulo_tcc));
+        $tcc =  $requisicao_documento->deposito->titulo_tcc;
         $pdf = Pdf::loadView('telas_bibliotecario.gerar_deposito', compact('discente', 'cpf', 'curso', 'bibliotecario', 'tcc'));
         $filename = 'deposito_' . preg_replace("/[^A-Za-z]+/", "", $discente) .'.pdf';
         return $pdf->download($filename);
