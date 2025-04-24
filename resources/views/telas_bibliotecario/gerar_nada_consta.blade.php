@@ -98,7 +98,6 @@
     <div class="assinatura">
         <div id="linha"></div>
         <span id="cargo">
-            Coordenadoria de Serviços Digitais<br>
             SIB/UFAPE
         </span>
     </div>

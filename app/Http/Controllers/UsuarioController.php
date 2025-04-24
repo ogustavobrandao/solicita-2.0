@@ -121,12 +121,15 @@ class UsuarioController extends Controller
         switch ($usuario->tipo) {
             case "aluno":
                 break;
-            case "bibliotecario":
-                if ($request->has('active')) {
+                case "bibliotecario":
+                    if ($request->has('active')) {
                     $usuario->active = 1;
                 } else {
                     $usuario->active = 0;
                 }
+                $usuario->bibliotecario->crb = $request->crb;
+                $usuario->bibliotecario->update();
+
                 $usuario->update();
 
                 break;
