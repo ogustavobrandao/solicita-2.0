@@ -93,7 +93,7 @@
     <div class="assinatura">
         <div id="linha"></div>
         <span id="cargo">
-            Direção SIB/UFAPE
+            SIB/UFAPE
         </span>
     </div>
 </body>

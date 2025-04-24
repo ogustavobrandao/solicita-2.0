@@ -63,6 +63,9 @@ class User extends Authenticatable implements MustVerifyEmail, JWTSubject
     public function servidor(){
         return $this->hasOne('App\Models\Servidor');
     }
+    public function bibliotecario(){
+        return $this->hasOne('App\Models\Bibliotecario');
+    }
     public function aluno(){
         return $this->hasOne('App\Models\Aluno');
     }
