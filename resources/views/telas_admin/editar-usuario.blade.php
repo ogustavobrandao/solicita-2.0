@@ -19,7 +19,7 @@
                     <div class="row justify-content-center">
                         <div class="form-group col-md-12">
                             <label for="nome" class="textoFicha row px-3">Nome:
-                                <input id="nome" type="type"
+                                <input id="nome" type="text"
                                     class="form-control @error('name') is-invalid @enderror " name="name"
                                     value="{{ $usuario->name }}" required autocomplete="name" placeholder="Nome Completo">
                             </label>
@@ -36,7 +36,7 @@
                     <div class="row justify-content-center">
                         <div class="form-group col-md-12">
                             <label for="email" class="textoFicha row px-3">E-mail:
-                                <input id="email" type="email"
+                                <input id="email" type="text"
                                     class="form-control @error('email') is-invalid @enderror " name="email"
                                     value="{{ $usuario->email }}" required autocomplete="email" placeholder="E-Mail">
                             </label>
