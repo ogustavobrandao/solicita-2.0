@@ -19,7 +19,7 @@
                     <div class="row justify-content-center">
                         <div class="form-group col-md-12">
                             <label for="nome" class="textoFicha row px-3">Nome:
-                                <input id="nome" type="name"
+                                <input id="nome" type="type"
                                     class="form-control @error('name') is-invalid @enderror " name="name"
                                     value="{{ $usuario->name }}" required autocomplete="name" placeholder="Nome Completo">
                             </label>
@@ -54,7 +54,7 @@
                         <div class="row justify-content-center">
                             <div class="form-group col-md-12">
                                 <label for="cpf" class="textoFicha px-3 row">CPF:
-                                    <input id="cpf" type="cpf"
+                                    <input id="cpf" type="text"
                                         class="form-control @error('cpf') is-invalid @enderror " name="cpf"
                                         value="{{ $usuarioEspecifico->cpf }}" required autocomplete="cpf" placeholder="CPF">
                                 </label>
@@ -126,12 +126,32 @@
                             </div>
                         </div>
 
+                    @endif
 
-                    @elseif($usuario->tipo == 'bibliotecario' || $usuario->tipo == 'servidor')
+                    <!--BIBLIOTECARIO-->
+                    @if($usuario->tipo == 'bibliotecario')
+                        <div class="row justify-content-center">
+                            <div class="form-group col-md-12">
+                                <label for="crb" class="row px-3 textoFicha">CRB:
+                                    <input id="crb" type="text"
+                                        class="form-control @error('crb') is-invalid @enderror" name="crb"
+                                        value="{{ $usuarioEspecifico->crb }}" required autocomplete="crb"
+                                        placeholder="crb">
+                                </label>
+                                @error('crb')
+                                    <span class="invalid-feedback" role="alert" style="overflow: visible; display:block">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                    @endif
+
+                    @if($usuario->tipo == 'bibliotecario' || $usuario->tipo == 'servidor')
                         <div class="row justify-content-center">
                             <div class="form-group col-md-12">
                                 <label for="matricula" class="row textoFicha px-3">Matrícula:
-                                    <input id="matricula" type="matricula"
+                                    <input id="matricula" type="text"
                                         class="form-control @error('matricula') is-invalid @enderror" name="matricula"
                                         value="{{ $usuarioEspecifico->matricula }}" required autocomplete="matricula"
                                         placeholder="matricula">
@@ -150,23 +170,6 @@
                                     @error('active') is-invalid @enderror" value="{{ $usuario->active ?? ''}}" {{ $usuario->active ? 'checked' : '' }}>
 
                                 @error('active')
-                                    <span class="invalid-feedback" role="alert" style="overflow: visible; display:block">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-                     <!--BIBLIOTECARIO-->
-                    @elseif($usuario->tipo == 'bibliotecario')
-                        <div class="row justify-content-center">
-                            <div class="form-group col-md-12">
-                                <label for="crb" class="row px-3 textoFicha">CRB:
-                                    <input id="crb" type="matricula"
-                                        class="form-control @error('matricula') is-invalid @enderror" name="crb"
-                                        value="{{ $usuarioEspecifico->crb }}" required autocomplete="crb"
-                                        placeholder="crb">
-                                </label>
-                                @error('crb')
                                     <span class="invalid-feedback" role="alert" style="overflow: visible; display:block">
                                         <strong>{{ $message }}</strong>
                                     </span>
