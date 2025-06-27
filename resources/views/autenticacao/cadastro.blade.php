@@ -24,7 +24,7 @@
                             <label for="name" class="row px-3 textoFicha"> Nome Completo: </label>
                             <input id="name" type="text" class="form-control @error('name') is-invalid @enderror "
                                     name="name" value="{{ old('name') }}" required autocomplete="name" autofocus placeholder="Nome Completo">
-                                    
+
                             @error('name')
                                 <span class="invalid-feedback" role="alert" style="overflow: visible; display:block">
                                     <strong>{{ $message }}</strong>
@@ -44,8 +44,8 @@
                             @enderror
                         </div>
 
-                        
-                       
+
+
 
                     </div>
 
@@ -55,13 +55,13 @@
                             <label for="vinculo" class="row px-3 textoFicha">Tipo de vínculo:</label>
                             <select name="vinculo" id="vinculo" class="browser-default custom-select">
                                 <option value="" disable selected hidden>-- Selecionar Vínculo --</option>
-                                <option value="1">Matriculado</option>
-                                <option value="2">Egresso</option>
-                                <option value="3">Especial</option>
-                                <option value="4">REMT - Regime Especial de Movimentação Temporária</option>
-                                <option value="5">Desistente</option>
-                                <option value="6">Matrícula Trancada</option>
-                                <option value="7">Intercâmbio</option>
+                                <option value="1" @if(old('vinculo') == 1) selected @endif>Matriculado</option>
+                                <option value="2" @if(old('vinculo') == 2) selected @endif>Egresso</option>
+                                <option value="3" @if(old('vinculo') == 3) selected @endif>Especial</option>
+                                <option value="4" @if(old('vinculo') == 4) selected @endif>REMT - Regime Especial de Movimentação Temporária</option>
+                                <option value="5" @if(old('vinculo') == 5) selected @endif>Desistente</option>
+                                <option value="6" @if(old('vinculo') == 6) selected @endif>Matrícula Trancada</option>
+                                <option value="7" @if(old('vinculo') == 7) selected @endif>Intercâmbio</option>
                             </select>
 
                             @error('vinculo')
@@ -76,27 +76,24 @@
                             <select name="unidade" id="unidade" class="browser-default custom-select">
                                 <option value="" disable hidden>-- Selecionar Unidade --</option>
                                 @foreach($unidades as $unidade)
-                                    <option value="{{$unidade->id}}">{{$unidade->nome}}</option>
+                                    <option value="{{$unidade->id}}" @if(old('unidade') == $unidade->id) selected @endif>{{$unidade->nome}}</option>
                                 @endforeach
- 
+
                             </select>
                             @error('unidade')
                                 <span class="invalid-feedback" role="alert" style="overflow: visible; display:block">
-                                <strong>{{ $message }}</strong>
+                                    <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
 
                         </div>
 
-                        <div id="curso-div" class="col-md-4" style="display: none;">
+                        <div id="curso-div" class="col-md-4 d-none">
                             <!-- Cursos-->
                             <label for="cursos" class="row px-3 textoFicha">Curso:</label>
                             <select name="cursos" id="cursos" class="browser-default custom-select">
 
-                                <option value="" disable selected hidden>-- Selecionar Curso --</option>
-                                @foreach($cursos as $curso)
-                                    <option value="{{$curso->id}}">{{$curso->nome}}</option>
-                                @endforeach
+
 
                             </select>
 
@@ -130,7 +127,7 @@
                             <label for="password" class="row px-3 textoFicha"> Senha: </label>
                             <input id="password" type="password" class="form-control @error('password') is-invalid @enderror"
                                     name="password" required autocomplete="current-password" placeholder="Senha">
-                            
+
                             @error('password')
                                 <span class="invalid-feedback" role="alert" style="overflow: visible; display:block;">
                                     <strong>{{ $message }}</strong>
@@ -175,32 +172,36 @@
 
   });
 
-  $(document).ready(function() {
-      $("#unidade").change(function() {
-          unidadeId = $(this).val();
-          $.ajax({
-              url: '/load-cursos/' + unidadeId,
-              success: function(data) {
-                  $("#cursos").html(data);
-              },
-          });
-      });
-  })
+    $(document).ready(function() {
 
-</script>
+        $("#unidade").change(function() {
+            mostrarCursoDiv();
+        });
 
-<script>
-    document.getElementById('unidade').addEventListener('change', mostrarCursoDiv);
+        if(@json(old('unidade'))){
+            mostrarCursoDiv();
 
-    function mostrarCursoDiv() {
-        var unidade = document.getElementById('unidade');
-        var curso_div = document.getElementById('curso-div');
-
-        if (unidade.value) {
-            curso_div.style.display = 'block';
-        } else {
-            curso_div.style.display = 'none';
         }
-    }
+
+        function mostrarCursoDiv() {
+            let curso_div = $('#curso-div');
+
+            $.ajax({
+                url: '/load-cursos/' + $('#unidade').val(),
+                success: function(data) {
+                    $("#cursos").html(data);
+                    $("#cursos").val(@json(old('cursos')))
+
+                },
+            });
+
+            if ($('#unidade').val()) {
+                curso_div.removeClass('d-none');
+            } else {
+                curso_div.addClass('d-none');
+            }
+        }
+    })
+
 </script>
 @endsection
