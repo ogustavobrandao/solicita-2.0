@@ -42,14 +42,14 @@
         }
         .corpo {
             margin-left: 2.29cm;
-            margin-top: 0.50cm;
+            margin-top: 4em;
             margin-right: 2.03cm;
             margin-bottom: 0.49cm;
             text-align: justify;
             text-indent: 50px;
         }
         .assinatura {
-            margin-top: 8cm;
+            margin-top: 7cm;
             display: flex;
             text-align: center;
             font-weight: bold;
@@ -76,6 +76,13 @@
         .corpo p {
             display: inline;
         }
+
+        #data{
+            text-align: right;
+            width: 80%;
+            font-size: 20px;
+            margin-top: 2em;
+        }
     </style>
 </head>
 
@@ -90,6 +97,10 @@
     </div>
     <div class="corpo">
         Declaramos que o(a) Discente <strong>{{$discente}}</strong>, portador(a) do CPF <strong>{{$cpf}}</strong>, regularmente matriculado(a) no curso de <strong>{{$curso}}</strong> da <b>Universidade Federal do Agreste de Pernambuco - UFAPE</b> realizou  o depósito do seu trabalho de conclusão de curso, cujo título é: "<b>{!! $tcc !!}</b>", bem como a entrega do Termo de Autorização para o depósito no Repositório Institucional, cumprindo todos os requisitos necessários. Portanto, não constando pendências com este setor. <br> <br>
+    </div>
+    <div id="data">
+        <p>{{ \Carbon\Carbon::now()->format('d/m/Y') }}</p>
+    </div>
     <div class="assinatura">
         <div id="linha"></div>
         <span id="cargo">
