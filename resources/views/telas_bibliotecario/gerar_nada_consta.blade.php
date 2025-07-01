@@ -78,6 +78,13 @@
             margin: 0;
             padding: 0;
         }
+
+        #data{
+            text-align: right;
+            width: 80%;
+            font-size: 20px;
+            margin-top: 5em;
+        }
     </style>
 </head>
 
@@ -94,6 +101,9 @@
     <div class="corpo">
         Declaramos que o(a) Discente <strong>{{$discente}}</strong>, portador(a) do CPF <strong>{{$cpf}}</strong>, regularmente matriculado(a) no curso de <strong>{{$curso}}</strong> da <b>Universidade Federal do Agreste de Pernambuco - UFAPE</b> não possui débitos para com o Sistema Integrado de Bibliotecas.
         <div class="obs"><strong>Obs</strong>: Esta declaração não comprova que o(a) aluno(a) realizou o depósito do TCC, apenas que não tem outras pendências na biblioteca.</div>
+    </div>
+    <div id="data">
+        <p>{{ \Carbon\Carbon::now()->format('d/m/Y') }}</p>
     </div>
     <div class="assinatura">
         <div id="linha"></div>
