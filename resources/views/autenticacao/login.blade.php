@@ -56,14 +56,26 @@
                         <div class="py-2">
                             <div>
                                 <img src="images/tag.svg" width="30px">
-                                <a href="pdfs/tutorial_fichas.pdf" target="_blank">
+                                <a href="https://ufape.edu.br/sites/default/files/2025-02/Solicitação%20Ficha%20Catalográfica%20-%20Tutorial.pdf" target="_blank">
                                     <span class="px-1 textoHome">Solicitação de ficha catalográfica.</span>
                                 </a>
                             </div>
                             <div>
                                 <img src="images/tag.svg" width="30px">
-                                <a href="pdfs/assinatura-gov-br.pdf" target="_blank">
-                                    <span class="px-1 textoHome">Orientação para assinatura eletrônica no gov.br.</span>
+                                <a href="https://ufape.edu.br/sites/default/files/2025-02/Como%20%20Anexar%20o%20Arquivo%20Contendo%20a%20Ficha%20Catalográfica%20no%20TCC%20-%20Tutorial.pdf" target="_blank">
+                                    <span class="px-1 textoHome">Como inserir a ficha catalográfica no trabalho.</span>
+                                </a>
+                            </div>
+                            <div>
+                                <img src="images/tag.svg" width="30px">
+                                <a href="https://ufape.edu.br/sites/default/files/2025-03/Depósito%20de%20trabalhos%20Acadêmicos%20-%20Tutorial%20Solicita.pdf" target="_blank">
+                                    <span class="px-1 textoHome">Solicitação de depósito.</span>
+                                </a>
+                            </div>
+                            <div>
+                                <img src="images/tag.svg" width="30px">
+                                <a href="https://ufape.edu.br/sites/default/files/2025-02/Assinatura%20Eletrônica%20de%20Documentos%20Gov.br%20%20-%20Tutorial.pdf" target="_blank">
+                                    <span class="px-1 textoHome">Assinatura eletrônica no gov.br.</span>
                                 </a>
                             </div>
                         </div>
