@@ -7,6 +7,7 @@ use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvi
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Str;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -35,6 +36,26 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        RateLimiter::for('limite_requisicao', function (Request $request) {
+
+            $user = $request->user()?->id ?? $request->ip();
+            $rota = $request->route()?->getName() ?? $request->path();
+
+            return [
+                Limit::perMinutes(30, 2)->by($user . '|'. $rota)
+                    ->response(function (Request $request, array $headers) {
+                        $retryAfter = (int) ($headers['Retry-After'] ?? 0);
+
+                        $tempo = (int) ceil($retryAfter / 60);
+                        $minutos = Str::plural('minuto', $tempo);
+
+                        return redirect()->back()->with([
+                            'fail' => "Você fez muitas requisições. Tente novamente em {$tempo} {$minutos}."
+                        ], 429);
+                }),
+            ];
+        });
+
         $this->configureRateLimiting();
 
         $this->routes(function () {

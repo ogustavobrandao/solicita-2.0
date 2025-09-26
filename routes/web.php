@@ -108,9 +108,9 @@ Route::middleware('CheckAluno')->group(function(){
 
     Route::post('/cadastrar-documento-bibli', [RequisicaoController::class, 'cadastrarDocumento'])->name('cadastrarDocumento');
     Route::get('/documento-bibli', [RequisicaoController::class, 'exibirDocumento'])->name('exibirDocumento');
-    Route::post('/criar-doc-bibli', [RequisicaoController::class, 'criarDocumento'])->name('criarDocumentoBibli');
-    Route::post('/criar-nada-consta', [RequisicaoController::class, 'criarNadaConsta'])->name('criarNadaConsta');
-    Route::post('/criar-deposito', [RequisicaoController::class, 'criarDeposito'])->name('criarDeposito');
+    Route::post('/criar-doc-bibli', [RequisicaoController::class, 'criarDocumento'])->name('criarDocumentoBibli')->middleware('throttle:limite_requisicao');
+    Route::post('/criar-nada-consta', [RequisicaoController::class, 'criarNadaConsta'])->name('criarNadaConsta')->middleware('throttle:limite_requisicao');
+    Route::post('/criar-deposito', [RequisicaoController::class, 'criarDeposito'])->name('criarDeposito')->middleware('throttle:limite_requisicao');
 
     Route::get('/confirmacao-requisicao',function(){
         return view('autenticacao.confirmacao-requisicao');
