@@ -169,9 +169,18 @@
                         </tr>
                         <tr>
                             @if($documento->nome_coorientador != null)
-                            <td class="recuo"><span class="recuo">{{substr($ficha->autor_sobrenome, 0, 3)}}</span>Coorientador(a): {{ $documento->nome_coorientador }} {{ $documento->sobrenome_coorientador }}.
-                                     </td>@endif
+                                <td class="recuo">
+                                    <span class="recuo">{{substr($ficha->autor_sobrenome, 0, 3)}}</span>Coorientador(a): {{ $documento->nome_coorientador }} {{ $documento->sobrenome_coorientador }}.
+                                </td>
+                            @endif
                         </tr>
+                        @if(!is_null($documento->nome_segundo_coorientador))
+                            <tr>
+                                <td class="recuo">
+                                    <span class="recuo">{{substr($ficha->autor_sobrenome, 0, 3)}}</span>Coorientador(a): {{ $documento->nome_segundo_coorientador }} {{ $documento->sobrenome_segundo_coorientador }}
+                                </td>
+                            </tr>
+                        @endif
                         <tr>
                             <td class="recuo"><span class="recuo">{{substr($ficha->autor_sobrenome, 0, 3)}}</span>Monografia @if($documento->tipo_curso == 'especializacao')
                                     (Especialização) @elseif($documento->tipo_curso == 'graduacao')
@@ -251,10 +260,20 @@
                             <td class="recuo" style="padding-top: 10px"><span class="recuo">{{substr($ficha->autor_sobrenome, 0, 3)}}</span>Orientador(a): {{ $documento->nome_orientador }} {{ $documento->sobrenome_orientador }}.
                             </td>
                         </tr>
-                        <tr>@if($documento->nome_coorientador != null)
-                            <td class="recuo"><span class="recuo">{{substr($ficha->autor_sobrenome, 0, 3)}}</span>Coorientador(a): {{ $documento->nome_coorientador }} {{ $documento->sobrenome_coorientador }}.
-                                    </td>@endif
+                        <tr>
+                            @if($documento->nome_coorientador != null)
+                                <td class="recuo">
+                                    <span class="recuo">{{substr($ficha->autor_sobrenome, 0, 3)}}</span>Coorientador(a): {{ $documento->nome_coorientador }} {{ $documento->sobrenome_coorientador }}.
+                                </td>
+                            @endif
                         </tr>
+                        @if(!is_null($documento->nome_segundo_coorientador))
+                            <tr>
+                                <td class="recuo">
+                                    <span class="recuo">{{substr($ficha->autor_sobrenome, 0, 3)}}</span>Coorientador(a): {{ $documento->nome_segundo_coorientador }} {{ $documento->sobrenome_segundo_coorientador }}
+                                </td>
+                            </tr>
+                        @endif
                         <tr>
                             <td class="recuo"><span class="recuo">{{substr($ficha->autor_sobrenome, 0, 3)}}</span>Dissertação (Mestrado) - @if($unidade->nome == 'UPE - Campus Garanhuns')
                                     <p>Universidade de Pernambuco</p>, @else
@@ -281,12 +300,20 @@
                             <td class="recuo" style="padding-top: 10px"><span class="recuo">{{substr($ficha->autor_sobrenome, 0, 3)}}</span>@for ($i = 0; $i < sizeof($palavras); $i++){{ ($i + 1) }}. {{ $palavras[$i]->palavra }}.
                                 @endfor I. {{ $documento->sobrenome_orientador }}, {{ $documento->nome_orientador }}
                                 (orient.)
-                                @if($documento->nome_coorientador != null)
+                                @if($documento->nome_coorientador != null && is_null($documento->nome_segundo_coorientador))
                                     II. {{ $documento->sobrenome_coorientador }}, {{ $documento->nome_coorientador }}
                                     (coorient.)
                                     III. @if($unidade->nome == 'UPE - Campus Garanhuns')<p>Universidade de
                                         Pernambuco</p> @else <p>Universidade Federal do Agreste de Pernambuco</p>@endif
                                     IV. Título
+                                @elseif($documento->nome_coorientador != null && $documento->nome_segundo_coorientador != null)
+                                    II. {{ $documento->sobrenome_coorientador }}, {{ $documento->nome_coorientador }}
+                                    (coorient.)
+                                    III. {{ $documento->sobrenome_segundo_coorientador }}, {{ $documento->nome_segundo_coorientador }}
+                                    (coorient.)
+                                    IV. @if($unidade->nome == 'UPE - Campus Garanhuns')<p>Universidade de
+                                        Pernambuco</p> @else <p>Universidade Federal do Agreste de Pernambuco</p>@endif
+                                    V. Título
                                 @else
                                     II. @if($unidade->nome == 'UPE - Campus Garanhuns')<p>Universidade de
                                         Pernambuco</p>@else <p>Universidade Federal do Agreste de Pernambuco</p>@endif
@@ -336,12 +363,21 @@
                             <td class="recuo" style="padding-top: 10px"><span class="recuo">{{substr($ficha->autor_sobrenome, 0, 3)}}</span>@for ($i = 0; $i < sizeof($palavras); $i++){{ ($i + 1) }}. {{ $palavras[$i]->palavra }}.
                                 @endfor I. {{ $documento->sobrenome_orientador }}, {{ $documento->nome_orientador }}
                                 (orient.)
-                                @if($documento->nome_coorientador != null)
+                                @if($documento->nome_coorientador != null && is_null($documento->nome_segundo_coorientador))
                                     II. {{ $documento->sobrenome_coorientador }}, {{ $documento->nome_coorientador }}
                                     (coorient.)
                                     III. @if($unidade->nome == 'UPE - Campus Garanhuns')<p>Universidade de
                                         Pernambuco</p> @else <p>Universidade Federal do Agreste de Pernambuco</p>@endif
                                     {{ $documento->programa }} IV. Título
+                                @elseif($documento->nome_coorientador != null && $documento->nome_segundo_coorientador != null)
+                                    II. {{ $documento->sobrenome_coorientador }}, {{ $documento->nome_coorientador }}
+                                    (coorient.)
+                                    III. {{ $documento->sobrenome_segundo_coorientador }}, {{ $documento->nome_segundo_coorientador }}
+                                    (coorient.)
+                                    IV. @if($unidade->nome == 'UPE - Campus Garanhuns')<p>Universidade de
+                                        Pernambuco</p> @else <p>Universidade Federal do Agreste de Pernambuco</p>@endif
+                                    V. Título
+
                                 @else
                                     II. @if($unidade->nome == 'UPE - Campus Garanhuns')<p>Universidade de
                                         Pernambuco</p>@else <p>Universidade Federal do Agreste de Pernambuco</p>@endif

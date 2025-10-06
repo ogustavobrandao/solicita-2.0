@@ -536,6 +536,8 @@ class BibliotecarioController extends Controller
             $documento->sobrenome_orientador = $request->sobrenome_orientador;
             $documento->nome_coorientador = $request->nome_coorientador;
             $documento->sobrenome_coorientador = $request->sobrenome_coorientador;
+            $documento->nome_segundo_coorientador = $request->nome_segundo_coorientador;
+            $documento->sobrenome_segundo_coorientador = $request->sobrenome_segundo_coorientador;
             $documento->curso = $perfil->default;
             $documento->tipo_curso = $request->tipo_curso;
             $documento->campus = $unidade->nome;
@@ -564,6 +566,8 @@ class BibliotecarioController extends Controller
             $documento->sobrenome_orientador = $request->sobrenome_orientador;
             $documento->nome_coorientador = $request->nome_coorientador;
             $documento->sobrenome_coorientador = $request->sobrenome_coorientador;
+            $documento->nome_segundo_coorientador = $request->nome_segundo_coorientador;
+            $documento->sobrenome_segundo_coorientador = $request->sobrenome_segundo_coorientador;
             $documento->campus = $unidade->nome;
             $documento->programa = $request->programa;
             $documento->ficha_catalografica_id = $ficha->id;
