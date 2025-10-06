@@ -248,6 +248,8 @@ class RequisicaoController extends Controller
             $monografia->sobrenome_orientador = $request->sobrenome_orientador;
             $monografia->nome_coorientador = $request->nome_coorientador;
             $monografia->sobrenome_coorientador = $request->sobrenome_coorientador;
+            $monografia->nome_segundo_coorientador = $request->nome_segundo_coorientador;
+            $monografia->sobrenome_segundo_coorientador = $request->sobrenome_segundo_coorientador;
             $monografia->curso = $perfil->default;
             $monografia->tipo_curso = $request->tipo_curso;
             $monografia->campus = $unidade->nome;
@@ -279,6 +281,8 @@ class RequisicaoController extends Controller
             $dissertacao->sobrenome_orientador = $request->sobrenome_orientador;
             $dissertacao->nome_coorientador = $request->nome_coorientador;
             $dissertacao->sobrenome_coorientador = $request->sobrenome_coorientador;
+            $dissertacao->nome_segundo_coorientador = $request->nome_segundo_coorientador;
+            $dissertacao->sobrenome_segundo_coorientador = $request->sobrenome_segundo_coorientador;
             $dissertacao->campus = $unidade->nome;
             $dissertacao->programa = $request->programa;
             $dissertacao->ficha_catalografica_id = $ficha->id;

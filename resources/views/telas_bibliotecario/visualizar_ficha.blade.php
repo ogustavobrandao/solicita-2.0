@@ -237,6 +237,21 @@
                                        readonly name="sobrenome_coorientador">
                             </div>
 
+                            <div class="form-group">
+                                <label for="nome_segundo_coorientador">Nome do Segundo Coorientador: </label>
+                                <input type="text" class="form-control" id="nome_segundo_coorientador"
+                                       placeholder="Digite o Nome do Segundo Coorientador"
+                                       value="{{$documento->nome_segundo_coorientador}}" readonly name="nome_segundo_coorientador">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="sobrenome_segundo_coorientador">Sobrenome do Segundo Coorientador: </label>
+                                <input type="text" class="form-control" id="sobrenome_segundo_coorientador" readonly
+                                       placeholder="Digite o Sobrenome do Segundo Coorientador"
+                                       value="{{$documento->sobrenome_segundo_coorientador}}"
+                                       name="sobrenome_segundo_coorientador">
+                            </div>
+
                             <div class="row justify-content-between">
                                 <div class="col-md-12">
                                     <div class="form-group">
@@ -425,6 +440,22 @@
                                            value="{{$documento->sobrenome_coorientador}}"
                                            readonly name="sobrenome_coorientador">
                                 </div>
+
+                                <div class="form-group">
+                                    <label for="nome_segundo_coorientador">Nome do Segundo Coorientador: </label>
+                                    <input type="text" class="form-control" id="nome_segundo_coorientador"
+                                           placeholder="Digite o Nome do Segundo Coorientador"
+                                           value="{{$documento->nome_segundo_coorientador}}" readonly name="nome_segundo_coorientador">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="sobrenome_segundo_coorientador">Sobrenome do Segundo Coorientador: </label>
+                                    <input type="text" class="form-control" id="sobrenome_segundo_coorientador" readonly
+                                           placeholder="Digite o Sobrenome do Segundo Coorientador"
+                                           value="{{$documento->sobrenome_segundo_coorientador}}"
+                                           name="sobrenome_segundo_coorientador">
+                                </div>
+
                                 <div class="form-group">
                                     <label for="programa">Nome do Programa de Pós-Graduação <span
                                             style="color: red">*</span></label>
