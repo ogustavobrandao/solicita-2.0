@@ -731,7 +731,7 @@ class RequisicaoController extends Controller
         $request->validate([
             'autor_nome' => ['required', 'string', 'max:255'],
             'titulo_tcc' => ['required', 'string'],
-            'registro_patente' => ['nullable','in:Sim,Não']
+            'registro_patente' => ['required', 'boolean']
         ]);
         $deposito = Deposito::find($deposito_id);
         $deposito->update( $request->all());
