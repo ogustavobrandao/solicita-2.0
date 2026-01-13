@@ -48,31 +48,61 @@ class BibliotecarioController extends Controller
 
     public function listarSolicitacoes(Request $request)
     {
-        $requisicoesFichas = Requisicao_documento::leftJoin('depositos', 'requisicao_documentos.deposito_id', '=', 'depositos.id')
-        ->leftJoin('ficha_catalograficas', 'requisicao_documentos.ficha_catalografica_id', '=', 'ficha_catalograficas.id')
-        ->leftJoin('nada_constas', 'requisicao_documentos.nada_consta_id', '=', 'nada_constas.id')
-        ->where('requisicao_documentos.created_at', '>=', Carbon::now()->subYears(1))
-        ->where(function($query) {
-            $query->whereNotNull('requisicao_documentos.deposito_id')
-                  ->orWhereNotNull('requisicao_documentos.ficha_catalografica_id')
-                  ->orWhereNotNull('requisicao_documentos.nada_consta_id');
-        })
-        ->when($request->search, function ($query, $search){
+        $data_inicio = $request->data_inicio;
+        $data_fim = $request->data_fim;
+
+        $query = Requisicao_documento::leftJoin('depositos', 'requisicao_documentos.deposito_id', '=', 'depositos.id')
+            ->leftJoin('ficha_catalograficas', 'requisicao_documentos.ficha_catalografica_id', '=', 'ficha_catalograficas.id')
+            ->leftJoin('nada_constas', 'requisicao_documentos.nada_consta_id', '=', 'nada_constas.id')
+            ->where(function($query) {
+                $query->whereNotNull('requisicao_documentos.deposito_id')
+                      ->orWhereNotNull('requisicao_documentos.ficha_catalografica_id')
+                      ->orWhereNotNull('requisicao_documentos.nada_consta_id');
+            });
+
+        if ($data_inicio && $data_fim) {
+            $query->whereBetween('requisicao_documentos.created_at', [
+                Carbon::parse($data_inicio)->startOfDay(),
+                Carbon::parse($data_fim)->endOfDay()
+            ]);
+        } elseif ($data_inicio) {
+            $query->where('requisicao_documentos.created_at', '>=', Carbon::parse($data_inicio)->startOfDay());
+        } elseif ($data_fim) {
+            $query->where('requisicao_documentos.created_at', '<=', Carbon::parse($data_fim)->endOfDay());
+        } else {
+            $query->where('requisicao_documentos.created_at', '>=', Carbon::now()->subDays(5));
+        }
+
+        if ($request->search) {
+            $search = $request->search;
             $query->where(function ($sub_query) use ($search){
                 $sub_query->where('depositos.autor_nome', 'ilike', "%{$search}%")
                 ->orWhere('ficha_catalograficas.autor_nome', 'ilike', "%{$search}%")
                 ->orWhere('nada_constas.autor_nome', 'ilike', "%{$search}%")
                 ->orWhere('requisicao_documentos.id', 'ilike', "%{$search}%");
             });
-        })
-        ->select(
+        }
+
+        $query->select(
             'requisicao_documentos.*',
             DB::raw('COALESCE(depositos.autor_nome, ficha_catalograficas.autor_nome, nada_constas.autor_nome) as autor_nome'),
             DB::raw('COALESCE(depositos.created_at, ficha_catalograficas.created_at, nada_constas.created_at) as entity_created_at'),
-            DB::raw('COALESCE(depositos.updated_at, ficha_catalograficas.updated_at, nada_constas.updated_at) as entity_updated_at'),
+            DB::raw('COALESCE(depositos.updated_at, ficha_catalograficas.updated_at, nada_constas.updated_at) as entity_updated_at')
+        );
 
-        )
-        ->when($request->sort === 'status', function ($query) use ($request) {
+        // Statistics for Dashboard
+        $statsQuery = clone $query;
+        $stats = [
+            'total' => $statsQuery->count(),
+            'concluidos' => (clone $statsQuery)->where('requisicao_documentos.status', 'Concluido')->count(),
+            'em_andamento' => (clone $statsQuery)->where('requisicao_documentos.status', 'Em andamento')->count(),
+            'rejeitados' => (clone $statsQuery)->where('requisicao_documentos.status', 'Rejeitado')->count(),
+            'depositos' => (clone $statsQuery)->whereNotNull('requisicao_documentos.deposito_id')->count(),
+            'nada_constas' => (clone $statsQuery)->whereNotNull('requisicao_documentos.nada_consta_id')->count(),
+            'fichas' => (clone $statsQuery)->whereNotNull('requisicao_documentos.ficha_catalografica_id')->count(),
+        ];
+
+        $requisicoesFichas = $query->when($request->sort === 'status', function ($query) use ($request) {
             $query->orderByRaw("
                 CASE requisicao_documentos.status
                     WHEN 'Em andamento' THEN 1
@@ -89,8 +119,7 @@ class BibliotecarioController extends Controller
         $bibliotecario = Bibliotecario::where('user_id', $idUser)->first();
         $unidadeBibliotecario = $bibliotecario->biblioteca->unidade_id;
 
-
-        return view('telas_bibliotecario.listar_documentos_solicitados', compact('requisicoesFichas','idUser', 'bibliotecario'));
+        return view('telas_bibliotecario.listar_documentos_solicitados', compact('requisicoesFichas','idUser', 'bibliotecario', 'stats'));
     }
 
     public function visualizarFicha($requisicaoId)
