@@ -688,6 +688,7 @@ class RequisicaoController extends Controller
         if ($request->hasFile('anexo_publicacao_parcial')) {
             $deposito->anexo_publicacao_parcial = $request->file('anexo_publicacao_parcial')->store('deposito');
         }
+        $deposito->registro_patente = $request->input('registro_patente');
         $deposito->save();
 
         $requisicao = new Requisicao();
@@ -729,7 +730,8 @@ class RequisicaoController extends Controller
     {
         $request->validate([
             'autor_nome' => ['required', 'string', 'max:255'],
-            'titulo_tcc' => ['required', 'string']
+            'titulo_tcc' => ['required', 'string'],
+            'registro_patente' => ['nullable','in:Sim,Não']
         ]);
         $deposito = Deposito::find($deposito_id);
         $deposito->update( $request->all());

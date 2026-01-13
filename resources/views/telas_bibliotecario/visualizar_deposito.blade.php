@@ -61,6 +61,8 @@
                                     <label class="pt-2 textoFicha" for="exampleFormControlInput1">Título do trabalho<span
                                             style="color: red">*</span>:</label>
                                     <div class="disabled">{!! $requisicao_documento->deposito->titulo_tcc !!}</div>
+                                        <label class="pt-2 textoFicha" for="registro_patente">Registro de patente<span style="color: red">*</span>:</label>
+                                        <input type="text" class="form-control" id="registro_patente" name="registro_patente" value="{{ $deposito->registro_patente ?? '' }}" readonly>
                                     <div class="form-group">
                                         <div class="forma-group">
                                             <label class="pt-2 textoFicha" for="anexoArquivo">Trabalho de Conclusão de Curso (TCC):<span

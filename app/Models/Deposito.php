@@ -14,6 +14,7 @@ class Deposito extends Model
         'anexo_tcc',
         'anexo_comprovante_autorizacao',
         'titulo_tcc',
+        'registro_patente',
         'anexo_publicacao_parcial',
         'autor_nome'
     ];

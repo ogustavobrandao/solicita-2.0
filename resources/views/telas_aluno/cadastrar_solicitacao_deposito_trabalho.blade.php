@@ -58,6 +58,19 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
+                                    <label for="registro_patente">Registro de patente: <span style="color: red">*</span></label>
+                                    <div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="registro_patente" id="registro_patente_sim" value="Sim" required {{ old('registro_patente') == 'Sim' ? 'checked' : '' }}>
+                                            <label class="form-check-label" for="registro_patente_sim">Sim</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="registro_patente" id="registro_patente_nao" value="Não" required {{ old('registro_patente') == 'Não' ? 'checked' : '' }}>
+                                            <label class="form-check-label" for="registro_patente_nao">Não</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
                                     <label for="anexo1">Trabalho de Conclusão de Curso (TCC): <span
                                             style="color: red">*</span></label><br>
                                     <input type="file" id="anexo1" accept="application/pdf, .docx, .doc" name="anexo_tcc"
